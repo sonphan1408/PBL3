@@ -152,6 +152,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -166,6 +167,29 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\unnamed.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unnamed1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unnamed2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1.Featureimage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngtree-outline-user-icon-png-image_1727916.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngtree-user-icon-png-image_1796659.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngtree-circle-password-icon-vectors-png-image_1738057.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\647600484_930136546239914_1486468665117018077_n.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
