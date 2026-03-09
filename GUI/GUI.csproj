@@ -88,6 +88,12 @@
     <Compile Include="Authentication\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\MainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authentication\MainScreen.Designer.cs">
+      <DependentUpon>MainScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client\frmBill.cs">
       <SubType>Form</SubType>
     </Compile>
