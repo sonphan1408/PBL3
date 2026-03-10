@@ -88,6 +88,12 @@
     <Compile Include="Authentication\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\MainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authentication\MainScreen.Designer.cs">
+      <DependentUpon>MainScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client\frmBill.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +182,7 @@
   <ItemGroup>
     <None Include="Resources\unnamed2.jpg" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <None Include="Resources\1.Featureimage.jpg" />
   </ItemGroup>
@@ -191,5 +198,7 @@
   <ItemGroup>
     <None Include="Resources\647600484_930136546239914_1486468665117018077_n.png" />
   </ItemGroup>
+=======
+>>>>>>> 7319b660e2a7fe1b5c0e21d5077a51f86c92bea8
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
