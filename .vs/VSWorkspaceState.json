@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\GUI",
+    "\\GUI\\Authentication"
   ],
-  "SelectedNode": "\\PBL3.slnx",
+  "SelectedNode": "\\GUI\\Authentication\\frmLogin.cs",
   "PreviewInSolutionExplorer": false
 }

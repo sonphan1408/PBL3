@@ -93,6 +93,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pngtree_circle_password_icon_vectors_png_image_17380571 {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-circle-password-icon-vectors-png-image_17380571", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngtree_outline_user_icon_png_image_1727916 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-outline-user-icon-png-image_1727916", resourceCulture);

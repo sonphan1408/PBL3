@@ -73,7 +73,7 @@ namespace GUI.Authentication
                 TaiKhoan.Text = "Username";
                 TaiKhoan.ForeColor = Color.Gray;
             }
-    }
+        }
 
         private void MatKhau_Enter(object sender, EventArgs e)
         {
@@ -98,13 +98,19 @@ namespace GUI.Authentication
         private void Back_Click(object sender, EventArgs e)
         {
             // Mở frmFace
-            Close();
+            this.Close();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmRegister registerForm = new frmRegister();
             registerForm.Show();
-            Close();
+            //Close();
+        }
+
+        private void MatKhau_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
+}
