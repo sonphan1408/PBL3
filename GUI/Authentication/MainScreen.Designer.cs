@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
@@ -43,7 +42,7 @@
             // panelHeader
             // 
             this.panelHeader.BackColor = System.Drawing.Color.White;
-            this.panelHeader.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelHeader.BackgroundImage")));
+            this.panelHeader.BackgroundImage = global::GUI.Properties.Resources.Gemini_Generated_Image_zg4wvdzg4wvdzg4w;
             this.panelHeader.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelHeader.Controls.Add(this.label1);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -64,7 +63,7 @@
             // panelContent
             // 
             this.panelContent.BackColor = System.Drawing.Color.White;
-            this.panelContent.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelContent.BackgroundImage")));
+            this.panelContent.BackgroundImage = global::GUI.Properties.Resources.banking_business_banner_finance_savings_abstract_silhouette_city_background_vector_illustration_84498592__1_;
             this.panelContent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelContent.Controls.Add(this.labelDescription);
             this.panelContent.Controls.Add(this.labelTagline);
