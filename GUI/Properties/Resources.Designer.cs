@@ -83,6 +83,37 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap banking_business_banner_finance_savings_abstract_silhouette_city_background_vector_illustration_84498592__1_ {
+            get {
+                object obj = ResourceManager.GetObject("banking-business-banner-finance-savings-abstract-silhouette-city-background-vecto" +
+                        "r-illustration-84498592 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_jyaunrjyaunrjyau {
+            get {
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_jyaunrjyaunrjyau", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_zg4wvdzg4wvdzg4w {
+            get {
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_zg4wvdzg4wvdzg4w", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngtree_circle_password_icon_vectors_png_image_1738057 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-circle-password-icon-vectors-png-image_1738057", resourceCulture);
