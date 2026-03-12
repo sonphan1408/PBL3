@@ -92,7 +92,7 @@
             // DangKi
             // 
             this.DangKi.AutoSize = true;
-            this.DangKi.Location = new System.Drawing.Point(285, 376);
+            this.DangKi.Location = new System.Drawing.Point(294, 376);
             this.DangKi.Name = "DangKi";
             this.DangKi.Size = new System.Drawing.Size(53, 16);
             this.DangKi.TabIndex = 9;
