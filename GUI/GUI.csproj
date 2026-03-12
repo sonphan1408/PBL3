@@ -150,6 +150,9 @@
     <EmbeddedResource Include="Authentication\frmRegister.resx">
       <DependentUpon>frmRegister.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Authentication\MainScreen.resx">
+      <DependentUpon>MainScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
