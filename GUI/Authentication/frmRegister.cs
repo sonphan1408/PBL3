@@ -24,7 +24,7 @@ namespace GUI.Authentication
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void frmRegister_Load(object sender, EventArgs e)

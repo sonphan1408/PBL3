@@ -33,8 +33,8 @@
             this.panelContent = new System.Windows.Forms.Panel();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelTagline = new System.Windows.Forms.Label();
-            this.Admin = new System.Windows.Forms.Button();
-            this.btnClient = new System.Windows.Forms.Button();
+            this.Register = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.panelContent.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +50,6 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(1182, 107);
             this.panelHeader.TabIndex = 0;
-            this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHeader_Paint);
             // 
             // label1
             // 
@@ -67,14 +66,13 @@
             this.panelContent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelContent.Controls.Add(this.labelDescription);
             this.panelContent.Controls.Add(this.labelTagline);
-            this.panelContent.Controls.Add(this.Admin);
-            this.panelContent.Controls.Add(this.btnClient);
+            this.panelContent.Controls.Add(this.Register);
+            this.panelContent.Controls.Add(this.btnLogin);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelContent.Location = new System.Drawing.Point(0, 107);
             this.panelContent.Name = "panelContent";
             this.panelContent.Size = new System.Drawing.Size(1182, 546);
             this.panelContent.TabIndex = 1;
-            this.panelContent.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContent_Paint);
             // 
             // labelDescription
             // 
@@ -102,31 +100,29 @@
             this.labelTagline.TabIndex = 0;
             this.labelTagline.Text = "Your Trusted Financial Partner.";
             // 
-            // Admin
+            // Register
             // 
-            this.Admin.BackColor = System.Drawing.Color.White;
-            this.Admin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.Admin.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.Admin.Location = new System.Drawing.Point(305, 220);
-            this.Admin.Name = "Admin";
-            this.Admin.Size = new System.Drawing.Size(100, 40);
-            this.Admin.TabIndex = 3;
-            this.Admin.Text = "Admin";
-            this.Admin.UseVisualStyleBackColor = false;
-            this.Admin.Click += new System.EventHandler(this.btnAdmin_Click);
+            this.Register.BackColor = System.Drawing.Color.White;
+            this.Register.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.Register.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.Register.Location = new System.Drawing.Point(305, 220);
+            this.Register.Name = "Register";
+            this.Register.Size = new System.Drawing.Size(100, 40);
+            this.Register.TabIndex = 3;
+            this.Register.Text = "Register";
+            this.Register.UseVisualStyleBackColor = false;
             // 
-            // btnClient
+            // btnLogin
             // 
-            this.btnClient.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnClient.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.btnClient.ForeColor = System.Drawing.Color.White;
-            this.btnClient.Location = new System.Drawing.Point(159, 220);
-            this.btnClient.Name = "btnClient";
-            this.btnClient.Size = new System.Drawing.Size(100, 40);
-            this.btnClient.TabIndex = 2;
-            this.btnClient.Text = "Client";
-            this.btnClient.UseVisualStyleBackColor = false;
-            this.btnClient.Click += new System.EventHandler(this.btnClient_Click);
+            this.btnLogin.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnLogin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.btnLogin.ForeColor = System.Drawing.Color.White;
+            this.btnLogin.Location = new System.Drawing.Point(159, 220);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(100, 40);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = false;
             // 
             // MainScreen
             // 
@@ -138,7 +134,6 @@
             this.Name = "MainScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sigma Bank - Where Money Meet Trust";
-            this.Load += new System.EventHandler(this.MainScreen_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             this.panelContent.ResumeLayout(false);
@@ -153,8 +148,8 @@
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.Label labelTagline;
         private System.Windows.Forms.Label labelDescription;
-        private System.Windows.Forms.Button btnClient;
-        private System.Windows.Forms.Button Admin;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button Register;
         private System.Windows.Forms.Label label1;
     }
 }

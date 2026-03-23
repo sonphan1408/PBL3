@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace GUI.Authentication
 {
@@ -15,46 +16,6 @@ namespace GUI.Authentication
         public frmLogin()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void TaiKhoan_Enter(object sender, EventArgs e)
@@ -104,13 +65,60 @@ namespace GUI.Authentication
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmRegister registerForm = new frmRegister();
-            registerForm.Show();
+            this.Hide();
+            registerForm.ShowDialog();
+            this.Show();
             //Close();
         }
 
         private void MatKhau_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ButtonLogin_Click(object sender, EventArgs e)
+        {
+            if (TaiKhoan.Text == "Username" || TaiKhoan.Text == "" ||
+                MatKhau.Text == "Password" || MatKhau.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ Username và Password!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string connectionString = @"Data Source=LAPTOP-IHOEII21\SQLEXPRESS;Initial Catalog=DigitalBankingDB;Integrated Security=True;TrustServerCertificate=True";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string sql = "SELECT COUNT(*) FROM Accounts WHERE Username = @user AND Password = @pass";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@user", TaiKhoan.Text);
+                        cmd.Parameters.AddWithValue("@pass", MatKhau.Text);
+
+                        int result = (int)cmd.ExecuteScalar();
+
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Đăng nhập thành công!", "Thông báo");
+                            this.Hide();
+
+                            // Mở form giao diện chính
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi kết nối Database: " + ex.Message, "Lỗi Hệ Thống");
+                }
+            }
         }
     }
 }

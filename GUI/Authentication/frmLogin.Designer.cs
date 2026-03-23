@@ -55,7 +55,6 @@
             this.label2.Size = new System.Drawing.Size(175, 36);
             this.label2.TabIndex = 1;
             this.label2.Text = "Đăng Nhập";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // TaiKhoan
             // 
@@ -78,6 +77,7 @@
             this.ButtonLogin.TabIndex = 6;
             this.ButtonLogin.Text = "Đăng Nhập";
             this.ButtonLogin.UseVisualStyleBackColor = true;
+            this.ButtonLogin.Click += new System.EventHandler(this.ButtonLogin_Click);
             // 
             // label4
             // 
@@ -87,7 +87,6 @@
             this.label4.Size = new System.Drawing.Size(145, 16);
             this.label4.TabIndex = 7;
             this.label4.Text = "Bạn chưa có tài khoản?";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // DangKi
             // 
@@ -121,7 +120,6 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 11;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
