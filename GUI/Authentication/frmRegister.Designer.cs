@@ -62,7 +62,7 @@
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.SystemColors.Control;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 13.84615F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.label13.ForeColor = System.Drawing.Color.RoyalBlue;
             this.label13.Location = new System.Drawing.Point(167, 23);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(142, 29);
@@ -325,7 +325,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(989, 529);
+            this.ClientSize = new System.Drawing.Size(457, 529);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
