@@ -44,6 +44,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.pnlSidebar.SuspendLayout();
             this.pnlLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,6 +58,9 @@
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.White;
+            this.pnlSidebar.Controls.Add(this.button6);
+            this.pnlSidebar.Controls.Add(this.button5);
+            this.pnlSidebar.Controls.Add(this.button4);
             this.pnlSidebar.Controls.Add(this.button3);
             this.pnlSidebar.Controls.Add(this.button2);
             this.pnlSidebar.Controls.Add(this.pnlLogo);
@@ -62,8 +68,9 @@
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(167, 450);
+            this.pnlSidebar.Size = new System.Drawing.Size(167, 688);
             this.pnlSidebar.TabIndex = 0;
+            this.pnlSidebar.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSidebar_Paint);
             // 
             // button3
             // 
@@ -76,7 +83,7 @@
             this.button3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.button3.Size = new System.Drawing.Size(167, 32);
             this.button3.TabIndex = 5;
-            this.button3.Text = "button3";
+            this.button3.Text = "Payments";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -91,9 +98,10 @@
             this.button2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.button2.Size = new System.Drawing.Size(167, 32);
             this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
+            this.button2.Text = "Transaction";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btnTransfer_Click);
             // 
             // pnlLogo
             // 
@@ -128,10 +136,10 @@
             this.button1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.button1.Size = new System.Drawing.Size(167, 32);
             this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
+            this.button1.Text = "Dashboard\r\n";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // pnlHeader
             // 
@@ -142,7 +150,7 @@
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(167, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(633, 62);
+            this.pnlHeader.Size = new System.Drawing.Size(1020, 62);
             this.pnlHeader.TabIndex = 1;
             // 
             // panel1
@@ -187,7 +195,7 @@
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(78, 184);
+            this.textBox1.Location = new System.Drawing.Point(272, 184);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(326, 23);
             this.textBox1.TabIndex = 1;
@@ -200,14 +208,62 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(167, 62);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(633, 388);
+            this.pnlMain.Size = new System.Drawing.Size(1020, 626);
             this.pnlMain.TabIndex = 2;
+            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
+            // 
+            // button4
+            // 
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.ForeColor = System.Drawing.Color.Black;
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(0, 177);
+            this.button4.Name = "button4";
+            this.button4.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.button4.Size = new System.Drawing.Size(167, 32);
+            this.button4.TabIndex = 6;
+            this.button4.Text = "Saving";
+            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.ForeColor = System.Drawing.Color.Black;
+            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.Location = new System.Drawing.Point(0, 215);
+            this.button5.Name = "button5";
+            this.button5.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.button5.Size = new System.Drawing.Size(167, 32);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "Loan";
+            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.ForeColor = System.Drawing.Color.Black;
+            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.Location = new System.Drawing.Point(0, 253);
+            this.button6.Name = "button6";
+            this.button6.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.button6.Size = new System.Drawing.Size(167, 32);
+            this.button6.TabIndex = 8;
+            this.button6.Text = "History";
+            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // frmClientDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1187, 688);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlSidebar);
@@ -242,5 +298,8 @@
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
