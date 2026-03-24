@@ -16,5 +16,12 @@ namespace GUI.Authentication
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmLogin loginForm = new frmLogin();
+            loginForm.Show();
+        }
     }
 }

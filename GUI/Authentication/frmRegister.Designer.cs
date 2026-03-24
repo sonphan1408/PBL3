@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label13 = new System.Windows.Forms.Label();
+            this.lbRegis = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -37,45 +37,40 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtFullName = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtSDT = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtConfirm = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.Submit = new System.Windows.Forms.Button();
+            this.bxGender = new System.Windows.Forms.ComboBox();
+            this.dtDayofBirth = new System.Windows.Forms.DateTimePicker();
             this.Back = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label13
+            // lbRegis
             // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.SystemColors.Control;
-            this.label13.Font = new System.Drawing.Font("Times New Roman", 13.84615F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label13.Location = new System.Drawing.Point(167, 23);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(142, 29);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "REGISTER";
+            this.lbRegis.AutoSize = true;
+            this.lbRegis.BackColor = System.Drawing.SystemColors.Control;
+            this.lbRegis.Font = new System.Drawing.Font("Times New Roman", 13.84615F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRegis.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lbRegis.Location = new System.Drawing.Point(148, 23);
+            this.lbRegis.Name = "lbRegis";
+            this.lbRegis.Size = new System.Drawing.Size(133, 26);
+            this.lbRegis.TabIndex = 0;
+            this.lbRegis.Text = "REGISTER";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 8.861538F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(38, 63);
+            this.label14.Location = new System.Drawing.Point(34, 63);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(159, 19);
+            this.label14.Size = new System.Drawing.Size(156, 17);
             this.label14.TabIndex = 0;
             this.label14.Text = "Please enter your details.";
             // 
@@ -85,11 +80,11 @@
             this.label15.BackColor = System.Drawing.SystemColors.Control;
             this.label15.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label15.Location = new System.Drawing.Point(37, 89);
+            this.label15.Location = new System.Drawing.Point(33, 89);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(67, 20);
+            this.label15.Size = new System.Drawing.Size(80, 19);
             this.label15.TabIndex = 0;
-            this.label15.Text = "Register";
+            this.label15.Text = "Full Name";
             // 
             // label16
             // 
@@ -97,9 +92,9 @@
             this.label16.BackColor = System.Drawing.SystemColors.Control;
             this.label16.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label16.Location = new System.Drawing.Point(243, 89);
+            this.label16.Location = new System.Drawing.Point(216, 89);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(62, 20);
+            this.label16.Size = new System.Drawing.Size(59, 19);
             this.label16.TabIndex = 0;
             this.label16.Text = "Gender";
             // 
@@ -109,9 +104,9 @@
             this.label17.BackColor = System.Drawing.SystemColors.Control;
             this.label17.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label17.Location = new System.Drawing.Point(37, 144);
+            this.label17.Location = new System.Drawing.Point(33, 144);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(67, 20);
+            this.label17.Size = new System.Drawing.Size(64, 19);
             this.label17.TabIndex = 0;
             this.label17.Text = "Address";
             // 
@@ -121,12 +116,11 @@
             this.label18.BackColor = System.Drawing.SystemColors.Control;
             this.label18.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label18.Location = new System.Drawing.Point(37, 198);
+            this.label18.Location = new System.Drawing.Point(33, 198);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(104, 20);
+            this.label18.Size = new System.Drawing.Size(99, 19);
             this.label18.TabIndex = 0;
             this.label18.Text = "Date of Birth";
-            this.label18.Click += new System.EventHandler(this.label6_Click);
             // 
             // label19
             // 
@@ -134,12 +128,11 @@
             this.label19.BackColor = System.Drawing.SystemColors.Control;
             this.label19.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label19.Location = new System.Drawing.Point(37, 253);
+            this.label19.Location = new System.Drawing.Point(33, 253);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(50, 20);
+            this.label19.Size = new System.Drawing.Size(49, 19);
             this.label19.TabIndex = 0;
             this.label19.Text = "Email";
-            this.label19.Click += new System.EventHandler(this.label6_Click);
             // 
             // label20
             // 
@@ -147,12 +140,11 @@
             this.label20.BackColor = System.Drawing.SystemColors.Control;
             this.label20.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label20.Location = new System.Drawing.Point(37, 307);
+            this.label20.Location = new System.Drawing.Point(33, 307);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(82, 20);
+            this.label20.Size = new System.Drawing.Size(78, 19);
             this.label20.TabIndex = 0;
             this.label20.Text = "Username";
-            this.label20.Click += new System.EventHandler(this.label6_Click);
             // 
             // label21
             // 
@@ -160,25 +152,11 @@
             this.label21.BackColor = System.Drawing.SystemColors.Control;
             this.label21.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label21.Location = new System.Drawing.Point(243, 363);
+            this.label21.Location = new System.Drawing.Point(216, 363);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(144, 20);
+            this.label21.Size = new System.Drawing.Size(136, 19);
             this.label21.TabIndex = 0;
             this.label21.Text = "Confirm Password";
-            this.label21.Click += new System.EventHandler(this.label6_Click);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.BackColor = System.Drawing.SystemColors.Control;
-            this.label22.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label22.Location = new System.Drawing.Point(243, 307);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(124, 20);
-            this.label22.TabIndex = 0;
-            this.label22.Text = "Accout Number";
-            this.label22.Click += new System.EventHandler(this.label6_Click);
             // 
             // label23
             // 
@@ -186,12 +164,11 @@
             this.label23.BackColor = System.Drawing.SystemColors.Control;
             this.label23.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label23.Location = new System.Drawing.Point(40, 363);
+            this.label23.Location = new System.Drawing.Point(36, 363);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(79, 20);
+            this.label23.Size = new System.Drawing.Size(74, 19);
             this.label23.TabIndex = 0;
             this.label23.Text = "Password";
-            this.label23.Click += new System.EventHandler(this.label6_Click);
             // 
             // label24
             // 
@@ -199,150 +176,121 @@
             this.label24.BackColor = System.Drawing.SystemColors.Control;
             this.label24.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label24.Location = new System.Drawing.Point(243, 198);
+            this.label24.Location = new System.Drawing.Point(216, 198);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(119, 20);
+            this.label24.Size = new System.Drawing.Size(111, 19);
             this.label24.TabIndex = 0;
             this.label24.Text = "Phone Number";
-            this.label24.Click += new System.EventHandler(this.label6_Click);
             // 
-            // textBox9
+            // txtFullName
             // 
-            this.textBox9.Location = new System.Drawing.Point(40, 108);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(200, 23);
-            this.textBox9.TabIndex = 1;
+            this.txtFullName.Location = new System.Drawing.Point(36, 108);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(178, 22);
+            this.txtFullName.TabIndex = 1;
             // 
-            // textBox10
+            // txtAddress
             // 
-            this.textBox10.Location = new System.Drawing.Point(40, 163);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(362, 23);
-            this.textBox10.TabIndex = 1;
-            this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
+            this.txtAddress.Location = new System.Drawing.Point(36, 163);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(322, 22);
+            this.txtAddress.TabIndex = 1;
             // 
-            // textBox11
+            // txtSDT
             // 
-            this.textBox11.Location = new System.Drawing.Point(246, 218);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(156, 23);
-            this.textBox11.TabIndex = 1;
+            this.txtSDT.Location = new System.Drawing.Point(219, 218);
+            this.txtSDT.Name = "txtSDT";
+            this.txtSDT.Size = new System.Drawing.Size(139, 22);
+            this.txtSDT.TabIndex = 1;
             // 
-            // textBox12
+            // txtEmail
             // 
-            this.textBox12.Location = new System.Drawing.Point(40, 272);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(362, 23);
-            this.textBox12.TabIndex = 1;
+            this.txtEmail.Location = new System.Drawing.Point(36, 272);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(322, 22);
+            this.txtEmail.TabIndex = 1;
             // 
-            // textBox13
+            // txtConfirm
             // 
-            this.textBox13.Location = new System.Drawing.Point(246, 326);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(156, 23);
-            this.textBox13.TabIndex = 1;
-            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
+            this.txtConfirm.Location = new System.Drawing.Point(219, 382);
+            this.txtConfirm.Name = "txtConfirm";
+            this.txtConfirm.Size = new System.Drawing.Size(139, 22);
+            this.txtConfirm.TabIndex = 1;
             // 
-            // textBox14
+            // txtPassword
             // 
-            this.textBox14.Location = new System.Drawing.Point(246, 382);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(156, 23);
-            this.textBox14.TabIndex = 1;
+            this.txtPassword.Location = new System.Drawing.Point(38, 382);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(176, 22);
+            this.txtPassword.TabIndex = 1;
             // 
-            // textBox15
+            // txtUsername
             // 
-            this.textBox15.Location = new System.Drawing.Point(43, 382);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(197, 23);
-            this.textBox15.TabIndex = 1;
+            this.txtUsername.Location = new System.Drawing.Point(36, 326);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(322, 22);
+            this.txtUsername.TabIndex = 1;
             // 
-            // textBox16
+            // Submit
             // 
-            this.textBox16.Location = new System.Drawing.Point(40, 326);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(200, 23);
-            this.textBox16.TabIndex = 1;
+            this.Submit.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.Submit.ForeColor = System.Drawing.SystemColors.Control;
+            this.Submit.Location = new System.Drawing.Point(36, 438);
+            this.Submit.Name = "Submit";
+            this.Submit.Size = new System.Drawing.Size(322, 33);
+            this.Submit.TabIndex = 2;
+            this.Submit.Text = "Submit";
+            this.Submit.UseVisualStyleBackColor = false;
+            this.Submit.Click += new System.EventHandler(this.Submit_Click);
             // 
-            // button3
+            // bxGender
             // 
-            this.button3.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.button3.ForeColor = System.Drawing.SystemColors.Control;
-            this.button3.Location = new System.Drawing.Point(40, 472);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(362, 33);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Submit";
-            this.button3.UseVisualStyleBackColor = false;
+            this.bxGender.FormattingEnabled = true;
+            this.bxGender.Items.AddRange(new object[] {
+            "Nữ",
+            "Nam"});
+            this.bxGender.Location = new System.Drawing.Point(219, 108);
+            this.bxGender.Name = "bxGender";
+            this.bxGender.Size = new System.Drawing.Size(139, 24);
+            this.bxGender.TabIndex = 3;
             // 
-            // comboBox2
+            // dtDayofBirth
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(246, 108);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(156, 24);
-            this.comboBox2.TabIndex = 3;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(40, 218);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
-            this.dateTimePicker1.TabIndex = 5;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(43, 416);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(165, 427);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 25);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Choose Avatar";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button2_Click);
+            this.dtDayofBirth.Location = new System.Drawing.Point(36, 218);
+            this.dtDayofBirth.Name = "dtDayofBirth";
+            this.dtDayofBirth.Size = new System.Drawing.Size(178, 22);
+            this.dtDayofBirth.TabIndex = 5;
             // 
             // Back
             // 
             this.Back.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Back.Location = new System.Drawing.Point(40, 23);
+            this.Back.Location = new System.Drawing.Point(36, 23);
             this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(52, 32);
+            this.Back.Size = new System.Drawing.Size(46, 32);
             this.Back.TabIndex = 14;
             this.Back.Tag = "";
             this.Back.Text = "←";
             this.Back.UseVisualStyleBackColor = true;
+            this.Back.Click += new System.EventHandler(this.Back_Click);
             // 
             // frmRegister
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(457, 529);
+            this.ClientSize = new System.Drawing.Size(406, 509);
             this.Controls.Add(this.Back);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox16);
-            this.Controls.Add(this.textBox15);
-            this.Controls.Add(this.textBox14);
-            this.Controls.Add(this.textBox13);
-            this.Controls.Add(this.textBox12);
-            this.Controls.Add(this.textBox11);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox9);
+            this.Controls.Add(this.dtDayofBirth);
+            this.Controls.Add(this.bxGender);
+            this.Controls.Add(this.Submit);
+            this.Controls.Add(this.txtUsername);
+            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.txtConfirm);
+            this.Controls.Add(this.txtEmail);
+            this.Controls.Add(this.txtSDT);
+            this.Controls.Add(this.txtAddress);
+            this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.label23);
-            this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
@@ -351,19 +299,17 @@
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
+            this.Controls.Add(this.lbRegis);
             this.Name = "frmRegister";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.frmRegister_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Đăng Kí nhen";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lbRegis;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
@@ -372,22 +318,18 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.TextBox txtSDT;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.TextBox txtConfirm;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Button Submit;
+        private System.Windows.Forms.ComboBox bxGender;
+        private System.Windows.Forms.DateTimePicker dtDayofBirth;
         private System.Windows.Forms.Button Back;
     }
 }

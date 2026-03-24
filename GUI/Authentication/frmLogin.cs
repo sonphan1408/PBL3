@@ -58,17 +58,16 @@ namespace GUI.Authentication
 
         private void Back_Click(object sender, EventArgs e)
         {
-            // Mở frmFace
             this.Close();
+            MainScreen mainScreen = new MainScreen();
+            mainScreen.Show();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            this.Close();
             frmRegister registerForm = new frmRegister();
-            this.Hide();
-            registerForm.ShowDialog();
-            this.Show();
-            //Close();
+            registerForm.Show();
         }
 
         private void MatKhau_TextChanged(object sender, EventArgs e)
@@ -104,7 +103,7 @@ namespace GUI.Authentication
                         if (result > 0)
                         {
                             MessageBox.Show("Đăng nhập thành công!", "Thông báo");
-                            this.Hide();
+                            this.Close();
 
                             // Mở form giao diện chính
                         }

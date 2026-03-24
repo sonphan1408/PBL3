@@ -33,7 +33,6 @@
             this.panelContent = new System.Windows.Forms.Panel();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelTagline = new System.Windows.Forms.Label();
-            this.Register = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -45,6 +44,7 @@
             this.panelHeader.BackgroundImage = global::GUI.Properties.Resources.Gemini_Generated_Image_zg4wvdzg4wvdzg4w;
             this.panelHeader.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelHeader.Controls.Add(this.label1);
+            this.panelHeader.Controls.Add(this.btnLogin);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
@@ -66,8 +66,6 @@
             this.panelContent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelContent.Controls.Add(this.labelDescription);
             this.panelContent.Controls.Add(this.labelTagline);
-            this.panelContent.Controls.Add(this.Register);
-            this.panelContent.Controls.Add(this.btnLogin);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelContent.Location = new System.Drawing.Point(0, 107);
             this.panelContent.Name = "panelContent";
@@ -80,7 +78,7 @@
             this.labelDescription.BackColor = System.Drawing.Color.Transparent;
             this.labelDescription.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Italic);
             this.labelDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labelDescription.Location = new System.Drawing.Point(155, 130);
+            this.labelDescription.Location = new System.Drawing.Point(148, 239);
             this.labelDescription.MaximumSize = new System.Drawing.Size(600, 60);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(559, 48);
@@ -94,35 +92,24 @@
             this.labelTagline.BackColor = System.Drawing.Color.Transparent;
             this.labelTagline.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTagline.ForeColor = System.Drawing.Color.Black;
-            this.labelTagline.Location = new System.Drawing.Point(145, 49);
+            this.labelTagline.Location = new System.Drawing.Point(138, 158);
             this.labelTagline.Name = "labelTagline";
             this.labelTagline.Size = new System.Drawing.Size(915, 70);
             this.labelTagline.TabIndex = 0;
             this.labelTagline.Text = "Your Trusted Financial Partner.";
-            // 
-            // Register
-            // 
-            this.Register.BackColor = System.Drawing.Color.White;
-            this.Register.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.Register.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.Register.Location = new System.Drawing.Point(305, 220);
-            this.Register.Name = "Register";
-            this.Register.Size = new System.Drawing.Size(100, 40);
-            this.Register.TabIndex = 3;
-            this.Register.Text = "Register";
-            this.Register.UseVisualStyleBackColor = false;
             // 
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnLogin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(159, 220);
+            this.btnLogin.Location = new System.Drawing.Point(977, 33);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(100, 40);
+            this.btnLogin.Size = new System.Drawing.Size(124, 40);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // MainScreen
             // 
@@ -149,7 +136,6 @@
         private System.Windows.Forms.Label labelTagline;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Button Register;
         private System.Windows.Forms.Label label1;
     }
 }
