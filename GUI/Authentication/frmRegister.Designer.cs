@@ -58,81 +58,81 @@
             // 
             this.lbRegis.AutoSize = true;
             this.lbRegis.BackColor = System.Drawing.SystemColors.Control;
-            this.lbRegis.Font = new System.Drawing.Font("Times New Roman", 13.84615F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRegis.Font = new System.Drawing.Font("Times New Roman", 18.27692F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRegis.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lbRegis.Location = new System.Drawing.Point(148, 23);
+            this.lbRegis.Location = new System.Drawing.Point(241, 21);
             this.lbRegis.Name = "lbRegis";
-            this.lbRegis.Size = new System.Drawing.Size(133, 26);
+            this.lbRegis.Size = new System.Drawing.Size(142, 37);
             this.lbRegis.TabIndex = 0;
-            this.lbRegis.Text = "REGISTER";
+            this.lbRegis.Text = "Đăng Ký";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Times New Roman", 8.861538F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(34, 63);
+            this.label14.Font = new System.Drawing.Font("Times New Roman", 11.07692F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(33, 73);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(156, 17);
+            this.label14.Size = new System.Drawing.Size(246, 22);
             this.label14.TabIndex = 0;
-            this.label14.Text = "Please enter your details.";
+            this.label14.Text = "Hãy Nhập Thông Tin Của Bạn";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.SystemColors.Control;
-            this.label15.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label15.Location = new System.Drawing.Point(33, 89);
+            this.label15.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Blue;
+            this.label15.Location = new System.Drawing.Point(32, 106);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(80, 19);
+            this.label15.Size = new System.Drawing.Size(109, 26);
             this.label15.TabIndex = 0;
-            this.label15.Text = "Full Name";
+            this.label15.Text = "Họ và Tên";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.SystemColors.Control;
-            this.label16.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label16.Location = new System.Drawing.Point(216, 89);
+            this.label16.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.Blue;
+            this.label16.Location = new System.Drawing.Point(318, 106);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(59, 19);
+            this.label16.Size = new System.Drawing.Size(102, 26);
             this.label16.TabIndex = 0;
-            this.label16.Text = "Gender";
+            this.label16.Text = "Giới Tính";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.SystemColors.Control;
-            this.label17.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label17.Location = new System.Drawing.Point(215, 140);
+            this.label17.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Blue;
+            this.label17.Location = new System.Drawing.Point(32, 188);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(64, 19);
+            this.label17.Size = new System.Drawing.Size(84, 26);
             this.label17.TabIndex = 0;
-            this.label17.Text = "Address";
+            this.label17.Text = "Địa Chỉ";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.SystemColors.Control;
-            this.label18.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label18.Location = new System.Drawing.Point(33, 198);
+            this.label18.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Blue;
+            this.label18.Location = new System.Drawing.Point(318, 188);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(99, 19);
+            this.label18.Size = new System.Drawing.Size(110, 26);
             this.label18.TabIndex = 0;
-            this.label18.Text = "Date of Birth";
+            this.label18.Text = "Ngày Sinh";
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.SystemColors.Control;
-            this.label19.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label19.Location = new System.Drawing.Point(33, 253);
+            this.label19.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Blue;
+            this.label19.Location = new System.Drawing.Point(318, 345);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(49, 19);
+            this.label19.Size = new System.Drawing.Size(65, 26);
             this.label19.TabIndex = 0;
             this.label19.Text = "Email";
             // 
@@ -140,135 +140,146 @@
             // 
             this.label20.AutoSize = true;
             this.label20.BackColor = System.Drawing.SystemColors.Control;
-            this.label20.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label20.Location = new System.Drawing.Point(33, 307);
+            this.label20.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.Blue;
+            this.label20.Location = new System.Drawing.Point(32, 345);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(78, 19);
+            this.label20.Size = new System.Drawing.Size(160, 26);
             this.label20.TabIndex = 0;
-            this.label20.Text = "Username";
+            this.label20.Text = "Tên Đăng Nhập";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.BackColor = System.Drawing.SystemColors.Control;
-            this.label21.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label21.Location = new System.Drawing.Point(216, 363);
+            this.label21.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Blue;
+            this.label21.Location = new System.Drawing.Point(318, 427);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(136, 19);
+            this.label21.Size = new System.Drawing.Size(194, 26);
             this.label21.TabIndex = 0;
-            this.label21.Text = "Confirm Password";
+            this.label21.Text = "Nhập Lại Mật Khẩu";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.BackColor = System.Drawing.SystemColors.Control;
-            this.label23.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label23.Location = new System.Drawing.Point(36, 363);
+            this.label23.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.Blue;
+            this.label23.Location = new System.Drawing.Point(32, 427);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(74, 19);
+            this.label23.Size = new System.Drawing.Size(103, 26);
             this.label23.TabIndex = 0;
-            this.label23.Text = "Password";
+            this.label23.Text = "Mật Khẩu";
             // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.BackColor = System.Drawing.SystemColors.Control;
-            this.label24.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label24.Location = new System.Drawing.Point(216, 198);
+            this.label24.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.Blue;
+            this.label24.Location = new System.Drawing.Point(318, 266);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(111, 19);
+            this.label24.Size = new System.Drawing.Size(148, 26);
             this.label24.TabIndex = 0;
-            this.label24.Text = "Phone Number";
+            this.label24.Text = "Số Điện Thoại";
+            this.label24.Click += new System.EventHandler(this.label24_Click);
             // 
             // txtFullName
             // 
-            this.txtFullName.Location = new System.Drawing.Point(36, 108);
+            this.txtFullName.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFullName.Location = new System.Drawing.Point(32, 135);
             this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(178, 22);
+            this.txtFullName.Size = new System.Drawing.Size(268, 33);
             this.txtFullName.TabIndex = 1;
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(219, 162);
+            this.txtAddress.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddress.Location = new System.Drawing.Point(32, 217);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(139, 22);
+            this.txtAddress.Size = new System.Drawing.Size(261, 33);
             this.txtAddress.TabIndex = 1;
             // 
             // txtSDT
             // 
-            this.txtSDT.Location = new System.Drawing.Point(219, 218);
+            this.txtSDT.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSDT.Location = new System.Drawing.Point(323, 295);
             this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(139, 22);
+            this.txtSDT.Size = new System.Drawing.Size(261, 33);
             this.txtSDT.TabIndex = 1;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(36, 272);
+            this.txtEmail.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Location = new System.Drawing.Point(323, 374);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(322, 22);
+            this.txtEmail.Size = new System.Drawing.Size(261, 33);
             this.txtEmail.TabIndex = 1;
             // 
             // txtConfirm
             // 
-            this.txtConfirm.Location = new System.Drawing.Point(219, 382);
+            this.txtConfirm.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConfirm.Location = new System.Drawing.Point(323, 461);
             this.txtConfirm.Name = "txtConfirm";
-            this.txtConfirm.Size = new System.Drawing.Size(139, 22);
+            this.txtConfirm.Size = new System.Drawing.Size(261, 33);
             this.txtConfirm.TabIndex = 1;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(38, 382);
+            this.txtPassword.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(37, 461);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(176, 22);
+            this.txtPassword.Size = new System.Drawing.Size(263, 33);
             this.txtPassword.TabIndex = 1;
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(36, 326);
+            this.txtUsername.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsername.Location = new System.Drawing.Point(32, 374);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(322, 22);
+            this.txtUsername.Size = new System.Drawing.Size(268, 33);
             this.txtUsername.TabIndex = 1;
             // 
             // Submit
             // 
-            this.Submit.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.Submit.ForeColor = System.Drawing.SystemColors.Control;
-            this.Submit.Location = new System.Drawing.Point(36, 438);
+            this.Submit.BackColor = System.Drawing.Color.White;
+            this.Submit.Font = new System.Drawing.Font("Times New Roman", 13.84615F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Submit.ForeColor = System.Drawing.Color.Blue;
+            this.Submit.Location = new System.Drawing.Point(143, 547);
             this.Submit.Name = "Submit";
-            this.Submit.Size = new System.Drawing.Size(322, 33);
+            this.Submit.Size = new System.Drawing.Size(338, 40);
             this.Submit.TabIndex = 2;
-            this.Submit.Text = "Submit";
+            this.Submit.Text = "Đăng Ký";
             this.Submit.UseVisualStyleBackColor = false;
             this.Submit.Click += new System.EventHandler(this.Submit_Click);
             // 
             // bxGender
             // 
+            this.bxGender.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bxGender.FormattingEnabled = true;
             this.bxGender.Items.AddRange(new object[] {
             "Nữ",
             "Nam"});
-            this.bxGender.Location = new System.Drawing.Point(219, 108);
+            this.bxGender.Location = new System.Drawing.Point(323, 135);
             this.bxGender.Name = "bxGender";
-            this.bxGender.Size = new System.Drawing.Size(139, 24);
+            this.bxGender.Size = new System.Drawing.Size(261, 33);
             this.bxGender.TabIndex = 3;
             // 
             // dtDayofBirth
             // 
-            this.dtDayofBirth.Location = new System.Drawing.Point(36, 218);
+            this.dtDayofBirth.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtDayofBirth.Location = new System.Drawing.Point(323, 217);
             this.dtDayofBirth.Name = "dtDayofBirth";
-            this.dtDayofBirth.Size = new System.Drawing.Size(178, 22);
+            this.dtDayofBirth.Size = new System.Drawing.Size(261, 33);
             this.dtDayofBirth.TabIndex = 5;
             // 
             // Back
             // 
             this.Back.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Back.Location = new System.Drawing.Point(36, 23);
+            this.Back.Location = new System.Drawing.Point(37, 21);
             this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(46, 32);
+            this.Back.Size = new System.Drawing.Size(56, 37);
             this.Back.TabIndex = 14;
             this.Back.Tag = "";
             this.Back.Text = "←";
@@ -277,28 +288,29 @@
             // 
             // txtCCCD
             // 
-            this.txtCCCD.Location = new System.Drawing.Point(38, 162);
+            this.txtCCCD.Font = new System.Drawing.Font("Times New Roman", 12.18462F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCCCD.Location = new System.Drawing.Point(32, 295);
             this.txtCCCD.Name = "txtCCCD";
-            this.txtCCCD.Size = new System.Drawing.Size(178, 22);
+            this.txtCCCD.Size = new System.Drawing.Size(268, 33);
             this.txtCCCD.TabIndex = 15;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label1.Location = new System.Drawing.Point(34, 140);
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12.73846F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Blue;
+            this.label1.Location = new System.Drawing.Point(32, 266);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 19);
+            this.label1.Size = new System.Drawing.Size(73, 26);
             this.label1.TabIndex = 16;
             this.label1.Text = "CCCD";
             // 
             // frmRegister
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 509);
+            this.ClientSize = new System.Drawing.Size(659, 694);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCCCD);
             this.Controls.Add(this.Back);
@@ -323,6 +335,7 @@
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.lbRegis);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "frmRegister";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng Kí nhen";
