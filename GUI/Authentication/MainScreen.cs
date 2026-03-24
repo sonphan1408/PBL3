@@ -21,7 +21,8 @@ namespace GUI.Authentication
         {
             this.Hide();
             frmLogin loginForm = new frmLogin();
-            loginForm.Show();
+            loginForm.ShowDialog();
+            this.Show();
         }
     }
 }

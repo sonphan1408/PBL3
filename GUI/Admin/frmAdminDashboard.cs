@@ -12,9 +12,12 @@ namespace GUI.Admin
 {
     public partial class frmAdminDashboard : Form
     {
-        public frmAdminDashboard()
+        private string username;
+
+        public frmAdminDashboard(string username)
         {
             InitializeComponent();
+            this.username = username;
         }
     }
 }

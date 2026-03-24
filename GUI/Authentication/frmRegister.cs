@@ -21,8 +21,6 @@ namespace GUI.Authentication
         private void Back_Click(object sender, EventArgs e)
         {
             this.Close();
-            frmLogin login = new frmLogin();
-            login.Show();
         }
 
         private void Submit_Click(object sender, EventArgs e)
@@ -60,7 +58,7 @@ namespace GUI.Authentication
                         cmd.Parameters.AddWithValue("@address", txtAddress.Text);
                         cmd.Parameters.AddWithValue("@phone", txtSDT.Text);
                         cmd.Parameters.AddWithValue("@email", txtEmail.Text);
-                        cmd.Parameters.AddWithValue("@idcard", txtSDT.Text);
+                        cmd.Parameters.AddWithValue("@idcard", txtCCCD.Text);
 
                         newCustomerId = (int)cmd.ExecuteScalar();
                     }

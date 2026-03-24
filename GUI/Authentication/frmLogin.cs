@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using GUI.Client;
+using GUI.Admin;
 
 namespace GUI.Authentication
 {
@@ -59,15 +61,14 @@ namespace GUI.Authentication
         private void Back_Click(object sender, EventArgs e)
         {
             this.Close();
-            MainScreen mainScreen = new MainScreen();
-            mainScreen.Show();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
+            this.Hide();
             frmRegister registerForm = new frmRegister();
-            registerForm.Show();
+            registerForm.ShowDialog();
+            this.Show();
         }
 
         private void MatKhau_TextChanged(object sender, EventArgs e)
@@ -78,44 +79,55 @@ namespace GUI.Authentication
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
             if (TaiKhoan.Text == "Username" || TaiKhoan.Text == "" ||
-                MatKhau.Text == "Password" || MatKhau.Text == "")
+                MatKhau.Text  == "Password" || MatKhau.Text  == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ Username và Password!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string connectionString = @"Data Source=LAPTOP-IHOEII21\SQLEXPRESS;Initial Catalog=DigitalBankingDB;Integrated Security=True;TrustServerCertificate=True";
+            string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=DigitalBankingDB;Integrated Security=True;TrustServerCertificate=True";
+            string sql = @"SELECT 'Customer' AS UserRole FROM Accounts WHERE Username = @u AND Password = @p
+               UNION
+               SELECT Role AS UserRole FROM Employees WHERE Username = @u AND Password = @p";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                try
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
-                    conn.Open();
-                    string sql = "SELECT COUNT(*) FROM Accounts WHERE Username = @user AND Password = @pass";
+                    cmd.Parameters.AddWithValue("@u", TaiKhoan.Text);
+                    cmd.Parameters.AddWithValue("@p", MatKhau.Text);
 
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
                     {
-                        cmd.Parameters.AddWithValue("@user", TaiKhoan.Text);
-                        cmd.Parameters.AddWithValue("@pass", MatKhau.Text);
+                        string role = result.ToString();
+                        string username = TaiKhoan.Text;
 
-                        int result = (int)cmd.ExecuteScalar();
+                        MessageBox.Show("Đăng nhập thành công!", "Thông báo");
+                        TaiKhoan.Text = "Username";
+                        MatKhau.Text = "Password";
+                        TaiKhoan.ForeColor = Color.Gray;
+                        MatKhau.ForeColor = Color.Gray;
+                        MatKhau.UseSystemPasswordChar = false;
 
-                        if (result > 0)
+                        this.Hide();
+                        if(role == "Customer")
                         {
-                            MessageBox.Show("Đăng nhập thành công!", "Thông báo");
-                            this.Close();
-
-                            // Mở form giao diện chính
+                            frmClientDashboard customerForm = new frmClientDashboard(username);
+                            customerForm.ShowDialog();
                         }
                         else
                         {
-                            MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            frmAdminDashboard employeeForm = new frmAdminDashboard(username);
+                            employeeForm.ShowDialog();
                         }
+                        this.Show();
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi kết nối Database: " + ex.Message, "Lỗi Hệ Thống");
+                    else
+                    {
+                        MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

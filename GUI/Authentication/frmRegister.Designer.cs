@@ -50,6 +50,8 @@
             this.bxGender = new System.Windows.Forms.ComboBox();
             this.dtDayofBirth = new System.Windows.Forms.DateTimePicker();
             this.Back = new System.Windows.Forms.Button();
+            this.txtCCCD = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbRegis
@@ -104,7 +106,7 @@
             this.label17.BackColor = System.Drawing.SystemColors.Control;
             this.label17.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label17.Location = new System.Drawing.Point(33, 144);
+            this.label17.Location = new System.Drawing.Point(215, 140);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(64, 19);
             this.label17.TabIndex = 0;
@@ -191,9 +193,9 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(36, 163);
+            this.txtAddress.Location = new System.Drawing.Point(219, 162);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(322, 22);
+            this.txtAddress.Size = new System.Drawing.Size(139, 22);
             this.txtAddress.TabIndex = 1;
             // 
             // txtSDT
@@ -273,11 +275,32 @@
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.Back_Click);
             // 
+            // txtCCCD
+            // 
+            this.txtCCCD.Location = new System.Drawing.Point(38, 162);
+            this.txtCCCD.Name = "txtCCCD";
+            this.txtCCCD.Size = new System.Drawing.Size(178, 22);
+            this.txtCCCD.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.label1.Location = new System.Drawing.Point(34, 140);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 19);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "CCCD";
+            // 
             // frmRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 509);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtCCCD);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.dtDayofBirth);
             this.Controls.Add(this.bxGender);
@@ -331,5 +354,7 @@
         private System.Windows.Forms.ComboBox bxGender;
         private System.Windows.Forms.DateTimePicker dtDayofBirth;
         private System.Windows.Forms.Button Back;
+        private System.Windows.Forms.TextBox txtCCCD;
+        private System.Windows.Forms.Label label1;
     }
 }

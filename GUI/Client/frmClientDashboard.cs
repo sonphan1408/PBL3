@@ -13,7 +13,8 @@ namespace GUI.Client
 {
     public partial class frmClientDashboard : Form
     {
-        // 1. CHỈ khai báo biến ở đây (Không dùng chữ "new" vội)
+        private string username;
+
         ucClientHome home;
         ucFinancials financials;
         ucHistory history;
@@ -21,21 +22,18 @@ namespace GUI.Client
         ucNotifications notifications;
         ucTransfer transfer;
 
-        // 2. ĐÂY LÀ HÀM BẠN ĐANG THIẾU (Bắt buộc phải có)
-        public frmClientDashboard()
+        public frmClientDashboard(string username)
         {
-            InitializeComponent(); // Lệnh này giúp vẽ pnlMain và các nút ra màn hình
-
-            // 3. Khởi tạo (new) các trang con ở đây, sau khi giao diện chính đã load xong
+            InitializeComponent();
             home = new ucClientHome();
             financials = new ucFinancials();
             history = new ucHistory();
             invoice = new ucInvoicePayment();
             notifications = new ucNotifications();
             transfer = new ucTransfer();
+            this.username = username;
         }
 
-        // Hàm tráo đổi UserControl của bạn (Đã chuẩn)
         private void addUserControl(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
@@ -44,7 +42,6 @@ namespace GUI.Client
             uc.BringToFront();
         }
 
-        // --- CÁC SỰ KIỆN NÚT BẤM ---
         private void btnHome_Click(object sender, EventArgs e)
         {
             addUserControl(home);
@@ -65,7 +62,6 @@ namespace GUI.Client
             addUserControl(transfer);
         }
 
-        // --- CÁC SỰ KIỆN KHÁC CỦA BẠN (GIỮ NGUYÊN) ---
         private void frmClientDashboard_Load(object sender, EventArgs e) { }
         private void pnlLogo_Paint(object sender, PaintEventArgs e) { }
         private void textBox1_TextChanged(object sender, EventArgs e) { }
@@ -74,7 +70,6 @@ namespace GUI.Client
         private void button4_Click(object sender, EventArgs e) { }
         private void pnlSidebar_Paint(object sender, PaintEventArgs e) { }
 
-        // Code bo góc thanh tìm kiếm của bạn (Đã chuẩn)
         private void pnlSearch_Paint(object sender, PaintEventArgs e)
         {
             GraphicsPath path = new GraphicsPath();
