@@ -66,6 +66,7 @@
             this.TaiKhoan.Size = new System.Drawing.Size(190, 21);
             this.TaiKhoan.TabIndex = 4;
             this.TaiKhoan.Text = "Username";
+            this.TaiKhoan.TextChanged += new System.EventHandler(this.TaiKhoan_TextChanged);
             this.TaiKhoan.Enter += new System.EventHandler(this.TaiKhoan_Enter);
             this.TaiKhoan.Leave += new System.EventHandler(this.TaiKhoan_Leave);
             // 

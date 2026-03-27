@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DTO.Models
 {
-    internal class ExternalBankDTO
+    public class ExternalBankDTO
     {
+        public string BankCode { get; set; }
+        public string BankName { get; set; }
+        public string FullName { get; set; }
     }
 }

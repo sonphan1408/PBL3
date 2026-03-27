@@ -53,11 +53,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AccountDTO.cs" />
+    <Compile Include="Models\createTime.cs" />
     <Compile Include="Models\CustomerDTO.cs" />
     <Compile Include="Models\EmployeeDTO.cs" />
     <Compile Include="Models\ExternalBankDTO.cs" />
+    <Compile Include="Models\ExternalTransactionDTO.cs" />
+    <Compile Include="Models\FileName.cs" />
     <Compile Include="Models\FinancialProductDTO.cs" />
     <Compile Include="Models\InterestRateDTO.cs" />
+    <Compile Include="Models\InternalTransactionDTO.cs" />
     <Compile Include="Models\InvoiceDTO.cs" />
     <Compile Include="Models\NotificationDTO.cs" />
     <Compile Include="Models\TransactionDTO.cs" />

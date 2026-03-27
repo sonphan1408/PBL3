@@ -131,5 +131,10 @@ namespace GUI.Authentication
                 }
             }
         }
+
+        private void TaiKhoan_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
