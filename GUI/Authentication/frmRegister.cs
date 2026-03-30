@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using BLL.Services;
+using DTO.Models;
 
 namespace GUI.Authentication
 {
@@ -36,60 +37,32 @@ namespace GUI.Authentication
                 return;
             }
 
-            string connString = @"Data Source=.\SQLEXPRESS;Initial Catalog=DigitalBankingDB;Integrated Security=True;TrustServerCertificate=True";
-
-            using (SqlConnection conn = new SqlConnection(connString))
+            try
             {
-                conn.Open();
-                SqlTransaction transaction = conn.BeginTransaction();
-
-                try
+                // Create customer DTO
+                CustomerDTO customer = new CustomerDTO
                 {
-                    string sqlCustomer = @"INSERT INTO Customers (FullName, Gender, DateOfBirth, Address, PhoneNumber, Email, IDCard) 
-                                   OUTPUT INSERTED.CustomerID 
-                                   VALUES (@name, @gender, @dob, @address, @phone, @email, @idcard)";
+                    FullName = txtFullName.Text,
+                    Gender = bxGender.Text,
+                    DateOfBirth = dtDayofBirth.Value,
+                    Address = txtAddress.Text,
+                    PhoneNumber = txtSDT.Text,
+                    Email = txtEmail.Text,
+                    IDCard = txtCCCD.Text
+                };
 
-                    int newCustomerId = 0;
-                    using (SqlCommand cmd = new SqlCommand(sqlCustomer, conn, transaction))
-                    {
-                        cmd.Parameters.AddWithValue("@name", txtFullName.Text);
-                        cmd.Parameters.AddWithValue("@gender", bxGender.Text);
-                        cmd.Parameters.AddWithValue("@dob", dtDayofBirth.Value);
-                        cmd.Parameters.AddWithValue("@address", txtAddress.Text);
-                        cmd.Parameters.AddWithValue("@phone", txtSDT.Text);
-                        cmd.Parameters.AddWithValue("@email", txtEmail.Text);
-                        cmd.Parameters.AddWithValue("@idcard", txtCCCD.Text);
+                // Register customer
+                string accountNumber = AuthService.RegisterCustomer(customer, txtUsername.Text, txtPassword.Text, txtConfirm.Text);
 
-                        newCustomerId = (int)cmd.ExecuteScalar();
-                    }
+                MessageBox.Show($"Đăng ký thành công!\nSố tài khoản ngân hàng của bạn là: {accountNumber}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    string newAccountNumber = "8888000" + newCustomerId.ToString();
-
-                    string sqlAccount = @"INSERT INTO Accounts (AccountNumber, CustomerID, Username, Password, Balance, Status) 
-                                  VALUES (@accNum, @custId, @user, @pass, 0, 'Active')";
-
-                    using (SqlCommand cmd = new SqlCommand(sqlAccount, conn, transaction))
-                    {
-                        cmd.Parameters.AddWithValue("@accNum", newAccountNumber);
-                        cmd.Parameters.AddWithValue("@custId", newCustomerId);
-                        cmd.Parameters.AddWithValue("@user", txtUsername.Text);
-                        cmd.Parameters.AddWithValue("@pass", txtPassword.Text);
-
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    transaction.Commit();
-                    MessageBox.Show($"Đăng ký thành công!\nSố tài khoản ngân hàng của bạn là: {newAccountNumber}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    this.Close();
-                    frmLogin login = new frmLogin();
-                    login.Show();
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    MessageBox.Show("Lỗi đăng ký (Có thể Username hoặc SĐT đã tồn tại): \n" + ex.Message, "Lỗi Hệ Thống");
-                }
+                this.Close();
+                frmLogin login = new frmLogin();
+                login.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi đăng ký:\n" + ex.Message, "Lỗi Hệ Thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -228,5 +228,15 @@
   <ItemGroup>
     <None Include="Resources\banking-business-banner-finance-savings-abstract-silhouette-city-background-vector-illustration-84498592 %281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BusinessLayer.csproj">
+      <Project>{e87e507b-ffd4-497f-91b8-dcce865e8e4f}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DataTranferObject.csproj">
+      <Project>{f37c74db-3187-4fce-8364-54b653bfe05f}</Project>
+      <Name>DataTranferObject</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

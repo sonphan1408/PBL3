@@ -11,16 +11,13 @@ namespace DAL.Core
 {
     public class DBHelper
     {
-        // Lấy chuỗi kết nối từ file App.config
         private static string connString = ConfigurationManager.ConnectionStrings["MyDbConn"].ConnectionString;
 
-        // Hàm mở kết nối
         public static SqlConnection GetConnection()
         {
             return new SqlConnection(connString);
         }
 
-        // Hàm thực thi SQL không trả về dữ liệu (INSERT, UPDATE, DELETE)
         public static int ExecuteNonQuery(string sql, SqlParameter[] parameters = null)
         {
             using (SqlConnection conn = GetConnection())
@@ -32,8 +29,6 @@ namespace DAL.Core
                 return cmd.ExecuteNonQuery();
             }
         }
-
-        // Hàm lấy dữ liệu (SELECT) trả về một DataTable
         public static DataTable ExecuteQuery(string sql, SqlParameter[] parameters = null)
         {
             using (SqlConnection conn = GetConnection())

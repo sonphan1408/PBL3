@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using BLL.Services;
 using GUI.Client;
 using GUI.Admin;
 
@@ -85,50 +85,34 @@ namespace GUI.Authentication
                 return;
             }
 
-            string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=DigitalBankingDB;Integrated Security=True;TrustServerCertificate=True";
-            string sql = @"SELECT 'Customer' AS UserRole FROM Accounts WHERE Username = @u AND Password = @p
-               UNION
-               SELECT Role AS UserRole FROM Employees WHERE Username = @u AND Password = @p";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                string role = AuthService.Login(TaiKhoan.Text, MatKhau.Text);
+                string username = TaiKhoan.Text;
+
+                MessageBox.Show("Đăng nhập thành công!", "Thông báo");
+                TaiKhoan.Text = "Username";
+                MatKhau.Text = "Password";
+                TaiKhoan.ForeColor = Color.Gray;
+                MatKhau.ForeColor = Color.Gray;
+                MatKhau.UseSystemPasswordChar = false;
+
+                this.Hide();
+                if (role == "Customer")
                 {
-                    cmd.Parameters.AddWithValue("@u", TaiKhoan.Text);
-                    cmd.Parameters.AddWithValue("@p", MatKhau.Text);
-
-                    object result = cmd.ExecuteScalar();
-                    if (result != null)
-                    {
-                        string role = result.ToString();
-                        string username = TaiKhoan.Text;
-
-                        MessageBox.Show("Đăng nhập thành công!", "Thông báo");
-                        TaiKhoan.Text = "Username";
-                        MatKhau.Text = "Password";
-                        TaiKhoan.ForeColor = Color.Gray;
-                        MatKhau.ForeColor = Color.Gray;
-                        MatKhau.UseSystemPasswordChar = false;
-
-                        this.Hide();
-                        if(role == "Customer")
-                        {
-                            frmClientDashboard customerForm = new frmClientDashboard(username);
-                            customerForm.ShowDialog();
-                        }
-                        else
-                        {
-                            frmAdminDashboard employeeForm = new frmAdminDashboard(username);
-                            employeeForm.ShowDialog();
-                        }
-                        this.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    frmClientDashboard customerForm = new frmClientDashboard(username);
+                    customerForm.ShowDialog();
                 }
+                else
+                {
+                    frmAdminDashboard employeeForm = new frmAdminDashboard(username);
+                    employeeForm.ShowDialog();
+                }
+                this.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
