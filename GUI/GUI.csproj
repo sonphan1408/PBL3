@@ -168,6 +168,9 @@
     <EmbeddedResource Include="Client\ucClientHome.resx">
       <DependentUpon>ucClientHome.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucHistory.resx">
+      <DependentUpon>ucHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
