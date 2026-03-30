@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BLL.Services;
 using DTO.Models;
+using BLL.Services;
 
 namespace GUI.Authentication
 {
@@ -26,54 +26,39 @@ namespace GUI.Authentication
 
         private void Submit_Click(object sender, EventArgs e)
         {
-            if (txtPassword.Text != txtConfirm.Text)
+            CustomerDTO newCustomer = new CustomerDTO()
             {
-                MessageBox.Show("Mật khẩu xác nhận không khớp!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (string.IsNullOrEmpty(txtUsername.Text) || string.IsNullOrEmpty(txtPassword.Text))
+                FullName = txtFullName.Text.Trim(),
+                Gender = bxGender.Text,
+                DateOfBirth = dtDayofBirth.Value,
+                Address = txtAddress.Text.Trim(),
+                PhoneNumber = txtSDT.Text.Trim(),
+                Email = txtEmail.Text.Trim(),
+                CCCD = txtCCCD.Text.Trim()
+            };
+
+            AccountDTO newAccount = new AccountDTO()
             {
-                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                Username = txtUsername.Text.Trim(),
+                Password = txtPassword.Text
+            };
 
-            try
+            AuthService authService = new AuthService();
+            string ketQua = authService.RegisterNewCustomer(newCustomer, newAccount, txtConfirm.Text);
+
+            if (ketQua.StartsWith("SUCCESS:"))
             {
-                // Create customer DTO
-                CustomerDTO customer = new CustomerDTO
-                {
-                    FullName = txtFullName.Text,
-                    Gender = bxGender.Text,
-                    DateOfBirth = dtDayofBirth.Value,
-                    Address = txtAddress.Text,
-                    PhoneNumber = txtSDT.Text,
-                    Email = txtEmail.Text,
-                    IDCard = txtCCCD.Text
-                };
-
-                // Register customer
-                string accountNumber = AuthService.RegisterCustomer(customer, txtUsername.Text, txtPassword.Text, txtConfirm.Text);
-
-                MessageBox.Show($"Đăng ký thành công!\nSố tài khoản ngân hàng của bạn là: {accountNumber}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string soTaiKhoan = ketQua.Substring(8);
+                MessageBox.Show($"Đăng ký thành công!\nSố tài khoản ngân hàng của bạn là: {soTaiKhoan}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Close();
                 frmLogin login = new frmLogin();
                 login.Show();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Lỗi đăng ký:\n" + ex.Message, "Lỗi Hệ Thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ketQua, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label24_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

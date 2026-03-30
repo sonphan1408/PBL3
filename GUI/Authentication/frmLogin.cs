@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BLL.Services;
 using GUI.Client;
 using GUI.Admin;
+using DAL.Repositories;
 
 namespace GUI.Authentication
 {
@@ -87,7 +88,7 @@ namespace GUI.Authentication
 
             try
             {
-                string role = AuthService.Login(TaiKhoan.Text, MatKhau.Text);
+                string role = AuthDAL.Login(TaiKhoan.Text, MatKhau.Text);
                 string username = TaiKhoan.Text;
 
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo");
