@@ -85,5 +85,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DataTranferLayer.csproj">
+      <Project>{f37c74db-3187-4fce-8364-54b653bfe05f}</Project>
+      <Name>DataTranferLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
