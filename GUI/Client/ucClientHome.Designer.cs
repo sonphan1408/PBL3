@@ -75,6 +75,7 @@
             this.LBTotalIn = new System.Windows.Forms.Label();
             this.MoneyTotalIn = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.lblUserName = new System.Windows.Forms.Label();
             this.pnlMyBalance.SuspendLayout();
             this.pnlMySavings.SuspendLayout();
             this.pnlMyLoans.SuspendLayout();
@@ -548,6 +549,16 @@
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
+            // lblUserName
+            // 
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.Font = new System.Drawing.Font("Arial", 10F);
+            this.lblUserName.Location = new System.Drawing.Point(52, 9);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(80, 16);
+            this.lblUserName.TabIndex = 6;
+            this.lblUserName.Text = "User Name";
+            // 
             // ucClientHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -555,6 +566,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lblBalanceHistoryTitle);
+            this.Controls.Add(this.lblUserName);
             this.Controls.Add(this.pnlMyBalance);
             this.Controls.Add(this.pnlMySavings);
             this.Controls.Add(this.pnlMyLoans);
@@ -640,5 +652,6 @@
         private System.Windows.Forms.Label MoneyTotalEx;
         private System.Windows.Forms.Label LBTotalEx;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Label lblUserName;
     }
 }
