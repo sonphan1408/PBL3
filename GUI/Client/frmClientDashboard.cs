@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D; // Bổ sung thêm thư viện này để dùng được GraphicsPath
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GUI.Client
@@ -20,6 +14,8 @@ namespace GUI.Client
         ucInvoicePayment invoice;
         ucNotifications notifications;
         ucTransfer transfer;
+        
+        public string CurrentUsername { get; private set; }
 
         // Parameterless constructor required by designer and other call sites
         public frmClientDashboard()
@@ -38,8 +34,9 @@ namespace GUI.Client
         // Constructor that accepts username; chains to parameterless to reuse initialization
         public frmClientDashboard(string username) : this()
         {
-            // You can use the username here (e.g. show it on the UI or store it)
-            // lblPageTitle.Text = username; // example if you want to display it
+            CurrentUsername = username;
+            transfer.SetUsername(username);
+            home.UserName = username;
         }
 
         // Hàm tráo đổi UserControl của bạn (Đã chuẩn)

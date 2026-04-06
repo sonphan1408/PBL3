@@ -1,10 +1,6 @@
-﻿using GUI.Client;
+﻿using GUI.Authentication;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using GUI.Authentication;
 
 namespace GUI
 {
@@ -18,7 +14,7 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmClientDashboard());
+            Application.Run(new MainScreen());
         }
     }
 }

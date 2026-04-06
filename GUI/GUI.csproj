@@ -168,8 +168,14 @@
     <EmbeddedResource Include="Client\ucClientHome.resx">
       <DependentUpon>ucClientHome.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucFinancials.resx">
+      <DependentUpon>ucFinancials.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Client\ucHistory.resx">
       <DependentUpon>ucHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucTransfer.resx">
+      <DependentUpon>ucTransfer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -244,6 +250,12 @@
       <Project>{f37c74db-3187-4fce-8364-54b653bfe05f}</Project>
       <Name>DataTranferObject</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngtree-vector-forward-icon-png-image_925823.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bro.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

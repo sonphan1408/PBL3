@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BLL.Services;
-using GUI.Client;
+﻿using DAL.Repositories;
 using GUI.Admin;
-using DAL.Repositories;
+using GUI.Client;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace GUI.Authentication
 {
@@ -23,7 +16,7 @@ namespace GUI.Authentication
 
         private void TaiKhoan_Enter(object sender, EventArgs e)
         {
-            if(TaiKhoan.Text == "Username")
+            if (TaiKhoan.Text == "Username")
             {
                 TaiKhoan.Text = "";
                 TaiKhoan.ForeColor = Color.Black;
@@ -72,15 +65,10 @@ namespace GUI.Authentication
             this.Show();
         }
 
-        private void MatKhau_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
             if (TaiKhoan.Text == "Username" || TaiKhoan.Text == "" ||
-                MatKhau.Text  == "Password" || MatKhau.Text  == "")
+                MatKhau.Text == "Password" || MatKhau.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ Username và Password!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -115,11 +103,6 @@ namespace GUI.Authentication
             {
                 MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void TaiKhoan_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

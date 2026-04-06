@@ -94,6 +94,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bro {
+            get {
+                object obj = ResourceManager.GetObject("bro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Gemini_Generated_Image_jyaunrjyaunrjyau {
             get {
                 object obj = ResourceManager.GetObject("Gemini_Generated_Image_jyaunrjyaunrjyau", resourceCulture);
@@ -147,6 +157,16 @@ namespace GUI.Properties {
         internal static System.Drawing.Bitmap pngtree_user_icon_png_image_1796659 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-user-icon-png-image_1796659", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_vector_forward_icon_png_image_925823 {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-vector-forward-icon-png-image_925823", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

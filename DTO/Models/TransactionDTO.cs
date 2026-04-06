@@ -10,7 +10,8 @@ namespace DTO.Models
     {
         public Guid TransactionID { get; set; } = Guid.NewGuid();
         public string FromAccount { get; set; }
-        public int TypeID { get; set; }
+        public string ToAccount { get; set; }
+        public int TypeID { get; set; } // Loại giao dịch
         public decimal Amount { get; set; }
         public decimal BalanceBefore { get; set; }
         public decimal BalanceAfter { get; set; }

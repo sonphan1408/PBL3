@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    internal class TransactionDAL
+    public class TransactionDAL
     {
+           
     }
 }

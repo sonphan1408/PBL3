@@ -66,7 +66,6 @@
             this.TaiKhoan.Size = new System.Drawing.Size(190, 21);
             this.TaiKhoan.TabIndex = 4;
             this.TaiKhoan.Text = "Username";
-            this.TaiKhoan.TextChanged += new System.EventHandler(this.TaiKhoan_TextChanged);
             this.TaiKhoan.Enter += new System.EventHandler(this.TaiKhoan_Enter);
             this.TaiKhoan.Leave += new System.EventHandler(this.TaiKhoan_Leave);
             // 
@@ -187,7 +186,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.DangKi);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ButtonLogin);
@@ -197,6 +195,7 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng Nhập nhen";
