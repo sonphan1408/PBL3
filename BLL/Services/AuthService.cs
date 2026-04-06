@@ -42,8 +42,8 @@ namespace BLL.Services
             if (string.IsNullOrWhiteSpace(customer.PhoneNumber) || !Regex.IsMatch(customer.PhoneNumber, @"^0\d{9}$"))
                 return "Số điện thoại phải có đúng 10 số và bắt đầu bằng số 0.";
 
-            if (string.IsNullOrWhiteSpace(customer.CCCD) || !Regex.IsMatch(customer.CCCD, @"^\d{12}$"))
-                return "CCCD phải bao gồm chính xác 12 chữ số.";
+            if (string.IsNullOrWhiteSpace(customer.CCCD) || !Regex.IsMatch(customer.CCCD, @"^0\d{11}$"))
+                return "CCCD phải bao gồm chính xác 12 chữ số và bắt đầu bằng số 0";
 
             if (string.IsNullOrWhiteSpace(customer.Email) || !Regex.IsMatch(customer.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
                 return "Email không đúng định dạng.";

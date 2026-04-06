@@ -60,5 +60,15 @@ namespace GUI.Authentication
                 MessageBox.Show(ketQua, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void txtFullName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmRegister_Shown(object sender, EventArgs e)
+        {
+            txtFullName.Focus();
+        }
     }
 }
