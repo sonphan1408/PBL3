@@ -31,9 +31,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pnlMyBalance = new System.Windows.Forms.Panel();
             this.lblBalance = new System.Windows.Forms.Label();
             this.lblBalanceAmount = new System.Windows.Forms.Label();
@@ -45,12 +45,26 @@
             this.lblLoansAmount = new System.Windows.Forms.Label();
             this.pnlCreditCard = new System.Windows.Forms.Panel();
             this.lblCardHolder = new System.Windows.Forms.Label();
+            this.lblCardNumber = new System.Windows.Forms.Label();
             this.lblBalanceHistoryTitle = new System.Windows.Forms.Label();
             this.pnlBalanceChart = new System.Windows.Forms.Panel();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pnlPaymentSection = new System.Windows.Forms.Panel();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.LabelIcome = new System.Windows.Forms.Label();
+            this.labelExpense = new System.Windows.Forms.Label();
+            this.guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.LLPayment = new System.Windows.Forms.LinkLabel();
+            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.MoneyTotalIn = new System.Windows.Forms.Label();
+            this.LBTotalIn = new System.Windows.Forms.Label();
+            this.MoneyTotalEx = new System.Windows.Forms.Label();
+            this.LBTotalEx = new System.Windows.Forms.Label();
             this.lblPaymentTitle = new System.Windows.Forms.Label();
             this.pnlPaymentPie = new System.Windows.Forms.Panel();
             this.pnlHistoryTransactions = new System.Windows.Forms.Panel();
+            this.LLHistory = new System.Windows.Forms.LinkLabel();
             this.lblHistoryTitle = new System.Windows.Forms.Label();
             this.lstHistory = new System.Windows.Forms.ListBox();
             this.pnlQuickTransfer = new System.Windows.Forms.Panel();
@@ -60,6 +74,7 @@
             this.btnTransfer = new System.Windows.Forms.Button();
             this.pnlMySavingsDetails = new System.Windows.Forms.Panel();
             this.lblSavingsDetailsTitle = new System.Windows.Forms.Label();
+            this.LLSaving = new System.Windows.Forms.LinkLabel();
             this.lstSavingsItems = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lblCardNumber = new System.Windows.Forms.Label();
@@ -80,7 +95,12 @@
             this.pnlMyLoans.SuspendLayout();
             this.pnlCreditCard.SuspendLayout();
             this.pnlBalanceChart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.pnlPaymentSection.SuspendLayout();
+            this.guna2Panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
+            this.guna2Panel1.SuspendLayout();
             this.pnlHistoryTransactions.SuspendLayout();
             this.pnlQuickTransfer.SuspendLayout();
             this.pnlMySavingsDetails.SuspendLayout();
@@ -96,7 +116,7 @@
             this.pnlMyBalance.Controls.Add(this.lblBalanceAmount);
             this.pnlMyBalance.Location = new System.Drawing.Point(52, 29);
             this.pnlMyBalance.Name = "pnlMyBalance";
-            this.pnlMyBalance.Size = new System.Drawing.Size(224, 131);
+            this.pnlMyBalance.Size = new System.Drawing.Size(275, 131);
             this.pnlMyBalance.TabIndex = 0;
             this.pnlMyBalance.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMyBalance_Paint);
             // 
@@ -128,9 +148,9 @@
             this.pnlMySavings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMySavings.Controls.Add(this.lblSavings);
             this.pnlMySavings.Controls.Add(this.lblSavingsAmount);
-            this.pnlMySavings.Location = new System.Drawing.Point(313, 29);
+            this.pnlMySavings.Location = new System.Drawing.Point(350, 29);
             this.pnlMySavings.Name = "pnlMySavings";
-            this.pnlMySavings.Size = new System.Drawing.Size(224, 131);
+            this.pnlMySavings.Size = new System.Drawing.Size(281, 131);
             this.pnlMySavings.TabIndex = 1;
             // 
             // lblSavings
@@ -161,10 +181,11 @@
             this.pnlMyLoans.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMyLoans.Controls.Add(this.lblLoans);
             this.pnlMyLoans.Controls.Add(this.lblLoansAmount);
-            this.pnlMyLoans.Location = new System.Drawing.Point(585, 29);
+            this.pnlMyLoans.Location = new System.Drawing.Point(648, 29);
             this.pnlMyLoans.Name = "pnlMyLoans";
-            this.pnlMyLoans.Size = new System.Drawing.Size(224, 131);
+            this.pnlMyLoans.Size = new System.Drawing.Size(276, 131);
             this.pnlMyLoans.TabIndex = 2;
+            this.pnlMyLoans.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMyLoans_Paint);
             // 
             // lblLoans
             // 
@@ -193,9 +214,9 @@
             this.pnlCreditCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
             this.pnlCreditCard.Controls.Add(this.lblCardHolder);
             this.pnlCreditCard.Controls.Add(this.lblCardNumber);
-            this.pnlCreditCard.Location = new System.Drawing.Point(855, 26);
+            this.pnlCreditCard.Location = new System.Drawing.Point(948, 29);
             this.pnlCreditCard.Name = "pnlCreditCard";
-            this.pnlCreditCard.Size = new System.Drawing.Size(376, 201);
+            this.pnlCreditCard.Size = new System.Drawing.Size(283, 157);
             this.pnlCreditCard.TabIndex = 3;
             // 
             // lblCardHolder
@@ -205,17 +226,28 @@
             this.lblCardHolder.ForeColor = System.Drawing.Color.White;
             this.lblCardHolder.Location = new System.Drawing.Point(17, 18);
             this.lblCardHolder.Name = "lblCardHolder";
-            this.lblCardHolder.Size = new System.Drawing.Size(161, 32);
+            this.lblCardHolder.Size = new System.Drawing.Size(169, 35);
             this.lblCardHolder.TabIndex = 0;
             this.lblCardHolder.Text = "HTTS Bank";
+            // 
+            // lblCardNumber
+            // 
+            this.lblCardNumber.AutoSize = true;
+            this.lblCardNumber.Font = new System.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold);
+            this.lblCardNumber.ForeColor = System.Drawing.Color.White;
+            this.lblCardNumber.Location = new System.Drawing.Point(17, 100);
+            this.lblCardNumber.Name = "lblCardNumber";
+            this.lblCardNumber.Size = new System.Drawing.Size(159, 34);
+            this.lblCardNumber.TabIndex = 1;
+            this.lblCardNumber.Text = "123220178";
             // 
             // lblBalanceHistoryTitle
             // 
             this.lblBalanceHistoryTitle.AutoSize = true;
             this.lblBalanceHistoryTitle.Font = new System.Drawing.Font("Times New Roman", 16.06154F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBalanceHistoryTitle.Location = new System.Drawing.Point(46, 195);
+            this.lblBalanceHistoryTitle.Location = new System.Drawing.Point(46, 206);
             this.lblBalanceHistoryTitle.Name = "lblBalanceHistoryTitle";
-            this.lblBalanceHistoryTitle.Size = new System.Drawing.Size(177, 32);
+            this.lblBalanceHistoryTitle.Size = new System.Drawing.Size(188, 35);
             this.lblBalanceHistoryTitle.TabIndex = 7;
             this.lblBalanceHistoryTitle.Text = "Lịch sử số dư";
             this.lblBalanceHistoryTitle.Click += new System.EventHandler(this.lblBalanceHistoryTitle_Click);
@@ -231,6 +263,22 @@
             this.pnlBalanceChart.TabIndex = 2;
             this.pnlBalanceChart.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBalanceChart_Paint);
             // 
+            // chart1
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
+            this.chart1.Location = new System.Drawing.Point(15, 11);
+            this.chart1.Name = "chart1";
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
+            this.chart1.Size = new System.Drawing.Size(701, 189);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
             // pnlPaymentSection
             // 
             this.pnlPaymentSection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
@@ -240,8 +288,116 @@
             this.pnlPaymentSection.Controls.Add(this.pnlPaymentPie);
             this.pnlPaymentSection.Location = new System.Drawing.Point(52, 519);
             this.pnlPaymentSection.Name = "pnlPaymentSection";
-            this.pnlPaymentSection.Size = new System.Drawing.Size(384, 220);
+            this.pnlPaymentSection.Size = new System.Drawing.Size(384, 223);
             this.pnlPaymentSection.TabIndex = 3;
+            // 
+            // guna2Panel2
+            // 
+            this.guna2Panel2.Controls.Add(this.LabelIcome);
+            this.guna2Panel2.Controls.Add(this.labelExpense);
+            this.guna2Panel2.Controls.Add(this.guna2CirclePictureBox2);
+            this.guna2Panel2.Controls.Add(this.guna2CirclePictureBox1);
+            this.guna2Panel2.Location = new System.Drawing.Point(236, 147);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Size = new System.Drawing.Size(129, 62);
+            this.guna2Panel2.TabIndex = 8;
+            // 
+            // LabelIcome
+            // 
+            this.LabelIcome.AutoSize = true;
+            this.LabelIcome.Location = new System.Drawing.Point(58, 15);
+            this.LabelIcome.Name = "LabelIcome";
+            this.LabelIcome.Size = new System.Drawing.Size(55, 16);
+            this.LabelIcome.TabIndex = 9;
+            this.LabelIcome.Text = "Income";
+            // 
+            // labelExpense
+            // 
+            this.labelExpense.AutoSize = true;
+            this.labelExpense.Location = new System.Drawing.Point(58, 39);
+            this.labelExpense.Name = "labelExpense";
+            this.labelExpense.Size = new System.Drawing.Size(62, 16);
+            this.labelExpense.TabIndex = 10;
+            this.labelExpense.Text = "Expense";
+            // 
+            // guna2CirclePictureBox2
+            // 
+            this.guna2CirclePictureBox2.FillColor = System.Drawing.Color.DarkGoldenrod;
+            this.guna2CirclePictureBox2.ImageRotate = 0F;
+            this.guna2CirclePictureBox2.Location = new System.Drawing.Point(15, 15);
+            this.guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
+            this.guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox2.Size = new System.Drawing.Size(23, 17);
+            this.guna2CirclePictureBox2.TabIndex = 0;
+            this.guna2CirclePictureBox2.TabStop = false;
+            // 
+            // guna2CirclePictureBox1
+            // 
+            this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.Red;
+            this.guna2CirclePictureBox1.ImageRotate = 0F;
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(15, 38);
+            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
+            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(23, 17);
+            this.guna2CirclePictureBox1.TabIndex = 0;
+            this.guna2CirclePictureBox1.TabStop = false;
+            // 
+            // LLPayment
+            // 
+            this.LLPayment.AutoSize = true;
+            this.LLPayment.Location = new System.Drawing.Point(258, 13);
+            this.LLPayment.Name = "LLPayment";
+            this.LLPayment.Size = new System.Drawing.Size(81, 16);
+            this.LLPayment.TabIndex = 2;
+            this.LLPayment.TabStop = true;
+            this.LLPayment.Text = "Xem tất cả";
+            // 
+            // guna2Panel1
+            // 
+            this.guna2Panel1.Controls.Add(this.MoneyTotalIn);
+            this.guna2Panel1.Controls.Add(this.LBTotalIn);
+            this.guna2Panel1.Controls.Add(this.MoneyTotalEx);
+            this.guna2Panel1.Controls.Add(this.LBTotalEx);
+            this.guna2Panel1.Location = new System.Drawing.Point(236, 32);
+            this.guna2Panel1.Name = "guna2Panel1";
+            this.guna2Panel1.Size = new System.Drawing.Size(129, 100);
+            this.guna2Panel1.TabIndex = 8;
+            // 
+            // MoneyTotalIn
+            // 
+            this.MoneyTotalIn.AutoSize = true;
+            this.MoneyTotalIn.Location = new System.Drawing.Point(22, 76);
+            this.MoneyTotalIn.Name = "MoneyTotalIn";
+            this.MoneyTotalIn.Size = new System.Drawing.Size(69, 16);
+            this.MoneyTotalIn.TabIndex = 9;
+            this.MoneyTotalIn.Text = "$1,100.00";
+            // 
+            // LBTotalIn
+            // 
+            this.LBTotalIn.AutoSize = true;
+            this.LBTotalIn.Location = new System.Drawing.Point(22, 45);
+            this.LBTotalIn.Name = "LBTotalIn";
+            this.LBTotalIn.Size = new System.Drawing.Size(94, 16);
+            this.LBTotalIn.TabIndex = 9;
+            this.LBTotalIn.Text = "Total Income";
+            // 
+            // MoneyTotalEx
+            // 
+            this.MoneyTotalEx.AutoSize = true;
+            this.MoneyTotalEx.Location = new System.Drawing.Point(13, 29);
+            this.MoneyTotalEx.Name = "MoneyTotalEx";
+            this.MoneyTotalEx.Size = new System.Drawing.Size(58, 16);
+            this.MoneyTotalEx.TabIndex = 9;
+            this.MoneyTotalEx.Text = "$417.00";
+            // 
+            // LBTotalEx
+            // 
+            this.LBTotalEx.AutoSize = true;
+            this.LBTotalEx.Location = new System.Drawing.Point(14, 7);
+            this.LBTotalEx.Name = "LBTotalEx";
+            this.LBTotalEx.Size = new System.Drawing.Size(101, 16);
+            this.LBTotalEx.TabIndex = 9;
+            this.LBTotalEx.Text = "Total Expense";
             // 
             // lblPaymentTitle
             // 
@@ -268,17 +424,28 @@
             this.pnlHistoryTransactions.Controls.Add(this.LLHistory);
             this.pnlHistoryTransactions.Controls.Add(this.lblHistoryTitle);
             this.pnlHistoryTransactions.Controls.Add(this.lstHistory);
-            this.pnlHistoryTransactions.Location = new System.Drawing.Point(855, 261);
+            this.pnlHistoryTransactions.Location = new System.Drawing.Point(855, 226);
             this.pnlHistoryTransactions.Name = "pnlHistoryTransactions";
             this.pnlHistoryTransactions.Size = new System.Drawing.Size(376, 255);
             this.pnlHistoryTransactions.TabIndex = 4;
             this.pnlHistoryTransactions.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHistoryTransactions_Paint);
             // 
+            // LLHistory
+            // 
+            this.LLHistory.AutoSize = true;
+            this.LLHistory.Location = new System.Drawing.Point(275, 20);
+            this.LLHistory.Name = "LLHistory";
+            this.LLHistory.Size = new System.Drawing.Size(81, 16);
+            this.LLHistory.TabIndex = 3;
+            this.LLHistory.TabStop = true;
+            this.LLHistory.Text = "Xem tất cả";
+            this.LLHistory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LLHistory_LinkClicked);
+            // 
             // lblHistoryTitle
             // 
             this.lblHistoryTitle.AutoSize = true;
             this.lblHistoryTitle.Font = new System.Drawing.Font("Times New Roman", 13.84615F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHistoryTitle.Location = new System.Drawing.Point(11, 10);
+            this.lblHistoryTitle.Location = new System.Drawing.Point(17, 11);
             this.lblHistoryTitle.Name = "lblHistoryTitle";
             this.lblHistoryTitle.Size = new System.Drawing.Size(196, 29);
             this.lblHistoryTitle.TabIndex = 0;
@@ -302,7 +469,7 @@
             this.pnlQuickTransfer.Controls.Add(this.pnlTransferIcons);
             this.pnlQuickTransfer.Controls.Add(this.txtTransferAmount);
             this.pnlQuickTransfer.Controls.Add(this.btnTransfer);
-            this.pnlQuickTransfer.Location = new System.Drawing.Point(855, 539);
+            this.pnlQuickTransfer.Location = new System.Drawing.Point(855, 519);
             this.pnlQuickTransfer.Name = "pnlQuickTransfer";
             this.pnlQuickTransfer.Size = new System.Drawing.Size(376, 200);
             this.pnlQuickTransfer.TabIndex = 5;
@@ -356,9 +523,9 @@
             this.pnlMySavingsDetails.Controls.Add(this.lblSavingsDetailsTitle);
             this.pnlMySavingsDetails.Controls.Add(this.LLSaving);
             this.pnlMySavingsDetails.Controls.Add(this.lstSavingsItems);
-            this.pnlMySavingsDetails.Location = new System.Drawing.Point(468, 519);
+            this.pnlMySavingsDetails.Location = new System.Drawing.Point(473, 519);
             this.pnlMySavingsDetails.Name = "pnlMySavingsDetails";
-            this.pnlMySavingsDetails.Size = new System.Drawing.Size(336, 220);
+            this.pnlMySavingsDetails.Size = new System.Drawing.Size(336, 200);
             this.pnlMySavingsDetails.TabIndex = 4;
             // 
             // lblSavingsDetailsTitle
@@ -370,6 +537,16 @@
             this.lblSavingsDetailsTitle.Size = new System.Drawing.Size(191, 29);
             this.lblSavingsDetailsTitle.TabIndex = 0;
             this.lblSavingsDetailsTitle.Text = "Tiết kiệm của tôi";
+            // 
+            // LLSaving
+            // 
+            this.LLSaving.AutoSize = true;
+            this.LLSaving.Location = new System.Drawing.Point(241, 16);
+            this.LLSaving.Name = "LLSaving";
+            this.LLSaving.Size = new System.Drawing.Size(81, 16);
+            this.LLSaving.TabIndex = 3;
+            this.LLSaving.TabStop = true;
+            this.LLSaving.Text = "Xem tất cả";
             // 
             // lstSavingsItems
             // 
@@ -524,7 +701,6 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lblBalanceHistoryTitle);
-            this.Controls.Add(this.lblUserName);
             this.Controls.Add(this.pnlMyBalance);
             this.Controls.Add(this.pnlMySavings);
             this.Controls.Add(this.pnlMyLoans);
@@ -546,8 +722,15 @@
             this.pnlCreditCard.ResumeLayout(false);
             this.pnlCreditCard.PerformLayout();
             this.pnlBalanceChart.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.pnlPaymentSection.ResumeLayout(false);
             this.pnlPaymentSection.PerformLayout();
+            this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
+            this.guna2Panel1.ResumeLayout(false);
+            this.guna2Panel1.PerformLayout();
             this.pnlHistoryTransactions.ResumeLayout(false);
             this.pnlHistoryTransactions.PerformLayout();
             this.pnlQuickTransfer.ResumeLayout(false);
@@ -603,6 +786,5 @@
         private System.Windows.Forms.Label MoneyTotalEx;
         private System.Windows.Forms.Label LBTotalEx;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Label lblUserName;
     }
 }

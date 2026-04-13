@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using BLL.Services;
+using DTO.Models;
 
 namespace GUI.Client
 {
     public partial class ucClientHome : UserControl
     {
+        // Data from SQL Server
+        private string currentUsername;
+        private AccountDTO currentAccount;
+        private CustomerDTO currentCustomer;
+        private List<TransactionDTO> transactions;
+
         // Sample data for balance history
         private List<decimal> balanceData = new List<decimal> { 600, 500, 400, 400, 500, 400, 500, 600, 1000 };
         private List<string> dateLabels = new List<string> { "06/2025", "06/2025", "06/2025", "06/2025", "06/2025", "06/2025", "06/2025", "06/2025", "06/2025" };
@@ -18,28 +26,121 @@ namespace GUI.Client
             InitializeUI();
         }
 
+        public ucClientHome(string username)
+        {
+            InitializeComponent();
+            currentUsername = username;
+            InitializeUI();
+            LoadDataFromDatabase();
+        }
+
         private void InitializeUI()
         {
-            // Populate sample transaction history
-            lstHistory.Items.Add("Deposit");
-            lstHistory.Items.Add("$500.00");
-            lstHistory.Items.Add("2025-06-12");
-            lstHistory.Items.Add("");
-            lstHistory.Items.Add("Transfer");
-            lstHistory.Items.Add("$80.00");
-            lstHistory.Items.Add("2025-06-11");
-            lstHistory.Items.Add("");
-            lstHistory.Items.Add("Transfer");
-            lstHistory.Items.Add("$50.00");
-            lstHistory.Items.Add("2025-06-10");
-
-            // Populate sample savings items
-            lstSavingsItems.Items.Add("House                    $1,800.00");
-            lstSavingsItems.Items.Add("Car                        $500.00");
-            lstSavingsItems.Items.Add("Education              $1,200.00");
-
             // Setup button click event
             btnTransfer.Click += BtnTransfer_Click;
+
+            // Ẩn Control Chart1 (màu xanh mặc định) che mất biểu đồ vẽ tay ở dưới
+            Control[] charts = this.Controls.Find("chart1", true);
+            if (charts.Length > 0)
+            {
+                charts[0].Visible = false;
+            }
+        }
+
+        private void LoadDataFromDatabase()
+        {
+            try
+            {
+                // Get account information
+                currentAccount = AccountService.GetAccountByUsername(currentUsername);
+                if (currentAccount == null)
+                {
+                    MessageBox.Show("Cannot find account information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Get customer information
+                currentCustomer = AccountService.GetCustomerInfo(currentAccount.CustomerID);
+                if (currentCustomer == null)
+                {
+                    MessageBox.Show("Cannot find customer information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Update UI with account info
+                UserName = currentCustomer.FullName;
+                BalanceAmount = "$" + currentAccount.Balance.ToString("F2");
+                CardNumber = currentAccount.AccountNumber;
+
+                // Get financial information (savings and loans)
+                int savingsCount = FinancialService.GetTotalSavingsAccounts(currentAccount.CustomerID);
+                decimal totalSavings = FinancialService.GetTotalSavings(currentAccount.CustomerID);
+                decimal totalLoans = FinancialService.GetTotalLoans(currentAccount.CustomerID);
+
+                // Update financial info labels (if they exist)
+                // Note: Adjust control names based on your actual Designer
+                SavingsAmount = savingsCount.ToString();
+                LoansAmount = totalLoans > 0 ? totalLoans.ToString("F2") : "0";
+
+                // Load transactions
+                transactions = TransactionService.GetTransactionsByAccount(currentAccount.AccountNumber, 10);
+                LoadTransactionHistory();
+
+                // Load savings items
+                LoadSavingsItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadTransactionHistory()
+        {
+            lstHistory.Items.Clear();
+
+            if (transactions != null && transactions.Count > 0)
+            {
+                foreach (var transaction in transactions)
+                {
+                    string type = transaction.Description ?? "Transaction";
+                    lstHistory.Items.Add(type);
+                    lstHistory.Items.Add("$" + transaction.Amount.ToString("F2"));
+                    lstHistory.Items.Add(transaction.CreatedAt.ToString("yyyy-MM-dd"));
+                    lstHistory.Items.Add("");
+                }
+            }
+            else
+            {
+                lstHistory.Items.Add("No transactions found");
+            }
+        }
+
+        private void LoadSavingsItems()
+        {
+            lstSavingsItems.Items.Clear();
+
+            try
+            {
+                List<FinancialProductDTO> savings = FinancialService.GetSavingsByCustomer(currentAccount.CustomerID);
+
+                if (savings != null && savings.Count > 0)
+                {
+                    foreach (var saving in savings)
+                    {
+                        string item = $"{saving.ProductName.PadRight(30)} ${saving.Amount.ToString("F2")}";
+                        lstSavingsItems.Items.Add(item);
+                    }
+                }
+                else
+                {
+                    lstSavingsItems.Items.Add("No savings accounts");
+                }
+            }
+            catch (Exception ex)
+            {
+                lstSavingsItems.Items.Add("Error loading savings: " + ex.Message);
+            }
         }
 
         private void BtnTransfer_Click(object sender, EventArgs e)
@@ -58,8 +159,8 @@ namespace GUI.Client
         // Properties to allow binding/updating data from outside
         public string UserName
         {
-            get { return lblUserName.Text; }
-            set { lblUserName.Text = value; }
+            get { return lblCardHolder.Text; }
+            set { lblCardHolder.Text = value; }
         }
 
         public string BalanceAmount
@@ -116,8 +217,8 @@ namespace GUI.Client
             if (valueRange == 0) valueRange = 1;
 
             // Draw Y-axis labels and grid lines
-            Brush gridBrush = new SolidBrush(Color.FromArgb(220, 220, 220));
-            Brush labelBrush = new SolidBrush(Color.FromArgb(150, 150, 150));
+            Brush gridBrush = new SolidBrush(Color.FromArgb(220, 230, 245)); // Xanh nhạt cho lưới
+            Brush labelBrush = new SolidBrush(Color.FromArgb(50, 100, 180)); // Xanh đậm cho nhãn
             Font labelFont = new Font("Arial", 8);
 
             int gridLines = 5;
@@ -136,11 +237,11 @@ namespace GUI.Client
             }
 
             // Draw X-axis
-            g.DrawLine(new Pen(Color.FromArgb(100, 100, 100), 2), paddingLeft, paddingTop + chartHeight, width - paddingRight, paddingTop + chartHeight);
+            g.DrawLine(new Pen(Color.FromArgb(220, 230, 245), 2), paddingLeft, paddingTop + chartHeight, width - paddingRight, paddingTop + chartHeight);
 
             // Draw data points and lines
-            Pen chartLinePen = new Pen(Color.FromArgb(30, 144, 255), 2);
-            Brush pointBrush = new SolidBrush(Color.FromArgb(30, 144, 255));
+            Pen chartLinePen = new Pen(Color.DodgerBlue, 2); // Màu xanh cho đường biểu đồ
+            Brush pointBrush = new SolidBrush(Color.DodgerBlue); // Màu xanh cho điểm
 
             List<PointF> points = new List<PointF>();
 
@@ -224,6 +325,11 @@ namespace GUI.Client
         }
 
         private void LLHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void pnlMyLoans_Paint(object sender, PaintEventArgs e)
         {
 
         }

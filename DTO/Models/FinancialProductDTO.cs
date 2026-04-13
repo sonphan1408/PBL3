@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace DTO.Models
 {
-    internal class FinancialProductDTO
+    public class FinancialProductDTO
     {
         public int ProductID { get; set; }
+        public string ProductName { get; set; }
         public string AccountNumber { get; set; }
         public string Category { get; set; } // Saving/Loan
+        public decimal Amount { get; set; }
         public decimal PrincipalAmount { get; set; }
         public decimal InterestRate { get; set; }
         public int TermMonths { get; set; }
