@@ -1,6 +1,6 @@
 ﻿namespace GUI.Client
 {
-    using Guna.UI2.WinForms;
+    
 
     partial class ucClientHome
     {
@@ -66,10 +66,7 @@
             this.LLPayment = new System.Windows.Forms.LinkLabel();
             this.LLSaving = new System.Windows.Forms.LinkLabel();
             this.LLHistory = new System.Windows.Forms.LinkLabel();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+         
             this.LabelIcome = new System.Windows.Forms.Label();
             this.labelExpense = new System.Windows.Forms.Label();
             this.LBTotalEx = new System.Windows.Forms.Label();
@@ -87,10 +84,7 @@
             this.pnlHistoryTransactions.SuspendLayout();
             this.pnlQuickTransfer.SuspendLayout();
             this.pnlMySavingsDetails.SuspendLayout();
-            this.guna2Panel1.SuspendLayout();
-            this.guna2Panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).BeginInit();
+          
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -241,9 +235,7 @@
             // 
             this.pnlPaymentSection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.pnlPaymentSection.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlPaymentSection.Controls.Add(this.guna2Panel2);
-            this.pnlPaymentSection.Controls.Add(this.LLPayment);
-            this.pnlPaymentSection.Controls.Add(this.guna2Panel1);
+          
             this.pnlPaymentSection.Controls.Add(this.lblPaymentTitle);
             this.pnlPaymentSection.Controls.Add(this.pnlPaymentPie);
             this.pnlPaymentSection.Location = new System.Drawing.Point(52, 519);
@@ -439,47 +431,11 @@
             // 
             // guna2Panel1
             // 
-            this.guna2Panel1.Controls.Add(this.MoneyTotalIn);
-            this.guna2Panel1.Controls.Add(this.LBTotalIn);
-            this.guna2Panel1.Controls.Add(this.MoneyTotalEx);
-            this.guna2Panel1.Controls.Add(this.LBTotalEx);
-            this.guna2Panel1.Location = new System.Drawing.Point(236, 32);
-            this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(129, 100);
-            this.guna2Panel1.TabIndex = 8;
+          
             // 
             // guna2Panel2
             // 
-            this.guna2Panel2.Controls.Add(this.LabelIcome);
-            this.guna2Panel2.Controls.Add(this.labelExpense);
-            this.guna2Panel2.Controls.Add(this.guna2CirclePictureBox2);
-            this.guna2Panel2.Controls.Add(this.guna2CirclePictureBox1);
-            this.guna2Panel2.Location = new System.Drawing.Point(236, 147);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(129, 62);
-            this.guna2Panel2.TabIndex = 8;
-            // 
-            // guna2CirclePictureBox1
-            // 
-            this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.Red;
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(15, 38);
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(23, 17);
-            this.guna2CirclePictureBox1.TabIndex = 0;
-            this.guna2CirclePictureBox1.TabStop = false;
-            // 
-            // guna2CirclePictureBox2
-            // 
-            this.guna2CirclePictureBox2.FillColor = System.Drawing.Color.DarkGoldenrod;
-            this.guna2CirclePictureBox2.ImageRotate = 0F;
-            this.guna2CirclePictureBox2.Location = new System.Drawing.Point(15, 15);
-            this.guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
-            this.guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox2.Size = new System.Drawing.Size(23, 17);
-            this.guna2CirclePictureBox2.TabIndex = 0;
-            this.guna2CirclePictureBox2.TabStop = false;
+         
             // 
             // LabelIcome
             // 
@@ -598,12 +554,7 @@
             this.pnlQuickTransfer.PerformLayout();
             this.pnlMySavingsDetails.ResumeLayout(false);
             this.pnlMySavingsDetails.PerformLayout();
-            this.guna2Panel1.ResumeLayout(false);
-            this.guna2Panel1.PerformLayout();
-            this.guna2Panel2.ResumeLayout(false);
-            this.guna2Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).EndInit();
+         this.pnlHistoryTransactions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -643,12 +594,10 @@
         private System.Windows.Forms.LinkLabel LLPayment;
         private System.Windows.Forms.LinkLabel LLSaving;
         private System.Windows.Forms.LinkLabel LLHistory;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+       
         private System.Windows.Forms.Label LabelIcome;
         private System.Windows.Forms.Label labelExpense;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox2;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+
         private System.Windows.Forms.Label MoneyTotalIn;
         private System.Windows.Forms.Label LBTotalIn;
         private System.Windows.Forms.Label MoneyTotalEx;

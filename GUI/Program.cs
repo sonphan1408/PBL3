@@ -1,4 +1,5 @@
 ﻿using GUI.Authentication;
+using GUI.Client;
 using System;
 using System.Windows.Forms;
 
@@ -14,7 +15,7 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainScreen());
+            Application.Run(new frmClientDashboard());
         }
     }
 }
