@@ -152,6 +152,10 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+# Application Configuration Files
+app.config
+App.config
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 
