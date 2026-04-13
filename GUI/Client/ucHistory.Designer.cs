@@ -37,12 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
            
             this.label3 = new System.Windows.Forms.Label();
-           
+
             this.SuspendLayout();
-            // 
-            // guna2Panel1
-            // 
-         
             // 
             // pictureBox1
             // 
@@ -77,10 +73,7 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Giao Dịch Gần Đây";
             // 
-            // guna2TextBox1
-            // 
-         
-            // guna2DataGridView1
+            // ucHistory
             // 
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
            
@@ -110,10 +103,6 @@
             this.label3.Size = new System.Drawing.Size(66, 16);
             this.label3.TabIndex = 2;
             this.label3.Text = "$489.682";
-            // 
-            // guna2ComboBox1
-            // 
-           
             // 
             // ucHistory
             // 

@@ -35,6 +35,15 @@ namespace DAL.Repositories
                 }
                 return transactions;
             }
+            catch (SqlException sqlEx)
+            {
+                if (sqlEx.Message.Contains("Invalid object name") && sqlEx.Message.Contains("InternalTransactions"))
+                {
+                    System.Diagnostics.Debug.WriteLine("TABLE NOT FOUND: dbo.InternalTransactions does not exist in the database. Please create it or verify the table name.");
+                    return new List<TransactionDTO>();
+                }
+                throw new Exception("Lỗi khi lấy lịch sử giao dịch: " + sqlEx.Message);
+            }
             catch (Exception ex)
             {
                 throw new Exception("Lỗi khi lấy lịch sử giao dịch: " + ex.Message);
@@ -61,6 +70,15 @@ namespace DAL.Repositories
                     return (decimal)dt.Rows[0]["TotalIncome"];
                 }
                 return 0;
+            }
+            catch (SqlException sqlEx)
+            {
+                if (sqlEx.Message.Contains("Invalid object name"))
+                {
+                    System.Diagnostics.Debug.WriteLine("TABLE NOT FOUND: dbo.InternalTransactions does not exist");
+                    return 0;
+                }
+                throw new Exception("Lỗi khi tính tổng thu nhập: " + sqlEx.Message);
             }
             catch (Exception ex)
             {
