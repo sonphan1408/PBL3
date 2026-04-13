@@ -237,6 +237,8 @@
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.Color.White;
+            this.pnlMain.BackgroundImage = global::GUI.Properties.Resources._656362958_1425254056280893_416290663166627344_n;
+            this.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(167, 62);
             this.pnlMain.Name = "pnlMain";
