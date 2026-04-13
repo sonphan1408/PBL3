@@ -1,5 +1,7 @@
 ﻿namespace GUI.Client
 {
+    using Guna.UI2.WinForms;
+
     partial class ucClientHome
     {
         /// <summary> 

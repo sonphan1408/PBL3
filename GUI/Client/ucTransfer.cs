@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using BLL.Services;
 using DTO.Models;
+using Krypton.Toolkit;
 
 namespace GUI.Client
 {
@@ -50,9 +51,12 @@ namespace GUI.Client
                 _senderAccount = _transferService.GetSenderByUsername(CurrentUsername);
                 if (_senderAccount != null)
                 {
-                    txtIDUser.Text = _senderAccount.AccountNumber;
-                    txtTenUser.Text = _transferService.GetCustomerName(_senderAccount.CustomerID);
-                    txtSoDu.Text = _senderAccount.Balance.ToString("N0") + " VND" ;
+                    if (txtIDUser != null)
+                        txtIDUser.Text = _senderAccount.AccountNumber;
+                    if (txtTenUser != null)
+                        txtTenUser.Text = _transferService.GetCustomerName(_senderAccount.CustomerID);
+                    if (txtSoDu != null)
+                        txtSoDu.Text = _senderAccount.Balance.ToString("N0") + " VND";
                 }
             }
             catch (Exception ex)
@@ -77,18 +81,26 @@ namespace GUI.Client
 
                 if (_recipientAccount != null)
                 {
-                    txtIDNguoiNhan1.Text = _recipientAccount.AccountNumber;
+                    if (txtIDNguoiNhan1 != null)
+                        txtIDNguoiNhan1.Text = _recipientAccount.AccountNumber;
 
                     string recipientName = _transferService.GetCustomerName(_recipientAccount.CustomerID);
-                    txtTenNguoiNhan.Text = recipientName;
+                    if (txtTenNguoiNhan != null)
+                        txtTenNguoiNhan.Text = recipientName;
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy tài khoản", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi: " + ex.Message, "Lỗi tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _recipientAccount = null;
-                txtIDNguoiNhan1.Text = "";
-                txtTenNguoiNhan.Text = "";
+                if (txtIDNguoiNhan1 != null)
+                    txtIDNguoiNhan1.Text = "";
+                if (txtTenNguoiNhan != null)
+                    txtTenNguoiNhan.Text = "";
             }
         }
 
@@ -110,21 +122,32 @@ namespace GUI.Client
                 }
 
                 // Try to get amount from user input or from selected amount
-                decimal transferAmount = _transferAmount;
+                decimal transferAmount = 0;
 
                 // Check if user manually entered an amount in txtSoTien
                 if (txtSoTien != null && !string.IsNullOrWhiteSpace(txtSoTien.Text))
                 {
-                    string amountText = txtSoTien.Text.Replace(",", "").Trim();
+                    string amountText = txtSoTien.Text.Replace(",", "").Replace(".", "").Trim();
                     if (decimal.TryParse(amountText, out decimal parsedAmount))
                     {
                         transferAmount = parsedAmount;
                     }
                 }
+                else if (_transferAmount > 0)
+                {
+                    transferAmount = _transferAmount;
+                }
 
                 if (transferAmount <= 0)
                 {
                     MessageBox.Show("Vui lòng nhập số tiền chuyển khoản (hoặc click một trong các nút nhanh)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Validate sender account balance
+                if (_senderAccount == null || _senderAccount.Balance < transferAmount)
+                {
+                    MessageBox.Show("Số dư tài khoản không đủ", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -140,6 +163,10 @@ namespace GUI.Client
                     ClearForm();
                     LoadSenderInfo();
                 }
+                else
+                {
+                    MessageBox.Show("Chuyển khoản thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
@@ -149,11 +176,16 @@ namespace GUI.Client
 
         private void ClearForm()
         {
-            if (txtIDNguoiNhan != null) txtIDNguoiNhan.Text = "";
-            if (txtSoTien != null) txtSoTien.Text = "";
-            if (txtNDCK != null) txtNDCK.Text = "";
-            txtIDNguoiNhan1.Text = "";
-            txtTenNguoiNhan.Text = "";
+            if (txtIDNguoiNhan != null) 
+                txtIDNguoiNhan.Text = "";
+            if (txtSoTien != null) 
+                txtSoTien.Text = "";
+            if (txtNDCK != null) 
+                txtNDCK.Text = "";
+            if (txtIDNguoiNhan1 != null)
+                txtIDNguoiNhan1.Text = "";
+            if (txtTenNguoiNhan != null)
+                txtTenNguoiNhan.Text = "";
             _recipientAccount = null;
             _transferAmount = 0;
         }
