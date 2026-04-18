@@ -1,4 +1,4 @@
-﻿using DAL.Repositories;
+﻿using BLL.Services;
 using GUI.Admin;
 using GUI.Client;
 using System;
@@ -76,7 +76,7 @@ namespace GUI.Authentication
 
             try
             {
-                string role = AuthDAL.Login(TaiKhoan.Text, MatKhau.Text);
+                string role = AuthService.Login(TaiKhoan.Text, MatKhau.Text);
                 string username = TaiKhoan.Text;
 
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo");

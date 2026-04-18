@@ -74,5 +74,17 @@ namespace BLL.Services
                 return "Lỗi đăng ký (Có thể Tên đăng nhập, CCCD hoặc SĐT đã tồn tại).\nChi tiết: " + ex.Message;
             }
         }
-    }
+
+        public static string Login(string username, string password)
+        {
+            try
+            {
+                return AuthDAL.Login(username, password);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Đăng nhập thất bại: " + ex.Message);
+            }
+        }
+    }W
 }
