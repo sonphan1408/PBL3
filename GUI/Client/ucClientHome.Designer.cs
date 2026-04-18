@@ -50,13 +50,12 @@
             this.pnlBalanceChart = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pnlPaymentSection = new System.Windows.Forms.Panel();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+           
             this.LabelIcome = new System.Windows.Forms.Label();
             this.labelExpense = new System.Windows.Forms.Label();
-            this.guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            
             this.LLPayment = new System.Windows.Forms.LinkLabel();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            
             this.MoneyTotalIn = new System.Windows.Forms.Label();
             this.LBTotalIn = new System.Windows.Forms.Label();
             this.MoneyTotalEx = new System.Windows.Forms.Label();
@@ -77,19 +76,7 @@
             this.LLSaving = new System.Windows.Forms.LinkLabel();
             this.lstSavingsItems = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.lblCardNumber = new System.Windows.Forms.Label();
-            this.LLPayment = new System.Windows.Forms.LinkLabel();
-            this.LLSaving = new System.Windows.Forms.LinkLabel();
-            this.LLHistory = new System.Windows.Forms.LinkLabel();
-         
-            this.LabelIcome = new System.Windows.Forms.Label();
-            this.labelExpense = new System.Windows.Forms.Label();
-            this.LBTotalEx = new System.Windows.Forms.Label();
-            this.MoneyTotalEx = new System.Windows.Forms.Label();
-            this.LBTotalIn = new System.Windows.Forms.Label();
-            this.MoneyTotalIn = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.lblUserName = new System.Windows.Forms.Label();
+          
             this.pnlMyBalance.SuspendLayout();
             this.pnlMySavings.SuspendLayout();
             this.pnlMyLoans.SuspendLayout();
@@ -97,15 +84,9 @@
             this.pnlBalanceChart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.pnlPaymentSection.SuspendLayout();
-            this.guna2Panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
-            this.guna2Panel1.SuspendLayout();
             this.pnlHistoryTransactions.SuspendLayout();
             this.pnlQuickTransfer.SuspendLayout();
             this.pnlMySavingsDetails.SuspendLayout();
-          
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMyBalance
@@ -293,14 +274,7 @@
             // 
             // guna2Panel2
             // 
-            this.guna2Panel2.Controls.Add(this.LabelIcome);
-            this.guna2Panel2.Controls.Add(this.labelExpense);
-            this.guna2Panel2.Controls.Add(this.guna2CirclePictureBox2);
-            this.guna2Panel2.Controls.Add(this.guna2CirclePictureBox1);
-            this.guna2Panel2.Location = new System.Drawing.Point(236, 147);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(129, 62);
-            this.guna2Panel2.TabIndex = 8;
+           
             // 
             // LabelIcome
             // 
@@ -322,25 +296,11 @@
             // 
             // guna2CirclePictureBox2
             // 
-            this.guna2CirclePictureBox2.FillColor = System.Drawing.Color.DarkGoldenrod;
-            this.guna2CirclePictureBox2.ImageRotate = 0F;
-            this.guna2CirclePictureBox2.Location = new System.Drawing.Point(15, 15);
-            this.guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
-            this.guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox2.Size = new System.Drawing.Size(23, 17);
-            this.guna2CirclePictureBox2.TabIndex = 0;
-            this.guna2CirclePictureBox2.TabStop = false;
+           
             // 
             // guna2CirclePictureBox1
             // 
-            this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.Red;
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(15, 38);
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(23, 17);
-            this.guna2CirclePictureBox1.TabIndex = 0;
-            this.guna2CirclePictureBox1.TabStop = false;
+            
             // 
             // LLPayment
             // 
@@ -354,14 +314,7 @@
             // 
             // guna2Panel1
             // 
-            this.guna2Panel1.Controls.Add(this.MoneyTotalIn);
-            this.guna2Panel1.Controls.Add(this.LBTotalIn);
-            this.guna2Panel1.Controls.Add(this.MoneyTotalEx);
-            this.guna2Panel1.Controls.Add(this.LBTotalEx);
-            this.guna2Panel1.Location = new System.Drawing.Point(236, 32);
-            this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(129, 100);
-            this.guna2Panel1.TabIndex = 8;
+            
             // 
             // MoneyTotalIn
             // 
@@ -564,136 +517,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // lblCardNumber
-            // 
-            this.lblCardNumber.AutoSize = true;
-            this.lblCardNumber.Font = new System.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold);
-            this.lblCardNumber.ForeColor = System.Drawing.Color.White;
-            this.lblCardNumber.Location = new System.Drawing.Point(17, 100);
-            this.lblCardNumber.Name = "lblCardNumber";
-            this.lblCardNumber.Size = new System.Drawing.Size(159, 34);
-            this.lblCardNumber.TabIndex = 1;
-            this.lblCardNumber.Text = "123220178";
-            // 
-            // LLPayment
-            // 
-            this.LLPayment.AutoSize = true;
-            this.LLPayment.Location = new System.Drawing.Point(258, 13);
-            this.LLPayment.Name = "LLPayment";
-            this.LLPayment.Size = new System.Drawing.Size(81, 16);
-            this.LLPayment.TabIndex = 2;
-            this.LLPayment.TabStop = true;
-            this.LLPayment.Text = "Xem tất cả";
-            // 
-            // LLSaving
-            // 
-            this.LLSaving.AutoSize = true;
-            this.LLSaving.Location = new System.Drawing.Point(241, 16);
-            this.LLSaving.Name = "LLSaving";
-            this.LLSaving.Size = new System.Drawing.Size(81, 16);
-            this.LLSaving.TabIndex = 3;
-            this.LLSaving.TabStop = true;
-            this.LLSaving.Text = "Xem tất cả";
-            // 
-            // LLHistory
-            // 
-            this.LLHistory.AutoSize = true;
-            this.LLHistory.Location = new System.Drawing.Point(275, 20);
-            this.LLHistory.Name = "LLHistory";
-            this.LLHistory.Size = new System.Drawing.Size(81, 16);
-            this.LLHistory.TabIndex = 3;
-            this.LLHistory.TabStop = true;
-            this.LLHistory.Text = "Xem tất cả";
-            this.LLHistory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LLHistory_LinkClicked);
-            // 
-            // guna2Panel1
-            // 
-          
-            // 
-            // guna2Panel2
-            // 
-         
-            // 
-            // LabelIcome
-            // 
-            this.LabelIcome.AutoSize = true;
-            this.LabelIcome.Location = new System.Drawing.Point(58, 15);
-            this.LabelIcome.Name = "LabelIcome";
-            this.LabelIcome.Size = new System.Drawing.Size(55, 16);
-            this.LabelIcome.TabIndex = 9;
-            this.LabelIcome.Text = "Income";
-            // 
-            // labelExpense
-            // 
-            this.labelExpense.AutoSize = true;
-            this.labelExpense.Location = new System.Drawing.Point(58, 39);
-            this.labelExpense.Name = "labelExpense";
-            this.labelExpense.Size = new System.Drawing.Size(62, 16);
-            this.labelExpense.TabIndex = 10;
-            this.labelExpense.Text = "Expense";
-            // 
-            // LBTotalEx
-            // 
-            this.LBTotalEx.AutoSize = true;
-            this.LBTotalEx.Location = new System.Drawing.Point(14, 7);
-            this.LBTotalEx.Name = "LBTotalEx";
-            this.LBTotalEx.Size = new System.Drawing.Size(101, 16);
-            this.LBTotalEx.TabIndex = 9;
-            this.LBTotalEx.Text = "Total Expense";
-            // 
-            // MoneyTotalEx
-            // 
-            this.MoneyTotalEx.AutoSize = true;
-            this.MoneyTotalEx.Location = new System.Drawing.Point(13, 29);
-            this.MoneyTotalEx.Name = "MoneyTotalEx";
-            this.MoneyTotalEx.Size = new System.Drawing.Size(58, 16);
-            this.MoneyTotalEx.TabIndex = 9;
-            this.MoneyTotalEx.Text = "$417.00";
-            // 
-            // LBTotalIn
-            // 
-            this.LBTotalIn.AutoSize = true;
-            this.LBTotalIn.Location = new System.Drawing.Point(22, 45);
-            this.LBTotalIn.Name = "LBTotalIn";
-            this.LBTotalIn.Size = new System.Drawing.Size(94, 16);
-            this.LBTotalIn.TabIndex = 9;
-            this.LBTotalIn.Text = "Total Income";
-            // 
-            // MoneyTotalIn
-            // 
-            this.MoneyTotalIn.AutoSize = true;
-            this.MoneyTotalIn.Location = new System.Drawing.Point(22, 76);
-            this.MoneyTotalIn.Name = "MoneyTotalIn";
-            this.MoneyTotalIn.Size = new System.Drawing.Size(69, 16);
-            this.MoneyTotalIn.TabIndex = 9;
-            this.MoneyTotalIn.Text = "$1,100.00";
-            // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(15, 11);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(701, 189);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
-            // 
-            // lblUserName
-            // 
-            this.lblUserName.AutoSize = true;
-            this.lblUserName.Font = new System.Drawing.Font("Arial", 10F);
-            this.lblUserName.Location = new System.Drawing.Point(52, 9);
-            this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(80, 16);
-            this.lblUserName.TabIndex = 6;
-            this.lblUserName.Text = "User Name";
-            // 
             // ucClientHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -725,19 +548,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.pnlPaymentSection.ResumeLayout(false);
             this.pnlPaymentSection.PerformLayout();
-            this.guna2Panel2.ResumeLayout(false);
-            this.guna2Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
-            this.guna2Panel1.ResumeLayout(false);
-            this.guna2Panel1.PerformLayout();
+           
+            
+          
             this.pnlHistoryTransactions.ResumeLayout(false);
             this.pnlHistoryTransactions.PerformLayout();
             this.pnlQuickTransfer.ResumeLayout(false);
             this.pnlQuickTransfer.PerformLayout();
             this.pnlMySavingsDetails.ResumeLayout(false);
             this.pnlMySavingsDetails.PerformLayout();
-         this.pnlHistoryTransactions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

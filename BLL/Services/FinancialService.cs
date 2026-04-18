@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using DAL.Repositories;
+﻿using DAL.Repositories;
 using DTO.Models;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace BLL.Services
 {
@@ -31,5 +32,32 @@ namespace BLL.Services
         {
             return FinancialDAL.GetTotalLoans(customerId, 0);
         }
+        public static List<InterestRateDTO> GetRatesByCategory(string category)
+        {
+            if (string.IsNullOrEmpty(category))
+            {
+                throw new Exception("Loại sản phẩm không được để trống!");
+            }
+
+
+            return FinancialDAL.GetInterestRatesByCategory(category);
+        }
+        public static SavingsPreviewDTO CalculateSavingsPreview(double principalAmount, int termMonths, string savingType)
+        {
+            SavingsPreviewDTO result = new SavingsPreviewDTO();
+            double rateValue = FinancialDAL.GetExactRateValue(savingType, termMonths);
+            result.InterestRate = rateValue;
+            if (rateValue == 0 || termMonths == 0) return result;
+            if (savingType == "Term")
+            {
+                result.MaturityInterest = principalAmount * (rateValue / 100.0) / 12.0 * termMonths;
+            }
+            else if (savingType == "Installment")
+            {
+
+            }
+            return result;
+        }
+
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq.Expressions;
+using System.Windows.Forms;
 using DAL.Core;
 using DTO.Models;
 
@@ -155,5 +157,69 @@ namespace DAL.Repositories
                 throw new Exception("Lỗi khi đếm khoản vay: " + ex.Message);
             }
         }
+
+
+            public static List<InterestRateDTO> GetInterestRatesByCategory(string category)
+        {
+            List<InterestRateDTO> list = new List<InterestRateDTO>();
+
+           
+            string query = "SELECT RateID, Category, TermMonths, RateValue FROM InterestRates WHERE Category = @Category ORDER BY TermMonths ASC";
+
+           
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Category", category)
+            };
+
+            DataTable dt = DBHelper.ExecuteQuery(query, parameters);
+
+           
+            foreach (DataRow row in dt.Rows)
+            {
+                InterestRateDTO rate = new InterestRateDTO
+                {
+                    RateID = Convert.ToInt32(row["RateID"]),
+                    Category = row["Category"].ToString(),
+                    TermMonths = Convert.ToInt32(row["TermMonths"]),
+                    RateValue = Convert.ToDecimal(row["RateValue"])
+                };
+                list.Add(rate);
+            }
+
+            return list;
+        }
+        public static double GetExactRateValue(string category, int termMonths)
+        {
+            try
+            {
+                double rate = 0;
+                string query = "SELECT RateValue FROM InterestRates WHERE Category = @Category AND TermMonths = @TermMonths";
+
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+        new SqlParameter("@Category", category),
+        new SqlParameter("@TermMonths", termMonths)
+                };
+
+
+                object result = DBHelper.ExecuteScalar(query, parameters);
+
+                if (result != null && result != DBNull.Value)
+                {
+                    rate = Convert.ToDouble(result);
+                }
+
+                return rate;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi tim rate: " + ex.Message);
+               
+            }
+
+           
+        }
     }
 }
+   

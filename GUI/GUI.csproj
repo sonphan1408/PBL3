@@ -36,6 +36,8 @@
     <Reference Include="Krypton.Toolkit, Version=100.26.1.19, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <HintPath>..\packages\Krypton.Toolkit.100.26.1.19\lib\net472\Krypton.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
@@ -57,6 +59,7 @@
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,6 +69,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\frmAdminDashboard.cs">
@@ -143,12 +147,6 @@
     <Compile Include="Client\ucInvoicePayment.Designer.cs">
       <DependentUpon>ucInvoicePayment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Client\ucFinancials.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Client\ucFinancials.Designer.cs">
-      <DependentUpon>ucFinancials.cs</DependentUpon>
-    </Compile>
     <Compile Include="Client\ucHistory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -163,6 +161,19 @@
     </Compile>
     <Compile Include="Client\ucTransfer.Designer.cs">
       <DependentUpon>ucTransfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\ucSaving.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\ucSaving.Designer.cs">
+      <DependentUpon>ucSaving.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\.Designer.cs">
+      <DependentUpon>.cs</DependentUpon>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -181,14 +192,17 @@
     <EmbeddedResource Include="Client\ucClientHome.resx">
       <DependentUpon>ucClientHome.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Client\ucFinancials.resx">
-      <DependentUpon>ucFinancials.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Client\ucHistory.resx">
       <DependentUpon>ucHistory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucSaving.resx">
+      <DependentUpon>ucSaving.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Client\ucTransfer.resx">
       <DependentUpon>ucTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\.resx">
+      <DependentUpon>.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

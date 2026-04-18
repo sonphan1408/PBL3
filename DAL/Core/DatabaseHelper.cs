@@ -42,5 +42,16 @@ namespace DAL.Core
                 return dt;
             }
         }
+        public static object ExecuteScalar(string sql, SqlParameter[] parameters = null)
+        {
+            using (SqlConnection conn = GetConnection())
+            {
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                if (parameters != null) cmd.Parameters.AddRange(parameters);
+
+                conn.Open();
+                return cmd.ExecuteScalar();
+            }
+        }
     }
 }

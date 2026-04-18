@@ -7,9 +7,9 @@ namespace GUI.Client
 {
     public partial class frmClientDashboard : Form
     {
-        // Khai báo các biến UserControl (nếu file Designer của bạn chưa có)
+       
         ucClientHome home;
-        ucFinancials financials;
+        ucSaving saving;
         ucHistory history;
         ucInvoicePayment invoice;
         ucNotifications notifications;
@@ -17,14 +17,13 @@ namespace GUI.Client
         
         public string CurrentUsername { get; private set; }
 
-        // Parameterless constructor required by designer and other call sites
+        
         public frmClientDashboard()
         {
-            InitializeComponent(); // Lệnh này giúp vẽ pnlMain và các nút ra màn hình
+            InitializeComponent(); 
 
-            // Khởi tạo các trang con ở đây, sau khi giao diện chính đã load xong
             home = new ucClientHome();
-            financials = new ucFinancials();
+            saving = new ucSaving();
             history = new ucHistory();
             invoice = new ucInvoicePayment();
             notifications = new ucNotifications();
@@ -35,7 +34,7 @@ namespace GUI.Client
         public frmClientDashboard(string username) : this()
         {
             CurrentUsername = username;
-            // Recreate home with username to load data from database
+            
             home.Dispose();
             home = new ucClientHome(username);
             transfer.SetUsername(username);
@@ -45,7 +44,7 @@ namespace GUI.Client
         }
 
         // Hàm tráo đổi UserControl của bạn (Đã chuẩn)
-        private void addUserControl(UserControl uc)
+        public void addUserControl(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
             pnlMain.Controls.Clear();
@@ -73,11 +72,11 @@ namespace GUI.Client
             btnNotification.Cursor = Cursors.Hand;
             btnNotification.Click += BtnNotification_Click;
 
-            // Thiết lập Badge hiển thị số lượng
+            
             lblNotificationBadge = new Label();
             lblNotificationBadge.AutoSize = false;
             lblNotificationBadge.Size = new Size(20, 20);
-            lblNotificationBadge.Location = new Point(32, 5); // Đặt góc trên phải của icon chuông
+            lblNotificationBadge.Location = new Point(32, 5);
             lblNotificationBadge.BackColor = Color.Red;
             lblNotificationBadge.ForeColor = Color.White;
             lblNotificationBadge.Font = new Font("Arial", 8F, FontStyle.Bold);
@@ -274,9 +273,10 @@ namespace GUI.Client
             addUserControl(home);
         }
 
-        private void btnFinancials_Click(object sender, EventArgs e)
+       
+        private void btnSaving_Click(object sender, EventArgs e)
         {
-            addUserControl(financials);
+            addUserControl(saving);
         }
 
         private void btnHistory_Click(object sender, EventArgs e)
@@ -298,7 +298,7 @@ namespace GUI.Client
             this.Close();
         }
 
-        // --- CÁC SỰ KIỆN KHÁC CỦA BẠN (GIỮ NGUYÊN) ---
+      
         private void frmClientDashboard_Load(object sender, EventArgs e) 
         { 
             SetupNotificationIcon();
@@ -328,7 +328,6 @@ namespace GUI.Client
         private void textBox1_TextChanged(object sender, EventArgs e) { }
         private void guna2TextBox1_TextChanged(object sender, EventArgs e) { }
         private void pnlMain_Paint(object sender, PaintEventArgs e) { }
-        private void button4_Click(object sender, EventArgs e) { }
         private void pnlSidebar_Paint(object sender, PaintEventArgs e) { }
 
         // Code bo góc thanh tìm kiếm của bạn (Đã chuẩn)

@@ -189,5 +189,10 @@ namespace GUI.Client
             _recipientAccount = null;
             _transferAmount = 0;
         }
+
+        private void ucTransfer_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -371,6 +371,7 @@ namespace GUI.Client
             this.Controls.Add(this.lblTitle);
             this.Name = "ucTransfer";
             this.Size = new System.Drawing.Size(970, 673);
+            this.Load += new System.EventHandler(this.ucTransfer_Load);
             this.pnlTabs.ResumeLayout(false);
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();

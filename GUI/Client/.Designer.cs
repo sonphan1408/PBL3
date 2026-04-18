@@ -1,6 +1,6 @@
 ﻿namespace GUI.Client
 {
-    partial class ucFinancials
+    partial class createSaving
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,12 +30,11 @@
         {
             this.SuspendLayout();
             // 
-            // ucFinancials
+            // createSaving
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "ucFinancials";
-            this.Size = new System.Drawing.Size(1020, 626);
+            this.Name = "createSaving";
             this.ResumeLayout(false);
 
         }
