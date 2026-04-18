@@ -52,8 +52,10 @@ namespace GUI.Authentication
             }
         }
 
+        Boolean check_click_back = false;
         private void Back_Click(object sender, EventArgs e)
         {
+            check_click_back = true;
             this.Close();
         }
 
@@ -62,7 +64,10 @@ namespace GUI.Authentication
             this.Hide();
             frmRegister registerForm = new frmRegister();
             registerForm.ShowDialog();
-            this.Show();
+            if (!this.IsDisposed)
+            {
+                this.Show();
+            }
         }
 
         private void ButtonLogin_Click(object sender, EventArgs e)
@@ -105,9 +110,10 @@ namespace GUI.Authentication
             }
         }
 
-        private void frmLogin_Load(object sender, EventArgs e)
+        private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            if (!check_click_back)
+                Application.Exit();
         }
     }
 }

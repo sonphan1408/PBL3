@@ -15,7 +15,10 @@ namespace GUI.Authentication
             this.Hide();
             frmLogin loginForm = new frmLogin();
             loginForm.ShowDialog();
-            this.Show();
+            if (!this.IsDisposed)
+            {
+                this.Show();
+            }
         }
     }
 }

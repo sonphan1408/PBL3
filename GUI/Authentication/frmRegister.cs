@@ -12,8 +12,10 @@ namespace GUI.Authentication
             InitializeComponent();
         }
 
+        Boolean check_click_back = false;
         private void Back_Click(object sender, EventArgs e)
         {
+            check_click_back = true;
             this.Close();
         }
 
@@ -50,6 +52,12 @@ namespace GUI.Authentication
             {
                 MessageBox.Show(ketQua, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void frmRegister_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(!check_click_back)
+                Application.Exit();
         }
     }
 }

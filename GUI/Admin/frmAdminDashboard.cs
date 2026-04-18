@@ -11,5 +11,10 @@ namespace GUI.Admin
             InitializeComponent();
             this.username = username;
         }
+
+        private void frmAdminDashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
