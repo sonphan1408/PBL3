@@ -270,3 +270,4 @@ ASALocalRun/
 *.snap
 
 **/App.config
+/GUI/App.config
