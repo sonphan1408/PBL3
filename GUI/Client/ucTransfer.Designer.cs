@@ -230,9 +230,9 @@ namespace GUI.Client
             // 
             // btnCK
             // 
-            this.btnCK.Location = new System.Drawing.Point(213, 181);
+            this.btnCK.Location = new System.Drawing.Point(193, 179);
             this.btnCK.Name = "btnCK";
-            this.btnCK.Size = new System.Drawing.Size(120, 32);
+            this.btnCK.Size = new System.Drawing.Size(165, 32);
             this.btnCK.StateCommon.Border.Rounding = 10F;
             this.btnCK.TabIndex = 8;
             this.btnCK.Values.DropDownArrowColor = System.Drawing.Color.Empty;
