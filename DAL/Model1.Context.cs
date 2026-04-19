@@ -28,16 +28,16 @@ namespace DAL
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<ExternalAccount> ExternalAccounts { get; set; }
         public virtual DbSet<ExternalBank> ExternalBanks { get; set; }
+        public virtual DbSet<ExternalTransaction> ExternalTransactions { get; set; }
         public virtual DbSet<FinancialProduct> FinancialProducts { get; set; }
         public virtual DbSet<InterestRate> InterestRates { get; set; }
+        public virtual DbSet<InternalTransaction> InternalTransactions { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<LoanRepayment> LoanRepayments { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<ServiceProvider> ServiceProviders { get; set; }
         public virtual DbSet<ServiceType> ServiceTypes { get; set; }
-        public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<TransactionType> TransactionTypes { get; set; }
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using DTO.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using DAL.Core;
-using DTO.Models;
+using System.Linq;
 
 namespace DAL.Repositories
 {
@@ -13,29 +11,22 @@ namespace DAL.Repositories
         {
             try
             {
-                string sql = @"SELECT AccountNumber, CustomerID, Username, Balance, Status 
-                            FROM dbo.Accounts WHERE Username = @username";
-
-                SqlParameter[] parameters = new SqlParameter[]
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@username", username)
-                };
-
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
-
-                if (dt.Rows.Count > 0)
-                {
-                    DataRow row = dt.Rows[0];
-                    return new AccountDTO
+                    var account = db.Accounts.FirstOrDefault(a => a.Username == username);
+                    if (account != null)
                     {
-                        AccountNumber = row["AccountNumber"].ToString(),
-                        CustomerID = (int)row["CustomerID"],
-                        Username = row["Username"].ToString(),
-                        Balance = (decimal)row["Balance"],
-                        Status = row["Status"].ToString()
-                    };
+                        return new AccountDTO
+                        {
+                            AccountNumber = account.AccountNumber,
+                            CustomerID = account.CustomerID,
+                            Username = account.Username,
+                            Balance = (decimal)account.Balance,
+                            Status = account.Status
+                        };
+                    }
+                    return null;
                 }
-                return null;
             }
             catch (Exception ex)
             {
@@ -47,31 +38,24 @@ namespace DAL.Repositories
         {
             try
             {
-                string sql = @"SELECT CustomerID, FullName, Gender, DateOfBirth, Address, PhoneNumber, Email 
-                            FROM dbo.Customers WHERE CustomerID = @customerId";
-
-                SqlParameter[] parameters = new SqlParameter[]
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@customerId", customerId)
-                };
-
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
-
-                if (dt.Rows.Count > 0)
-                {
-                    DataRow row = dt.Rows[0];
-                    return new CustomerDTO
+                    var customer = db.Customers.FirstOrDefault(c => c.CustomerID == customerId);
+                    if (customer != null)
                     {
-                        CustomerID = (int)row["CustomerID"],
-                        FullName = row["FullName"].ToString(),
-                        Gender = row["Gender"].ToString(),
-                        DateOfBirth = (DateTime)row["DateOfBirth"],
-                        Address = row["Address"].ToString(),
-                        PhoneNumber = row["PhoneNumber"].ToString(),
-                        Email = row["Email"].ToString()
-                    };
+                        return new CustomerDTO
+                        {
+                            CustomerID = customer.CustomerID,
+                            FullName = customer.FullName,
+                            Gender = customer.Gender,
+                            DateOfBirth = (DateTime)customer.DateOfBirth,
+                            Address = customer.Address,
+                            PhoneNumber = customer.PhoneNumber,
+                            Email = customer.Email
+                        };
+                    }
+                    return null;
                 }
-                return null;
             }
             catch (Exception ex)
             {
@@ -83,29 +67,18 @@ namespace DAL.Repositories
         {
             try
             {
-                string sql = @"SELECT AccountNumber, CustomerID, Username, Balance, Status 
-                            FROM dbo.Accounts WHERE CustomerID = @customerId";
-
-                SqlParameter[] parameters = new SqlParameter[]
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@customerId", customerId)
-                };
-
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
-
-                List<AccountDTO> accounts = new List<AccountDTO>();
-                foreach (DataRow row in dt.Rows)
-                {
-                    accounts.Add(new AccountDTO
+                    var accounts = db.Accounts.Where(a => a.CustomerID == customerId).ToList();
+                    return accounts.Select(account => new AccountDTO
                     {
-                        AccountNumber = row["AccountNumber"].ToString(),
-                        CustomerID = (int)row["CustomerID"],
-                        Username = row["Username"].ToString(),
-                        Balance = (decimal)row["Balance"],
-                        Status = row["Status"].ToString()
-                    });
+                        AccountNumber = account.AccountNumber,
+                        CustomerID = account.CustomerID,
+                        Username = account.Username,
+                        Balance = (decimal)account.Balance,
+                        Status = account.Status
+                    }).ToList();
                 }
-                return accounts;
             }
             catch (Exception ex)
             {

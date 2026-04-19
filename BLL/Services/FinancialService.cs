@@ -30,7 +30,7 @@ namespace BLL.Services
 
         public static int GetTotalLoansCount(int customerId)
         {
-            return FinancialDAL.GetTotalLoans(customerId, 0);
+            return FinancialDAL.GetTotalLoanAccounts(customerId);
         }
         public static List<InterestRateDTO> GetRatesByCategory(string category)
         {

@@ -23,12 +23,13 @@
           </Key>
           <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CCCD" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IDCard" Type="varchar" MaxLength="20" StoreGeneratedPattern="Computed" />
           <Property Name="Gender" Type="nvarchar" MaxLength="10" />
           <Property Name="DateOfBirth" Type="date" />
           <Property Name="Address" Type="nvarchar" MaxLength="255" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
-          <Property Name="IDCard" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="AvatarPath" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedAt" Type="datetime" />
         </EntityType>
@@ -42,15 +43,6 @@
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <EntityType Name="ExternalAccounts">
-          <Key>
-            <PropertyRef Name="ExternalAccNum" />
-          </Key>
-          <Property Name="ExternalAccNum" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="BankCode" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="AccountHolder" Type="nvarchar" MaxLength="100" />
-          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
-        </EntityType>
         <EntityType Name="ExternalBanks">
           <Key>
             <PropertyRef Name="BankCode" />
@@ -58,6 +50,23 @@
           <Property Name="BankCode" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="BankName" Type="nvarchar" MaxLength="100" />
           <Property Name="FullName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ExternalTransactions">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FromAccount" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ReceiverAccount" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReceiverName" Type="nvarchar" MaxLength="100" />
+          <Property Name="BankCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BalanceBefore" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BalanceAfter" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="TraceNumber" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedAt" Type="datetime" />
         </EntityType>
         <EntityType Name="FinancialProducts">
           <Key>
@@ -82,6 +91,20 @@
           <Property Name="Category" Type="nvarchar" MaxLength="50" />
           <Property Name="TermMonths" Type="int" />
           <Property Name="RateValue" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="InternalTransactions">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FromAccount" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ToAccount" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BalanceBefore" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BalanceAfter" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedAt" Type="datetime" />
         </EntityType>
         <EntityType Name="Invoices">
           <Key>
@@ -132,21 +155,6 @@
           <Property Name="ServiceTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ServiceIcon" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="Transactions">
-          <Key>
-            <PropertyRef Name="TransactionID" />
-          </Key>
-          <Property Name="TransactionID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="TypeID" Type="int" Nullable="false" />
-          <Property Name="FromAccount" Type="varchar" MaxLength="20" />
-          <Property Name="ReceiverAccountNumber" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="ReceiverBankCode" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="BalanceBefore" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="BalanceAfter" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Description" Type="nvarchar" MaxLength="255" />
-          <Property Name="CreatedAt" Type="datetime" />
-        </EntityType>
         <EntityType Name="TransactionTypes">
           <Key>
             <PropertyRef Name="TypeID" />
@@ -154,7 +162,7 @@
           <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Accounts__Custom__412EB0B6">
+        <Association Name="FK_Account_Customer">
           <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
           <ReferentialConstraint>
@@ -166,19 +174,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ExternalA__BankC__656C112C">
+        <Association Name="FK_External_Bank">
           <End Role="ExternalBanks" Type="Self.ExternalBanks" Multiplicity="1" />
-          <End Role="ExternalAccounts" Type="Self.ExternalAccounts" Multiplicity="*" />
+          <End Role="ExternalTransactions" Type="Self.ExternalTransactions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ExternalBanks">
               <PropertyRef Name="BankCode" />
             </Principal>
-            <Dependent Role="ExternalAccounts">
+            <Dependent Role="ExternalTransactions">
               <PropertyRef Name="BankCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Financial__Accou__5CD6CB2B">
+        <Association Name="FK_External_From">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="ExternalTransactions" Type="Self.ExternalTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="ExternalTransactions">
+              <PropertyRef Name="FromAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fin_Acc">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="FinancialProducts" Type="Self.FinancialProducts" Multiplicity="*" />
           <ReferentialConstraint>
@@ -190,7 +210,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Financial__Appro__5DCAEF64">
+        <Association Name="FK_Fin_Emp">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="FinancialProducts" Type="Self.FinancialProducts" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,7 +222,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Invoices__Accoun__571DF1D5">
+        <Association Name="FK_Internal_From">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="InternalTransactions" Type="Self.InternalTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="InternalTransactions">
+              <PropertyRef Name="FromAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Internal_To">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="InternalTransactions" Type="Self.InternalTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="InternalTransactions">
+              <PropertyRef Name="ToAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Internal_Type">
+          <End Role="TransactionTypes" Type="Self.TransactionTypes" Multiplicity="1" />
+          <End Role="InternalTransactions" Type="Self.InternalTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionTypes">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="InternalTransactions">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Acc">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -214,7 +270,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Invoices__Provid__5812160E">
+        <Association Name="FK_Invoice_Provider">
           <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="1" />
           <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -226,19 +282,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LoanRepay__Produ__619B8048">
-          <End Role="FinancialProducts" Type="Self.FinancialProducts" Multiplicity="1" />
-          <End Role="LoanRepayments" Type="Self.LoanRepayments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FinancialProducts">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="LoanRepayments">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Notificat__Recei__6A30C649">
+        <Association Name="FK_Noti_Acc">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
           <ReferentialConstraint>
@@ -250,7 +294,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServicePr__Servi__534D60F1">
+        <Association Name="FK_Provider_ServiceType">
           <End Role="ServiceTypes" Type="Self.ServiceTypes" Multiplicity="1" />
           <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -262,39 +306,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Transacti__FromA__4D94879B">
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
-          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+        <Association Name="FK_Repay_Prod">
+          <End Role="FinancialProducts" Type="Self.FinancialProducts" Multiplicity="1" />
+          <End Role="LoanRepayments" Type="Self.LoanRepayments" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Accounts">
-              <PropertyRef Name="AccountNumber" />
+            <Principal Role="FinancialProducts">
+              <PropertyRef Name="ProductID" />
             </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="FromAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Transacti__Recei__4E88ABD4">
-          <End Role="ExternalBanks" Type="Self.ExternalBanks" Multiplicity="1" />
-          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ExternalBanks">
-              <PropertyRef Name="BankCode" />
-            </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="ReceiverBankCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Transacti__TypeI__4CA06362">
-          <End Role="TransactionTypes" Type="Self.TransactionTypes" Multiplicity="1" />
-          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransactionTypes">
-              <PropertyRef Name="TypeID" />
-            </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="TypeID" />
+            <Dependent Role="LoanRepayments">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -302,64 +322,68 @@
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ExternalAccounts" EntityType="Self.ExternalAccounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExternalBanks" EntityType="Self.ExternalBanks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExternalTransactions" EntityType="Self.ExternalTransactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinancialProducts" EntityType="Self.FinancialProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InterestRates" EntityType="Self.InterestRates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InternalTransactions" EntityType="Self.InternalTransactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanRepayments" EntityType="Self.LoanRepayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceProviders" EntityType="Self.ServiceProviders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceTypes" EntityType="Self.ServiceTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionTypes" EntityType="Self.TransactionTypes" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Accounts__Custom__412EB0B6" Association="Self.FK__Accounts__Custom__412EB0B6">
+          <AssociationSet Name="FK_Account_Customer" Association="Self.FK_Account_Customer">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Accounts" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK__ExternalA__BankC__656C112C" Association="Self.FK__ExternalA__BankC__656C112C">
+          <AssociationSet Name="FK_External_Bank" Association="Self.FK_External_Bank">
             <End Role="ExternalBanks" EntitySet="ExternalBanks" />
-            <End Role="ExternalAccounts" EntitySet="ExternalAccounts" />
+            <End Role="ExternalTransactions" EntitySet="ExternalTransactions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Financial__Accou__5CD6CB2B" Association="Self.FK__Financial__Accou__5CD6CB2B">
+          <AssociationSet Name="FK_External_From" Association="Self.FK_External_From">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ExternalTransactions" EntitySet="ExternalTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fin_Acc" Association="Self.FK_Fin_Acc">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="FinancialProducts" EntitySet="FinancialProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Financial__Appro__5DCAEF64" Association="Self.FK__Financial__Appro__5DCAEF64">
+          <AssociationSet Name="FK_Fin_Emp" Association="Self.FK_Fin_Emp">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="FinancialProducts" EntitySet="FinancialProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Invoices__Accoun__571DF1D5" Association="Self.FK__Invoices__Accoun__571DF1D5">
+          <AssociationSet Name="FK_Internal_From" Association="Self.FK_Internal_From">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="InternalTransactions" EntitySet="InternalTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Internal_To" Association="Self.FK_Internal_To">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="InternalTransactions" EntitySet="InternalTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Internal_Type" Association="Self.FK_Internal_Type">
+            <End Role="TransactionTypes" EntitySet="TransactionTypes" />
+            <End Role="InternalTransactions" EntitySet="InternalTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Acc" Association="Self.FK_Invoice_Acc">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Invoices__Provid__5812160E" Association="Self.FK__Invoices__Provid__5812160E">
+          <AssociationSet Name="FK_Invoice_Provider" Association="Self.FK_Invoice_Provider">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
-          <AssociationSet Name="FK__LoanRepay__Produ__619B8048" Association="Self.FK__LoanRepay__Produ__619B8048">
-            <End Role="FinancialProducts" EntitySet="FinancialProducts" />
-            <End Role="LoanRepayments" EntitySet="LoanRepayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Notificat__Recei__6A30C649" Association="Self.FK__Notificat__Recei__6A30C649">
+          <AssociationSet Name="FK_Noti_Acc" Association="Self.FK_Noti_Acc">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
-          <AssociationSet Name="FK__ServicePr__Servi__534D60F1" Association="Self.FK__ServicePr__Servi__534D60F1">
+          <AssociationSet Name="FK_Provider_ServiceType" Association="Self.FK_Provider_ServiceType">
             <End Role="ServiceTypes" EntitySet="ServiceTypes" />
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Transacti__FromA__4D94879B" Association="Self.FK__Transacti__FromA__4D94879B">
-            <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="Transactions" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Transacti__Recei__4E88ABD4" Association="Self.FK__Transacti__Recei__4E88ABD4">
-            <End Role="ExternalBanks" EntitySet="ExternalBanks" />
-            <End Role="Transactions" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Transacti__TypeI__4CA06362" Association="Self.FK__Transacti__TypeI__4CA06362">
-            <End Role="TransactionTypes" EntitySet="TransactionTypes" />
-            <End Role="Transactions" EntitySet="Transactions" />
+          <AssociationSet Name="FK_Repay_Prod" Association="Self.FK_Repay_Prod">
+            <End Role="FinancialProducts" EntitySet="FinancialProducts" />
+            <End Role="LoanRepayments" EntitySet="LoanRepayments" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -378,11 +402,13 @@
           <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__Accounts__Custom__412EB0B6" FromRole="Accounts" ToRole="Customers" />
-          <NavigationProperty Name="FinancialProducts" Relationship="Self.FK__Financial__Accou__5CD6CB2B" FromRole="Accounts" ToRole="FinancialProducts" />
-          <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoices__Accoun__571DF1D5" FromRole="Accounts" ToRole="Invoices" />
-          <NavigationProperty Name="Notifications" Relationship="Self.FK__Notificat__Recei__6A30C649" FromRole="Accounts" ToRole="Notifications" />
-          <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__FromA__4D94879B" FromRole="Accounts" ToRole="Transactions" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Account_Customer" FromRole="Accounts" ToRole="Customers" />
+          <NavigationProperty Name="ExternalTransactions" Relationship="Self.FK_External_From" FromRole="Accounts" ToRole="ExternalTransactions" />
+          <NavigationProperty Name="FinancialProducts" Relationship="Self.FK_Fin_Acc" FromRole="Accounts" ToRole="FinancialProducts" />
+          <NavigationProperty Name="InternalTransactions" Relationship="Self.FK_Internal_From" FromRole="Accounts" ToRole="InternalTransactions" />
+          <NavigationProperty Name="InternalTransactions1" Relationship="Self.FK_Internal_To" FromRole="Accounts" ToRole="InternalTransactions" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_Acc" FromRole="Accounts" ToRole="Invoices" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_Noti_Acc" FromRole="Accounts" ToRole="Notifications" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -390,15 +416,16 @@
           </Key>
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CCCD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
           <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IDCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AvatarPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK__Accounts__Custom__412EB0B6" FromRole="Customers" ToRole="Accounts" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Customer" FromRole="Customers" ToRole="Accounts" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -409,17 +436,7 @@
           <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="FinancialProducts" Relationship="Self.FK__Financial__Appro__5DCAEF64" FromRole="Employees" ToRole="FinancialProducts" />
-        </EntityType>
-        <EntityType Name="ExternalAccount">
-          <Key>
-            <PropertyRef Name="ExternalAccNum" />
-          </Key>
-          <Property Name="ExternalAccNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BankCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AccountHolder" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="ExternalBank" Relationship="Self.FK__ExternalA__BankC__656C112C" FromRole="ExternalAccounts" ToRole="ExternalBanks" />
+          <NavigationProperty Name="FinancialProducts" Relationship="Self.FK_Fin_Emp" FromRole="Employees" ToRole="FinancialProducts" />
         </EntityType>
         <EntityType Name="ExternalBank">
           <Key>
@@ -428,8 +445,26 @@
           <Property Name="BankCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ExternalAccounts" Relationship="Self.FK__ExternalA__BankC__656C112C" FromRole="ExternalBanks" ToRole="ExternalAccounts" />
-          <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__Recei__4E88ABD4" FromRole="ExternalBanks" ToRole="Transactions" />
+          <NavigationProperty Name="ExternalTransactions" Relationship="Self.FK_External_Bank" FromRole="ExternalBanks" ToRole="ExternalTransactions" />
+        </EntityType>
+        <EntityType Name="ExternalTransaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="Guid" Nullable="false" />
+          <Property Name="FromAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReceiverAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReceiverName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BankCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BalanceBefore" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BalanceAfter" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TraceNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_External_From" FromRole="ExternalTransactions" ToRole="Accounts" />
+          <NavigationProperty Name="ExternalBank" Relationship="Self.FK_External_Bank" FromRole="ExternalTransactions" ToRole="ExternalBanks" />
         </EntityType>
         <EntityType Name="FinancialProduct">
           <Key>
@@ -445,9 +480,9 @@
           <Property Name="EndDate" Type="DateTime" Precision="0" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ApprovedBy" Type="Int32" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Financial__Accou__5CD6CB2B" FromRole="FinancialProducts" ToRole="Accounts" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK__Financial__Appro__5DCAEF64" FromRole="FinancialProducts" ToRole="Employees" />
-          <NavigationProperty Name="LoanRepayments" Relationship="Self.FK__LoanRepay__Produ__619B8048" FromRole="FinancialProducts" ToRole="LoanRepayments" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Fin_Acc" FromRole="FinancialProducts" ToRole="Accounts" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Fin_Emp" FromRole="FinancialProducts" ToRole="Employees" />
+          <NavigationProperty Name="LoanRepayments" Relationship="Self.FK_Repay_Prod" FromRole="FinancialProducts" ToRole="LoanRepayments" />
         </EntityType>
         <EntityType Name="InterestRate">
           <Key>
@@ -457,6 +492,23 @@
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TermMonths" Type="Int32" />
           <Property Name="RateValue" Type="Decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="InternalTransaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="Guid" Nullable="false" />
+          <Property Name="FromAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ToAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BalanceBefore" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BalanceAfter" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Internal_From" FromRole="InternalTransactions" ToRole="Accounts" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK_Internal_To" FromRole="InternalTransactions" ToRole="Accounts" />
+          <NavigationProperty Name="TransactionType" Relationship="Self.FK_Internal_Type" FromRole="InternalTransactions" ToRole="TransactionTypes" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -469,8 +521,8 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="DueDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Invoices__Accoun__571DF1D5" FromRole="Invoices" ToRole="Accounts" />
-          <NavigationProperty Name="ServiceProvider" Relationship="Self.FK__Invoices__Provid__5812160E" FromRole="Invoices" ToRole="ServiceProviders" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Invoice_Acc" FromRole="Invoices" ToRole="Accounts" />
+          <NavigationProperty Name="ServiceProvider" Relationship="Self.FK_Invoice_Provider" FromRole="Invoices" ToRole="ServiceProviders" />
         </EntityType>
         <EntityType Name="LoanRepayment">
           <Key>
@@ -481,7 +533,7 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
           <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="FinancialProduct" Relationship="Self.FK__LoanRepay__Produ__619B8048" FromRole="LoanRepayments" ToRole="FinancialProducts" />
+          <NavigationProperty Name="FinancialProduct" Relationship="Self.FK_Repay_Prod" FromRole="LoanRepayments" ToRole="FinancialProducts" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -493,7 +545,7 @@
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsRead" Type="Boolean" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Notificat__Recei__6A30C649" FromRole="Notifications" ToRole="Accounts" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Noti_Acc" FromRole="Notifications" ToRole="Accounts" />
         </EntityType>
         <EntityType Name="ServiceProvider">
           <Key>
@@ -502,8 +554,8 @@
           <Property Name="ProviderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ServiceTypeID" Type="Int32" Nullable="false" />
           <Property Name="ProviderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoices__Provid__5812160E" FromRole="ServiceProviders" ToRole="Invoices" />
-          <NavigationProperty Name="ServiceType" Relationship="Self.FK__ServicePr__Servi__534D60F1" FromRole="ServiceProviders" ToRole="ServiceTypes" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_Provider" FromRole="ServiceProviders" ToRole="Invoices" />
+          <NavigationProperty Name="ServiceType" Relationship="Self.FK_Provider_ServiceType" FromRole="ServiceProviders" ToRole="ServiceTypes" />
         </EntityType>
         <EntityType Name="ServiceType">
           <Key>
@@ -512,25 +564,7 @@
           <Property Name="ServiceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ServiceTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ServiceIcon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ServiceProviders" Relationship="Self.FK__ServicePr__Servi__534D60F1" FromRole="ServiceTypes" ToRole="ServiceProviders" />
-        </EntityType>
-        <EntityType Name="Transaction">
-          <Key>
-            <PropertyRef Name="TransactionID" />
-          </Key>
-          <Property Name="TransactionID" Type="Guid" Nullable="false" />
-          <Property Name="TypeID" Type="Int32" Nullable="false" />
-          <Property Name="FromAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ReceiverAccountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ReceiverBankCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="BalanceBefore" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="BalanceAfter" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Transacti__FromA__4D94879B" FromRole="Transactions" ToRole="Accounts" />
-          <NavigationProperty Name="ExternalBank" Relationship="Self.FK__Transacti__Recei__4E88ABD4" FromRole="Transactions" ToRole="ExternalBanks" />
-          <NavigationProperty Name="TransactionType" Relationship="Self.FK__Transacti__TypeI__4CA06362" FromRole="Transactions" ToRole="TransactionTypes" />
+          <NavigationProperty Name="ServiceProviders" Relationship="Self.FK_Provider_ServiceType" FromRole="ServiceTypes" ToRole="ServiceProviders" />
         </EntityType>
         <EntityType Name="TransactionType">
           <Key>
@@ -538,9 +572,9 @@
           </Key>
           <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__TypeI__4CA06362" FromRole="TransactionTypes" ToRole="Transactions" />
+          <NavigationProperty Name="InternalTransactions" Relationship="Self.FK_Internal_Type" FromRole="TransactionTypes" ToRole="InternalTransactions" />
         </EntityType>
-        <Association Name="FK__Accounts__Custom__412EB0B6">
+        <Association Name="FK_Account_Customer">
           <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
           <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
@@ -552,7 +586,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Financial__Accou__5CD6CB2B">
+        <Association Name="FK_External_From">
+          <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+          <End Role="ExternalTransactions" Type="Self.ExternalTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="ExternalTransactions">
+              <PropertyRef Name="FromAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fin_Acc">
           <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
           <End Role="FinancialProducts" Type="Self.FinancialProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -564,7 +610,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Invoices__Accoun__571DF1D5">
+        <Association Name="FK_Internal_From">
+          <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+          <End Role="InternalTransactions" Type="Self.InternalTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="InternalTransactions">
+              <PropertyRef Name="FromAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Internal_To">
+          <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+          <End Role="InternalTransactions" Type="Self.InternalTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="InternalTransactions">
+              <PropertyRef Name="ToAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Acc">
           <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
           <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -576,7 +646,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Notificat__Recei__6A30C649">
+        <Association Name="FK_Noti_Acc">
           <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
           <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
@@ -588,19 +658,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Transacti__FromA__4D94879B">
-          <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accounts">
-              <PropertyRef Name="AccountNumber" />
-            </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="FromAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Financial__Appro__5DCAEF64">
+        <Association Name="FK_Fin_Emp">
           <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="FinancialProducts" Type="Self.FinancialProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -612,31 +670,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ExternalA__BankC__656C112C">
+        <Association Name="FK_External_Bank">
           <End Role="ExternalBanks" Type="Self.ExternalBank" Multiplicity="1" />
-          <End Role="ExternalAccounts" Type="Self.ExternalAccount" Multiplicity="*" />
+          <End Role="ExternalTransactions" Type="Self.ExternalTransaction" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ExternalBanks">
               <PropertyRef Name="BankCode" />
             </Principal>
-            <Dependent Role="ExternalAccounts">
+            <Dependent Role="ExternalTransactions">
               <PropertyRef Name="BankCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Transacti__Recei__4E88ABD4">
-          <End Role="ExternalBanks" Type="Self.ExternalBank" Multiplicity="1" />
-          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ExternalBanks">
-              <PropertyRef Name="BankCode" />
-            </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="ReceiverBankCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LoanRepay__Produ__619B8048">
+        <Association Name="FK_Repay_Prod">
           <End Role="FinancialProducts" Type="Self.FinancialProduct" Multiplicity="1" />
           <End Role="LoanRepayments" Type="Self.LoanRepayment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -648,7 +694,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Invoices__Provid__5812160E">
+        <Association Name="FK_Internal_Type">
+          <End Role="TransactionTypes" Type="Self.TransactionType" Multiplicity="1" />
+          <End Role="InternalTransactions" Type="Self.InternalTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionTypes">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="InternalTransactions">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Provider">
           <End Role="ServiceProviders" Type="Self.ServiceProvider" Multiplicity="1" />
           <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -660,7 +718,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServicePr__Servi__534D60F1">
+        <Association Name="FK_Provider_ServiceType">
           <End Role="ServiceTypes" Type="Self.ServiceType" Multiplicity="1" />
           <End Role="ServiceProviders" Type="Self.ServiceProvider" Multiplicity="*" />
           <ReferentialConstraint>
@@ -672,80 +730,72 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Transacti__TypeI__4CA06362">
-          <End Role="TransactionTypes" Type="Self.TransactionType" Multiplicity="1" />
-          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransactionTypes">
-              <PropertyRef Name="TypeID" />
-            </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="TypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DigitalBankingDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="ExternalAccounts" EntityType="Self.ExternalAccount" />
           <EntitySet Name="ExternalBanks" EntityType="Self.ExternalBank" />
+          <EntitySet Name="ExternalTransactions" EntityType="Self.ExternalTransaction" />
           <EntitySet Name="FinancialProducts" EntityType="Self.FinancialProduct" />
           <EntitySet Name="InterestRates" EntityType="Self.InterestRate" />
+          <EntitySet Name="InternalTransactions" EntityType="Self.InternalTransaction" />
           <EntitySet Name="Invoices" EntityType="Self.Invoice" />
           <EntitySet Name="LoanRepayments" EntityType="Self.LoanRepayment" />
           <EntitySet Name="Notifications" EntityType="Self.Notification" />
           <EntitySet Name="ServiceProviders" EntityType="Self.ServiceProvider" />
           <EntitySet Name="ServiceTypes" EntityType="Self.ServiceType" />
-          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
           <EntitySet Name="TransactionTypes" EntityType="Self.TransactionType" />
-          <AssociationSet Name="FK__Accounts__Custom__412EB0B6" Association="Self.FK__Accounts__Custom__412EB0B6">
+          <AssociationSet Name="FK_Account_Customer" Association="Self.FK_Account_Customer">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Accounts" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Financial__Accou__5CD6CB2B" Association="Self.FK__Financial__Accou__5CD6CB2B">
+          <AssociationSet Name="FK_External_From" Association="Self.FK_External_From">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ExternalTransactions" EntitySet="ExternalTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fin_Acc" Association="Self.FK_Fin_Acc">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="FinancialProducts" EntitySet="FinancialProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Invoices__Accoun__571DF1D5" Association="Self.FK__Invoices__Accoun__571DF1D5">
+          <AssociationSet Name="FK_Internal_From" Association="Self.FK_Internal_From">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="InternalTransactions" EntitySet="InternalTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Internal_To" Association="Self.FK_Internal_To">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="InternalTransactions" EntitySet="InternalTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Acc" Association="Self.FK_Invoice_Acc">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Notificat__Recei__6A30C649" Association="Self.FK__Notificat__Recei__6A30C649">
+          <AssociationSet Name="FK_Noti_Acc" Association="Self.FK_Noti_Acc">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
-          <AssociationSet Name="FK__Transacti__FromA__4D94879B" Association="Self.FK__Transacti__FromA__4D94879B">
-            <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="Transactions" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Financial__Appro__5DCAEF64" Association="Self.FK__Financial__Appro__5DCAEF64">
+          <AssociationSet Name="FK_Fin_Emp" Association="Self.FK_Fin_Emp">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="FinancialProducts" EntitySet="FinancialProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__ExternalA__BankC__656C112C" Association="Self.FK__ExternalA__BankC__656C112C">
+          <AssociationSet Name="FK_External_Bank" Association="Self.FK_External_Bank">
             <End Role="ExternalBanks" EntitySet="ExternalBanks" />
-            <End Role="ExternalAccounts" EntitySet="ExternalAccounts" />
+            <End Role="ExternalTransactions" EntitySet="ExternalTransactions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Transacti__Recei__4E88ABD4" Association="Self.FK__Transacti__Recei__4E88ABD4">
-            <End Role="ExternalBanks" EntitySet="ExternalBanks" />
-            <End Role="Transactions" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LoanRepay__Produ__619B8048" Association="Self.FK__LoanRepay__Produ__619B8048">
+          <AssociationSet Name="FK_Repay_Prod" Association="Self.FK_Repay_Prod">
             <End Role="FinancialProducts" EntitySet="FinancialProducts" />
             <End Role="LoanRepayments" EntitySet="LoanRepayments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Invoices__Provid__5812160E" Association="Self.FK__Invoices__Provid__5812160E">
+          <AssociationSet Name="FK_Internal_Type" Association="Self.FK_Internal_Type">
+            <End Role="TransactionTypes" EntitySet="TransactionTypes" />
+            <End Role="InternalTransactions" EntitySet="InternalTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Provider" Association="Self.FK_Invoice_Provider">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
-          <AssociationSet Name="FK__ServicePr__Servi__534D60F1" Association="Self.FK__ServicePr__Servi__534D60F1">
+          <AssociationSet Name="FK_Provider_ServiceType" Association="Self.FK_Provider_ServiceType">
             <End Role="ServiceTypes" EntitySet="ServiceTypes" />
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Transacti__TypeI__4CA06362" Association="Self.FK__Transacti__TypeI__4CA06362">
-            <End Role="TransactionTypes" EntitySet="TransactionTypes" />
-            <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -772,12 +822,13 @@
               <MappingFragment StoreEntitySet="Customers">
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="IDCard" ColumnName="IDCard" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="IDCard" ColumnName="IDCard" />
                 <ScalarProperty Name="AvatarPath" ColumnName="AvatarPath" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
               </MappingFragment>
@@ -794,22 +845,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ExternalAccounts">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.ExternalAccount">
-              <MappingFragment StoreEntitySet="ExternalAccounts">
-                <ScalarProperty Name="ExternalAccNum" ColumnName="ExternalAccNum" />
-                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
-                <ScalarProperty Name="AccountHolder" ColumnName="AccountHolder" />
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ExternalBanks">
             <EntityTypeMapping TypeName="DigitalBankingDBModel.ExternalBank">
               <MappingFragment StoreEntitySet="ExternalBanks">
                 <ScalarProperty Name="BankCode" ColumnName="BankCode" />
                 <ScalarProperty Name="BankName" ColumnName="BankName" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExternalTransactions">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.ExternalTransaction">
+              <MappingFragment StoreEntitySet="ExternalTransactions">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="FromAccount" ColumnName="FromAccount" />
+                <ScalarProperty Name="ReceiverAccount" ColumnName="ReceiverAccount" />
+                <ScalarProperty Name="ReceiverName" ColumnName="ReceiverName" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BalanceBefore" ColumnName="BalanceBefore" />
+                <ScalarProperty Name="BalanceAfter" ColumnName="BalanceAfter" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TraceNumber" ColumnName="TraceNumber" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -836,6 +895,21 @@
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="TermMonths" ColumnName="TermMonths" />
                 <ScalarProperty Name="RateValue" ColumnName="RateValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InternalTransactions">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.InternalTransaction">
+              <MappingFragment StoreEntitySet="InternalTransactions">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="FromAccount" ColumnName="FromAccount" />
+                <ScalarProperty Name="ToAccount" ColumnName="ToAccount" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BalanceBefore" ColumnName="BalanceBefore" />
+                <ScalarProperty Name="BalanceAfter" ColumnName="BalanceAfter" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -890,22 +964,6 @@
                 <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
                 <ScalarProperty Name="ServiceTypeName" ColumnName="ServiceTypeName" />
                 <ScalarProperty Name="ServiceIcon" ColumnName="ServiceIcon" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Transactions">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.Transaction">
-              <MappingFragment StoreEntitySet="Transactions">
-                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="FromAccount" ColumnName="FromAccount" />
-                <ScalarProperty Name="ReceiverAccountNumber" ColumnName="ReceiverAccountNumber" />
-                <ScalarProperty Name="ReceiverBankCode" ColumnName="ReceiverBankCode" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="BalanceBefore" ColumnName="BalanceBefore" />
-                <ScalarProperty Name="BalanceAfter" ColumnName="BalanceAfter" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

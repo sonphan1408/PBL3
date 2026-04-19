@@ -12,21 +12,22 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Transaction
+    public partial class ExternalTransaction
     {
         public System.Guid TransactionID { get; set; }
-        public int TypeID { get; set; }
         public string FromAccount { get; set; }
-        public string ReceiverAccountNumber { get; set; }
-        public string ReceiverBankCode { get; set; }
+        public string ReceiverAccount { get; set; }
+        public string ReceiverName { get; set; }
+        public string BankCode { get; set; }
         public decimal Amount { get; set; }
         public Nullable<decimal> BalanceBefore { get; set; }
         public Nullable<decimal> BalanceAfter { get; set; }
+        public string Status { get; set; }
+        public string TraceNumber { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual ExternalBank ExternalBank { get; set; }
-        public virtual TransactionType TransactionType { get; set; }
     }
 }

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using DAL.Core;
+using DTO.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Core;
-using DTO.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace DAL.Repositories
 {
@@ -16,114 +17,44 @@ namespace DAL.Repositories
         {
             try
             {
-                string sql = @"SELECT 'Customer' AS UserRole FROM Accounts WHERE Username = @u AND Password = @p
-                            UNION
-                            SELECT Role AS UserRole FROM Employees WHERE Username = @u AND Password = @p";
-
-                SqlParameter[] parameters = new SqlParameter[]
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@u", username),
-                    new SqlParameter("@p", password)
-                };
+                    var account = db.Accounts.FirstOrDefault(a=> a.Username == username && a.Password == password);
+                    if(account != null) return "Customer";
 
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
+                    var employ = db.Employees.FirstOrDefault(e => e.Username == username && e.Password == password);
+                    if(employ != null) return employ.Role;
 
-                if (dt.Rows.Count > 0)
-                {
-                    return dt.Rows[0]["UserRole"].ToString();
+                    return null;
                 }
-                return null;
             }
             catch (Exception ex)
             {
                 throw new Exception("Lỗi khi đăng nhập: " + ex.Message);
             }
         }
-        //public static string Register(CustomerDTO customer, string username, string password)
-        //{
-        //    try
-        //    {
-        //        using (SqlConnection conn = DBHelper.GetConnection())
-        //        {
-        //            conn.Open();
-        //            SqlTransaction transaction = conn.BeginTransaction();
 
-        //            try
-        //            {
-        //                string sqlCustomer = @"INSERT INTO Customers (FullName, Gender, DateOfBirth, Address, PhoneNumber, Email, IDCard) 
-        //                               OUTPUT INSERTED.CustomerID 
-        //                               VALUES (@name, @gender, @dob, @address, @phone, @email, @idcard)";
-
-        //                int newCustomerId = 0;
-        //                using (SqlCommand cmd = new SqlCommand(sqlCustomer, conn, transaction))
-        //                {
-        //                    cmd.Parameters.AddWithValue("@name", customer.FullName ?? (object)DBNull.Value);
-        //                    cmd.Parameters.AddWithValue("@gender", customer.Gender ?? (object)DBNull.Value);
-        //                    cmd.Parameters.AddWithValue("@dob", customer.DateOfBirth);
-        //                    cmd.Parameters.AddWithValue("@address", customer.Address ?? (object)DBNull.Value);
-        //                    cmd.Parameters.AddWithValue("@phone", customer.PhoneNumber ?? (object)DBNull.Value);
-        //                    cmd.Parameters.AddWithValue("@email", customer.Email ?? (object)DBNull.Value);
-        //                    cmd.Parameters.AddWithValue("@idcard", customer.IDCard ?? (object)DBNull.Value);
-
-        //                    newCustomerId = (int)cmd.ExecuteScalar();
-        //                }
-
-        //                string newAccountNumber = "8888000" + newCustomerId.ToString().PadLeft(7, '0');
-
-        //                string sqlAccount = @"INSERT INTO Accounts (AccountNumber, CustomerID, Username, Password, Balance, Status) 
-        //                              VALUES (@accNum, @custId, @user, @pass, 0, 'Active')";
-
-        //                using (SqlCommand cmd = new SqlCommand(sqlAccount, conn, transaction))
-        //                {
-        //                    cmd.Parameters.AddWithValue("@accNum", newAccountNumber);
-        //                    cmd.Parameters.AddWithValue("@custId", newCustomerId);
-        //                    cmd.Parameters.AddWithValue("@user", username);
-        //                    cmd.Parameters.AddWithValue("@pass", password);
-
-        //                    cmd.ExecuteNonQuery();
-        //                }
-
-        //                transaction.Commit();
-        //                return newAccountNumber;
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                transaction.Rollback();
-        //                throw new Exception("Lỗi đăng ký: " + ex.Message);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Lỗi khi đăng ký tài khoản: " + ex.Message);
-        //    }
-        //}
         public static AccountDTO GetAccountByUsername(string username)
         {
             try
             {
-                string sql = "SELECT * FROM Accounts WHERE Username = @u";
-                SqlParameter[] parameters = new SqlParameter[]
+                using(var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@u", username)
-                };
-
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
-
-                if (dt.Rows.Count > 0)
-                {
-                    DataRow row = dt.Rows[0];
-                    return new AccountDTO
+                    var account = db.Accounts.FirstOrDefault(a => a.Username == username);
+                    if(account != null)
                     {
-                        AccountNumber = row["AccountNumber"].ToString(),
-                        CustomerID = (int)row["CustomerID"],
-                        Username = row["Username"].ToString(),
-                        Password = row["Password"].ToString(),
-                        Balance = (decimal)row["Balance"],
-                        Status = row["Status"].ToString()
-                    };
+                        return new AccountDTO
+                        {
+                            AccountNumber = account.AccountNumber,
+                            CustomerID = account.CustomerID,
+                            Username = account.Username,
+                            Password = account.Password,
+                            Balance = (decimal)account.Balance,
+                            Status = account.Status
+                        };
+                    }
+                    return null;
                 }
-                return null;
             }
             catch (Exception ex)
             {
@@ -135,14 +66,10 @@ namespace DAL.Repositories
         {
             try
             {
-                string sql = "SELECT COUNT(*) FROM Accounts WHERE Username = @u";
-                SqlParameter[] parameters = new SqlParameter[]
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@u", username)
-                };
-
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
-                return (int)dt.Rows[0][0] > 0;
+                    return db.Accounts.Any(a => a.Username == username);
+                }
             }
             catch (Exception ex)
             {
@@ -154,14 +81,10 @@ namespace DAL.Repositories
         {
             try
             {
-                string sql = "SELECT COUNT(*) FROM Customers WHERE PhoneNumber = @phone";
-                SqlParameter[] parameters = new SqlParameter[]
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@phone", phone)
-                };
-
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
-                return (int)dt.Rows[0][0] > 0;
+                    return db.Customers.Any(c => c.PhoneNumber == phone);
+                }
             }
             catch (Exception ex)
             {
@@ -169,60 +92,63 @@ namespace DAL.Repositories
             }
         }
 
-        private string connString = @"Data Source=.\SQLEXPRESS;Initial Catalog=DigitalBankingDB;Integrated Security=True;TrustServerCertificate=True";
-
         public string RegisterCustomerAndAccount(CustomerDTO customer, AccountDTO account)
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            try
             {
-                conn.Open();
-                SqlTransaction transaction = conn.BeginTransaction();
-
-                try
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    // 1. Lưu Customer (Thêm cột CCCD và IDCard)
-                    string sqlCustomer = @"INSERT INTO Customers (FullName, Gender, DateOfBirth, Address, PhoneNumber, Email, CCCD, IDCard) 
-                                           OUTPUT INSERTED.CustomerID 
-                                           VALUES (@name, @gender, @dob, @address, @phone, @email, @cccd, @idcard)";
-
-                    int newCustomerId = 0;
-                    using (SqlCommand cmd = new SqlCommand(sqlCustomer, conn, transaction))
+                    using (var transaction = db.Database.BeginTransaction())
                     {
-                        cmd.Parameters.AddWithValue("@name", customer.FullName);
-                        cmd.Parameters.AddWithValue("@gender", customer.Gender);
-                        cmd.Parameters.AddWithValue("@dob", customer.DateOfBirth);
-                        cmd.Parameters.AddWithValue("@address", customer.Address);
-                        cmd.Parameters.AddWithValue("@phone", customer.PhoneNumber);
-                        cmd.Parameters.AddWithValue("@email", customer.Email);
-                        cmd.Parameters.AddWithValue("@cccd", customer.CCCD);
-                        cmd.Parameters.AddWithValue("@idcard", customer.IDCard); // Mã 9 số do BLL tự sinh
+                        try
+                        {
+                            // 1. Tạo và lưu Customer mới
+                            var newCustomer = new Customer
+                            {
+                                FullName = customer.FullName,
+                                Gender = customer.Gender,
+                                DateOfBirth = customer.DateOfBirth,
+                                Address = customer.Address,
+                                PhoneNumber = customer.PhoneNumber,
+                                Email = customer.Email,
+                                IDCard = customer.IDCard,
+                                CCCD = customer.CCCD
+                            };
 
-                        newCustomerId = (int)cmd.ExecuteScalar();
+                            db.Customers.Add(newCustomer);
+                            db.SaveChanges();
+
+                            int newCustomerId = newCustomer.CustomerID;
+
+                            // 2. Tạo và lưu Account mới
+                            string newAccountNumber = "8888000" + newCustomerId.ToString();
+                            var newAccount = new Account
+                            {
+                                AccountNumber = newAccountNumber,
+                                CustomerID = newCustomerId,
+                                Username = account.Username,
+                                Password = account.Password,
+                                Balance = 0,
+                                Status = "Active"
+                            };
+
+                            db.Accounts.Add(newAccount);
+                            db.SaveChanges();
+
+                            transaction.Commit();
+                            return newAccountNumber;
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw new Exception("Lỗi Database: " + ex.Message);
+                        }
                     }
-
-                    // 2. Lưu Account
-                    string newAccountNumber = "8888000" + newCustomerId.ToString();
-                    string sqlAccount = @"INSERT INTO Accounts (AccountNumber, CustomerID, Username, Password, Balance, Status) 
-                                          VALUES (@accNum, @custId, @user, @pass, 0, 'Active')";
-
-                    using (SqlCommand cmd = new SqlCommand(sqlAccount, conn, transaction))
-                    {
-                        cmd.Parameters.AddWithValue("@accNum", newAccountNumber);
-                        cmd.Parameters.AddWithValue("@custId", newCustomerId);
-                        cmd.Parameters.AddWithValue("@user", account.Username);
-                        cmd.Parameters.AddWithValue("@pass", account.Password);
-
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    transaction.Commit();
-                    return newAccountNumber; // Trả về số tài khoản
                 }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    throw new Exception("Lỗi Database: " + ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi đăng ký tài khoản: " + ex.Message);
             }
         }
     }

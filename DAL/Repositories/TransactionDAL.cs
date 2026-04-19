@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using DAL.Core;
+using System.Linq;
 using DTO.Models;
 
 namespace DAL.Repositories
@@ -13,39 +11,38 @@ namespace DAL.Repositories
         {
             try
             {
-                string sql = @"SELECT TOP (@limit) TransactionID, FromAccount, ToAccount, TypeID, Amount, 
-                            BalanceBefore, BalanceAfter, Description, CreatedAt
-                            FROM dbo.InternalTransactions 
-                            WHERE FromAccount = @account OR ToAccount = @account
-                            ORDER BY CreatedAt DESC";
-
-                SqlParameter[] parameters = new SqlParameter[]
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@account", accountNumber),
-                    new SqlParameter("@limit", limit)
-                };
+                    var transactions = db.InternalTransactions
+                        .Where(t => t.FromAccount == accountNumber || t.ToAccount == accountNumber)
+                        .OrderByDescending(t => t.CreatedAt)
+                        .Take(limit)
+                        .ToList()  // Execute query FIRST, then map in memory
+                        .Select(t => new InternalTransactionDTO
+                        {
+                            TransactionID = t.TransactionID,
+                            FromAccount = t.FromAccount,
+                            ToAccount = t.ToAccount,
+                            TypeID = t.TypeID,
+                            Amount = t.Amount,
+                            BalanceBefore = t.BalanceBefore.GetValueOrDefault(0),
+                            BalanceAfter = t.BalanceAfter.GetValueOrDefault(0),
+                            Description = t.Description,
+                            CreatedAt = t.CreatedAt ?? DateTime.Now
+                        })
+                        .Cast<TransactionDTO>()
+                        .ToList();
 
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
-
-                List<TransactionDTO> transactions = new List<TransactionDTO>();
-                foreach (DataRow row in dt.Rows)
-                {
-                    var transaction = GetTransactionDTO(row);
-                    transactions.Add(transaction);
+                    return transactions;
                 }
-                return transactions;
-            }
-            catch (SqlException sqlEx)
-            {
-                if (sqlEx.Message.Contains("Invalid object name") && sqlEx.Message.Contains("InternalTransactions"))
-                {
-                    System.Diagnostics.Debug.WriteLine("TABLE NOT FOUND: dbo.InternalTransactions does not exist in the database. Please create it or verify the table name.");
-                    return new List<TransactionDTO>();
-                }
-                throw new Exception("Lỗi khi lấy lịch sử giao dịch: " + sqlEx.Message);
             }
             catch (Exception ex)
             {
+                if (ex.Message.Contains("InternalTransaction"))
+                {
+                    System.Diagnostics.Debug.WriteLine("TABLE NOT FOUND: InternalTransactions does not exist in the database.");
+                    return new List<TransactionDTO>();
+                }
                 throw new Exception("Lỗi khi lấy lịch sử giao dịch: " + ex.Message);
             }
         }
@@ -54,35 +51,17 @@ namespace DAL.Repositories
         {
             try
             {
-                string sql = @"SELECT ISNULL(SUM(Amount), 0) AS TotalIncome
-                            FROM dbo.InternalTransactions 
-                            WHERE ToAccount = @account";
-
-                SqlParameter[] parameters = new SqlParameter[]
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@account", accountNumber)
-                };
-
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
-
-                if (dt.Rows.Count > 0)
-                {
-                    return (decimal)dt.Rows[0]["TotalIncome"];
+                    return db.InternalTransactions
+                        .Where(t => t.ToAccount == accountNumber)
+                        .Sum(t => (decimal?)t.Amount) ?? 0m;
                 }
+            }
+            catch
+            {
+                System.Diagnostics.Debug.WriteLine("TABLE NOT FOUND: InternalTransactions does not exist");
                 return 0;
-            }
-            catch (SqlException sqlEx)
-            {
-                if (sqlEx.Message.Contains("Invalid object name"))
-                {
-                    System.Diagnostics.Debug.WriteLine("TABLE NOT FOUND: dbo.InternalTransactions does not exist");
-                    return 0;
-                }
-                throw new Exception("Lỗi khi tính tổng thu nhập: " + sqlEx.Message);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Lỗi khi tính tổng thu nhập: " + ex.Message);
             }
         }
 
@@ -90,22 +69,12 @@ namespace DAL.Repositories
         {
             try
             {
-                string sql = @"SELECT ISNULL(SUM(Amount), 0) AS TotalExpense
-                            FROM dbo.InternalTransactions 
-                            WHERE FromAccount = @account";
-
-                SqlParameter[] parameters = new SqlParameter[]
+                using (var db = new DigitalBankingDBEntities())
                 {
-                    new SqlParameter("@account", accountNumber)
-                };
-
-                DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
-
-                if (dt.Rows.Count > 0)
-                {
-                    return (decimal)dt.Rows[0]["TotalExpense"];
+                    return db.InternalTransactions
+                        .Where(t => t.FromAccount == accountNumber)
+                        .Sum(t => (decimal?)t.Amount) ?? 0m;
                 }
-                return 0;
             }
             catch (Exception ex)
             {
@@ -113,23 +82,5 @@ namespace DAL.Repositories
             }
         }
 
-        private static TransactionDTO GetTransactionDTO(DataRow row)
-        {
-            var transaction = new InternalTransactionDTO();
-
-            if (Guid.TryParse(row["TransactionID"].ToString(), out Guid transId))
-                transaction.TransactionID = transId;
-
-            transaction.FromAccount = row["FromAccount"].ToString();
-            transaction.ToAccount = row["ToAccount"].ToString();
-            transaction.TypeID = (int)row["TypeID"];
-            transaction.Amount = (decimal)row["Amount"];
-            transaction.BalanceBefore = (decimal)row["BalanceBefore"];
-            transaction.BalanceAfter = (decimal)row["BalanceAfter"];
-            transaction.Description = row["Description"].ToString();
-            transaction.CreatedAt = (DateTime)row["CreatedAt"];
-
-            return transaction;
+            }
         }
-    }
-}
