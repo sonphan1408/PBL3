@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GUI.Client
 {
-    public partial class createSaving : UserControl
+    public partial class uccreateSaving : UserControl
     {
-        public createSaving()
+        public uccreateSaving()
         {
             InitializeComponent();
         }

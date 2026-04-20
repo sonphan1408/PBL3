@@ -1,6 +1,8 @@
 ﻿using DAL.Repositories;
+using DTO.Models;
 using GUI.Admin;
 using GUI.Client;
+using GUI.Session;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -76,8 +78,7 @@ namespace GUI.Authentication
 
             try
             {
-                string role = AuthDAL.Login(TaiKhoan.Text, MatKhau.Text);
-                string username = TaiKhoan.Text;
+               AccountCustomerDTO account = AuthDAL.LoginCustomer(TaiKhoan.Text, MatKhau.Text);
 
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo");
                 TaiKhoan.Text = "Username";
@@ -87,16 +88,13 @@ namespace GUI.Authentication
                 MatKhau.UseSystemPasswordChar = false;
 
                 this.Hide();
-                if (role == "Customer")
+                if (account != null)
                 {
-                    frmClientDashboard customerForm = new frmClientDashboard(username);
+                    UserSession.CurrentUser = account;
+                    frmClientDashboard customerForm = new frmClientDashboard();
                     customerForm.ShowDialog();
                 }
-                else
-                {
-                    frmAdminDashboard employeeForm = new frmAdminDashboard(username);
-                    employeeForm.ShowDialog();
-                }
+               
                 this.Show();
             }
             catch (Exception ex)

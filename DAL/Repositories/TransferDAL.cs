@@ -8,7 +8,7 @@ namespace DAL.Repositories
 {
     public class TransferDAL
     {
-        public AccountDTO GetAccountByAccountNumber(string accountNumber)
+        public AccountCustomerDTO GetAccountByAccountNumber(string accountNumber)
         {
             try
             {
@@ -23,12 +23,11 @@ namespace DAL.Repositories
                 if (dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    return new AccountDTO
+                    return new AccountCustomerDTO
                     {
                         AccountNumber = row["AccountNumber"].ToString(),
                         CustomerID = (int)row["CustomerID"],
                         Username = row["Username"].ToString(),
-                        Password = row["Password"].ToString(),
                         Balance = (decimal)row["Balance"],
                         Status = row["Status"].ToString()
                     };
@@ -41,7 +40,7 @@ namespace DAL.Repositories
             }
         }
 
-        public AccountDTO GetAccountByUsername(string username)
+        public AccountCustomerDTO GetAccountByUsername(string username)
         {
             try
             {
@@ -56,12 +55,11 @@ namespace DAL.Repositories
                 if (dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    return new AccountDTO
+                    return new AccountCustomerDTO
                     {
                         AccountNumber = row["AccountNumber"].ToString(),
                         CustomerID = (int)row["CustomerID"],
                         Username = row["Username"].ToString(),
-                        Password = row["Password"].ToString(),
                         Balance = (decimal)row["Balance"],
                         Status = row["Status"].ToString()
                     };

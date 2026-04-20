@@ -168,15 +168,16 @@
     <Compile Include="Client\ucSaving.Designer.cs">
       <DependentUpon>ucSaving.cs</DependentUpon>
     </Compile>
-    <Compile Include="Client\.cs">
+    <Compile Include="Client\uccreateSaving.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Client\.Designer.cs">
-      <DependentUpon>.cs</DependentUpon>
+      <DependentUpon>uccreateSaving.cs</DependentUpon>
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session\UserSession.cs" />
     <EmbeddedResource Include="Authentication\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -201,8 +202,8 @@
     <EmbeddedResource Include="Client\ucTransfer.resx">
       <DependentUpon>ucTransfer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Client\.resx">
-      <DependentUpon>.cs</DependentUpon>
+    <EmbeddedResource Include="Client\uccreateSaving.resx">
+      <DependentUpon>uccreateSaving.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

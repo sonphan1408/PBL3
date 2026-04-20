@@ -98,7 +98,7 @@ namespace DAL.Repositories
         //        throw new Exception("Lỗi khi đăng ký tài khoản: " + ex.Message);
         //    }
         //}
-        public static AccountDTO GetAccountByUsername(string username)
+        public static AccountCustomerDTO GetAccountByUsername(string username)
         {
             try
             {
@@ -113,12 +113,12 @@ namespace DAL.Repositories
                 if (dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    return new AccountDTO
+                    return new AccountCustomerDTO
                     {
                         AccountNumber = row["AccountNumber"].ToString(),
                         CustomerID = (int)row["CustomerID"],
                         Username = row["Username"].ToString(),
-                        Password = row["Password"].ToString(),
+                      
                         Balance = (decimal)row["Balance"],
                         Status = row["Status"].ToString()
                     };
@@ -195,12 +195,12 @@ namespace DAL.Repositories
                         cmd.Parameters.AddWithValue("@phone", customer.PhoneNumber);
                         cmd.Parameters.AddWithValue("@email", customer.Email);
                         cmd.Parameters.AddWithValue("@cccd", customer.CCCD);
-                        cmd.Parameters.AddWithValue("@idcard", customer.IDCard); // Mã 9 số do BLL tự sinh
+                        cmd.Parameters.AddWithValue("@idcard", customer.IDCard); 
 
                         newCustomerId = (int)cmd.ExecuteScalar();
                     }
 
-                    // 2. Lưu Account
+                    
                     string newAccountNumber = "8888000" + newCustomerId.ToString();
                     string sqlAccount = @"INSERT INTO Accounts (AccountNumber, CustomerID, Username, Password, Balance, Status) 
                                           VALUES (@accNum, @custId, @user, @pass, 0, 'Active')";
@@ -216,7 +216,7 @@ namespace DAL.Repositories
                     }
 
                     transaction.Commit();
-                    return newAccountNumber; // Trả về số tài khoản
+                    return newAccountNumber; 
                 }
                 catch (Exception ex)
                 {
@@ -225,5 +225,79 @@ namespace DAL.Repositories
                 }
             }
         }
+      
+        
+            public static AccountCustomerDTO LoginCustomer(string username, string password)
+            {
+               
+                string query = "SELECT AccountNumber, CustomerID, Username, Balance, Status FROM Accounts WHERE Username = @u AND Password = @p AND Status = 'Active'";
+
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+                new SqlParameter("@u", username),
+                new SqlParameter("@p", password)
+                };
+
+                DataTable dt = DBHelper.ExecuteQuery(query, parameters);
+
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    AccountCustomerDTO customer = new AccountCustomerDTO();
+
+             
+                    customer.Username = row["Username"].ToString();
+                    customer.Role = "Customer"; 
+
+                    customer.AccountNumber = row["AccountNumber"].ToString();
+
+                    if (row["CustomerID"] != DBNull.Value)
+                        customer.CustomerID = Convert.ToInt32(row["CustomerID"]);
+
+                    if (row["Balance"] != DBNull.Value)
+                        customer.Balance = Convert.ToDecimal(row["Balance"]);
+
+                    customer.Status = row["Status"].ToString();
+
+                    return customer;
+                }
+
+                return null; 
+            }
+
+            
+            public AccountEmployeeDTO LoginEmployee(string username, string password)
+            {
+                
+                string query = "SELECT EmployeeID, FullName, Username, Role FROM Employees WHERE Username = @u AND Password = @p";
+
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+                new SqlParameter("@u", username),
+                new SqlParameter("@p", password)
+                };
+
+                DataTable dt = DBHelper.ExecuteQuery(query, parameters);
+
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    AccountEmployeeDTO employee = new AccountEmployeeDTO();
+
+                    
+                    employee.Username = row["Username"].ToString();
+                    employee.Role = row["Role"].ToString(); 
+
+                    employee.EmployeeID = row["EmployeeID"].ToString();
+
+                    if (row["FullName"] != DBNull.Value)
+                        employee.FullName = row["FullName"].ToString();
+
+                    return employee;
+                }
+
+                return null; 
+            }
+        }
     }
-}
+

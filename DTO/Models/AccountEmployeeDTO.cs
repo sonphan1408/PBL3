@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTO.Models
 {
-    internal class AccountEmployeeDTO
+    public class AccountEmployeeDTO : AccountDTO
     {
+        public string EmployeeID { get; set; } 
+        public string FullName { get; set; }
     }
 }

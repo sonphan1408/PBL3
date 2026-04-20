@@ -302,27 +302,27 @@ namespace GUI.Client
         private void frmClientDashboard_Load(object sender, EventArgs e) 
         { 
             SetupNotificationIcon();
-            // Lấy tên người dùng hiện tại từ Database nếu có
-            try
-            {
-                DTO.Models.AccountDTO account = BLL.Services.AccountService.GetAccountByUsername(CurrentUsername);
-                if (account != null)
-                {
-                    DTO.Models.CustomerDTO customer = BLL.Services.AccountService.GetCustomerInfo(account.CustomerID);
-                    if (customer != null)
-                    {
-                        lblUserName.Text = customer.FullName;
-                    }
-                    else
-                    {
-                        lblUserName.Text = CurrentUsername;
-                    }
-                }
-            }
-            catch
-            {
-                lblUserName.Text = CurrentUsername;
-            }
+            //// Lấy tên người dùng hiện tại từ Database nếu có
+            //try
+            //{
+            //    DTO.Models.AccountDTO account = BLL.Services.AccountService.GetAccountByUsername(CurrentUsername);
+            //    if (account != null)
+            //    {
+            //        DTO.Models.CustomerDTO customer = BLL.Services.AccountService.GetCustomerInfo(account.CustomerID);
+            //        if (customer != null)
+            //        {
+            //            lblUserName.Text = customer.FullName;
+            //        }
+            //        else
+            //        {
+            //            lblUserName.Text = CurrentUsername;
+            //        }
+            //    }
+            //}
+            //catch
+            //{
+            //    lblUserName.Text = CurrentUsername;
+            //}
         }
         private void pnlLogo_Paint(object sender, PaintEventArgs e) { }
         private void textBox1_TextChanged(object sender, EventArgs e) { }

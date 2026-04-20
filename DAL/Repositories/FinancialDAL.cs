@@ -158,8 +158,7 @@ namespace DAL.Repositories
             }
         }
 
-
-            public static List<InterestRateDTO> GetInterestRatesByCategory(string category)
+        public static List<InterestRateDTO> GetInterestRatesByCategory(string category)
         {
             List<InterestRateDTO> list = new List<InterestRateDTO>();
 

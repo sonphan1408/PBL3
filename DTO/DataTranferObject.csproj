@@ -52,7 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AccountCustomerDTO.cs" />
     <Compile Include="Models\AccountDTO.cs" />
+    <Compile Include="Models\AccountEmployeeDTO.cs" />
     <Compile Include="Models\createTime.cs" />
     <Compile Include="Models\CustomerDTO.cs" />
     <Compile Include="Models\EmployeeDTO.cs" />

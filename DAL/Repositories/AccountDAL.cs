@@ -9,7 +9,7 @@ namespace DAL.Repositories
 {
     public class AccountDAL
     {
-        public static AccountDTO GetAccountByUsername(string username)
+        public static AccountCustomerDTO GetAccountByUsername(string username)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace DAL.Repositories
                 if (dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    return new AccountDTO
+                    return new AccountCustomerDTO
                     {
                         AccountNumber = row["AccountNumber"].ToString(),
                         CustomerID = (int)row["CustomerID"],
@@ -79,7 +79,7 @@ namespace DAL.Repositories
             }
         }
 
-        public static List<AccountDTO> GetAccountsByCustomer(int customerId)
+        public static List<AccountCustomerDTO> GetAccountsByCustomer(int customerId)
         {
             try
             {
@@ -93,10 +93,10 @@ namespace DAL.Repositories
 
                 DataTable dt = DBHelper.ExecuteQuery(sql, parameters);
 
-                List<AccountDTO> accounts = new List<AccountDTO>();
+                List<AccountCustomerDTO> accounts = new List<AccountCustomerDTO>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    accounts.Add(new AccountDTO
+                    accounts.Add(new AccountCustomerDTO
                     {
                         AccountNumber = row["AccountNumber"].ToString(),
                         CustomerID = (int)row["CustomerID"],

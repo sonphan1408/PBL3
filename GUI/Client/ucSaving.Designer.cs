@@ -318,7 +318,7 @@
             this.btnTerm.Panel.MouseEnter += new System.EventHandler(this.btnTerm_MouseEnter);
             this.btnTerm.Panel.MouseLeave += new System.EventHandler(this.btnTerm_MouseLeave);
             this.btnTerm.Size = new System.Drawing.Size(269, 209);
-            this.btnTerm.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("kryptonGroup4.StateCommon.Back.Image")));
+            this.btnTerm.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnTerm.StateCommon.Back.Image")));
             this.btnTerm.StateCommon.Back.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnTerm.StateCommon.Border.Rounding = 15F;
             this.btnTerm.TabIndex = 1;
