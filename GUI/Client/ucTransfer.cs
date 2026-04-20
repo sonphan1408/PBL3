@@ -12,8 +12,8 @@ namespace GUI.Client
 
         private TransferService _transferService = new TransferService();
 
-        private AccountDTO _senderAccount = null;
-        private AccountDTO _recipientAccount = null;
+        private AccountCustomerDTO _senderAccount = null;
+        private AccountCustomerDTO _recipientAccount = null;
         private decimal _transferAmount = 0;
 
         public ucTransfer()

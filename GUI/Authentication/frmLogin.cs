@@ -1,6 +1,7 @@
 ﻿using BLL.Services;
 using GUI.Admin;
 using GUI.Client;
+using GUI.Session;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -84,25 +85,30 @@ namespace GUI.Authentication
                 string role = AuthService.Login(TaiKhoan.Text, MatKhau.Text);
                 string username = TaiKhoan.Text;
 
-                MessageBox.Show("Đăng nhập thành công!", "Thông báo");
                 TaiKhoan.Text = "Username";
                 MatKhau.Text = "Password";
                 TaiKhoan.ForeColor = Color.Gray;
                 MatKhau.ForeColor = Color.Gray;
                 MatKhau.UseSystemPasswordChar = false;
 
-                this.Hide();
-                if (role == "Customer")
+                if(role != null)
                 {
-                    frmClientDashboard customerForm = new frmClientDashboard(username);
-                    customerForm.ShowDialog();
+                    this.Hide();
+                    MessageBox.Show("Đăng nhập thành công!", "Thông báo");
+                    if (role == "Customer")
+                    {
+
+                        frmClientDashboard customerForm = new frmClientDashboard(username);
+                        customerForm.ShowDialog();
+                    }
+                    else if (role == "Admin" || role == "Teller")
+                    {
+                        frmAdminDashboard employeeForm = new frmAdminDashboard(username);
+                        employeeForm.ShowDialog();
+                    }
+                    this.Show();
                 }
-                else
-                {
-                    frmAdminDashboard employeeForm = new frmAdminDashboard(username);
-                    employeeForm.ShowDialog();
-                }
-                this.Show();
+                else MessageBox.Show("Tài khoản hoặc mật khẩu bị sai!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

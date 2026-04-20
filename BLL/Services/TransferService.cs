@@ -10,12 +10,12 @@ namespace BLL.Services
         private const decimal MIN_TRANSFER_AMOUNT = 2000m;  // 2,000 VND
         private const decimal MAX_TRANSFER_AMOUNT = 10000000m;  // 10,000,000 VND
 
-        public AccountDTO GetRecipientByAccountNumber(string accountNumber)
+        public AccountCustomerDTO GetRecipientByAccountNumber(string accountNumber)
         {
             if (string.IsNullOrWhiteSpace(accountNumber))
                 throw new Exception("Vui lòng nhập số tài khoản người nhận.");
 
-            AccountDTO account = _transferDAL.GetAccountByAccountNumber(accountNumber);
+            var account = _transferDAL.GetAccountByAccountNumber(accountNumber);
             if (account == null)
                 throw new Exception("Không tìm thấy tài khoản người nhận.");
 
@@ -25,12 +25,12 @@ namespace BLL.Services
             return account;
         }
 
-        public AccountDTO GetSenderByUsername(string username)
+        public AccountCustomerDTO GetSenderByUsername(string username)
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new Exception("Vui lòng nhập tên đăng nhập.");
 
-            AccountDTO account = _transferDAL.GetAccountByUsername(username);
+            var account = _transferDAL.GetAccountByUsername(username);
             if (account == null)
                 throw new Exception("Không tìm thấy tài khoản người gửi.");
 
@@ -81,10 +81,10 @@ namespace BLL.Services
             try
             {
                 // 1. Get sender account
-                AccountDTO senderAccount = GetSenderByUsername(senderUsername);
+                AccountCustomerDTO senderAccount = GetSenderByUsername(senderUsername);
 
                 // 2. Get recipient account
-                AccountDTO recipientAccount = GetRecipientByAccountNumber(recipientAccountNumber);
+                AccountCustomerDTO recipientAccount = GetRecipientByAccountNumber(recipientAccountNumber);
 
                 // 3. Validate transfer amount
                 ValidateTransferAmount(amount);
@@ -108,7 +108,7 @@ namespace BLL.Services
         {
             try
             {
-                AccountDTO account = GetSenderByUsername(username);
+                AccountCustomerDTO account = GetSenderByUsername(username);
                 return account.Balance;
             }
             catch (Exception ex)

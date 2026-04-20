@@ -14,7 +14,7 @@ namespace BLL.Services
     {
         private AuthDAL _authDAL = new AuthDAL();
 
-        public string RegisterNewCustomer(CustomerDTO customer, AccountDTO account, string confirmPassword)
+        public string RegisterNewCustomer(CustomerDTO customer, AccountCustomerDTO account, string confirmPassword)
         {
             // --- 1. KIỂM TRA VALIDATION (Theo đúng thứ tự từ trên xuống dưới của Form) ---
 
@@ -63,10 +63,10 @@ namespace BLL.Services
             try
             {
                 // Nếu vượt qua hết các trạm kiểm tra ở trên, tiến hành lưu
-                string newAccNum = _authDAL.RegisterCustomerAndAccount(customer, account);
+                _authDAL.RegisterCustomerAndAccount(customer, account);
 
                 // Trả về kết quả thành công kèm số tài khoản ngân hàng
-                return "SUCCESS:" + newAccNum;
+                return "Tạo thanh công tài khoản mới";
             }
             catch (Exception ex)
             {

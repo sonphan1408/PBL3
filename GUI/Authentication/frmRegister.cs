@@ -32,10 +32,11 @@ namespace GUI.Authentication
                 CCCD = txtCCCD.Text.Trim()
             };
 
-            AccountDTO newAccount = new AccountDTO()
+            AccountCustomerDTO newAccount = new AccountCustomerDTO()
             {
                 Username = txtUsername.Text.Trim(),
-                Password = txtPassword.Text
+                Password = txtPassword.Text,
+                Role = "Customer"
             };
 
             AuthService authService = new AuthService();

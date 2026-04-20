@@ -7,7 +7,7 @@ namespace DAL.Repositories
 {
     public class AccountDAL
     {
-        public static AccountDTO GetAccountByUsername(string username)
+        public static AccountCustomerDTO GetAccountByUsername(string username)
         {
             try
             {
@@ -16,11 +16,12 @@ namespace DAL.Repositories
                     var account = db.Accounts.FirstOrDefault(a => a.Username == username);
                     if (account != null)
                     {
-                        return new AccountDTO
+                        return new AccountCustomerDTO
                         {
                             AccountNumber = account.AccountNumber,
                             CustomerID = account.CustomerID,
                             Username = account.Username,
+                            Password = account.Password,
                             Balance = (decimal)account.Balance,
                             Status = account.Status
                         };
@@ -63,18 +64,19 @@ namespace DAL.Repositories
             }
         }
 
-        public static List<AccountDTO> GetAccountsByCustomer(int customerId)
+        public static List<AccountCustomerDTO> GetAccountsByCustomer(int customerId)
         {
             try
             {
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var accounts = db.Accounts.Where(a => a.CustomerID == customerId).ToList();
-                    return accounts.Select(account => new AccountDTO
+                    return accounts.Select(account => new AccountCustomerDTO
                     {
                         AccountNumber = account.AccountNumber,
                         CustomerID = account.CustomerID,
                         Username = account.Username,
+                        Password = account.Password,
                         Balance = (decimal)account.Balance,
                         Status = account.Status
                     }).ToList();

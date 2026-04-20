@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace DAL.Repositories
@@ -34,7 +35,7 @@ namespace DAL.Repositories
             }
         }
 
-        public static AccountDTO GetAccountByUsername(string username)
+        public static AccountCustomerDTO GetAccountByUsername(string username)
         {
             try
             {
@@ -43,7 +44,7 @@ namespace DAL.Repositories
                     var account = db.Accounts.FirstOrDefault(a => a.Username == username);
                     if(account != null)
                     {
-                        return new AccountDTO
+                        return new AccountCustomerDTO
                         {
                             AccountNumber = account.AccountNumber,
                             CustomerID = account.CustomerID,
@@ -92,7 +93,7 @@ namespace DAL.Repositories
             }
         }
 
-        public string RegisterCustomerAndAccount(CustomerDTO customer, AccountDTO account)
+        public void RegisterCustomerAndAccount(CustomerDTO customer, AccountCustomerDTO account)
         {
             try
             {
@@ -118,38 +119,58 @@ namespace DAL.Repositories
                             db.Customers.Add(newCustomer);
                             db.SaveChanges();
 
-                            int newCustomerId = newCustomer.CustomerID;
-
-                            // 2. Tạo và lưu Account mới
-                            string newAccountNumber = "8888000" + newCustomerId.ToString();
                             var newAccount = new Account
                             {
-                                AccountNumber = newAccountNumber,
-                                CustomerID = newCustomerId,
+                                CustomerID = newCustomer.CustomerID,
                                 Username = account.Username,
-                                Password = account.Password,
-                                Balance = 0,
-                                Status = "Active"
+                                Password = account.Password
                             };
 
                             db.Accounts.Add(newAccount);
                             db.SaveChanges();
 
                             transaction.Commit();
-                            return newAccountNumber;
                         }
                         catch (Exception ex)
                         {
                             transaction.Rollback();
-                            throw new Exception("Lỗi Database: " + ex.Message);
+                            MessageBox.Show("Lỗi Database: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Lỗi đăng ký tài khoản: " + ex.Message);
+                MessageBox.Show("Lỗi đăng ký tài khoản: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public AccountEmployeeDTO LoginEmployee(string username, string password)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities())
+                {
+                    var employee = db.Employees.FirstOrDefault(e => e.Username == username && e.Password == password);
+                    if (employee != null)
+                    {
+                        return new AccountEmployeeDTO
+                        {
+                            EmployeeID = employee.EmployeeID.ToString(),
+                            FullName = employee.FullName,
+                            Username = employee.Username,
+                            Password = employee.Password,
+                            Role = employee.Role
+                        };
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi đăng nhập nhân viên: " + ex.Message);
+            }
+        }
+        }
     }
-}
+

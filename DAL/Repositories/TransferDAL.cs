@@ -6,7 +6,7 @@ namespace DAL.Repositories
 {
     public class TransferDAL
     {
-        public AccountDTO GetAccountByAccountNumber(string accountNumber)
+        public AccountCustomerDTO GetAccountByAccountNumber(string accountNumber)
         {
             try
             {
@@ -15,7 +15,7 @@ namespace DAL.Repositories
                     var account = db.Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
                     if (account != null)
                     {
-                        return new AccountDTO
+                        return new AccountCustomerDTO
                         {
                             AccountNumber = account.AccountNumber,
                             CustomerID = account.CustomerID,
@@ -34,7 +34,7 @@ namespace DAL.Repositories
             }
         }
 
-        public AccountDTO GetAccountByUsername(string username)
+        public AccountCustomerDTO GetAccountByUsername(string username)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace DAL.Repositories
                     var account = db.Accounts.FirstOrDefault(a => a.Username == username);
                     if (account != null)
                     {
-                        return new AccountDTO
+                        return new AccountCustomerDTO
                         {
                             AccountNumber = account.AccountNumber,
                             CustomerID = account.CustomerID,

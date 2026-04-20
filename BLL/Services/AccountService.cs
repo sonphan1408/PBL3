@@ -7,7 +7,7 @@ namespace BLL.Services
 {
     public class AccountService
     {
-        public static AccountDTO GetAccountByUsername(string username)
+        public static AccountCustomerDTO GetAccountByUsername(string username)
         {
             return AccountDAL.GetAccountByUsername(username);
         }
@@ -17,7 +17,7 @@ namespace BLL.Services
             return AccountDAL.GetCustomerInfo(customerId);
         }
 
-        public static List<AccountDTO> GetAccountsByCustomer(int customerId)
+        public static List<AccountCustomerDTO> GetAccountsByCustomer(int customerId)
         {
             return AccountDAL.GetAccountsByCustomer(customerId);
         }

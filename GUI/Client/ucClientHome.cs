@@ -12,7 +12,7 @@ namespace GUI.Client
     {
         // Data from SQL Server
         private string currentUsername;
-        private AccountDTO currentAccount;
+        private AccountCustomerDTO currentAccount;
         private CustomerDTO currentCustomer;
         private List<TransactionDTO> transactions;
 
