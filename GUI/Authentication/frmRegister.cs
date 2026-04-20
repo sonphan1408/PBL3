@@ -59,5 +59,10 @@ namespace GUI.Authentication
             if(!check_click_back)
                 Application.Exit();
         }
+
+        private void frmRegister_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

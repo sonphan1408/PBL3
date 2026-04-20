@@ -25,11 +25,6 @@ namespace BLL.Services
             if (string.IsNullOrWhiteSpace(customer.Gender))
                 return "Vui lòng chọn giới tính.";
 
-            int age = DateTime.Now.Year - customer.DateOfBirth.Year;
-            if (customer.DateOfBirth.Date > DateTime.Now.AddYears(-age)) age--;
-            if (age < 15)
-                return "Khách hàng phải từ đủ 15 tuổi trở lên.";
-
             // Kiểm tra Địa chỉ (Linh hoạt nhưng chống nhập rác)
             if (string.IsNullOrWhiteSpace(customer.Address) ||
                 customer.Address.Trim().Length < 15 ||
@@ -39,18 +34,23 @@ namespace BLL.Services
                 return "Địa chỉ chưa hợp lệ hoặc quá ngắn. Vui lòng gõ đầy đủ (VD: 107/5 Bà Huyện Thanh Quan, Mỹ An, Ngũ Hành Sơn, Đà Nẵng).";
             }
 
-            if (string.IsNullOrWhiteSpace(customer.PhoneNumber) || !Regex.IsMatch(customer.PhoneNumber, @"^0\d{9}$"))
-                return "Số điện thoại phải có đúng 10 số và bắt đầu bằng số 0.";
+            int age = DateTime.Now.Year - customer.DateOfBirth.Year;
+            if (customer.DateOfBirth.Date > DateTime.Now.AddYears(-age)) age--;
+            if (age < 15)
+                return "Khách hàng phải từ đủ 15 tuổi trở lên.";
 
-            if (string.IsNullOrWhiteSpace(customer.CCCD) || !Regex.IsMatch(customer.CCCD, @"^\d{12}$"))
+            if (string.IsNullOrWhiteSpace(customer.CCCD) || !Regex.IsMatch(customer.CCCD, @"^0\d{12}$"))
                 return "CCCD phải bao gồm chính xác 12 chữ số.";
 
-            if (string.IsNullOrWhiteSpace(customer.Email) || !Regex.IsMatch(customer.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-                return "Email không đúng định dạng.";
+            if (string.IsNullOrWhiteSpace(customer.PhoneNumber) || !Regex.IsMatch(customer.PhoneNumber, @"^0\d{9}$"))
+                return "Số điện thoại phải có đúng 10 số và bắt đầu bằng số 0.";
 
             // Nhóm 2: Thông tin tài khoản đăng nhập
             if (string.IsNullOrWhiteSpace(account.Username) || account.Username.Length < 6)
                 return "Tên đăng nhập không được để trống và phải từ 6 ký tự.";
+
+            if (string.IsNullOrWhiteSpace(customer.Email) || !Regex.IsMatch(customer.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                return "Email không đúng định dạng.";
 
             if (string.IsNullOrWhiteSpace(account.Password) || account.Password.Length < 6)
                 return "Mật khẩu phải có ít nhất 6 ký tự.";

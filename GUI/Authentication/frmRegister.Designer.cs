@@ -198,7 +198,7 @@
             this.txtAddress.Location = new System.Drawing.Point(28, 217);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(232, 31);
-            this.txtAddress.TabIndex = 1;
+            this.txtAddress.TabIndex = 3;
             // 
             // txtSDT
             // 
@@ -206,7 +206,7 @@
             this.txtSDT.Location = new System.Drawing.Point(287, 295);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(232, 31);
-            this.txtSDT.TabIndex = 1;
+            this.txtSDT.TabIndex = 6;
             // 
             // txtEmail
             // 
@@ -214,7 +214,7 @@
             this.txtEmail.Location = new System.Drawing.Point(287, 374);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(232, 31);
-            this.txtEmail.TabIndex = 1;
+            this.txtEmail.TabIndex = 8;
             // 
             // txtConfirm
             // 
@@ -222,7 +222,7 @@
             this.txtConfirm.Location = new System.Drawing.Point(287, 461);
             this.txtConfirm.Name = "txtConfirm";
             this.txtConfirm.Size = new System.Drawing.Size(232, 31);
-            this.txtConfirm.TabIndex = 1;
+            this.txtConfirm.TabIndex = 10;
             // 
             // txtPassword
             // 
@@ -230,7 +230,7 @@
             this.txtPassword.Location = new System.Drawing.Point(33, 461);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(234, 31);
-            this.txtPassword.TabIndex = 1;
+            this.txtPassword.TabIndex = 9;
             // 
             // txtUsername
             // 
@@ -238,7 +238,7 @@
             this.txtUsername.Location = new System.Drawing.Point(28, 374);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(239, 31);
-            this.txtUsername.TabIndex = 1;
+            this.txtUsername.TabIndex = 7;
             // 
             // Submit
             // 
@@ -248,7 +248,7 @@
             this.Submit.Location = new System.Drawing.Point(127, 547);
             this.Submit.Name = "Submit";
             this.Submit.Size = new System.Drawing.Size(300, 40);
-            this.Submit.TabIndex = 2;
+            this.Submit.TabIndex = 11;
             this.Submit.Text = "Đăng Ký";
             this.Submit.UseVisualStyleBackColor = false;
             this.Submit.Click += new System.EventHandler(this.Submit_Click);
@@ -263,7 +263,7 @@
             this.bxGender.Location = new System.Drawing.Point(287, 135);
             this.bxGender.Name = "bxGender";
             this.bxGender.Size = new System.Drawing.Size(232, 30);
-            this.bxGender.TabIndex = 3;
+            this.bxGender.TabIndex = 2;
             // 
             // dtDayofBirth
             // 
@@ -271,7 +271,7 @@
             this.dtDayofBirth.Location = new System.Drawing.Point(287, 217);
             this.dtDayofBirth.Name = "dtDayofBirth";
             this.dtDayofBirth.Size = new System.Drawing.Size(232, 31);
-            this.dtDayofBirth.TabIndex = 5;
+            this.dtDayofBirth.TabIndex = 4;
             // 
             // Back
             // 
@@ -279,7 +279,7 @@
             this.Back.Location = new System.Drawing.Point(33, 21);
             this.Back.Name = "Back";
             this.Back.Size = new System.Drawing.Size(50, 37);
-            this.Back.TabIndex = 14;
+            this.Back.TabIndex = 12;
             this.Back.Tag = "";
             this.Back.Text = "←";
             this.Back.UseVisualStyleBackColor = true;
@@ -291,7 +291,7 @@
             this.txtCCCD.Location = new System.Drawing.Point(28, 295);
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(239, 31);
-            this.txtCCCD.TabIndex = 15;
+            this.txtCCCD.TabIndex = 5;
             // 
             // label1
             // 
@@ -339,6 +339,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng Kí nhen";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmRegister_FormClosing);
+            this.Load += new System.EventHandler(this.frmRegister_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
