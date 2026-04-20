@@ -8,6 +8,6 @@ namespace DTO.Models
 {
     public class InternalTransactionDTO : TransactionDTO
     {
-        public string ToAccount { get; set; }
+        public new string ToAccount { get; set; }
     }
 }
