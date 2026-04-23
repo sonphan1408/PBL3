@@ -96,6 +96,39 @@ namespace BLL.Services
             return newInterest;
 
         }
+        private static string GenerateContractID()
+        {
+
+            string prefix = "TK";
+            string timePart = DateTime.Now.ToString("yyMMddHHmmss");
+
+            string miliSecond = DateTime.Now.ToString("fff");
+
+            string newContractID = prefix + timePart + miliSecond;
+
+            return newContractID;
+        }
+        private static decimal CalculateInterest(decimal principalAmount, decimal rate, int termMonths, DateTime startDate, DateTime endDate)
+        {
+            int day = (endDate.Date - startDate.Date).Days;
+            if (day <= 0) return 0m;
+            decimal interest = (principalAmount * (rate / 100m) * day) / 365m;
+            return interest;
+        }
+        private static decimal CalculateInterestTerm(decimal principalAmount, decimal rate, int termMonths)
+        {
+            DateTime startDate = DateTime.Now;
+            DateTime endDate = startDate.AddMonths(termMonths);
+            return CalculateInterest(principalAmount, rate, termMonths, startDate, endDate);
+
+        }
+        private static decimal CalculateInterestInstallment(decimal newPrincipalAmount, decimal rate, int termMonths, DateTime endDate)
+        {
+            DateTime updateDate = DateTime.Now;
+            decimal newInterest = CalculateInterest(newPrincipalAmount, rate, termMonths, updateDate, endDate);
+            return newInterest;
+
+        }
         public static SavingContractsDTO CreateSavingDraft(decimal principalAmount, int termMonths, string savingType, string goal, decimal rate, string accountNumber)
         {
             SavingContractsDTO draft = new SavingContractsDTO();
@@ -121,6 +154,8 @@ namespace BLL.Services
 
 
 
+
+        }
 
         }
     }
