@@ -1,4 +1,5 @@
 ﻿using BLL.Services;
+using DTO.Models;
 using GUI.Admin;
 using GUI.Client;
 using GUI.Session;
@@ -82,29 +83,30 @@ namespace GUI.Authentication
 
             try
             {
-                string role = AuthService.Login(TaiKhoan.Text, MatKhau.Text);
-                string username = TaiKhoan.Text;
+               AccountCustomerDTO account = AuthService.LoginCustomer(TaiKhoan.Text, MatKhau.Text);
 
                 TaiKhoan.Text = "Username";
                 MatKhau.Text = "Password";
                 TaiKhoan.ForeColor = Color.Gray;
                 MatKhau.ForeColor = Color.Gray;
                 MatKhau.UseSystemPasswordChar = false;
+               
 
-                if(role != null)
+                if(account != null)
                 {
+                    UserSession.CurrentUser = account;
                     this.Hide();
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo");
-                    if (role == "Customer")
+                    if (account.Role == "Customer")
                     {
 
-                        frmClientDashboard customerForm = new frmClientDashboard(username);
+                        frmClientDashboard customerForm = new frmClientDashboard();
                         customerForm.ShowDialog();
                     }
-                    else if (role == "Admin" || role == "Teller")
+                    else if (account.Role == "Admin" || account.Role == "Teller")
                     {
-                        frmAdminDashboard employeeForm = new frmAdminDashboard(username);
-                        employeeForm.ShowDialog();
+                        //frmAdminDashboard employeeForm = new frmAdminDashboard();
+                        //employeeForm.ShowDialog();
                     }
                     this.Show();
                 }

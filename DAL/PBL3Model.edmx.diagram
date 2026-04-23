@@ -4,34 +4,38 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7e6106edc94044f3aff79d00fe464fe8" Name="Diagram1">
+      <Diagram DiagramId="7e6106edc94044f3aff79d00fe464fe8" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="DigitalBankingDBModel.Account" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.Customer" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.Employee" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.ExternalBank" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DigitalBankingDBModel.ExternalTransaction" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DigitalBankingDBModel.FinancialProduct" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.InterestRate" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.InternalTransaction" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.Invoice" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DigitalBankingDBModel.LoanRepayment" Width="1.5" PointX="10.5" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.Notification" Width="1.5" PointX="5.25" PointY="26.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.ServiceProvider" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.ServiceType" Width="1.5" PointX="0.75" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.TransactionType" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Account_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="DigitalBankingDBModel.FK_External_From" ManuallyRouted="false" />
-        <AssociationConnector Association="DigitalBankingDBModel.FK_Fin_Acc" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Internal_From" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Internal_To" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Invoice_Acc" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Noti_Acc" ManuallyRouted="false" />
-        <AssociationConnector Association="DigitalBankingDBModel.FK_Fin_Emp" ManuallyRouted="false" />
-        <AssociationConnector Association="DigitalBankingDBModel.FK_External_Bank" ManuallyRouted="false" />
-        <AssociationConnector Association="DigitalBankingDBModel.FK_Repay_Prod" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Internal_Type" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Invoice_Provider" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Provider_ServiceType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.LoanContract" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.LoanRepayment" Width="1.5" PointX="5.25" PointY="1.5" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.SavingContract" Width="1.5" PointX="3" PointY="21.875" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.SavingTransaction" Width="1.5" PointX="5.25" PointY="22.375" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.sysdiagram" Width="1.5" PointX="7.375" PointY="1.625" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_Loan_Rate" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_Saving_Rate" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_LoanRepay_Contract" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_SavingTrans_Contract" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.ExternalTransaction1" Width="1.5" PointX="8.25" PointY="10.875" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_External_From1" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_External_Bank1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

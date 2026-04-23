@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace DTO.Models
 {
-    public class FinancialProductDTO
+    public class SavingContractsDTO
     {
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
+        public string ContractID { get; set; }
+
+        public string SavingType { get; set; }
         public string AccountNumber { get; set; }
-        public string Category { get; set; } // Saving/Loan
-        public decimal Amount { get; set; }
+        public string Goal { get; set; }
         public decimal PrincipalAmount { get; set; }
+        public decimal CurrentBalance { get; set; }
+        public decimal AccruedInterest { get; set; }
         public decimal InterestRate { get; set; }
         public int TermMonths { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
         public string Status { get; set; }
-        public int? ApprovedBy { get; set; }
+       
     }
 }

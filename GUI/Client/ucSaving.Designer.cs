@@ -52,9 +52,11 @@
             this.kryptonGroup3 = new Krypton.Toolkit.KryptonGroup();
             this.btnTerm = new Krypton.Toolkit.KryptonGroup();
             this.btnInstallment = new Krypton.Toolkit.KryptonGroup();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
+            this.kryptonPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTerm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1)).BeginInit();
@@ -100,6 +102,7 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.label4);
             this.kryptonPanel2.Location = new System.Drawing.Point(887, 23);
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(418, 730);
@@ -331,6 +334,7 @@
             // 
             // btnInstallment.Panel
             // 
+            this.btnInstallment.Panel.Click += new System.EventHandler(this.btnInstallment_Panel_Click);
             this.btnInstallment.Panel.MouseEnter += new System.EventHandler(this.btnInstallment_MouseEnter);
             this.btnInstallment.Panel.MouseLeave += new System.EventHandler(this.btnInstallment_MouseLeave);
             this.btnInstallment.Size = new System.Drawing.Size(269, 209);
@@ -340,6 +344,16 @@
             this.btnInstallment.TabIndex = 0;
             this.btnInstallment.MouseEnter += new System.EventHandler(this.btnInstallment_MouseEnter);
             this.btnInstallment.MouseLeave += new System.EventHandler(this.btnInstallment_MouseLeave);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(193, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 16);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "label4";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // ucSaving
             // 
@@ -362,6 +376,8 @@
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
+            this.kryptonPanel2.ResumeLayout(false);
+            this.kryptonPanel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTerm)).EndInit();
@@ -414,5 +430,6 @@
         private Krypton.Toolkit.KryptonGroup kryptonGroup3;
         private Krypton.Toolkit.KryptonGroup btnInstallment;
         private Krypton.Toolkit.KryptonGroup btnTerm;
+        private System.Windows.Forms.Label label4;
     }
 }

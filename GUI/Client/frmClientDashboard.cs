@@ -14,6 +14,8 @@ namespace GUI.Client
         ucInvoicePayment invoice;
         ucNotifications notifications;
         ucTransfer transfer;
+        ucConfirmSaving confirmSaving;
+        uccreateSaving createSaving;
         
         public string CurrentUsername { get; private set; }
 
@@ -24,10 +26,17 @@ namespace GUI.Client
 
             home = new ucClientHome();
             saving = new ucSaving();
+            saving.NavigateTo = addUserControl; // Truyền hàm điều hướng vào ucSaving
+            //createSaving = new uccreateSaving();
+            //createSaving.NavigateTo = addUserControl;
+            //confirmSaving = new ucConfirmSaving();
+            
+
             history = new ucHistory();
             invoice = new ucInvoicePayment();
             notifications = new ucNotifications();
             transfer = new ucTransfer();
+            addUserControl(home);
         }
 
         // Constructor that accepts username; chains to parameterless to reuse initialization
@@ -51,6 +60,7 @@ namespace GUI.Client
             pnlMain.Controls.Add(uc);
             uc.BringToFront();
         }
+        
 
         // Khai báo các biến cho Icon thông báo
         private Button btnNotification;
@@ -333,13 +343,7 @@ namespace GUI.Client
         // Code bo góc thanh tìm kiếm của bạn (Đã chuẩn)
         private void pnlSearch_Paint(object sender, PaintEventArgs e)
         {
-            GraphicsPath path = new GraphicsPath();
-            int radius = 25;
-            path.AddArc(0, 0, radius, radius, 180, 90);
-            path.AddArc(pnlSearch.Width - radius, 0, radius, radius, 270, 90);
-            path.AddArc(pnlSearch.Width - radius, pnlSearch.Height - radius, radius, radius, 0, 90);
-            path.AddArc(0, pnlSearch.Height - radius, radius, radius, 90, 90);
-            pnlSearch.Region = new Region(path);
+            
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e) { }

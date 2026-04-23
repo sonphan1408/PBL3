@@ -1,5 +1,6 @@
 ﻿using BLL.Services;
 using DTO.Models;
+using GUI.Session;
 using Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace GUI.Client
 {
     public partial class ucSaving : UserControl
     {
+        public Action<UserControl> NavigateTo;
+       
+
         int[] allowedMonths = { 1, 3, 6, 12, 24, 36 };
         public ucSaving()
         {
@@ -70,9 +74,10 @@ namespace GUI.Client
             lblInterestRate.Text = "0%";
             lblMaturityInterest.Text = "0VNĐ";
             btnTermSaving.Checked = true;
+            label4.Text = UserSession.CurrentUser.Balance.ToString("N2") + "VNĐ";
 
 
-           
+
         }
 
         private void lblTermMonths_Click(object sender, EventArgs e)
@@ -81,8 +86,8 @@ namespace GUI.Client
         }
         private void UpdatePreviewCard()
         {
-            double principalAmount = 0;
-            if (!double.TryParse(txtPrincipalAmount.Text, out  principalAmount))
+            decimal principalAmount = 0;
+            if (!decimal.TryParse(txtPrincipalAmount.Text, out  principalAmount))
             {
                 lblInterestRate.Text = "0%";
                 lblMaturityInterest.Text = "0VNĐ";
@@ -91,7 +96,7 @@ namespace GUI.Client
             string savingType = "";
             int termMonths = allowedMonths[trackBarTerm.Value];
              savingType = btnTermSaving.Checked ? "Term" : "";
-
+                
 
 
 
@@ -162,6 +167,22 @@ namespace GUI.Client
 
             btnTerm.StateCommon.Border.Color1 = Color.Black;
             btnTerm.StateCommon.Border.Width = 1;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnInstallment_Panel_Click(object sender, EventArgs e)
+        {
+            uccreateSaving createSaving = new uccreateSaving();
+            createSaving.NavigateTo = this.NavigateTo;
+            if (NavigateTo != null)
+            {        
+                NavigateTo(createSaving);
+            }
+           
         }
     }
 }

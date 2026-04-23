@@ -14,24 +14,38 @@ namespace DAL.Repositories
 {
     public class AuthDAL
     {
-        public static string Login(string username, string password)
+        public static AccountCustomerDTO LoginCustomer(string username, string password)
         {
             try
             {
                 using (var db = new DigitalBankingDBEntities())
                 {
-                    var account = db.Accounts.FirstOrDefault(a=> a.Username == username && a.Password == password);
-                    if(account != null) return "Customer";
+                    // Tìm tài khoản khách hàng khớp user, pass và phải đang hoạt động (Active)
+                    var account = db.Accounts.FirstOrDefault(a => a.Username == username
+                                                               && a.Password == password
+                                                               && a.Status == "Active");
 
-                    var employ = db.Employees.FirstOrDefault(e => e.Username == username && e.Password == password);
-                    if(employ != null) return employ.Role;
+                    // Nếu tìm thấy, tạo mới một CustomerDTO để hứng dữ liệu và trả về
+                    if (account != null)
+                    {
+                        return new AccountCustomerDTO
+                        {
+                            AccountNumber = account.AccountNumber,
+                            Username = account.Username,
+                            Role = "Customer", 
+                            Balance = account.Balance ?? 0, 
+                            Status = account.Status
+                           
+                        };
+                    }
 
+                    
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Lỗi khi đăng nhập: " + ex.Message);
+                throw new Exception("Lỗi khi đăng nhập Khách hàng: " + ex.Message);
             }
         }
 

@@ -75,11 +75,11 @@ namespace BLL.Services
             }
         }
 
-        public static string Login(string username, string password)
+        public static AccountCustomerDTO LoginCustomer(string username, string password)
         {
             try
             {
-                return AuthDAL.Login(username, password);
+                return AuthDAL.LoginCustomer(username, password);
             }
             catch (Exception ex)
             {

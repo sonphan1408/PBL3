@@ -8,7 +8,7 @@ namespace DTO.Models
 {
     public class SavingsPreviewDTO
     {
-        public double InterestRate { get; set; }        // Lãi suất áp dụng (%)
-        public double MaturityInterest { get; set; }    // Tiền lãi dự kiến
+        public decimal InterestRate { get; set; }        // Lãi suất áp dụng (%)
+        public decimal MaturityInterest { get; set; }    // Tiền lãi dự kiến
     }
 }

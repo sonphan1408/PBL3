@@ -1,44 +1,45 @@
-﻿using System;
+﻿using DTO.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using DTO.Models;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace DAL.Repositories
 {
     public class FinancialDAL
     {
-        public static List<FinancialProductDTO> GetSavingsByCustomer(int customerId)
-        {
-            try
-            {
-                using (var db = new DigitalBankingDBEntities())
-                {
-                    var accountNumbers = db.Accounts
-                        .Where(a => a.CustomerID == customerId)
-                        .Select(a => a.AccountNumber)
-                        .ToList();
+        //public static List<FinancialProductDTO> GetSavingsByCustomer(int customerId)
+        //{
+        //    try
+        //    {
+        //        using (var db = new DigitalBankingDBEntities())
+        //        {
+        //            var accountNumbers = db.Accounts
+        //                .Where(a => a.CustomerID == customerId)
+        //                .Select(a => a.AccountNumber)
+        //                .ToList();
 
-                    var savings = db.FinancialProducts
-                        .Where(p => accountNumbers.Contains(p.AccountNumber) && p.Category == "Saving")
-                        .Select(p => new FinancialProductDTO
-                        {
-                            ProductID = p.ProductID,
-                            ProductName = "Account " + p.AccountNumber,
-                            AccountNumber = p.AccountNumber,
-                            Amount = p.PrincipalAmount,
-                            InterestRate = p.InterestRate,
-                            Status = p.Status
-                        })
-                        .ToList();
+        //            var savings = db.FinancialProducts
+        //                .Where(p => accountNumbers.Contains(p.AccountNumber) && p.Category == "Saving")
+        //                .Select(p => new FinancialProductDTO
+        //                {
+        //                    ProductID = p.ProductID,
+        //                    ProductName = "Account " + p.AccountNumber,
+        //                    AccountNumber = p.AccountNumber,
+        //                    Amount = p.PrincipalAmount,
+        //                    InterestRate = p.InterestRate,
+        //                    Status = p.Status
+        //                })
+        //                .ToList();
 
-                    return savings;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Lỗi khi lấy danh sách tiết kiệm: " + ex.Message);
-            }
-        }
+        //            return savings;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Lỗi khi lấy danh sách tiết kiệm: " + ex.Message);
+        //    }
+        //}
 
         public static decimal GetTotalSavings(int customerId)
         {
@@ -156,7 +157,7 @@ namespace DAL.Repositories
                                 RateID = r.RateID,
                                 Category = r.Category,
                                 TermMonths = r.TermMonths.GetValueOrDefault(0),
-                                RateValue = (decimal)(r.RateValue ?? 0)
+                                RateValue = (decimal)(r.RateValue ?? 0m)
                             })
                             .ToList();
                     }
@@ -166,7 +167,7 @@ namespace DAL.Repositories
                     throw new Exception("Lỗi khi lấy lãi suất theo danh mục: " + ex.Message);
                 }
             }
-        public static double GetExactRateValue(string category, int termMonths)
+        public static decimal GetExactRateValue(string category, int termMonths)
         {
             try
             {
@@ -177,9 +178,9 @@ namespace DAL.Repositories
 
                     if (rate != null)
                     {
-                        return (double)(rate.RateValue ?? 0);
+                        return rate.RateValue ?? 0m;
                     }
-                    return 0;
+                    return 0m;
                 }
             }
             catch (Exception ex)
@@ -187,6 +188,8 @@ namespace DAL.Repositories
                 throw new Exception("Lỗi khi tìm lãi suất: " + ex.Message);
             }
         }
+      
+       
     }
 }
    

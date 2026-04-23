@@ -9,7 +9,7 @@ namespace GUI.Session
 {
     public static class UserSession
     {
-        public static AccountDTO CurrentUser { get; set; }
+        public static AccountCustomerDTO CurrentUser { get; set; }
         public static void ClearSession()
         {
             CurrentUser = null;
