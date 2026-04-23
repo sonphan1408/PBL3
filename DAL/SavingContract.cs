@@ -12,28 +12,30 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class FinancialProduct
+    public partial class SavingContract
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FinancialProduct()
+        public SavingContract()
         {
-            this.LoanRepayments = new HashSet<LoanRepayment>();
+            this.SavingTransactions = new HashSet<SavingTransaction>();
         }
     
-        public int ProductID { get; set; }
+        public string ContractID { get; set; }
         public string AccountNumber { get; set; }
-        public string Category { get; set; }
+        public int RateID { get; set; }
         public decimal PrincipalAmount { get; set; }
+        public decimal CurrentBalance { get; set; }
         public decimal InterestRate { get; set; }
-        public Nullable<int> TermMonths { get; set; }
+        public Nullable<decimal> AccruedInterest { get; set; }
         public System.DateTime StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public System.DateTime EndDate { get; set; }
+        public string Goal { get; set; }
         public string Status { get; set; }
-        public Nullable<int> ApprovedBy { get; set; }
+        public int TermMonths { get; set; }
+        public string SavingTypes { get; set; }
     
-        public virtual Account Account { get; set; }
-        public virtual Employee Employee { get; set; }
+        public virtual InterestRate InterestRate1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LoanRepayment> LoanRepayments { get; set; }
+        public virtual ICollection<SavingTransaction> SavingTransactions { get; set; }
     }
 }

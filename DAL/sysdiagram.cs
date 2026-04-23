@@ -12,15 +12,12 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class LoanRepayment
+    public partial class sysdiagram
     {
-        public int RepaymentID { get; set; }
-        public string ContractID { get; set; }
-        public decimal PrincipalPaid { get; set; }
-        public decimal InterestPaid { get; set; }
-        public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string Notes { get; set; }
-    
-        public virtual LoanContract LoanContract { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

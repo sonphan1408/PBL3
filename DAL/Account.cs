@@ -18,7 +18,6 @@ namespace DAL
         public Account()
         {
             this.ExternalTransactions = new HashSet<ExternalTransaction>();
-            this.FinancialProducts = new HashSet<FinancialProduct>();
             this.InternalTransactions = new HashSet<InternalTransaction>();
             this.InternalTransactions1 = new HashSet<InternalTransaction>();
             this.Invoices = new HashSet<Invoice>();
@@ -36,8 +35,6 @@ namespace DAL
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExternalTransaction> ExternalTransactions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FinancialProduct> FinancialProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InternalTransaction> InternalTransactions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

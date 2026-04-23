@@ -14,19 +14,10 @@ namespace DAL
     
     public partial class Employee
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
-        {
-            this.FinancialProducts = new HashSet<FinancialProduct>();
-        }
-    
         public int EmployeeID { get; set; }
         public string FullName { get; set; }
         public string Role { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FinancialProduct> FinancialProducts { get; set; }
     }
 }

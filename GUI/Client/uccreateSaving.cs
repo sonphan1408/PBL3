@@ -48,11 +48,6 @@ namespace GUI.Client
             cbTermMonths.DataSource = valueCombox;
             cbTermMonths.DisplayMember = "display";
             cbTermMonths.ValueMember = "value";
-
-
-
-
-
         }
 
         private void btnHouse_Click(object sender, EventArgs e)
@@ -83,9 +78,14 @@ namespace GUI.Client
             decimal rate = valueCb.value;
             int termMonths = valueCb.termMonths;
             string goal = txtDesc.Text;
+            string savingTYpe = "Installment";
+           decimal principalAmount = decimal.Parse(txtPrincialAmount.Text);
+
+            
+            SavingContractsDTO draff = FinancialService.CreateSavingDraft(principalAmount, termMonths, savingTYpe, goal, rate, UserSession.CurrentUser.AccountNumber);
 
 
-            ucConfirmSaving confirmSaving = new ucConfirmSaving();
+            ucConfirmSaving confirmSaving = new ucConfirmSaving(draff);
             confirmSaving.NavigateTo = this.NavigateTo;
 
             if (NavigateTo != null)

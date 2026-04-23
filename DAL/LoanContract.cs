@@ -12,23 +12,27 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class InterestRate
+    public partial class LoanContract
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InterestRate()
+        public LoanContract()
         {
-            this.LoanContracts = new HashSet<LoanContract>();
-            this.SavingContracts = new HashSet<SavingContract>();
+            this.LoanRepayments = new HashSet<LoanRepayment>();
         }
     
+        public string ContractID { get; set; }
+        public string AccountNumber { get; set; }
         public int RateID { get; set; }
-        public string Category { get; set; }
-        public Nullable<int> TermMonths { get; set; }
-        public Nullable<decimal> RateValue { get; set; }
+        public decimal LoanAmount { get; set; }
+        public decimal RemainingBalance { get; set; }
+        public decimal InterestRate { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
+        public string Collateral { get; set; }
+        public string Status { get; set; }
     
+        public virtual InterestRate InterestRate1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LoanContract> LoanContracts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SavingContract> SavingContracts { get; set; }
+        public virtual ICollection<LoanRepayment> LoanRepayments { get; set; }
     }
 }

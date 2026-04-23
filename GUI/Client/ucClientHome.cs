@@ -87,7 +87,7 @@ namespace GUI.Client
                 LoadTransactionHistory();
 
                 // Load savings items
-                //LoadSavingsItems();
+                LoadSavingsItems();
             }
             catch (Exception ex)
             {
@@ -116,32 +116,32 @@ namespace GUI.Client
             }
         }
 
-        //private void LoadSavingsItems()
-        //{
-        //    lstSavingsItems.Items.Clear();
+        private void LoadSavingsItems()
+        {
+            lstSavingsItems.Items.Clear();
 
-        //    try
-        //    {
-        //        List<FinancialProductDTO> savings = FinancialService.GetSavingsByCustomer(currentAccount.CustomerID);
+            try
+            {
+                List<SavingContractsDTO> savings = FinancialService.GetSavingsByCustomer(currentAccount.CustomerID);
 
-        //        if (savings != null && savings.Count > 0)
-        //        {
-        //            foreach (var saving in savings)
-        //            {
-        //                string item = $"{saving.ProductName.PadRight(30)} ${saving.Amount.ToString("F2")}";
-        //                lstSavingsItems.Items.Add(item);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            lstSavingsItems.Items.Add("No savings accounts");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        lstSavingsItems.Items.Add("Error loading savings: " + ex.Message);
-        //    }
-        //}
+                if (savings != null && savings.Count > 0)
+                {
+                    foreach (var saving in savings)
+                    {
+                        string item = $"{saving.SavingType.PadRight(20)} ${saving.PrincipalAmount.ToString("F2")}";
+                        lstSavingsItems.Items.Add(item);
+                    }
+                }
+                else
+                {
+                    lstSavingsItems.Items.Add("No savings accounts");
+                }
+            }
+            catch (Exception ex)
+            {
+                lstSavingsItems.Items.Add("Error loading savings: " + ex.Message);
+            }
+        }
 
         private void BtnTransfer_Click(object sender, EventArgs e)
         {
