@@ -34,7 +34,6 @@
             this.txtDesc = new Krypton.Toolkit.KryptonTextBox();
             this.btnPre = new Krypton.Toolkit.KryptonButton();
             this.btnContinue = new Krypton.Toolkit.KryptonButton();
-            this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             this.lblAccountNumber = new System.Windows.Forms.Label();
             this.lblBalance = new System.Windows.Forms.Label();
             this.btnHouse = new Krypton.Toolkit.KryptonButton();
@@ -85,7 +84,7 @@
             this.btnPre.Size = new System.Drawing.Size(195, 68);
             this.btnPre.StateCommon.Back.Color1 = System.Drawing.Color.Gray;
             this.btnPre.StateCommon.Back.Color2 = System.Drawing.Color.Gray;
-            this.btnPre.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton1.StateCommon.Back.Image")));
+            this.btnPre.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnPre.StateCommon.Back.Image")));
             this.btnPre.StateCommon.Back.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnPre.StateCommon.Border.Rounding = 20F;
             this.btnPre.TabIndex = 3;
@@ -101,7 +100,7 @@
             this.btnContinue.Size = new System.Drawing.Size(183, 68);
             this.btnContinue.StateCommon.Back.Color1 = System.Drawing.Color.Gray;
             this.btnContinue.StateCommon.Back.Color2 = System.Drawing.Color.Gray;
-            this.btnContinue.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton3.StateCommon.Back.Image")));
+            this.btnContinue.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnContinue.StateCommon.Back.Image")));
             this.btnContinue.StateCommon.Back.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnContinue.StateCommon.Border.Rounding = 20F;
             this.btnContinue.TabIndex = 5;
@@ -110,21 +109,13 @@
             this.btnContinue.Values.Text = "";
             this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
             // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(109, 25);
-            this.kryptonLabel1.TabIndex = 6;
-            this.kryptonLabel1.Values.Text = "kryptonLabel1";
-            // 
             // lblAccountNumber
             // 
             this.lblAccountNumber.AutoSize = true;
             this.lblAccountNumber.BackColor = System.Drawing.Color.Transparent;
             this.lblAccountNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAccountNumber.ForeColor = System.Drawing.Color.Red;
-            this.lblAccountNumber.Location = new System.Drawing.Point(141, 163);
+            this.lblAccountNumber.Location = new System.Drawing.Point(131, 161);
             this.lblAccountNumber.Name = "lblAccountNumber";
             this.lblAccountNumber.Padding = new System.Windows.Forms.Padding(5);
             this.lblAccountNumber.Size = new System.Drawing.Size(74, 32);
@@ -137,7 +128,7 @@
             this.lblBalance.BackColor = System.Drawing.Color.Transparent;
             this.lblBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBalance.ForeColor = System.Drawing.Color.Red;
-            this.lblBalance.Location = new System.Drawing.Point(452, 163);
+            this.lblBalance.Location = new System.Drawing.Point(423, 161);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Padding = new System.Windows.Forms.Padding(5);
             this.lblBalance.Size = new System.Drawing.Size(74, 32);
@@ -208,7 +199,6 @@
             this.Controls.Add(this.btnHouse);
             this.Controls.Add(this.lblBalance);
             this.Controls.Add(this.lblAccountNumber);
-            this.Controls.Add(this.kryptonLabel1);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.btnPre);
             this.Controls.Add(this.txtDesc);
@@ -230,7 +220,6 @@
         private Krypton.Toolkit.KryptonTextBox txtDesc;
         private Krypton.Toolkit.KryptonButton btnPre;
         private Krypton.Toolkit.KryptonButton btnContinue;
-        private Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private System.Windows.Forms.Label lblAccountNumber;
         private System.Windows.Forms.Label lblBalance;
         private Krypton.Toolkit.KryptonButton btnHouse;

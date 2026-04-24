@@ -18,15 +18,9 @@
         <AssociationConnector Association="DigitalBankingDBModel.FK_Internal_Type" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Invoice_Provider" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Provider_ServiceType" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DigitalBankingDBModel.LoanContract" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.LoanRepayment" Width="1.5" PointX="5.25" PointY="1.5" />
-        <EntityTypeShape EntityType="DigitalBankingDBModel.SavingContract" Width="1.5" PointX="3" PointY="21.875" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.SavingTransaction" Width="1.5" PointX="5.25" PointY="22.375" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.sysdiagram" Width="1.5" PointX="7.375" PointY="1.625" />
-        <AssociationConnector Association="DigitalBankingDBModel.FK_Loan_Rate" />
-        <AssociationConnector Association="DigitalBankingDBModel.FK_Saving_Rate" />
-        <AssociationConnector Association="DigitalBankingDBModel.FK_LoanRepay_Contract" />
-        <AssociationConnector Association="DigitalBankingDBModel.FK_SavingTrans_Contract" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.Account" Width="1.5" PointX="3" PointY="9.25" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.ExternalTransaction" Width="1.5" PointX="5.25" PointY="8.75" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Account_Customer" />
@@ -36,6 +30,10 @@
         <AssociationConnector Association="DigitalBankingDBModel.FK_Invoice_Acc" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Noti_Acc" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_External_Bank" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.SavingContract" Width="1.5" PointX="3" PointY="21.75" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_SavingTrans_Contract" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.LoanContract" Width="1.5" PointX="3" PointY="1.25" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_LoanRepay_Contract" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

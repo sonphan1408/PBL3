@@ -104,7 +104,7 @@ namespace BLL.Services
             draft.Goal = goal;
             draft.CurrentBalance = 0;
             draft.InterestRate = rate;
-            draft.Status = "Chờ xác nhận";
+            draft.Status = "Awaiting confirmation";
             draft.AccountNumber = accountNumber;
 
             draft.StartDate = DateTime.Now;
@@ -112,6 +112,93 @@ namespace BLL.Services
             draft.AccruedInterest = CalculateInterest(principalAmount, rate, termMonths, draft.StartDate, draft.EndDate);
 
             return draft;
+        }
+
+        public static bool CreateSavingAccount(SavingContractsDTO savingContract)
+        {
+            bool deducted = false;
+            string accountNumber = savingContract.AccountNumber;
+            try
+            {
+              
+               
+                // Lấy số dư tài khoản hiện tại
+                decimal currentBalance = AccountService.GetAccountBalance(accountNumber);
+
+                // Kiểm tra xem có đủ tiền không
+                if (currentBalance < savingContract.PrincipalAmount)
+                {
+                    throw new Exception("Tài khoản không đủ tiền để tạo tiết kiệm! Số tiền cần: " + savingContract.PrincipalAmount.ToString("N0") + ", Số dư: " + currentBalance.ToString("N0"));
+                }
+
+                // Trừ tiền từ tài khoản
+                 deducted = AccountService.DeductAccountBalance(accountNumber, savingContract.PrincipalAmount);
+
+                if (!deducted)
+                {
+                    throw new Exception("Lỗi khi trừ tiền từ tài khoản!");
+                }
+
+                // Cập nhật status thành "Active" và balance của saving
+                savingContract.Status = "Active";
+                savingContract.CurrentBalance = savingContract.PrincipalAmount;
+
+                // Lưu tiết kiệm vào database
+                bool saved = FinancialDAL.CreateSavingAccount(savingContract);
+
+                if (!saved)
+                {
+                   
+                   
+                    throw new Exception("Lỗi khi tạo tài khoản tiết kiệm!");
+                }
+
+                // Tạo ghi chép SavingTransaction
+                FinancialDAL.CreateSavingTransaction(savingContract.ContractID, "Opening", savingContract.PrincipalAmount, "Mở tài khoản tiết kiệm");
+
+                return true;
+            }
+            catch (Exception ex)
+
+            {
+                if (deducted)
+                {
+                    AccountService.AddAccountBalance(accountNumber, savingContract.PrincipalAmount);
+                }
+                string detailError = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                throw new Exception("Lỗi hệ thống: " + detailError);
+            }
+        }
+
+        public static bool CheckPassword(string accountNumber, string inputPassword)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(accountNumber))
+                {
+                    throw new Exception("Số tài khoản không được để trống!");
+                }
+
+                if (string.IsNullOrWhiteSpace(inputPassword))
+                {
+                    throw new Exception("Mật khẩu không được để trống!");
+                }
+
+                
+                string databasePassword = AccountService.GetPasswordByAccountNumber(accountNumber);
+
+                if (string.IsNullOrWhiteSpace(databasePassword))
+                {
+                    throw new Exception("Không tìm thấy tài khoản!");
+                }
+
+                
+                return inputPassword == databasePassword;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi kiểm tra mật khẩu: " + ex.Message);
+            }
         }
     }
 }

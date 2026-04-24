@@ -187,8 +187,69 @@ namespace DAL.Repositories
                 throw new Exception("Lỗi khi tìm lãi suất: " + ex.Message);
             }
         }
-      
-       
+
+        public static bool CreateSavingAccount(SavingContractsDTO savingContract)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities())
+                {
+                    var newContract = new SavingContract
+                    {
+                        ContractID = savingContract.ContractID,
+                        AccountNumber = savingContract.AccountNumber,
+                        SavingTypes = savingContract.SavingType,
+                        PrincipalAmount = savingContract.PrincipalAmount,
+                        InterestRate = savingContract.InterestRate,
+                        StartDate = savingContract.StartDate,
+                        EndDate = savingContract.EndDate,
+                        CurrentBalance = savingContract.CurrentBalance,
+                        AccruedInterest = savingContract.AccruedInterest,
+                        Status = savingContract.Status,
+                        Goal = savingContract.Goal,
+                        TermMonths = savingContract.TermMonths
+                    };
+
+                    db.SavingContracts.Add(newContract);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi tạo tài khoản tiết kiệm: " + ex.Message);
+                return false;
+            }
+        }
+
+        public static bool CreateSavingTransaction(string contractID, string transactionType, decimal amount, string notes)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities())
+                {
+                    var newTransaction = new SavingTransaction
+                    {
+                        ContractID = contractID,
+                        TransactionType = transactionType,
+                        Amount = amount,
+                        TransactionDate = DateTime.Now,
+                        Notes = notes
+                    };
+
+                    db.SavingTransactions.Add(newTransaction);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi tạo ghi chép tiết kiệm: " + ex.Message);
+            }
+        }
+
+
     }
 }
-   
+
+

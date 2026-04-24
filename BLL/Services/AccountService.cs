@@ -21,5 +21,25 @@ namespace BLL.Services
         {
             return AccountDAL.GetAccountsByCustomer(customerId);
         }
+
+        public static string GetPasswordByAccountNumber(string accountNumber)
+        {
+            return AccountDAL.GetPasswordByAccountNumber(accountNumber);
+        }
+
+        public static decimal GetAccountBalance(string accountNumber)
+        {
+            return AccountDAL.GetAccountBalance(accountNumber);
+        }
+
+        public static bool DeductAccountBalance(string accountNumber, decimal amount)
+        {
+            return AccountDAL.DeductAccountBalance(accountNumber, amount);
+        }
+
+        public static bool AddAccountBalance(string accountNumber, decimal amount)
+        {
+            return AccountDAL.AddAccountBalance(accountNumber, amount);
+        }
     }
 }

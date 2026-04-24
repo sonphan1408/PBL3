@@ -109,7 +109,6 @@
           </Key>
           <Property Name="ContractID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="RateID" Type="int" Nullable="false" />
           <Property Name="LoanAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="RemainingBalance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="InterestRate" Type="decimal" Precision="5" Scale="2" Nullable="false" />
@@ -146,7 +145,6 @@
           </Key>
           <Property Name="ContractID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="RateID" Type="int" Nullable="false" />
           <Property Name="PrincipalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CurrentBalance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="InterestRate" Type="decimal" Precision="5" Scale="2" Nullable="false" />
@@ -286,18 +284,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Loan_Rate">
-          <End Role="InterestRates" Type="Self.InterestRates" Multiplicity="1" />
-          <End Role="LoanContracts" Type="Self.LoanContracts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InterestRates">
-              <PropertyRef Name="RateID" />
-            </Principal>
-            <Dependent Role="LoanContracts">
-              <PropertyRef Name="RateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LoanRepay_Contract">
           <End Role="LoanContracts" Type="Self.LoanContracts" Multiplicity="1" />
           <End Role="LoanRepayments" Type="Self.LoanRepayments" Multiplicity="*" />
@@ -331,18 +317,6 @@
             </Principal>
             <Dependent Role="ServiceProviders">
               <PropertyRef Name="ServiceTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Saving_Rate">
-          <End Role="InterestRates" Type="Self.InterestRates" Multiplicity="1" />
-          <End Role="SavingContracts" Type="Self.SavingContracts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InterestRates">
-              <PropertyRef Name="RateID" />
-            </Principal>
-            <Dependent Role="SavingContracts">
-              <PropertyRef Name="RateID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -404,10 +378,6 @@
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
-          <AssociationSet Name="FK_Loan_Rate" Association="Self.FK_Loan_Rate">
-            <End Role="InterestRates" EntitySet="InterestRates" />
-            <End Role="LoanContracts" EntitySet="LoanContracts" />
-          </AssociationSet>
           <AssociationSet Name="FK_LoanRepay_Contract" Association="Self.FK_LoanRepay_Contract">
             <End Role="LoanContracts" EntitySet="LoanContracts" />
             <End Role="LoanRepayments" EntitySet="LoanRepayments" />
@@ -419,10 +389,6 @@
           <AssociationSet Name="FK_Provider_ServiceType" Association="Self.FK_Provider_ServiceType">
             <End Role="ServiceTypes" EntitySet="ServiceTypes" />
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Saving_Rate" Association="Self.FK_Saving_Rate">
-            <End Role="InterestRates" EntitySet="InterestRates" />
-            <End Role="SavingContracts" EntitySet="SavingContracts" />
           </AssociationSet>
           <AssociationSet Name="FK_SavingTrans_Contract" Association="Self.FK_SavingTrans_Contract">
             <End Role="SavingContracts" EntitySet="SavingContracts" />
@@ -477,8 +443,6 @@
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TermMonths" Type="Int32" />
           <Property Name="RateValue" Type="Decimal" Precision="5" Scale="2" />
-          <NavigationProperty Name="LoanContracts" Relationship="DigitalBankingDBModel.FK_Loan_Rate" FromRole="InterestRate" ToRole="LoanContract" />
-          <NavigationProperty Name="SavingContracts" Relationship="DigitalBankingDBModel.FK_Saving_Rate" FromRole="InterestRate" ToRole="SavingContract" />
         </EntityType>
         <EntityType Name="InternalTransaction">
           <Key>
@@ -609,27 +573,9 @@
             <End Role="ServiceTypes" EntitySet="ServiceTypes" />
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
           </AssociationSet>
-          <EntitySet Name="LoanContracts" EntityType="DigitalBankingDBModel.LoanContract" />
           <EntitySet Name="LoanRepayments" EntityType="DigitalBankingDBModel.LoanRepayment" />
-          <EntitySet Name="SavingContracts" EntityType="DigitalBankingDBModel.SavingContract" />
           <EntitySet Name="SavingTransactions" EntityType="DigitalBankingDBModel.SavingTransaction" />
           <EntitySet Name="sysdiagrams" EntityType="DigitalBankingDBModel.sysdiagram" />
-          <AssociationSet Name="FK_Loan_Rate" Association="DigitalBankingDBModel.FK_Loan_Rate">
-            <End Role="InterestRate" EntitySet="InterestRates" />
-            <End Role="LoanContract" EntitySet="LoanContracts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Saving_Rate" Association="DigitalBankingDBModel.FK_Saving_Rate">
-            <End Role="InterestRate" EntitySet="InterestRates" />
-            <End Role="SavingContract" EntitySet="SavingContracts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LoanRepay_Contract" Association="DigitalBankingDBModel.FK_LoanRepay_Contract">
-            <End Role="LoanContract" EntitySet="LoanContracts" />
-            <End Role="LoanRepayment" EntitySet="LoanRepayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SavingTrans_Contract" Association="DigitalBankingDBModel.FK_SavingTrans_Contract">
-            <End Role="SavingContract" EntitySet="SavingContracts" />
-            <End Role="SavingTransaction" EntitySet="SavingTransactions" />
-          </AssociationSet>
           <EntitySet Name="Accounts" EntityType="DigitalBankingDBModel.Account" />
           <EntitySet Name="ExternalTransactions" EntityType="DigitalBankingDBModel.ExternalTransaction" />
           <AssociationSet Name="FK_Account_Customer" Association="DigitalBankingDBModel.FK_Account_Customer">
@@ -660,24 +606,17 @@
             <End Role="ExternalBank" EntitySet="ExternalBanks" />
             <End Role="ExternalTransaction" EntitySet="ExternalTransactions" />
           </AssociationSet>
+          <EntitySet Name="SavingContracts" EntityType="DigitalBankingDBModel.SavingContract" />
+          <AssociationSet Name="FK_SavingTrans_Contract" Association="DigitalBankingDBModel.FK_SavingTrans_Contract">
+            <End Role="SavingContract" EntitySet="SavingContracts" />
+            <End Role="SavingTransaction" EntitySet="SavingTransactions" />
+          </AssociationSet>
+          <EntitySet Name="LoanContracts" EntityType="DigitalBankingDBModel.LoanContract" />
+          <AssociationSet Name="FK_LoanRepay_Contract" Association="DigitalBankingDBModel.FK_LoanRepay_Contract">
+            <End Role="LoanContract" EntitySet="LoanContracts" />
+            <End Role="LoanRepayment" EntitySet="LoanRepayments" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="LoanContract">
-          <Key>
-            <PropertyRef Name="ContractID" />
-          </Key>
-          <Property Name="ContractID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RateID" Type="Int32" Nullable="false" />
-          <Property Name="LoanAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="RemainingBalance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="InterestRate" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Collateral" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="InterestRate1" Relationship="DigitalBankingDBModel.FK_Loan_Rate" FromRole="LoanContract" ToRole="InterestRate" />
-          <NavigationProperty Name="LoanRepayments" Relationship="DigitalBankingDBModel.FK_LoanRepay_Contract" FromRole="LoanContract" ToRole="LoanRepayment" />
-        </EntityType>
         <EntityType Name="LoanRepayment">
           <Key>
             <PropertyRef Name="RepaymentID" />
@@ -689,26 +628,6 @@
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
           <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LoanContract" Relationship="DigitalBankingDBModel.FK_LoanRepay_Contract" FromRole="LoanRepayment" ToRole="LoanContract" />
-        </EntityType>
-        <EntityType Name="SavingContract">
-          <Key>
-            <PropertyRef Name="ContractID" />
-          </Key>
-          <Property Name="ContractID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RateID" Type="Int32" Nullable="false" />
-          <Property Name="PrincipalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="CurrentBalance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="InterestRate" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="AccruedInterest" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Goal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="InterestRate1" Relationship="DigitalBankingDBModel.FK_Saving_Rate" FromRole="SavingContract" ToRole="InterestRate" />
-          <NavigationProperty Name="SavingTransactions" Relationship="DigitalBankingDBModel.FK_SavingTrans_Contract" FromRole="SavingContract" ToRole="SavingTransaction" />
-          <Property Name="TermMonths" Type="Int32" Nullable="false" />
-          <Property Name="SavingTypes" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SavingTransaction">
           <Key>
@@ -732,54 +651,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Loan_Rate">
-          <End Type="DigitalBankingDBModel.InterestRate" Role="InterestRate" Multiplicity="1" />
-          <End Type="DigitalBankingDBModel.LoanContract" Role="LoanContract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InterestRate">
-              <PropertyRef Name="RateID" />
-            </Principal>
-            <Dependent Role="LoanContract">
-              <PropertyRef Name="RateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Saving_Rate">
-          <End Type="DigitalBankingDBModel.InterestRate" Role="InterestRate" Multiplicity="1" />
-          <End Type="DigitalBankingDBModel.SavingContract" Role="SavingContract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InterestRate">
-              <PropertyRef Name="RateID" />
-            </Principal>
-            <Dependent Role="SavingContract">
-              <PropertyRef Name="RateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LoanRepay_Contract">
-          <End Type="DigitalBankingDBModel.LoanContract" Role="LoanContract" Multiplicity="1" />
-          <End Type="DigitalBankingDBModel.LoanRepayment" Role="LoanRepayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoanContract">
-              <PropertyRef Name="ContractID" />
-            </Principal>
-            <Dependent Role="LoanRepayment">
-              <PropertyRef Name="ContractID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SavingTrans_Contract">
-          <End Type="DigitalBankingDBModel.SavingContract" Role="SavingContract" Multiplicity="1" />
-          <End Type="DigitalBankingDBModel.SavingTransaction" Role="SavingTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SavingContract">
-              <PropertyRef Name="ContractID" />
-            </Principal>
-            <Dependent Role="SavingTransaction">
-              <PropertyRef Name="ContractID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountNumber" />
@@ -898,6 +769,63 @@
             </Principal>
             <Dependent Role="ExternalTransaction">
               <PropertyRef Name="BankCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SavingContract">
+          <Key>
+            <PropertyRef Name="ContractID" />
+          </Key>
+          <Property Name="ContractID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrincipalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CurrentBalance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="InterestRate" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="AccruedInterest" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Goal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TermMonths" Type="Int32" Nullable="false" />
+          <Property Name="SavingTypes" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SavingTransactions" Relationship="DigitalBankingDBModel.FK_SavingTrans_Contract" FromRole="SavingContract" ToRole="SavingTransaction" />
+        </EntityType>
+        <Association Name="FK_SavingTrans_Contract">
+          <End Type="DigitalBankingDBModel.SavingContract" Role="SavingContract" Multiplicity="1" />
+          <End Type="DigitalBankingDBModel.SavingTransaction" Role="SavingTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SavingContract">
+              <PropertyRef Name="ContractID" />
+            </Principal>
+            <Dependent Role="SavingTransaction">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LoanContract">
+          <Key>
+            <PropertyRef Name="ContractID" />
+          </Key>
+          <Property Name="ContractID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoanAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="RemainingBalance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="InterestRate" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Collateral" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoanRepayments" Relationship="DigitalBankingDBModel.FK_LoanRepay_Contract" FromRole="LoanContract" ToRole="LoanRepayment" />
+        </EntityType>
+        <Association Name="FK_LoanRepay_Contract">
+          <End Type="DigitalBankingDBModel.LoanContract" Role="LoanContract" Multiplicity="1" />
+          <End Type="DigitalBankingDBModel.LoanRepayment" Role="LoanRepayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanContract">
+              <PropertyRef Name="ContractID" />
+            </Principal>
+            <Dependent Role="LoanRepayment">
+              <PropertyRef Name="ContractID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1020,22 +948,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LoanContracts">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanContract">
-              <MappingFragment StoreEntitySet="LoanContracts">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Collateral" ColumnName="Collateral" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
-                <ScalarProperty Name="RemainingBalance" ColumnName="RemainingBalance" />
-                <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
-                <ScalarProperty Name="RateID" ColumnName="RateID" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LoanRepayments">
             <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanRepayment">
               <MappingFragment StoreEntitySet="LoanRepayments">
@@ -1045,25 +957,6 @@
                 <ScalarProperty Name="PrincipalPaid" ColumnName="PrincipalPaid" />
                 <ScalarProperty Name="ContractID" ColumnName="ContractID" />
                 <ScalarProperty Name="RepaymentID" ColumnName="RepaymentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SavingContracts">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.SavingContract">
-              <MappingFragment StoreEntitySet="SavingContracts">
-                <ScalarProperty Name="SavingTypes" ColumnName="SavingTypes" />
-                <ScalarProperty Name="TermMonths" ColumnName="TermMonths" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Goal" ColumnName="Goal" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="AccruedInterest" ColumnName="AccruedInterest" />
-                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
-                <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
-                <ScalarProperty Name="PrincipalAmount" ColumnName="PrincipalAmount" />
-                <ScalarProperty Name="RateID" ColumnName="RateID" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1118,6 +1011,39 @@
                 <ScalarProperty Name="ReceiverAccount" ColumnName="ReceiverAccount" />
                 <ScalarProperty Name="FromAccount" ColumnName="FromAccount" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SavingContracts">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.SavingContract">
+              <MappingFragment StoreEntitySet="SavingContracts">
+                <ScalarProperty Name="SavingTypes" ColumnName="SavingTypes" />
+                <ScalarProperty Name="TermMonths" ColumnName="TermMonths" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Goal" ColumnName="Goal" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="AccruedInterest" ColumnName="AccruedInterest" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
+                <ScalarProperty Name="PrincipalAmount" ColumnName="PrincipalAmount" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanContracts">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanContract">
+              <MappingFragment StoreEntitySet="LoanContracts">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Collateral" ColumnName="Collateral" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="RemainingBalance" ColumnName="RemainingBalance" />
+                <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
