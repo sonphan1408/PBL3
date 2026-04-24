@@ -5,13 +5,13 @@ using System.Linq;
 using System.Windows.Forms;
 using BLL.Services;
 using DTO.Models;
+using GUI.Session;
 
 namespace GUI.Client
 {
     public partial class ucClientHome : UserControl
     {
         // Data from SQL Server
-        private string currentUsername;
         private AccountCustomerDTO currentAccount;
         private CustomerDTO currentCustomer;
         private List<TransactionDTO> transactions;
@@ -23,13 +23,6 @@ namespace GUI.Client
         public ucClientHome()
         {
             InitializeComponent();
-            InitializeUI();
-        }
-
-        public ucClientHome(string username)
-        {
-            InitializeComponent();
-            currentUsername = username;
             InitializeUI();
             LoadDataFromDatabase();
         }
@@ -52,7 +45,7 @@ namespace GUI.Client
             try
             {
                 // Get account information
-                currentAccount = AccountService.GetAccountByUsername(currentUsername);
+                currentAccount = AccountService.GetAccountByUsername(UserSession.CurrentUser.Username);
                 if (currentAccount == null)
                 {
                     MessageBox.Show("Cannot find account information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

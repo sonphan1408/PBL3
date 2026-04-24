@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D; // Bổ sung thêm thư viện này để dùng được GraphicsPath
 using System.Windows.Forms;
+using GUI.Session;
 
 namespace GUI.Client
 {
@@ -16,13 +17,10 @@ namespace GUI.Client
         ucTransfer transfer;
         ucConfirmSaving confirmSaving;
         uccreateSaving createSaving;
-        
-        public string CurrentUsername { get; private set; }
 
-        
         public frmClientDashboard()
         {
-            InitializeComponent(); 
+            InitializeComponent();
 
             home = new ucClientHome();
             saving = new ucSaving();
@@ -36,19 +34,6 @@ namespace GUI.Client
             invoice = new ucInvoicePayment();
             notifications = new ucNotifications();
             transfer = new ucTransfer();
-            addUserControl(home);
-        }
-
-        // Constructor that accepts username; chains to parameterless to reuse initialization
-        public frmClientDashboard(string username) : this()
-        {
-            CurrentUsername = username;
-            
-            home.Dispose();
-            home = new ucClientHome(username);
-            transfer.SetUsername(username);
-
-            // Load home page by default
             addUserControl(home);
         }
 
@@ -139,9 +124,9 @@ namespace GUI.Client
                 LoadNotificationsToDropdown();
                 pnlNotificationDropdown.Visible = true;
                 pnlNotificationDropdown.BringToFront();
-                
+
                 // Đánh dấu đã đọc
-                BLL.Services.NotificationService.MarkAllAsRead(CurrentUsername);
+                BLL.Services.NotificationService.MarkAllAsRead(UserSession.CurrentUser.Username);
                 UpdateNotificationBadge(); // Ẩn badge
             }
         }
@@ -158,7 +143,7 @@ namespace GUI.Client
             pnlNotificationDropdown.Controls.Add(lblTitle);
 
             // Fetch notifications
-            var notifications = BLL.Services.NotificationService.GetRecentNotifications(CurrentUsername);
+            var notifications = BLL.Services.NotificationService.GetRecentNotifications(UserSession.CurrentUser.Username);
             
             if (notifications.Count == 0)
             {
@@ -260,7 +245,7 @@ namespace GUI.Client
         {
             try
             {
-                int count = BLL.Services.NotificationService.GetUnreadCount(CurrentUsername);
+                int count = BLL.Services.NotificationService.GetUnreadCount(UserSession.CurrentUser.Username);
                 if (count > 0)
                 {
                     lblNotificationBadge.Text = count > 99 ? "99+" : count.ToString();

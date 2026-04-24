@@ -24,8 +24,8 @@ namespace DAL
         public string Description { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
     
-        public virtual TransactionType TransactionType { get; set; }
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }
+        public virtual TransactionType TransactionType { get; set; }
     }
 }

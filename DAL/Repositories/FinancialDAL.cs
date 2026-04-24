@@ -26,7 +26,6 @@ namespace DAL.Repositories
                             ContractID = s.ContractID,
                             AccountNumber = s.AccountNumber,
                             PrincipalAmount = s.PrincipalAmount,
-                            SavingType = s.SavingTypes,
                             InterestRate = s.InterestRate,
                             Status = s.Status,
                             StartDate = s.StartDate,
@@ -198,7 +197,6 @@ namespace DAL.Repositories
                     {
                         ContractID = savingContract.ContractID,
                         AccountNumber = savingContract.AccountNumber,
-                        SavingTypes = savingContract.SavingType,
                         PrincipalAmount = savingContract.PrincipalAmount,
                         InterestRate = savingContract.InterestRate,
                         StartDate = savingContract.StartDate,
@@ -218,7 +216,6 @@ namespace DAL.Repositories
             catch (Exception ex)
             {
                 throw new Exception("Lỗi khi tạo tài khoản tiết kiệm: " + ex.Message);
-                return false;
             }
         }
 
