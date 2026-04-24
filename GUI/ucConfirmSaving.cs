@@ -119,7 +119,7 @@ namespace GUI
                 MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-q
+
         private void BtnExit_Click(object sender, EventArgs e)
         {
             // Thoát khỏi form hoặc quay lại
