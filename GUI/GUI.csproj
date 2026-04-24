@@ -178,6 +178,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\UserSession.cs" />
+    <Compile Include="ucConfirmSaving.Designer.cs" />
     <EmbeddedResource Include="Authentication\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
