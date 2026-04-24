@@ -64,6 +64,7 @@
             this.txtPrincialAmount.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.txtPrincialAmount.StateCommon.Border.Rounding = 15F;
             this.txtPrincialAmount.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.txtPrincialAmount.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrincialAmount.TabIndex = 1;
             // 
             // txtDesc
@@ -75,6 +76,7 @@
             this.txtDesc.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.txtDesc.StateCommon.Border.Rounding = 15F;
             this.txtDesc.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.txtDesc.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDesc.TabIndex = 2;
             // 
             // btnPre
@@ -152,7 +154,7 @@
             // 
             this.btnWedding.Location = new System.Drawing.Point(366, 629);
             this.btnWedding.Name = "btnWedding";
-            this.btnWedding.Size = new System.Drawing.Size(90, 36);
+            this.btnWedding.Size = new System.Drawing.Size(115, 36);
             this.btnWedding.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.btnWedding.StateCommon.Back.Color2 = System.Drawing.Color.LightCyan;
             this.btnWedding.StateCommon.Border.Rounding = 15F;
@@ -176,7 +178,7 @@
             // 
             // btnTour
             // 
-            this.btnTour.Location = new System.Drawing.Point(475, 629);
+            this.btnTour.Location = new System.Drawing.Point(505, 629);
             this.btnTour.Name = "btnTour";
             this.btnTour.Size = new System.Drawing.Size(90, 36);
             this.btnTour.StateCommon.Back.Color1 = System.Drawing.Color.White;

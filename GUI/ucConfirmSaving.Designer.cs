@@ -41,11 +41,14 @@
             this.btnProvison = new Krypton.Toolkit.KryptonCheckBox();
             this.btnConfirm = new Krypton.Toolkit.KryptonButton();
             this.btnExit = new Krypton.Toolkit.KryptonButton();
-            this.panelCheckPassword = new Krypton.Toolkit.KryptonPanel();
             this.btnPassword = new Krypton.Toolkit.KryptonButton();
             this.txtCheckPassword = new Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
+            this.panelCheckPassword = new Krypton.Toolkit.KryptonGroup();
+            this.btnExitCheckPassword = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelCheckPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelCheckPassword.Panel)).BeginInit();
+            this.panelCheckPassword.Panel.SuspendLayout();
             this.panelCheckPassword.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -175,21 +178,9 @@
             this.btnExit.Values.ImageTransparentColor = System.Drawing.Color.Black;
             this.btnExit.Values.Text = "";
             // 
-            // panelCheckPassword
-            // 
-            this.panelCheckPassword.Controls.Add(this.btnPassword);
-            this.panelCheckPassword.Controls.Add(this.txtCheckPassword);
-            this.panelCheckPassword.Controls.Add(this.kryptonLabel1);
-            this.panelCheckPassword.Location = new System.Drawing.Point(186, 524);
-            this.panelCheckPassword.Name = "panelCheckPassword";
-            this.panelCheckPassword.Size = new System.Drawing.Size(1029, 260);
-            this.panelCheckPassword.StateCommon.Color1 = System.Drawing.Color.White;
-            this.panelCheckPassword.StateCommon.Color2 = System.Drawing.Color.White;
-            this.panelCheckPassword.TabIndex = 12;
-            // 
             // btnPassword
             // 
-            this.btnPassword.Location = new System.Drawing.Point(391, 166);
+            this.btnPassword.Location = new System.Drawing.Point(363, 128);
             this.btnPassword.Name = "btnPassword";
             this.btnPassword.Size = new System.Drawing.Size(190, 55);
             this.btnPassword.StateCommon.Back.Color1 = System.Drawing.Color.Gray;
@@ -204,18 +195,21 @@
             // 
             // txtCheckPassword
             // 
-            this.txtCheckPassword.Location = new System.Drawing.Point(303, 85);
-            this.txtCheckPassword.Multiline = true;
+            this.txtCheckPassword.Location = new System.Drawing.Point(270, 66);
+            this.txtCheckPassword.Multiline = false;
             this.txtCheckPassword.Name = "txtCheckPassword";
             this.txtCheckPassword.Size = new System.Drawing.Size(395, 45);
             this.txtCheckPassword.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.txtCheckPassword.StateCommon.Border.Rounding = 15F;
             this.txtCheckPassword.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.txtCheckPassword.UseSystemPasswordChar = true;
+            this.txtCheckPassword.ReadOnly = false;
+            this.txtCheckPassword.Enabled = true;
             this.txtCheckPassword.TabIndex = 4;
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(348, 25);
+            this.kryptonLabel1.Location = new System.Drawing.Point(315, 16);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(350, 31);
             this.kryptonLabel1.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -223,6 +217,37 @@
             this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonLabel1.TabIndex = 3;
             this.kryptonLabel1.Values.Text = "Vui lòng nhập mật khẩu";
+            // 
+            // panelCheckPassword
+            // 
+            this.panelCheckPassword.Location = new System.Drawing.Point(211, 555);
+            // 
+            // panelCheckPassword.Panel
+            // 
+            this.panelCheckPassword.Panel.Controls.Add(this.btnExitCheckPassword);
+            this.panelCheckPassword.Panel.Controls.Add(this.btnPassword);
+            this.panelCheckPassword.Panel.Controls.Add(this.txtCheckPassword);
+            this.panelCheckPassword.Panel.Controls.Add(this.kryptonLabel1);
+            this.panelCheckPassword.Size = new System.Drawing.Size(966, 214);
+            this.panelCheckPassword.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.panelCheckPassword.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.panelCheckPassword.StateCommon.Border.Color1 = System.Drawing.Color.Cyan;
+            this.panelCheckPassword.StateCommon.Border.Rounding = 15F;
+            this.panelCheckPassword.TabIndex = 13;
+            // 
+            // btnExitCheckPassword
+            // 
+            this.btnExitCheckPassword.Location = new System.Drawing.Point(893, 12);
+            this.btnExitCheckPassword.Name = "btnExitCheckPassword";
+            this.btnExitCheckPassword.Size = new System.Drawing.Size(35, 35);
+            this.btnExitCheckPassword.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.btnExitCheckPassword.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.btnExitCheckPassword.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnExitCheckPassword.StateCommon.Back.Image")));
+            this.btnExitCheckPassword.StateCommon.Back.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnExitCheckPassword.TabIndex = 12;
+            this.btnExitCheckPassword.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            this.btnExitCheckPassword.Values.Text = "";
+            this.btnExitCheckPassword.Click += new System.EventHandler(this.btnExitCheckPassword_Click);
             // 
             // ucConfirmSaving
             // 
@@ -246,9 +271,11 @@
             this.Name = "ucConfirmSaving";
             this.Size = new System.Drawing.Size(1387, 791);
             this.Load += new System.EventHandler(this.ucConfirmSaving_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.panelCheckPassword.Panel)).EndInit();
+            this.panelCheckPassword.Panel.ResumeLayout(false);
+            this.panelCheckPassword.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelCheckPassword)).EndInit();
             this.panelCheckPassword.ResumeLayout(false);
-            this.panelCheckPassword.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -268,9 +295,10 @@
         private Krypton.Toolkit.KryptonCheckBox btnProvison;
         private Krypton.Toolkit.KryptonButton btnConfirm;
         private Krypton.Toolkit.KryptonButton btnExit;
-        private Krypton.Toolkit.KryptonPanel panelCheckPassword;
         private Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private Krypton.Toolkit.KryptonTextBox txtCheckPassword;
         private Krypton.Toolkit.KryptonButton btnPassword;
+        private Krypton.Toolkit.KryptonGroup panelCheckPassword;
+        private Krypton.Toolkit.KryptonButton btnExitCheckPassword;
     }
 }
