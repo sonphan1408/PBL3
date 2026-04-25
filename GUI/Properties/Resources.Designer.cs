@@ -93,6 +93,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _656362958_1425254056280893_416290663166627344_n1 {
+            get {
+                object obj = ResourceManager.GetObject("656362958_1425254056280893_416290663166627344_n1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap banking_business_banner_finance_savings_abstract_silhouette_city_background_vector_illustration_84498592__1_ {
             get {
                 object obj = ResourceManager.GetObject("banking-business-banner-finance-savings-abstract-silhouette-city-background-vecto" +
