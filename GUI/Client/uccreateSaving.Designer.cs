@@ -46,7 +46,7 @@
             // cbTermMonths
             // 
             this.cbTermMonths.DropDownWidth = 471;
-            this.cbTermMonths.Location = new System.Drawing.Point(145, 448);
+            this.cbTermMonths.Location = new System.Drawing.Point(455, 436);
             this.cbTermMonths.Name = "cbTermMonths";
             this.cbTermMonths.Size = new System.Drawing.Size(432, 35);
             this.cbTermMonths.StateCommon.ComboBox.Border.Rounding = 10F;
@@ -57,29 +57,31 @@
             // 
             // txtPrincialAmount
             // 
-            this.txtPrincialAmount.Location = new System.Drawing.Point(145, 325);
+            this.txtPrincialAmount.Location = new System.Drawing.Point(455, 321);
             this.txtPrincialAmount.Multiline = true;
             this.txtPrincialAmount.Name = "txtPrincialAmount";
             this.txtPrincialAmount.Size = new System.Drawing.Size(395, 45);
             this.txtPrincialAmount.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.txtPrincialAmount.StateCommon.Border.Rounding = 15F;
             this.txtPrincialAmount.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.txtPrincialAmount.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrincialAmount.TabIndex = 1;
             // 
             // txtDesc
             // 
-            this.txtDesc.Location = new System.Drawing.Point(145, 561);
+            this.txtDesc.Location = new System.Drawing.Point(455, 558);
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(395, 45);
             this.txtDesc.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.txtDesc.StateCommon.Border.Rounding = 15F;
             this.txtDesc.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.txtDesc.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDesc.TabIndex = 2;
             // 
             // btnPre
             // 
-            this.btnPre.Location = new System.Drawing.Point(160, 689);
+            this.btnPre.Location = new System.Drawing.Point(455, 671);
             this.btnPre.Name = "btnPre";
             this.btnPre.Size = new System.Drawing.Size(195, 68);
             this.btnPre.StateCommon.Back.Color1 = System.Drawing.Color.Gray;
@@ -95,7 +97,7 @@
             // 
             // btnContinue
             // 
-            this.btnContinue.Location = new System.Drawing.Point(382, 689);
+            this.btnContinue.Location = new System.Drawing.Point(728, 671);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(183, 68);
             this.btnContinue.StateCommon.Back.Color1 = System.Drawing.Color.Gray;
@@ -115,7 +117,7 @@
             this.lblAccountNumber.BackColor = System.Drawing.Color.Transparent;
             this.lblAccountNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAccountNumber.ForeColor = System.Drawing.Color.Red;
-            this.lblAccountNumber.Location = new System.Drawing.Point(131, 161);
+            this.lblAccountNumber.Location = new System.Drawing.Point(433, 161);
             this.lblAccountNumber.Name = "lblAccountNumber";
             this.lblAccountNumber.Padding = new System.Windows.Forms.Padding(5);
             this.lblAccountNumber.Size = new System.Drawing.Size(74, 32);
@@ -128,7 +130,7 @@
             this.lblBalance.BackColor = System.Drawing.Color.Transparent;
             this.lblBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBalance.ForeColor = System.Drawing.Color.Red;
-            this.lblBalance.Location = new System.Drawing.Point(423, 161);
+            this.lblBalance.Location = new System.Drawing.Point(744, 161);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Padding = new System.Windows.Forms.Padding(5);
             this.lblBalance.Size = new System.Drawing.Size(74, 32);
@@ -137,7 +139,7 @@
             // 
             // btnHouse
             // 
-            this.btnHouse.Location = new System.Drawing.Point(145, 629);
+            this.btnHouse.Location = new System.Drawing.Point(455, 620);
             this.btnHouse.Name = "btnHouse";
             this.btnHouse.Size = new System.Drawing.Size(90, 36);
             this.btnHouse.StateCommon.Back.Color1 = System.Drawing.Color.White;
@@ -150,9 +152,9 @@
             // 
             // btnWedding
             // 
-            this.btnWedding.Location = new System.Drawing.Point(366, 629);
+            this.btnWedding.Location = new System.Drawing.Point(681, 620);
             this.btnWedding.Name = "btnWedding";
-            this.btnWedding.Size = new System.Drawing.Size(90, 36);
+            this.btnWedding.Size = new System.Drawing.Size(115, 36);
             this.btnWedding.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.btnWedding.StateCommon.Back.Color2 = System.Drawing.Color.LightCyan;
             this.btnWedding.StateCommon.Border.Rounding = 15F;
@@ -163,7 +165,7 @@
             // 
             // btnCar
             // 
-            this.btnCar.Location = new System.Drawing.Point(253, 629);
+            this.btnCar.Location = new System.Drawing.Point(560, 620);
             this.btnCar.Name = "btnCar";
             this.btnCar.Size = new System.Drawing.Size(90, 36);
             this.btnCar.StateCommon.Back.Color1 = System.Drawing.Color.White;
@@ -176,7 +178,7 @@
             // 
             // btnTour
             // 
-            this.btnTour.Location = new System.Drawing.Point(475, 629);
+            this.btnTour.Location = new System.Drawing.Point(821, 620);
             this.btnTour.Name = "btnTour";
             this.btnTour.Size = new System.Drawing.Size(90, 36);
             this.btnTour.StateCommon.Back.Color1 = System.Drawing.Color.White;

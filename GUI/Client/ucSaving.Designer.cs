@@ -33,6 +33,7 @@
             this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
             this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel2 = new Krypton.Toolkit.KryptonPanel();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnTermSaving = new System.Windows.Forms.RadioButton();
             this.btnInstallmentSaving = new System.Windows.Forms.RadioButton();
@@ -52,7 +53,6 @@
             this.kryptonGroup3 = new Krypton.Toolkit.KryptonGroup();
             this.btnTerm = new Krypton.Toolkit.KryptonGroup();
             this.btnInstallment = new Krypton.Toolkit.KryptonGroup();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -107,6 +107,16 @@
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(418, 730);
             this.kryptonPanel2.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(193, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 16);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "label4";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // groupBox1
             // 
@@ -318,6 +328,8 @@
             // 
             // btnTerm.Panel
             // 
+            this.btnTerm.Panel.Click += new System.EventHandler(this.btnTerm_Panel_Click);
+            this.btnTerm.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.btnTerm_Panel_Paint);
             this.btnTerm.Panel.MouseEnter += new System.EventHandler(this.btnTerm_MouseEnter);
             this.btnTerm.Panel.MouseLeave += new System.EventHandler(this.btnTerm_MouseLeave);
             this.btnTerm.Size = new System.Drawing.Size(269, 209);
@@ -344,16 +356,6 @@
             this.btnInstallment.TabIndex = 0;
             this.btnInstallment.MouseEnter += new System.EventHandler(this.btnInstallment_MouseEnter);
             this.btnInstallment.MouseLeave += new System.EventHandler(this.btnInstallment_MouseLeave);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(193, 54);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 16);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "label4";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // ucSaving
             // 

@@ -14,5 +14,19 @@ namespace GUI.Session
         {
             CurrentUser = null;
         }
+        public static event Action BalanceChanged;
+
+      
+        public static void UpdateBalance(decimal amountToDeduct)
+        {
+            if (CurrentUser != null)
+            {
+                // Trừ tiền ngay trên RAM (Session)
+                CurrentUser.Balance -= amountToDeduct;
+
+                // PHÁT LOA! Gọi tất cả những Form nào đang đăng ký nghe sự kiện này
+                BalanceChanged?.Invoke();
+            }
+        }
     }
 }

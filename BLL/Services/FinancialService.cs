@@ -146,12 +146,14 @@ namespace BLL.Services
                 // Lưu tiết kiệm vào database
                 bool saved = FinancialDAL.CreateSavingAccount(savingContract);
 
+
                 if (!saved)
                 {
                    
                    
                     throw new Exception("Lỗi khi tạo tài khoản tiết kiệm!");
                 }
+                
 
                 // Tạo ghi chép SavingTransaction
                 FinancialDAL.CreateSavingTransaction(savingContract.ContractID, "Opening", savingContract.PrincipalAmount, "Mở tài khoản tiết kiệm");

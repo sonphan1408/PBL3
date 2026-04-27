@@ -176,13 +176,30 @@ namespace GUI.Client
 
         private void btnInstallment_Panel_Click(object sender, EventArgs e)
         {
-            uccreateSaving createSaving = new uccreateSaving();
+            string savingType = "Installment";
+            uccreateSaving createSaving = new uccreateSaving(savingType);
             createSaving.NavigateTo = this.NavigateTo;
             if (NavigateTo != null)
             {        
                 NavigateTo(createSaving);
             }
            
+        }
+
+        private void btnTerm_Panel_Paint(object sender, PaintEventArgs e)
+        {
+           
+        }
+
+        private void btnTerm_Panel_Click(object sender, EventArgs e)
+        {
+            string savingType = "Term";
+            uccreateSaving createSaving = new uccreateSaving(savingType);
+            createSaving.NavigateTo = this.NavigateTo;
+            if (NavigateTo != null)
+            {
+                NavigateTo(createSaving);
+            }
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using DTO.Models;
+﻿using BLL.Services;
+using DTO.Models;
+using GUI.Client;
+using GUI.Session;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,8 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BLL.Services;
-using GUI.Client;
 
 namespace GUI
 {
@@ -26,7 +27,7 @@ namespace GUI
         private void ucConfirmSaving_Load(object sender, EventArgs e)
         {
             // Ẩn panel check password ban đầu
-            panelCheckPassword.Visible = false;
+           panelCheckPassword.Visible = false;
 
             if (Data != null)
             {
@@ -38,6 +39,10 @@ namespace GUI
                 if(Data.SavingType == "Installment")
                 {
                     lblSavingType.Text = "Gửi góp";
+                }
+                else
+                {
+                    lblSavingType.Text = "Có kỳ hạn";
                 }
 
                lblMaturityInterest.Text = Data.AccruedInterest.ToString("N0") + " VNĐ";
@@ -62,7 +67,7 @@ namespace GUI
                 return;
             }
             panelCheckPassword.Visible = true;
-            txtCheckPassword.Clear();
+           
             txtCheckPassword.Focus();
 
         }
@@ -97,7 +102,10 @@ namespace GUI
                     MessageBox.Show("Tài khoản tiết kiệm đã được tạo thành công!.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     panelCheckPassword.Visible = false;
                     txtCheckPassword.Clear();
+                    UserSession.UpdateBalance(Data.PrincipalAmount);
+
                     ucSaving saving = new ucSaving();
+                    saving.NavigateTo = this.NavigateTo;
 
                     NavigateTo(saving);
                 }
@@ -118,12 +126,19 @@ namespace GUI
             panelCheckPassword.Visible = false;
             txtCheckPassword.Clear();
             ucSaving saving = new ucSaving();
-
+            saving.NavigateTo = this.NavigateTo;
             NavigateTo(saving);
         }
 
         private void lblContractId_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnExitCheckPassword_Click(object sender, EventArgs e)
+        {
+            panelCheckPassword.Visible = false;
+            txtCheckPassword.Clear();
 
         }
     }
