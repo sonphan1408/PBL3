@@ -297,6 +297,10 @@ namespace GUI.Client
         private void frmClientDashboard_Load(object sender, EventArgs e) 
         { 
             SetupNotificationIcon();
+
+            // ✅ Subscribe vào event từ UserSession
+            UserSession.OnNotification += UserSession_OnNotification;
+
             //// Lấy tên người dùng hiện tại từ Database nếu có
             //try
             //{
@@ -318,6 +322,29 @@ namespace GUI.Client
             //{
             //    lblUserName.Text = CurrentUsername;
             //}
+        }
+
+        // ✅ Handler khi có notification event
+        private void UserSession_OnNotification(string message, string type)
+        {
+            // Refresh notifications từ database
+            RefreshNotifications();
+        }
+
+        // ✅ Refresh notifications
+        private void RefreshNotifications()
+        {
+            try
+            {
+                LoadNotificationsToDropdown();
+                pnlNotificationDropdown.Visible = true;
+                pnlNotificationDropdown.BringToFront();
+                UpdateNotificationBadge();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error refreshing notifications: " + ex.Message);
+            }
         }
         private void pnlLogo_Paint(object sender, PaintEventArgs e) { }
         private void textBox1_TextChanged(object sender, EventArgs e) { }
