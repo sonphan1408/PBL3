@@ -17,6 +17,7 @@ namespace GUI
     public partial class ucConfirmSaving : UserControl
     {
         public Action<UserControl> NavigateTo;
+        public Action<UserControl> NavigateTo1;
         private SavingContractsDTO Data;
         public ucConfirmSaving(SavingContractsDTO draff)
         {
@@ -104,10 +105,11 @@ namespace GUI
                     txtCheckPassword.Clear();
                     UserSession.UpdateBalance(Data.PrincipalAmount);
 
-                    ucSaving saving = new ucSaving();
-                    saving.NavigateTo = this.NavigateTo;
+                   ucListSaving listSaving = new ucListSaving();
+                    listSaving.NavigateTo = this.NavigateTo;
+                    listSaving.NavigateTo1 = this.NavigateTo1;
 
-                    NavigateTo(saving);
+                    NavigateTo(listSaving);
                 }
                 else
                 {
@@ -125,9 +127,7 @@ namespace GUI
             // Thoát khỏi form hoặc quay lại
             panelCheckPassword.Visible = false;
             txtCheckPassword.Clear();
-            ucSaving saving = new ucSaving();
-            saving.NavigateTo = this.NavigateTo;
-            NavigateTo(saving);
+            this.Dispose();
         }
 
         private void lblContractId_Click(object sender, EventArgs e)

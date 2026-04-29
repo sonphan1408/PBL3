@@ -18,6 +18,7 @@ namespace GUI.Client
     {
         private string savingType;
         public Action<UserControl> NavigateTo;
+        public Action<UserControl> NavigateTo1;
 
         public uccreateSaving(string savingType)
         {
@@ -118,24 +119,17 @@ namespace GUI.Client
 
             ucConfirmSaving confirmSaving = new ucConfirmSaving(draff);
             confirmSaving.NavigateTo = this.NavigateTo;
+            confirmSaving.NavigateTo1 = this.NavigateTo1;
 
-            if (NavigateTo != null)
+            if (NavigateTo1 != null)  
             {
-                NavigateTo( confirmSaving);
+                NavigateTo1( confirmSaving);
             }
         }
 
         private void btnPre_Click(object sender, EventArgs e)
         {
-            ucSaving saving = new ucSaving();
-            saving.NavigateTo = this
-                .NavigateTo;
-
-
-            if (NavigateTo != null)
-            {
-                NavigateTo(saving);
-            }
+          this.Dispose();
 
         }
 

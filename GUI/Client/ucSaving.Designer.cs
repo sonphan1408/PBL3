@@ -53,6 +53,7 @@
             this.kryptonGroup3 = new Krypton.Toolkit.KryptonGroup();
             this.btnTerm = new Krypton.Toolkit.KryptonGroup();
             this.btnInstallment = new Krypton.Toolkit.KryptonGroup();
+            this.kryptonButton1 = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -102,6 +103,7 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.kryptonButton1);
             this.kryptonPanel2.Controls.Add(this.label4);
             this.kryptonPanel2.Location = new System.Drawing.Point(887, 23);
             this.kryptonPanel2.Name = "kryptonPanel2";
@@ -357,6 +359,16 @@
             this.btnInstallment.MouseEnter += new System.EventHandler(this.btnInstallment_MouseEnter);
             this.btnInstallment.MouseLeave += new System.EventHandler(this.btnInstallment_MouseLeave);
             // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Location = new System.Drawing.Point(150, 208);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.Size = new System.Drawing.Size(90, 25);
+            this.kryptonButton1.TabIndex = 1;
+            this.kryptonButton1.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            this.kryptonButton1.Values.Text = "kryptonButton1";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            // 
             // ucSaving
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -433,5 +445,6 @@
         private Krypton.Toolkit.KryptonGroup btnInstallment;
         private Krypton.Toolkit.KryptonGroup btnTerm;
         private System.Windows.Forms.Label label4;
+        private Krypton.Toolkit.KryptonButton kryptonButton1;
     }
 }

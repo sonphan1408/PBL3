@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BLL.Services;
 using DTO.Models;
+using GUI.Session;
 
 namespace GUI.Client
 {
@@ -122,7 +123,7 @@ namespace GUI.Client
 
             try
             {
-                List<SavingContractsDTO> savings = FinancialService.GetSavingsByCustomer(currentAccount.CustomerID);
+                List<SavingContractsDTO> savings = FinancialService.GetSavingContractsByAccountNumber(UserSession.CurrentUser.AccountNumber);
 
                 if (savings != null && savings.Count > 0)
                 {

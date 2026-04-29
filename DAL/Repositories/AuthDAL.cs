@@ -34,8 +34,9 @@ namespace DAL.Repositories
                             Username = account.Username,
                             Role = "Customer", 
                             Balance = account.Balance ?? 0, 
-                            Status = account.Status
-                           
+                            Status = account.Status,
+                            CustomerID = account.CustomerID
+
                         };
                     }
 

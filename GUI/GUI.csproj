@@ -154,6 +154,7 @@
     <Compile Include="Client\uccreateSaving.Designer.cs">
       <DependentUpon>uccreateSaving.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client\ucListSaving.cs" />
     <Compile Include="Client\ucTransfer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -187,11 +188,47 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\UserSession.cs" />
+    <Compile Include="ucConfirmDeposit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucConfirmDeposit.Designer.cs">
+      <DependentUpon>ucConfirmDeposit.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucConfirmSaving.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucConfirmSaving.Designer.cs">
       <DependentUpon>ucConfirmSaving.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucDeposit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucDeposit.Designer.cs">
+      <DependentUpon>ucDeposit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucDetailSaving.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucDetailSaving.Designer.cs">
+      <DependentUpon>ucDetailSaving.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucListSaving.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucListSaving.Designer.cs">
+      <DependentUpon>ucListSaving.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucSavingCardInstallment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucSavingCardInstallment.Designer.cs">
+      <DependentUpon>ucSavingCardInstallment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucSavingTransactionCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucSavingTransactionCard.Designer.cs">
+      <DependentUpon>ucSavingTransactionCard.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Admin\frmAdminDashboard.resx">
       <DependentUpon>frmAdminDashboard.cs</DependentUpon>
@@ -233,8 +270,26 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ucConfirmDeposit.resx">
+      <DependentUpon>ucConfirmDeposit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucConfirmSaving.resx">
       <DependentUpon>ucConfirmSaving.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucDeposit.resx">
+      <DependentUpon>ucDeposit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucDetailSaving.resx">
+      <DependentUpon>ucDetailSaving.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucListSaving.resx">
+      <DependentUpon>ucListSaving.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucSavingCardInstallment.resx">
+      <DependentUpon>ucSavingCardInstallment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucSavingTransactionCard.resx">
+      <DependentUpon>ucSavingTransactionCard.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

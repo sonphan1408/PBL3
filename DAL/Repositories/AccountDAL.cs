@@ -179,5 +179,31 @@ namespace DAL.Repositories
                 throw new Exception("Lỗi khi cộng tiền: " + ex.Message);
             }
         }
+        public static string GetFullNameByCustomerId(int customerId)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities()) // Gọi DB Context của bạn
+                {
+                    // 1. Tìm khách hàng có ID khớp với tham số truyền vào
+                    var khachHang = db.Customers.FirstOrDefault(c => c.CustomerID == customerId);
+
+                    // 2. Nếu tìm thấy, trả về tên
+                    if (khachHang != null)
+                    {
+                        return khachHang.FullName; // Thay 'FullName' bằng tên cột thật trong DB của bạn nếu khác
+                    }
+
+                    // 3. Nếu không tìm thấy (ID không tồn tại)
+                    return "Không tìm thấy khách hàng";
+                }
+            }
+            catch (Exception ex)
+            {
+                // Bắt lỗi rớt mạng SQL hoặc lỗi truy vấn
+                Console.WriteLine("Lỗi lấy tên khách hàng: " + ex.Message);
+                return ""; // Trả về chuỗi rỗng để giao diện không bị lỗi hiển thị chữ null
+            }
+        }
     }
 }

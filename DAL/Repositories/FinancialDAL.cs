@@ -8,27 +8,27 @@ namespace DAL.Repositories
 {
     public class FinancialDAL
     {
-        public static List<SavingContractsDTO> GetSavingsByCustomer(int customerId)
+        public static List<SavingContractsDTO> GetSavingsByAccountNumber(string accountNumber)
         {
             try
             {
                 using (var db = new DigitalBankingDBEntities())
                 {
-                    var accountNumbers = db.Accounts
-                        .Where(a => a.CustomerID == customerId)
-                        .Select(a => a.AccountNumber)
-                        .ToList();
-
                     var savings = db.SavingContracts
-                        .Where(s => accountNumbers.Contains(s.AccountNumber) && s.Status == "Active")
+                        .Where(s => s.AccountNumber == accountNumber && s.Status == "Active")
+                        .OrderByDescending(s => s.StartDate)
                         .Select(s => new SavingContractsDTO
                         {
                             ContractID = s.ContractID,
                             AccountNumber = s.AccountNumber,
                             PrincipalAmount = s.PrincipalAmount,
+                            TermMonths = s.TermMonths,
                             SavingType = s.SavingTypes,
                             InterestRate = s.InterestRate,
+                            AccruedInterest = s.AccruedInterest ?? 0m,
                             Status = s.Status,
+                            CurrentBalance = s.CurrentBalance,
+                            Goal = s.Goal,
                             StartDate = s.StartDate,
                             EndDate = s.EndDate
                         })
@@ -149,7 +149,7 @@ namespace DAL.Repositories
                     return db.InterestRates
                         .Where(r => r.Category == category)
                         .OrderBy(r => r.TermMonths)
-                        .ToList()  
+                        .ToList()
                         .Select(r => new InterestRateDTO
                         {
                             RateID = r.RateID,
@@ -218,7 +218,7 @@ namespace DAL.Repositories
             catch (Exception ex)
             {
                 throw new Exception("Lỗi khi tạo tài khoản tiết kiệm: " + ex.Message);
-                return false;
+
             }
         }
 
@@ -247,8 +247,82 @@ namespace DAL.Repositories
                 throw new Exception("Lỗi khi tạo ghi chép tiết kiệm: " + ex.Message);
             }
         }
+        public static dynamic GetSavingTransactions(string contractId, DateTime fromDate, DateTime toDate)
+        {
+            using (var db = new DigitalBankingDBEntities())
+            {
+                // Chuẩn hóa ngày: 00:00:00 ngày bắt đầu -> 23:59:59 ngày kết thúc
+                DateTime start = fromDate.Date;
+                DateTime end = toDate.Date.AddDays(1).AddTicks(-1);
+
+                var list = db.SavingTransactions
+                    .Where(t => t.ContractID == contractId
+                             && t.TransactionDate >= start
+                             && t.TransactionDate <= end)
+                    .OrderByDescending(t => t.TransactionDate)
+                    .Select(t => new SavingTransactionDTO
+                    {
+                        TransactionID = t.TransactionID,
+                        TransactionDate = t.TransactionDate ?? DateTime.Now,
+                        TransactionType = t.TransactionType, // Ví dụ: Gửi thêm, Rút gốc, Nhận lãi
+                        Amount = t.Amount,
+                        Note = t.Notes
+                    })
+                    .ToList();
+
+                return list;
+            }
+        }
+        public static bool UpdateFinalSettlement(string contractId, decimal finalAmount, decimal accruedInterest, DateTime endDate)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities())
+                {
+                    var contract = db.SavingContracts.FirstOrDefault(s => s.ContractID == contractId);
+                    if (contract != null && contract.Status == "Active")
+                    {
+                        contract.CurrentBalance = 0m;
+                        contract.Status = "Closed";
+                        contract.EndDate = endDate;
+                        contract.AccruedInterest = accruedInterest;
+                        db.SaveChanges();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi tất toán tiết kiệm: " + ex.Message);
+            }
 
 
+        }
+        public static bool UpdateDeposit(string contractId, decimal depositAmount, decimal newInterest)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities())
+                {
+                    var contract = db.SavingContracts.FirstOrDefault(s => s.ContractID == contractId);
+                    if (contract != null && contract.Status == "Active")
+                    {
+                        contract.CurrentBalance += depositAmount;
+                       
+                        
+                        contract.AccruedInterest += newInterest;
+                        db.SaveChanges();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi tất toán tiết kiệm: " + ex.Message);
+            }
+        }
     }
 }
 

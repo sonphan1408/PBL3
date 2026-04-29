@@ -28,5 +28,18 @@ namespace GUI.Session
                 BalanceChanged?.Invoke();
             }
         }
+
+        public static void AddBalance(decimal amountToDeduct)
+        {
+            if (CurrentUser != null)
+            {
+                
+                CurrentUser.Balance += amountToDeduct;
+
+              
+                BalanceChanged?.Invoke();
+            }
+        }
+
     }
 }

@@ -16,6 +16,7 @@ namespace GUI.Client
         ucTransfer transfer;
         ucConfirmSaving confirmSaving;
         uccreateSaving createSaving;
+        ucListSaving listSaving;
         
         public string CurrentUsername { get; private set; }
 
@@ -25,8 +26,12 @@ namespace GUI.Client
             InitializeComponent(); 
 
             home = new ucClientHome();
-            saving = new ucSaving();
-            saving.NavigateTo = addUserControl; // Truyền hàm điều hướng vào ucSaving
+            listSaving = new ucListSaving();
+
+            listSaving.NavigateTo = addUserControl;
+            listSaving.NavigateTo1 = addUserControl1;
+
+            // Truyền hàm điều hướng vào ucSaving
             //createSaving = new uccreateSaving();
             //createSaving.NavigateTo = addUserControl;
             //confirmSaving = new ucConfirmSaving();
@@ -60,7 +65,14 @@ namespace GUI.Client
             pnlMain.Controls.Add(uc);
             uc.BringToFront();
         }
-        
+        public void addUserControl1(UserControl uc)
+        {
+            uc.Dock = DockStyle.Fill;
+          
+            pnlMain.Controls.Add(uc);
+            uc.BringToFront();
+        }
+
 
         // Khai báo các biến cho Icon thông báo
         private Button btnNotification;
@@ -286,7 +298,7 @@ namespace GUI.Client
        
         private void btnSaving_Click(object sender, EventArgs e)
         {
-            addUserControl(saving);
+            addUserControl(listSaving);
         }
 
         private void btnHistory_Click(object sender, EventArgs e)

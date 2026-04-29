@@ -192,20 +192,19 @@
             this.btnPassword.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.btnPassword.Values.ImageTransparentColor = System.Drawing.Color.Black;
             this.btnPassword.Values.Text = "";
+            this.btnPassword.Click += new System.EventHandler(this.BtnPassword_Click);
             // 
             // txtCheckPassword
             // 
             this.txtCheckPassword.Location = new System.Drawing.Point(270, 66);
-            this.txtCheckPassword.Multiline = false;
             this.txtCheckPassword.Name = "txtCheckPassword";
-            this.txtCheckPassword.Size = new System.Drawing.Size(395, 45);
+            this.txtCheckPassword.PasswordChar = '●';
+            this.txtCheckPassword.Size = new System.Drawing.Size(395, 37);
             this.txtCheckPassword.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.txtCheckPassword.StateCommon.Border.Rounding = 15F;
             this.txtCheckPassword.StateCommon.Content.Color1 = System.Drawing.Color.Black;
-            this.txtCheckPassword.UseSystemPasswordChar = true;
-            this.txtCheckPassword.ReadOnly = false;
-            this.txtCheckPassword.Enabled = true;
             this.txtCheckPassword.TabIndex = 4;
+            this.txtCheckPassword.UseSystemPasswordChar = true;
             // 
             // kryptonLabel1
             // 
@@ -220,7 +219,7 @@
             // 
             // panelCheckPassword
             // 
-            this.panelCheckPassword.Location = new System.Drawing.Point(211, 555);
+            this.panelCheckPassword.Location = new System.Drawing.Point(216, 565);
             // 
             // panelCheckPassword.Panel
             // 
