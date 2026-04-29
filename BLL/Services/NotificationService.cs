@@ -41,5 +41,18 @@ namespace BLL.Services
             }
             catch { }
         }
+
+        public static bool CreateNotification(string username, string message, string type = "General")
+        {
+            try
+            {
+                return NotificationDAL.CreateNotification(username, message, type);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error creating notification: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

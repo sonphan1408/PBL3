@@ -26,6 +26,8 @@ namespace GUI.Client
         public ucClientHome()
         {
             InitializeComponent();
+            if (this.DesignMode || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime) return;
+
             InitializeUI();
             LoadDataFromDatabase();
         }
@@ -100,14 +102,41 @@ namespace GUI.Client
                 CardNumber = currentAccount.AccountNumber;
 
                 // Get financial information (savings and loans)
-                int savingsCount = FinancialService.GetTotalSavingsAccounts(currentAccount.CustomerID);
-                decimal totalSavings = FinancialService.GetTotalSavings(currentAccount.CustomerID);
-                decimal totalLoans = FinancialService.GetTotalLoans(currentAccount.CustomerID);
+                int savingsCount = 0;
+                decimal totalSavings = 0;
+                decimal totalLoans = 0;
+
+                try
+                {
+                    savingsCount = FinancialService.GetTotalSavingsAccounts(currentAccount.CustomerID);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Warning: Could not load savings count: " + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                try
+                {
+                    totalSavings = FinancialService.GetTotalSavings(currentAccount.CustomerID);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Warning: Could not load total savings: " + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                try
+                {
+                    totalLoans = FinancialService.GetTotalLoans(currentAccount.CustomerID);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Warning: Could not load total loans: " + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
                 // Update financial info labels (if they exist)
                 // Note: Adjust control names based on your actual Designer
-                SavingsAmount = savingsCount.ToString();
-                LoansAmount = totalLoans > 0 ? totalLoans.ToString("F2") : "0";
+                SavingsAmount = "0"; // savingsCount.ToString();
+                LoansAmount = "0"; // totalLoans > 0 ? totalLoans.ToString("F2") : "0";
 
                 // Load transactions
                 transactions = TransactionService.GetTransactionsByAccount(currentAccount.AccountNumber, 10);
