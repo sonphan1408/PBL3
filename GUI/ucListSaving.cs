@@ -61,16 +61,34 @@ namespace GUI
                 foreach (var savingContract in savingContracts)
                 {
                     // Tạo ucSavingCardInstallment để hiển thị dữ liệu
-                    ucSavingCardInstallment savingCard = new ucSavingCardInstallment();
-                    savingCard.SetData(savingContract);
-                    savingCard.NavigateTo = this.NavigateTo;
-                    savingCard.NavigateTo1 = this.NavigateTo1;
-                    // Thiết lập kích thước card để fit với FlowLayout
-                    savingCard.Width = flowLayoutListSaving.Width - 20; // Trừ đi padding
-                    //savingCard.Height = 200; // Chiều cao card
-                    //savingCard.Width = flowLayoutListSaving.ClientSize.Width - 25;
-                    // Thêm card vào FlowLayout
-                    flowLayoutListSaving.Controls.Add(savingCard);
+                    if(savingContract.SavingType == "Installment")
+                          
+                    {
+                        ucSavingCardInstallment savingCard = new ucSavingCardInstallment();
+                        savingCard.SetData(savingContract);
+                        savingCard.NavigateTo = this.NavigateTo;
+                        savingCard.NavigateTo1 = this.NavigateTo1;
+                        // Thiết lập kích thước card để fit với FlowLayout
+                        savingCard.Width = flowLayoutListSaving.Width - 20; // Trừ đi padding
+                                                                            //savingCard.Height = 200; // Chiều cao card
+                                                                            //savingCard.Width = flowLayoutListSaving.ClientSize.Width - 25;
+                                                                            // Thêm card vào FlowLayout
+                        flowLayoutListSaving.Controls.Add(savingCard);
+
+                    }else if(savingContract.SavingType == "Term")
+                    {
+                        ucSavingCardTerm savingCard = new ucSavingCardTerm();
+                        savingCard.SetData(savingContract);
+                        savingCard.NavigateTo = this.NavigateTo;
+                        savingCard.NavigateTo1 = this.NavigateTo1;
+                        // Thiết lập kích thước card để fit với FlowLayout
+                        savingCard.Width = flowLayoutListSaving.Width - 20; // Trừ đi padding
+                                                                            //savingCard.Height = 200; // Chiều cao card
+                                                                            //savingCard.Width = flowLayoutListSaving.ClientSize.Width - 25;
+                                                                            // Thêm card vào FlowLayout
+                        flowLayoutListSaving.Controls.Add(savingCard);
+                    }
+
                     totalDeposit += savingContract.CurrentBalance;
                     totalExpectedInterest += savingContract.AccruedInterest;
                 }

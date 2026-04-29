@@ -11,14 +11,14 @@ using DTO.Models;
 
 namespace GUI
 {
-    public partial class ucSavingCardInstallment : UserControl
+    public partial class ucSavingCardTerm : UserControl
 
     {
         public Action<UserControl> NavigateTo;
         public Action<UserControl> NavigateTo1;
         private SavingContractsDTO _savingData;
 
-        public ucSavingCardInstallment()
+        public ucSavingCardTerm()
         {
             InitializeComponent();
             panelPassedDay.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.None;
@@ -64,7 +64,7 @@ namespace GUI
                 lblContractId.Text = _savingData.ContractID;
                 lblBalance.Text = _savingData.CurrentBalance.ToString("N0") + " VNĐ";
                 lblInterestRate.Text = "(" + _savingData.InterestRate.ToString() + "/năm)";
-                lblAccruedInterest.Text = _savingData.AccruedInterest.ToString("N0") + " VNĐ";
+                lblAccruedInterest.Text = _savingData.AccruedInterest.ToString("N0") + " VNĐ" ;
                 lblStartDate.Text = _savingData.StartDate.ToString("dd/MM/yyyy");
                 lblEndDate.Text = _savingData.EndDate.ToString("dd/MM/yyyy");
 
@@ -151,16 +151,16 @@ namespace GUI
 
         }
 
-        private void btnDeposit_Click(object sender, EventArgs e)
-        {
-            if (NavigateTo != null)
-            {
-                ucDeposit deposit = new ucDeposit();
-                deposit.LoadData(_savingData);
-                deposit.NavigateTo1 = this.NavigateTo1;
-                deposit.NavigateTo = this.NavigateTo;
-                NavigateTo1(deposit);
-            }
-        }
+        //private void btnDeposit_Click(object sender, EventArgs e)
+        //{
+        //    //if (NavigateTo != null)
+        //    //{
+        //    //    ucDeposit deposit = new ucDeposit();
+        //    //    deposit.LoadData(_savingData);
+        //    //    deposit.NavigateTo1 = this.NavigateTo1;
+        //    //    deposit.NavigateTo = this.NavigateTo;
+        //    //    NavigateTo1(deposit);
+        //    //}
+        //}
     }
 }

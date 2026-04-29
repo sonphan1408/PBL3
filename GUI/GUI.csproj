@@ -218,6 +218,12 @@
     <Compile Include="ucListSaving.Designer.cs">
       <DependentUpon>ucListSaving.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucSavingCardTerm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucSavingCardTerm.Designer.cs">
+      <DependentUpon>ucSavingCardTerm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucSavingCardInstallment.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -284,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucListSaving.resx">
       <DependentUpon>ucListSaving.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucSavingCardTerm.resx">
+      <DependentUpon>ucSavingCardTerm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucSavingCardInstallment.resx">
       <DependentUpon>ucSavingCardInstallment.cs</DependentUpon>
