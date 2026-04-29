@@ -66,7 +66,7 @@ namespace BLL.Services
                 _authDAL.RegisterCustomerAndAccount(customer, account);
 
                 // Trả về kết quả thành công kèm số tài khoản ngân hàng
-                return "Tạo thanh công tài khoản mới";
+                return "Tạo thành công tài khoản mới";
             }
             catch (Exception ex)
             {
