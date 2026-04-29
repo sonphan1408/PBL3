@@ -162,6 +162,9 @@
     <EmbeddedResource Include="Authentication\MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Client\frmBill.resx">
+      <DependentUpon>frmBill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Client\frmClientDashboard.resx">
       <DependentUpon>frmClientDashboard.cs</DependentUpon>
     </EmbeddedResource>
