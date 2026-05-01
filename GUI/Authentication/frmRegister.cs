@@ -65,5 +65,15 @@ namespace GUI.Authentication
         {
 
         }
+
+        private void txtFullName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmRegister_Shown(object sender, EventArgs e)
+        {
+            txtFullName.Focus();
+        }
     }
 }

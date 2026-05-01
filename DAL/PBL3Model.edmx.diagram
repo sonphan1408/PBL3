@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1b74d49a7b0a41ca9b154b56a47d47a7" Name="Diagram1">
+      <Diagram DiagramId="1b74d49a7b0a41ca9b154b56a47d47a7" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="DigitalBankingDBModel.Account" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.Customer" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
@@ -36,6 +36,7 @@
         <AssociationConnector Association="DigitalBankingDBModel.FK_LoanRepay_Contract" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_SavingTrans_Contract" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Provider_ServiceType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
