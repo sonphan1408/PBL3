@@ -170,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::GUI.Properties.Resources.BillTransfer;
+            this.BackgroundImage = global::GUI.Properties.Resources.e5c31d18_8b54_4ddf_9fab_07d4c5671275;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1280, 769);
             this.Controls.Add(this.kryptonTextBox8);
@@ -185,7 +185,7 @@
             this.DoubleBuffered = true;
             this.Name = "frmBill";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Bill";
             this.ResumeLayout(false);
             this.PerformLayout();
 

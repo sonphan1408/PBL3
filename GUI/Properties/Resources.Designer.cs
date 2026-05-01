@@ -124,6 +124,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap e5c31d18_8b54_4ddf_9fab_07d4c5671275 {
+            get {
+                object obj = ResourceManager.GetObject("e5c31d18-8b54-4ddf-9fab-07d4c5671275", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Gemini_Generated_Image_jyaunrjyaunrjyau {
             get {
                 object obj = ResourceManager.GetObject("Gemini_Generated_Image_jyaunrjyaunrjyau", resourceCulture);
