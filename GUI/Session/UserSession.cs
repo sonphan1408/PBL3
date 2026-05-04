@@ -38,8 +38,10 @@ namespace GUI.Session
             catch { }
         }
         public static event Action BalanceChanged;
+        public static event Action DataSavingChanged;
 
-      
+
+
         public static void UpdateBalance(decimal amountToDeduct)
         {
             if (CurrentUser != null)
@@ -52,17 +54,25 @@ namespace GUI.Session
             }
         }
 
-        public static void AddBalance(decimal amountToDeduct)
+        public static void AddBalance(decimal amountToAdd)
         {
             if (CurrentUser != null)
             {
                 
-                CurrentUser.Balance += amountToDeduct;
+                CurrentUser.Balance += amountToAdd;
 
               
                 BalanceChanged?.Invoke();
             }
         }
+        public static void LoadSavingData()
+        {
+           
+                DataSavingChanged?.Invoke();
+            
+        }
+
+
 
     }
 }

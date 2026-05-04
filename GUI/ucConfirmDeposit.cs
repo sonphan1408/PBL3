@@ -93,6 +93,7 @@ namespace GUI
                     panelCheckPassword.Visible = false;
                     txtCheckPassword.Clear();
                     UserSession.UpdateBalance(_depositAmount);
+                    UserSession.LoadSavingData();
                     ucListSaving listSaving = new ucListSaving();
                     listSaving.NavigateTo = this.NavigateTo;
                     listSaving.NavigateTo1 = this.NavigateTo1;

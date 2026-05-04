@@ -17,7 +17,8 @@ namespace GUI
 {
     public partial class ucDetailSaving : UserControl
     {
-        public Action<UserControl> NavigateTo;
+        //public Action<UserControl> NavigateTo;
+        public Action<UserControl> NavigateTo1;
         private SavingContractsDTO _savingData;
         public ucDetailSaving()
         {
@@ -231,7 +232,8 @@ namespace GUI
 
                    
                     LoadSavingData();
-                    UpdateProgressBar(); 
+                    UpdateProgressBar();
+                    UserSession.LoadSavingData();
                     btnFinalSettlement.Enabled = false;
                     btnFinalSettlement.Text = "Đã tất toán";
                    
@@ -245,7 +247,10 @@ namespace GUI
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+
             this.Dispose();
+
+
         }
     }
 

@@ -146,7 +146,8 @@ namespace GUI
         {
             ucDetailSaving detailSaving = new ucDetailSaving();
             detailSaving.LoadData(_savingData);
-            //detailSaving.NavigateTo1 = NavigateTo1;
+            //detailSaving.NavigateTo = NavigateTo;
+            detailSaving.NavigateTo1 = NavigateTo1;
             NavigateTo1(detailSaving);
 
         }

@@ -77,15 +77,16 @@ namespace GUI
         {
             string password = txtCheckPassword.Text;
 
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+           
 
             try
             {
-                // Kiểm tra mật khẩu từ database
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                
                 bool passwordValid = FinancialService.CheckPassword(Data.AccountNumber, password);
 
                 if (!passwordValid)
@@ -104,6 +105,7 @@ namespace GUI
                     panelCheckPassword.Visible = false;
                     txtCheckPassword.Clear();
                     UserSession.UpdateBalance(Data.PrincipalAmount);
+                    UserSession.LoadSavingData();
 
                    ucListSaving listSaving = new ucListSaving();
                     listSaving.NavigateTo = this.NavigateTo;
@@ -139,6 +141,11 @@ namespace GUI
         {
             panelCheckPassword.Visible = false;
             txtCheckPassword.Clear();
+
+        }
+
+        private void panelCheckPassword_Panel_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

@@ -227,6 +227,7 @@
             this.panelCheckPassword.Panel.Controls.Add(this.btnPassword);
             this.panelCheckPassword.Panel.Controls.Add(this.txtCheckPassword);
             this.panelCheckPassword.Panel.Controls.Add(this.kryptonLabel1);
+            this.panelCheckPassword.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCheckPassword_Panel_Paint);
             this.panelCheckPassword.Size = new System.Drawing.Size(966, 214);
             this.panelCheckPassword.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.panelCheckPassword.StateCommon.Back.Color2 = System.Drawing.Color.White;

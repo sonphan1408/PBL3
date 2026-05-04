@@ -146,21 +146,22 @@ namespace GUI
         {
             ucDetailSaving detailSaving = new ucDetailSaving();
             detailSaving.LoadData(_savingData);
-            //detailSaving.NavigateTo1 = NavigateTo1;
+            detailSaving.NavigateTo1 = NavigateTo1;
+            //detailSaving.NavigateTo = NavigateTo;
             NavigateTo1(detailSaving);
 
         }
 
-        //private void btnDeposit_Click(object sender, EventArgs e)
-        //{
-        //    //if (NavigateTo != null)
-        //    //{
-        //    //    ucDeposit deposit = new ucDeposit();
-        //    //    deposit.LoadData(_savingData);
-        //    //    deposit.NavigateTo1 = this.NavigateTo1;
-        //    //    deposit.NavigateTo = this.NavigateTo;
-        //    //    NavigateTo1(deposit);
-        //    //}
-        //}
+        private void btnDeposit_Click(object sender, EventArgs e)
+        {
+            if (NavigateTo != null)
+            {
+                ucDeposit deposit = new ucDeposit();
+                deposit.LoadData(_savingData);
+                deposit.NavigateTo1 = this.NavigateTo1;
+                deposit.NavigateTo = this.NavigateTo;
+                NavigateTo1(deposit);
+            }
+        }
     }
 }

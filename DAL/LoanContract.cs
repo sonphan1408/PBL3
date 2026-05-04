@@ -22,7 +22,6 @@ namespace DAL
     
         public string ContractID { get; set; }
         public string AccountNumber { get; set; }
-        public int RateID { get; set; }
         public decimal LoanAmount { get; set; }
         public decimal RemainingBalance { get; set; }
         public decimal InterestRate { get; set; }
@@ -31,8 +30,6 @@ namespace DAL
         public string Collateral { get; set; }
         public string Status { get; set; }
     
-        public virtual Account Account { get; set; }
-        public virtual InterestRate InterestRate1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanRepayment> LoanRepayments { get; set; }
     }

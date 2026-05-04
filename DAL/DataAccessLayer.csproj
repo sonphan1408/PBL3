@@ -133,6 +133,9 @@
     <Compile Include="ServiceType.cs">
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>PBL3Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="TransactionType.cs">
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>

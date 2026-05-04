@@ -12,11 +12,12 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class InterestRate
+    public partial class sysdiagram
     {
-        public int RateID { get; set; }
-        public string Category { get; set; }
-        public Nullable<int> TermMonths { get; set; }
-        public Nullable<decimal> RateValue { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

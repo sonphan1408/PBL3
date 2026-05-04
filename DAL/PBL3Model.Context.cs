@@ -40,6 +40,7 @@ namespace DAL
         public virtual DbSet<SavingTransaction> SavingTransactions { get; set; }
         public virtual DbSet<ServiceProvider> ServiceProviders { get; set; }
         public virtual DbSet<ServiceType> ServiceTypes { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TransactionType> TransactionTypes { get; set; }
     }
 }

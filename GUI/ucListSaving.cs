@@ -29,7 +29,9 @@ namespace GUI
 
         private void ucListSaving_Load(object sender, EventArgs e)
         {
-            
+            UserSession.DataSavingChanged += LoadData;
+
+            this.Disposed += UcListSaving_Disposed;
             LoadData();  
            
         }
@@ -165,20 +167,10 @@ namespace GUI
             };
 
             // --- BIỂU ĐỒ MỤC TIÊU ---
-           
+
 
             // --- BIỂU ĐỒ LOẠI TIẾT KIỆM ---
-            var typeStats = data.GroupBy(s => s.SavingType)
-                     .Select(g => new
-                     {
-                         // Cú pháp: Nếu là Installment -> Gửi góp. Nếu Term -> Kỳ hạn. Còn lại -> Lấy tên gốc
-                         Name = g.Key == "Installment" ? "Gửi góp" :
-                                g.Key == "Term" ? "Kỳ hạn" :
-                                (g.Key ?? "Khác"),
-
-                         Total = g.Sum(s => s.PrincipalAmount)
-                     })
-                     .ToList();
+           var typeStats = FinancialService.GroupBySavingTypes(data);
 
             int j = 0;
             foreach (var item in typeStats)
@@ -207,7 +199,11 @@ namespace GUI
         {
 
         }
-
+        private void UcListSaving_Disposed(object sender, EventArgs e)
+        {
+            // 3. THÁO DÂY: Gỡ hàm LoadData ra khỏi sự kiện tĩnh
+            UserSession.DataSavingChanged -= LoadData;
+        }
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
 

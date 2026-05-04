@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Transactions;
 using System.Windows.Forms;
+using System.Linq;
 
 
 namespace BLL.Services
@@ -50,27 +51,27 @@ namespace BLL.Services
 
             return FinancialDAL.GetInterestRatesByCategory(category);
         }
-        public static SavingsPreviewDTO CalculateSavingsPreview(decimal principalAmount, int termMonths, string savingType)
-        {
-            SavingsPreviewDTO result = new SavingsPreviewDTO();
+        //public static SavingsPreviewDTO CalculateSavingsPreview(decimal principalAmount, int termMonths, string savingType)
+        //{
+        //    SavingsPreviewDTO result = new SavingsPreviewDTO();
 
-            decimal rateValue = FinancialDAL.GetExactRateValue(savingType, termMonths);
-            result.InterestRate = rateValue;
+        //    decimal rateValue = FinancialDAL.GetExactRateValue(savingType, termMonths);
+        //    result.InterestRate = rateValue;
 
-            if (rateValue == 0 || termMonths == 0)
-                return result;
+        //    if (rateValue == 0 || termMonths == 0)
+        //        return result;
 
-            if (savingType.Equals("Term", StringComparison.OrdinalIgnoreCase))
-            {
-                result.MaturityInterest = principalAmount * (rateValue / 100m) / 12m * termMonths;
-            }
-            else if (savingType.Equals("Installment", StringComparison.OrdinalIgnoreCase))
-            {
-                // TODO: xử lý góp
-            }
+        //    if (savingType.Equals("Term", StringComparison.OrdinalIgnoreCase))
+        //    {
+        //        result.MaturityInterest = principalAmount * (rateValue / 100m) / 12m * termMonths;
+        //    }
+        //    else if (savingType.Equals("Installment", StringComparison.OrdinalIgnoreCase))
+        //    {
+        //        // TODO: xử lý góp
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
         private static string GenerateContractID()
         {
             string prefix = "TK";
@@ -298,6 +299,22 @@ namespace BLL.Services
                 string detailError = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 throw new Exception("Lỗi hệ thống: " + detailError);
             }
+        }
+        public static List<StatisticSavingTypesDTO> GroupBySavingTypes(List<SavingContractsDTO> data)
+        {
+            List<StatisticSavingTypesDTO> typeStats = data.GroupBy(s => s.SavingType)
+         .Select(g => new StatisticSavingTypesDTO
+         {
+             // Cú pháp: Nếu là Installment -> Gửi góp. Nếu Term -> Kỳ hạn. Còn lại -> Lấy tên gốc
+             Name = g.Key == "Installment" ? "Gửi góp" :
+                    g.Key == "Term" ? "Kỳ hạn" :
+                    (g.Key ?? "Khác"),
+
+             Total = g.Sum(s => s.CurrentBalance)
+         })
+         .ToList();
+            return typeStats;
+
         }
 
     }

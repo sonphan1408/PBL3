@@ -102,10 +102,10 @@ namespace GUI.Client
 
             if (savingType != "" && principalAmount != 0)
             {
-                SavingsPreviewDTO previewResult = FinancialService.CalculateSavingsPreview(principalAmount, termMonths, savingType);
+                //SavingsPreviewDTO previewResult = FinancialService.CalculateSavingsPreview(principalAmount, termMonths, savingType);
 
-                lblInterestRate.Text = previewResult.InterestRate.ToString() + "%";
-                lblMaturityInterest.Text = Math.Round(previewResult.MaturityInterest, 2).ToString("N2") + "VNĐ";
+                //lblInterestRate.Text = previewResult.InterestRate.ToString() + "%";
+                //lblMaturityInterest.Text = Math.Round(previewResult.MaturityInterest, 2).ToString("N2") + "VNĐ";
 
             }
         }

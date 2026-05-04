@@ -25,14 +25,14 @@ namespace DAL
         public decimal PrincipalAmount { get; set; }
         public decimal CurrentBalance { get; set; }
         public decimal InterestRate { get; set; }
-        public int TermMonths { get; set; }
         public Nullable<decimal> AccruedInterest { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
         public string Goal { get; set; }
         public string Status { get; set; }
+        public int TermMonths { get; set; }
+        public string SavingTypes { get; set; }
     
-        public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SavingTransaction> SavingTransactions { get; set; }
     }

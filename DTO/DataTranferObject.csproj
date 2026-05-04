@@ -63,7 +63,7 @@
     <Compile Include="Models\InternalTransactionDTO.cs" />
     <Compile Include="Models\InvoiceDTO.cs" />
     <Compile Include="Models\NotificationDTO.cs" />
-    <Compile Include="Models\SavingsPreviewDTO.cs" />
+    <Compile Include="Models\StatisticSavingTypesDTO.cs" />
     <Compile Include="Models\SavingTransactionDTO.cs" />
     <Compile Include="Models\TransactionDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
