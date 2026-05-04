@@ -138,7 +138,11 @@ namespace DAL.Repositories
                             {
                                 CustomerID = newCustomer.CustomerID,
                                 Username = account.Username,
-                                Password = account.Password
+                                Password = account.Password,
+                                AccountNumber = "ACC" + DateTime.Now.Ticks.ToString().Substring(0, 12),
+                                Balance = 0,
+                                Status = "Active",
+                                CreatedAt = DateTime.Now
                             };
 
                             db.Accounts.Add(newAccount);

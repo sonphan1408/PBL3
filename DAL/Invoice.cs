@@ -22,7 +22,7 @@ namespace DAL
         public string Status { get; set; }
         public Nullable<System.DateTime> DueDate { get; set; }
     
-        public virtual ServiceProvider ServiceProvider { get; set; }
         public virtual Account Account { get; set; }
+        public virtual ServiceProvider ServiceProvider { get; set; }
     }
 }

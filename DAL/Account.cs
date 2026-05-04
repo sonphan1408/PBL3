@@ -21,7 +21,9 @@ namespace DAL
             this.InternalTransactions = new HashSet<InternalTransaction>();
             this.InternalTransactions1 = new HashSet<InternalTransaction>();
             this.Invoices = new HashSet<Invoice>();
+            this.LoanContracts = new HashSet<LoanContract>();
             this.Notifications = new HashSet<Notification>();
+            this.SavingContracts = new HashSet<SavingContract>();
         }
     
         public string AccountNumber { get; set; }
@@ -42,6 +44,10 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanContract> LoanContracts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Notification> Notifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SavingContract> SavingContracts { get; set; }
     }
 }

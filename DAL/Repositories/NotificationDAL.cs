@@ -52,5 +52,31 @@ namespace DAL.Repositories
                 return new List<NotificationDTO>();
             }
         }
+
+        public static bool CreateNotification(string username, string message, string type)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities())
+                {
+                    var notification = new Notification
+                    {
+                        ReceiverAccount = username,
+                        Message = message,
+                        Type = type ?? "General",
+                        IsRead = false,
+                        CreatedAt = DateTime.Now
+                    };
+                    db.Notifications.Add(notification);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in CreateNotification: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

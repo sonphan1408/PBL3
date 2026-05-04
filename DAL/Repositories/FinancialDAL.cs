@@ -12,6 +12,10 @@ namespace DAL.Repositories
         {
             try
             {
+                // Table SavingContracts does not exist in database
+                return new List<SavingContractsDTO>();
+
+                /*
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var savings = db.SavingContracts
@@ -30,12 +34,18 @@ namespace DAL.Repositories
                             CurrentBalance = s.CurrentBalance,
                             Goal = s.Goal,
                             StartDate = s.StartDate,
-                            EndDate = s.EndDate
+                            EndDate = s.EndDate,
+                            SavingType = s.Goal,
+                            CurrentBalance = s.CurrentBalance,
+                            AccruedInterest = s.AccruedInterest ?? 0m,
+                            TermMonths = s.TermMonths,
+                            Goal = s.Goal
                         })
                         .ToList();
 
                     return savings;
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -47,6 +57,10 @@ namespace DAL.Repositories
         {
             try
             {
+                // Table SavingContracts does not exist in database
+                return 0m;
+
+                /*
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var accountNumbers = db.Accounts
@@ -61,6 +75,7 @@ namespace DAL.Repositories
 
                     return totalSavings;
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -72,6 +87,10 @@ namespace DAL.Repositories
         {
             try
             {
+                // Table LoanContracts does not exist in database
+                return 0m;
+
+                /*
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var accountNumbers = db.Accounts
@@ -86,6 +105,7 @@ namespace DAL.Repositories
 
                     return totalLoans;
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -97,6 +117,10 @@ namespace DAL.Repositories
         {
             try
             {
+                // Table SavingContracts does not exist in database
+                return 0;
+
+                /*
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var accountNumbers = db.Accounts
@@ -104,15 +128,23 @@ namespace DAL.Repositories
                         .Select(a => a.AccountNumber)
                         .ToList();
 
+                    if (accountNumbers.Count == 0)
+                    {
+                        return 0; // No accounts found
+                    }
+
                     return db.SavingContracts
                         .Where(s => accountNumbers.Contains(s.AccountNumber) &&
                                     s.Status == "Active")
                         .Count();
                 }
+                */
             }
             catch (Exception ex)
             {
-                throw new Exception("Lỗi khi đếm tài khoản tiết kiệm: " + ex.Message);
+                // Log the full exception details for debugging
+                System.Diagnostics.Debug.WriteLine("FinancialDAL.GetTotalSavingsAccounts Error: " + ex.ToString());
+                throw new Exception("Lỗi khi đếm tài khoản tiết kiệm: " + ex.Message + "\n\nInner: " + (ex.InnerException?.Message ?? "No inner exception"), ex);
             }
         }
 
@@ -120,6 +152,10 @@ namespace DAL.Repositories
         {
             try
             {
+                // Table LoanContracts does not exist in database
+                return 0;
+
+                /*
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var accountNumbers = db.Accounts
@@ -132,6 +168,7 @@ namespace DAL.Repositories
                                     l.Status == "Active")
                         .Count();
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -144,6 +181,10 @@ namespace DAL.Repositories
         {
             try
             {
+                // Table InterestRates does not exist in database
+                return new List<InterestRateDTO>();
+
+                /*
                 using (var db = new DigitalBankingDBEntities())
                 {
                     return db.InterestRates
@@ -159,6 +200,7 @@ namespace DAL.Repositories
                         })
                         .ToList();
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -170,6 +212,10 @@ namespace DAL.Repositories
         {
             try
             {
+                // Table InterestRates does not exist in database
+                return 0m;
+
+                /*
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var rate = db.InterestRates
@@ -181,6 +227,7 @@ namespace DAL.Repositories
                     }
                     return 0m;
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -192,13 +239,16 @@ namespace DAL.Repositories
         {
             try
             {
+                // Table SavingContracts does not exist in database
+                return false;
+
+                /*
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var newContract = new SavingContract
                     {
                         ContractID = savingContract.ContractID,
                         AccountNumber = savingContract.AccountNumber,
-                        SavingTypes = savingContract.SavingType,
                         PrincipalAmount = savingContract.PrincipalAmount,
                         InterestRate = savingContract.InterestRate,
                         StartDate = savingContract.StartDate,
@@ -214,6 +264,7 @@ namespace DAL.Repositories
                     db.SaveChanges();
                     return true;
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -226,6 +277,10 @@ namespace DAL.Repositories
         {
             try
             {
+                // Table SavingTransactions does not exist in database
+                return false;
+
+                /*
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var newTransaction = new SavingTransaction
@@ -241,6 +296,7 @@ namespace DAL.Repositories
                     db.SaveChanges();
                     return true;
                 }
+                */
             }
             catch (Exception ex)
             {

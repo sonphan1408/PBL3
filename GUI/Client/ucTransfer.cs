@@ -2,14 +2,13 @@
 using System.Windows.Forms;
 using BLL.Services;
 using DTO.Models;
+using GUI.Session;
 using Krypton.Toolkit;
 
 namespace GUI.Client
 {
     public partial class ucTransfer : UserControl
     {
-        public string CurrentUsername { get; private set; }
-
         private TransferService _transferService = new TransferService();
 
         private AccountCustomerDTO _senderAccount = null;
@@ -20,11 +19,6 @@ namespace GUI.Client
         {
             InitializeComponent();
             SetupEventHandlers();
-        }
-
-        public void SetUsername(string username)
-        {
-            CurrentUsername = username;
             LoadSenderInfo();
         }
 
@@ -48,7 +42,7 @@ namespace GUI.Client
         {
             try
             {
-                _senderAccount = _transferService.GetSenderByUsername(CurrentUsername);
+                _senderAccount = _transferService.GetSenderByUsername(UserSession.CurrentUser.Username);
                 if (_senderAccount != null)
                 {
                     if (txtIDUser != null)
@@ -155,13 +149,24 @@ namespace GUI.Client
                 if (txtNDCK != null && !string.IsNullOrWhiteSpace(txtNDCK.Text))
                     notes = txtNDCK.Text;
 
-                bool result = _transferService.ExecuteTransfer(CurrentUsername, _recipientAccount.AccountNumber, transferAmount, notes);
+                bool result = _transferService.ExecuteTransfer(UserSession.CurrentUser.Username, _recipientAccount.AccountNumber, transferAmount, notes);
 
                 if (result)
                 {
-                    MessageBox.Show("Chuyển khoản thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearForm();
-                    LoadSenderInfo();
+                    string senderName = _transferService.GetCustomerName(_senderAccount.CustomerID);
+                    string recipientName = _transferService.GetCustomerName(_recipientAccount.CustomerID);
+
+                    frmBill bill = new frmBill(
+                        amount: transferAmount,
+                        senderAccount: _senderAccount.AccountNumber,
+                        senderName: senderName,
+                        recipientAccount: _recipientAccount.AccountNumber,
+                        recipientName: recipientName,
+                        notes: notes
+                    );
+
+                    bill.FormClosed += (s, args) => { ClearForm(); LoadSenderInfo(); };
+                    bill.ShowDialog();
                 }
                 else
                 {
@@ -176,11 +181,11 @@ namespace GUI.Client
 
         private void ClearForm()
         {
-            if (txtIDNguoiNhan != null) 
+            if (txtIDNguoiNhan != null)
                 txtIDNguoiNhan.Text = "";
-            if (txtSoTien != null) 
+            if (txtSoTien != null)
                 txtSoTien.Text = "";
-            if (txtNDCK != null) 
+            if (txtNDCK != null)
                 txtNDCK.Text = "";
             if (txtIDNguoiNhan1 != null)
                 txtIDNguoiNhan1.Text = "";

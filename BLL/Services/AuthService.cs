@@ -39,8 +39,8 @@ namespace BLL.Services
             if (age < 15)
                 return "Khách hàng phải từ đủ 15 tuổi trở lên.";
 
-            if (string.IsNullOrWhiteSpace(customer.CCCD) || !Regex.IsMatch(customer.CCCD, @"^0\d{12}$"))
-                return "CCCD phải bao gồm chính xác 12 chữ số.";
+            if (string.IsNullOrWhiteSpace(customer.CCCD) || !Regex.IsMatch(customer.CCCD, @"^0\d{11}$"))
+                return "CCCD phải bao gồm chính xác 12 chữ số và bắt đầu bằng số 0";
 
             if (string.IsNullOrWhiteSpace(customer.PhoneNumber) || !Regex.IsMatch(customer.PhoneNumber, @"^0\d{9}$"))
                 return "Số điện thoại phải có đúng 10 số và bắt đầu bằng số 0.";
@@ -66,7 +66,7 @@ namespace BLL.Services
                 _authDAL.RegisterCustomerAndAccount(customer, account);
 
                 // Trả về kết quả thành công kèm số tài khoản ngân hàng
-                return "Tạo thanh công tài khoản mới";
+                return "Tạo thành công tài khoản mới";
             }
             catch (Exception ex)
             {
