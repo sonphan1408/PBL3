@@ -29,10 +29,11 @@ namespace GUI
         {
             // Ẩn panel check password ban đầu
            panelCheckPassword.Visible = false;
-
+            
             if (Data != null)
             {
-
+                
+                
                 lblPrincipalAmount.Text = Data.PrincipalAmount.ToString("N0") + " VNĐ";
                 lblContractId.Text = Data.ContractID.ToString();
                 lblTermMonths.Text = Data.TermMonths.ToString() + " tháng";
@@ -56,6 +57,7 @@ namespace GUI
                 btnConfirm.Click += BtnConfirm_Click;
                 btnPassword.Click += BtnPassword_Click;
                 btnExit.Click += BtnExit_Click;
+               
             }
         }
 
@@ -72,15 +74,19 @@ namespace GUI
             txtCheckPassword.Focus();
 
         }
-
+        bool isProcessing = false;
         private void BtnPassword_Click(object sender, EventArgs e)
         {
-            string password = txtCheckPassword.Text;
+            
 
            
 
             try
             {
+                if (isProcessing) return;
+                isProcessing = true;
+                string password = txtCheckPassword.Text;
+                
                 if (string.IsNullOrWhiteSpace(password))
                 {
                     MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -145,6 +151,11 @@ namespace GUI
         }
 
         private void panelCheckPassword_Panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnProvison_CheckedChanged(object sender, EventArgs e)
         {
 
         }

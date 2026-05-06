@@ -97,7 +97,7 @@
             // 
             // btnContinue
             // 
-            this.btnContinue.Location = new System.Drawing.Point(728, 671);
+            this.btnContinue.Location = new System.Drawing.Point(713, 671);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(183, 68);
             this.btnContinue.StateCommon.Back.Color1 = System.Drawing.Color.Gray;
@@ -126,14 +126,13 @@
             // 
             // lblBalance
             // 
-            this.lblBalance.AutoSize = true;
-            this.lblBalance.BackColor = System.Drawing.Color.Transparent;
+            this.lblBalance.BackColor = System.Drawing.Color.White;
             this.lblBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBalance.ForeColor = System.Drawing.Color.Red;
-            this.lblBalance.Location = new System.Drawing.Point(744, 161);
+            this.lblBalance.Location = new System.Drawing.Point(724, 161);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Padding = new System.Windows.Forms.Padding(5);
-            this.lblBalance.Size = new System.Drawing.Size(74, 32);
+            this.lblBalance.Size = new System.Drawing.Size(201, 32);
             this.lblBalance.TabIndex = 8;
             this.lblBalance.Text = "label1";
             // 

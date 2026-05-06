@@ -46,6 +46,7 @@
             this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             this.panelCheckPassword = new Krypton.Toolkit.KryptonGroup();
             this.btnExitCheckPassword = new Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel2 = new Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.panelCheckPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelCheckPassword.Panel)).BeginInit();
             this.panelCheckPassword.Panel.SuspendLayout();
@@ -54,7 +55,8 @@
             // 
             // lblTermMonths
             // 
-            this.lblTermMonths.Location = new System.Drawing.Point(449, 248);
+            this.lblTermMonths.AutoSize = false;
+            this.lblTermMonths.Location = new System.Drawing.Point(651, 264);
             this.lblTermMonths.Name = "lblTermMonths";
             this.lblTermMonths.Size = new System.Drawing.Size(134, 25);
             this.lblTermMonths.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -65,7 +67,8 @@
             // 
             // lblRate
             // 
-            this.lblRate.Location = new System.Drawing.Point(738, 248);
+            this.lblRate.AutoSize = false;
+            this.lblRate.Location = new System.Drawing.Point(894, 264);
             this.lblRate.Name = "lblRate";
             this.lblRate.Size = new System.Drawing.Size(134, 25);
             this.lblRate.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -76,7 +79,8 @@
             // 
             // lblPrincipalAmount
             // 
-            this.lblPrincipalAmount.Location = new System.Drawing.Point(568, 106);
+            this.lblPrincipalAmount.AutoSize = false;
+            this.lblPrincipalAmount.Location = new System.Drawing.Point(770, 122);
             this.lblPrincipalAmount.Name = "lblPrincipalAmount";
             this.lblPrincipalAmount.Size = new System.Drawing.Size(190, 25);
             this.lblPrincipalAmount.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -87,7 +91,8 @@
             // 
             // lblContractId
             // 
-            this.lblContractId.Location = new System.Drawing.Point(670, 332);
+            this.lblContractId.AutoSize = false;
+            this.lblContractId.Location = new System.Drawing.Point(872, 348);
             this.lblContractId.Name = "lblContractId";
             this.lblContractId.Size = new System.Drawing.Size(300, 25);
             this.lblContractId.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -97,7 +102,8 @@
             // 
             // lblStartDate
             // 
-            this.lblStartDate.Location = new System.Drawing.Point(670, 378);
+            this.lblStartDate.AutoSize = false;
+            this.lblStartDate.Location = new System.Drawing.Point(872, 394);
             this.lblStartDate.Name = "lblStartDate";
             this.lblStartDate.Size = new System.Drawing.Size(190, 25);
             this.lblStartDate.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -106,7 +112,8 @@
             // 
             // lblEndDate
             // 
-            this.lblEndDate.Location = new System.Drawing.Point(670, 426);
+            this.lblEndDate.AutoSize = false;
+            this.lblEndDate.Location = new System.Drawing.Point(872, 442);
             this.lblEndDate.Name = "lblEndDate";
             this.lblEndDate.Size = new System.Drawing.Size(190, 25);
             this.lblEndDate.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -115,7 +122,8 @@
             // 
             // lblSavingType
             // 
-            this.lblSavingType.Location = new System.Drawing.Point(670, 475);
+            this.lblSavingType.AutoSize = false;
+            this.lblSavingType.Location = new System.Drawing.Point(872, 491);
             this.lblSavingType.Name = "lblSavingType";
             this.lblSavingType.Size = new System.Drawing.Size(190, 25);
             this.lblSavingType.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -124,7 +132,8 @@
             // 
             // lblGoal
             // 
-            this.lblGoal.Location = new System.Drawing.Point(670, 574);
+            this.lblGoal.AutoSize = false;
+            this.lblGoal.Location = new System.Drawing.Point(872, 588);
             this.lblGoal.Name = "lblGoal";
             this.lblGoal.Size = new System.Drawing.Size(190, 25);
             this.lblGoal.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -133,7 +142,8 @@
             // 
             // lblMaturityInterest
             // 
-            this.lblMaturityInterest.Location = new System.Drawing.Point(670, 524);
+            this.lblMaturityInterest.AutoSize = false;
+            this.lblMaturityInterest.Location = new System.Drawing.Point(872, 540);
             this.lblMaturityInterest.Name = "lblMaturityInterest";
             this.lblMaturityInterest.Size = new System.Drawing.Size(190, 25);
             this.lblMaturityInterest.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -142,15 +152,16 @@
             // 
             // btnProvison
             // 
-            this.btnProvison.Location = new System.Drawing.Point(428, 623);
+            this.btnProvison.Location = new System.Drawing.Point(615, 640);
             this.btnProvison.Name = "btnProvison";
             this.btnProvison.Size = new System.Drawing.Size(22, 30);
             this.btnProvison.TabIndex = 9;
             this.btnProvison.Values.Text = "";
+            this.btnProvison.CheckedChanged += new System.EventHandler(this.btnProvison_CheckedChanged);
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(706, 669);
+            this.btnConfirm.Location = new System.Drawing.Point(872, 685);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(190, 55);
             this.btnConfirm.StateCommon.Back.Color1 = System.Drawing.Color.Gray;
@@ -165,7 +176,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(449, 669);
+            this.btnExit.Location = new System.Drawing.Point(626, 685);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(190, 55);
             this.btnExit.StateCommon.Back.Color1 = System.Drawing.Color.Gray;
@@ -208,7 +219,7 @@
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(315, 16);
+            this.kryptonLabel1.Location = new System.Drawing.Point(324, 16);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(350, 31);
             this.kryptonLabel1.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -219,7 +230,7 @@
             // 
             // panelCheckPassword
             // 
-            this.panelCheckPassword.Location = new System.Drawing.Point(216, 565);
+            this.panelCheckPassword.Location = new System.Drawing.Point(377, 559);
             // 
             // panelCheckPassword.Panel
             // 
@@ -249,12 +260,24 @@
             this.btnExitCheckPassword.Values.Text = "";
             this.btnExitCheckPassword.Click += new System.EventHandler(this.btnExitCheckPassword_Click);
             // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(103, 206);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(500, 31);
+            this.kryptonLabel2.StateCommon.ShortText.Color1 = System.Drawing.Color.Cyan;
+            this.kryptonLabel2.StateCommon.ShortText.Color2 = System.Drawing.Color.Silver;
+            this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel2.TabIndex = 14;
+            this.kryptonLabel2.Values.Text = "Xác nhận gửi tiết kiệm";
+            // 
             // ucConfirmSaving
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.kryptonLabel2);
             this.Controls.Add(this.panelCheckPassword);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnConfirm);
@@ -300,5 +323,6 @@
         private Krypton.Toolkit.KryptonButton btnPassword;
         private Krypton.Toolkit.KryptonGroup panelCheckPassword;
         private Krypton.Toolkit.KryptonButton btnExitCheckPassword;
+        private Krypton.Toolkit.KryptonLabel kryptonLabel2;
     }
 }
