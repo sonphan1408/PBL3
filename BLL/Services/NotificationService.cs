@@ -35,9 +35,7 @@ namespace BLL.Services
         {
             try
             {
-                string sql = "UPDATE Notifications SET IsRead = 1 WHERE ReceiverAccount = @username AND IsRead = 0";
-                System.Data.SqlClient.SqlParameter[] p = { new System.Data.SqlClient.SqlParameter("@username", username) };
-                DAL.Core.DBHelper.ExecuteQuery(sql, p);
+                NotificationDAL.MarkAllAsRead(username);
             }
             catch { }
         }

@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using BLL.Services;
 using DTO.Models;
 using GUI.Session;
+using GUI;   // ToastNotification
 using Krypton.Toolkit;
 
 namespace GUI.Client
@@ -155,6 +156,23 @@ namespace GUI.Client
                 {
                     string senderName = _transferService.GetCustomerName(_senderAccount.CustomerID);
                     string recipientName = _transferService.GetCustomerName(_recipientAccount.CustomerID);
+
+                    // ✅ Hiển thị Toast Notification
+                    ToastNotification.ShowTransfer(recipientName, _recipientAccount.AccountNumber, transferAmount);
+
+                    // Trigger notification with structured data
+                    var notificationData = new NotificationMessageDTO
+                    {
+                        OperationType = "transfer",
+                        NotificationType = "transaction",
+                        RecipientName = recipientName,
+                        RecipientAccount = _recipientAccount.AccountNumber,
+                        TransferAmount = transferAmount
+                    };
+                    UserSession.RaiseNotification(notificationData);
+
+                    // Update balance in session
+                    UserSession.UpdateBalance(transferAmount);
 
                     frmBill bill = new frmBill(
                         amount: transferAmount,

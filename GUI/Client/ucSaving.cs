@@ -208,5 +208,10 @@ namespace GUI.Client
             listSaving.NavigateTo = this.NavigateTo;
             NavigateTo(listSaving);
         }
+
+        private void kryptonGroup1_Panel_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -116,6 +116,16 @@ namespace GUI.Client
 
             SavingContractsDTO draff = FinancialService.CreateSavingDraft(principalAmount, termMonths, savingType, goal, rate, UserSession.CurrentUser.AccountNumber);
 
+            // Trigger notification with structured data
+            var notificationData = new NotificationMessageDTO
+            {
+                OperationType = "savings",
+                NotificationType = "success",
+                PrincipalAmount = principalAmount,
+                TermMonths = termMonths,
+                InterestRate = rate
+            };
+            UserSession.RaiseNotification(notificationData);
 
             ucConfirmSaving confirmSaving = new ucConfirmSaving(draff);
             confirmSaving.NavigateTo = this.NavigateTo;

@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting; // Thêm thư viện này cho Chart
 using BLL.Services;
 using DTO.Models;
 using GUI.Session;
@@ -30,24 +31,50 @@ namespace GUI.Client
 
             InitializeUI();
             LoadDataFromDatabase();
+
+            // Subscribe để refresh khi có giao dịch mới
+            UserSession.BalanceChanged += RefreshData;
         }
 
-        private PictureBox picChart;
+        /// <summary>
+        /// Tự động refresh khi người dùng quay lại trang chủ
+        /// </summary>
+        protected override void OnVisibleChanged(EventArgs e)
+        {
+            base.OnVisibleChanged(e);
+            if (this.Visible)
+            {
+                System.Diagnostics.Debug.WriteLine("[ucClientHome] OnVisibleChanged — refreshing data");
+                LoadDataFromDatabase();
+            }
+        }
+
+        /// <summary>
+        /// Gọi từ bên ngoài khi balance thay đổi
+        /// </summary>
+        public void RefreshData()
+        {
+            System.Diagnostics.Debug.WriteLine("[ucClientHome] RefreshData called");
+            if (this.InvokeRequired)
+                this.Invoke(new Action(LoadDataFromDatabase));
+            else
+                LoadDataFromDatabase();
+        }
 
         private void InitializeUI()
         {
             // Setup button click event
-            btnTransfer.Click += BtnTransfer_Click;
+            if (btnTransfer != null)
+            {
+                btnTransfer.Click += BtnTransfer_Click;
+            }
 
             if (this.picDonutChart != null)
             {
                 this.picDonutChart.Paint += PicDonutChart_Paint;
             }
-            if (this.pnlLegendExIn != null)
-            {
-                this.pnlLegendExIn.Paint += PnlLegendExIn_Paint;
-            }
 
+            // Định dạng font chữ đậm cho tổng thu/chi
             if (lblTotalExpenseAmount != null)
             {
                 lblTotalExpenseAmount.Font = new Font(lblTotalExpenseAmount.Font, FontStyle.Bold);
@@ -57,22 +84,34 @@ namespace GUI.Client
                 lblTotalIncomeAmount.Font = new Font(lblTotalIncomeAmount.Font, FontStyle.Bold);
             }
 
-            // Ẩn Control Chart1 (màu xanh mặc định) che mất biểu đồ vẽ tay ở dưới
-            Control[] charts = this.Controls.Find("chart1", true);
-            if (charts.Length > 0)
+            if (LLHistory != null)
             {
-                charts[0].Visible = false;
+                LLHistory.LinkClicked += LLHistory_LinkClicked;
             }
 
-            // Dùng PictureBox bọc lên trên Panel của pnlBalanceChart để vẽ đồ thị đẹp hơn
-            if (this.pnlBalanceChart != null && this.pnlBalanceChart.Panel != null)
+            if (LLPaySec != null)
             {
-                picChart = new PictureBox();
-                picChart.Dock = DockStyle.Fill;
-                picChart.BackColor = Color.Transparent;
-                picChart.Paint += PnlBalanceChart_Paint;
-                this.pnlBalanceChart.Panel.Controls.Add(picChart);
-                picChart.BringToFront();
+                LLPaySec.LinkClicked += LLPaySec_LinkClicked;
+            }
+
+            // Note: Đã xóa phần ẩn chart1 và vẽ picChart thủ công vì UI mới đang dùng trực tiếp chart1
+        }
+
+        private void LLHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var dashboard = this.ParentForm as frmClientDashboard;
+            if (dashboard != null)
+            {
+                dashboard.NavigateToTransactionHistory();
+            }
+        }
+
+        private void LLPaySec_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var dashboard = this.ParentForm as frmClientDashboard;
+            if (dashboard != null)
+            {
+                dashboard.NavigateToPaymentHistory();
             }
         }
 
@@ -97,46 +136,8 @@ namespace GUI.Client
                 }
 
                 // Update UI with account info
-                UserName = currentCustomer.FullName;
                 BalanceAmount = "$" + currentAccount.Balance.ToString("F2");
                 CardNumber = currentAccount.AccountNumber;
-
-                // Get financial information (savings and loans)
-                int savingsCount = 0;
-                decimal totalSavings = 0;
-                decimal totalLoans = 0;
-
-                try
-                {
-                    savingsCount = FinancialService.GetTotalSavingsAccounts(currentAccount.CustomerID);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Warning: Could not load savings count: " + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-                try
-                {
-                    totalSavings = FinancialService.GetTotalSavings(currentAccount.CustomerID);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Warning: Could not load total savings: " + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-                try
-                {
-                    totalLoans = FinancialService.GetTotalLoans(currentAccount.CustomerID);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Warning: Could not load total loans: " + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-                // Update financial info labels (if they exist)
-                // Note: Adjust control names based on your actual Designer
-                SavingsAmount = "0"; // savingsCount.ToString();
-                LoansAmount = "0"; // totalLoans > 0 ? totalLoans.ToString("F2") : "0";
 
                 // Load transactions
                 transactions = TransactionService.GetTransactionsByAccount(currentAccount.AccountNumber, 10);
@@ -150,12 +151,6 @@ namespace GUI.Client
 
                 // Load savings items
                 LoadSavingsItems();
-
-                // Trigger chart redraw
-                if (picChart != null)
-                {
-                    picChart.Invalidate();
-                }
             }
             catch (Exception ex)
             {
@@ -173,34 +168,90 @@ namespace GUI.Client
                 if (transactions != null && transactions.Count > 0)
                 {
                     decimal tempBal = currentAccount.Balance;
+                    var dailyBalance = new Dictionary<string, decimal>();
+                    dailyBalance["Hiện tại"] = tempBal;
 
-                    // Thêm điểm cuối cùng (số dư hiện tại)
-                    balanceData.Insert(0, tempBal);
-                    dateLabels.Insert(0, "Hiện tại");
-
-                    // Tính ngược số dư cho từng giao dịch
                     foreach (var tx in transactions)
                     {
-                        // Giá trị 'tempBal' lúc này chính là biến động số dư SAU khi diễn ra giao dịch 'tx'
-                        balanceData.Insert(0, tempBal);
-                        dateLabels.Insert(0, tx.CreatedAt.ToString("MM/dd"));
-
-                        // Hoàn tác giao dịch 'tx' để truy hồi số dư TRƯỚC thời điểm thực hiện 'tx'
+                        string dateKey = tx.CreatedAt.ToString("MM/dd");
                         if (tx.FromAccount == currentAccount.AccountNumber)
-                        {
-                            tempBal += tx.Amount; // Nếu đã chuyển đi, thì ngày trước số dư phải cao hơn
-                        }
+                            tempBal += tx.Amount;
                         else if (tx.ToAccount == currentAccount.AccountNumber)
+                            tempBal -= tx.Amount;
+                        dailyBalance[dateKey] = tempBal;
+                    }
+
+                    string todayKey = DateTime.Today.ToString("MM/dd");
+                    var sortedDates = dailyBalance.Keys
+                        .Where(k => k != "Hiện tại")
+                        .OrderBy(k =>
                         {
-                            tempBal -= tx.Amount; // Nếu đã nhận, thì ngày trước số dư thấp hơn
+                            DateTime parsed;
+                            return DateTime.TryParseExact(k, "MM/dd",
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                System.Globalization.DateTimeStyles.None, out parsed)
+                                ? parsed : DateTime.MinValue;
+                        })
+                        .ToList();
+
+                    foreach (var date in sortedDates)
+                    {
+                        if (date == todayKey)
+                        {
+                            dateLabels.Add("Hiện tại");
+                            balanceData.Add(dailyBalance["Hiện tại"]);
                         }
+                        else
+                        {
+                            dateLabels.Add(date);
+                            balanceData.Add(dailyBalance[date]);
+                        }
+                    }
+
+                    if (!sortedDates.Contains(todayKey))
+                    {
+                        dateLabels.Add("Hiện tại");
+                        balanceData.Add(dailyBalance["Hiện tại"]);
                     }
                 }
                 else
                 {
-                    // Trạng thái mặc định nếu chưa có giao dịch biểu diễn thành một đường đi ngang
                     balanceData = new List<decimal> { currentAccount.Balance, currentAccount.Balance, currentAccount.Balance };
                     dateLabels = new List<string> { DateTime.Now.AddMonths(-2).ToString("MM/dd"), DateTime.Now.AddMonths(-1).ToString("MM/dd"), "Hiện tại" };
+                }
+
+                if (chart1 != null)
+                {
+                    chart1.Series.Clear();
+                    Series series = new Series("Số dư");
+
+                    series.ChartType = SeriesChartType.Line;
+                    series.Color = Color.FromArgb(30, 100, 220);
+                    series.BorderWidth = 3;
+                    series.MarkerStyle = MarkerStyle.Circle;
+                    series.MarkerSize = 8;
+                    series.MarkerColor = Color.FromArgb(30, 100, 220);
+                    series.MarkerBorderColor = Color.White;
+                    series.MarkerBorderWidth = 2;
+
+                    for (int i = 0; i < balanceData.Count; i++)
+                    {
+                        series.Points.AddXY(dateLabels[i], balanceData[i]);
+                    }
+
+                    chart1.Series.Add(series);
+
+                    var area = chart1.ChartAreas[0];
+                    area.BackColor = Color.White;
+                    area.AxisX.MajorGrid.LineColor = Color.FromArgb(230, 230, 230);
+                    area.AxisY.MajorGrid.LineColor = Color.FromArgb(230, 230, 230);
+                    area.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+                    area.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+                    area.AxisX.LabelStyle.Font = new Font("Segoe UI", 8);
+                    area.AxisY.LabelStyle.Font = new Font("Segoe UI", 8);
+                    area.AxisX.LineColor = Color.FromArgb(180, 180, 180);
+                    area.AxisY.LineColor = Color.FromArgb(180, 180, 180);
+                    area.AxisY.LabelStyle.Format = "#,0";
                 }
             }
             catch (Exception ex)
@@ -211,6 +262,7 @@ namespace GUI.Client
 
         private void LoadTransactionHistory()
         {
+            if (lstHistory == null) return;
             lstHistory.Items.Clear();
 
             if (transactions != null && transactions.Count > 0)
@@ -232,6 +284,7 @@ namespace GUI.Client
 
         private void LoadSavingsItems()
         {
+            if (lstSavingsItems == null) return;
             lstSavingsItems.Items.Clear();
 
             try
@@ -274,9 +327,6 @@ namespace GUI.Client
 
                     if (picDonutChart != null)
                         picDonutChart.Invalidate();
-
-                    if (pnlLegendExIn != null)
-                        pnlLegendExIn.Invalidate();
                 }
             }
             catch (Exception ex)
@@ -303,8 +353,8 @@ namespace GUI.Client
 
             decimal total = currentTotalIncome + currentTotalExpense;
 
-            Color incomeColor = Color.FromArgb(120, 190, 250); // Light blue
-            Color expenseColor = Color.FromArgb(20, 70, 130);  // Dark blue
+            Color incomeColor = Color.FromArgb(120, 190, 250);
+            Color expenseColor = Color.FromArgb(20, 70, 130);
 
             if (total == 0)
             {
@@ -332,60 +382,11 @@ namespace GUI.Client
             int innerSize = (int)(size * 0.5);
             Rectangle innerRect = new Rectangle((width - innerSize) / 2, (height - innerSize) / 2, innerSize, innerSize);
 
+            // Cập nhật màu nền ở giữa vòng Donut khớp với màu nền UI
             using (SolidBrush innerBrush = new SolidBrush(Color.SkyBlue))
             {
                 g.FillEllipse(innerBrush, innerRect);
             }
-
-            if (total > 0)
-            {
-                using (Font font = new Font("Arial", 8, FontStyle.Regular))
-                using (SolidBrush textBrush = new SolidBrush(Color.White))
-                {
-                    float expenseAngle = (float)((currentTotalExpense / total) * 360);
-
-                    if (currentTotalExpense > 0)
-                    {
-                        float expCenterAngle = -90 + (expenseAngle / 2);
-                        DrawStringAtAngle(g, "Expense", font, textBrush, rect, innerSize, expCenterAngle);
-                    }
-
-                    if (currentTotalIncome > 0)
-                    {
-                        float incCenterAngle = -90 + expenseAngle + ((360 - expenseAngle) / 2);
-                        DrawStringAtAngle(g, "Income", font, textBrush, rect, innerSize, incCenterAngle);
-                    }
-                }
-            }
-        }
-
-        private void DrawStringAtAngle(Graphics g, string text, Font font, Brush brush, Rectangle rect, int innerSize, float angle)
-        {
-            double rad = angle * Math.PI / 180;
-            int radius = (rect.Width / 2 + innerSize / 2) / 2;
-            int cx = rect.X + rect.Width / 2;
-            int cy = rect.Y + rect.Height / 2;
-
-            float x = cx + (float)(radius * Math.Cos(rad));
-            float y = cy + (float)(radius * Math.Sin(rad));
-
-            SizeF size = g.MeasureString(text, font);
-            g.DrawString(text, font, brush, x - size.Width / 2, y - size.Height / 2);
-        }
-
-        private void PnlLegendExIn_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            Color incomeColor = Color.FromArgb(120, 190, 250); 
-            Color expenseColor = Color.FromArgb(20, 70, 130);
-
-            int yIncome = lblLegendIncome != null ? lblLegendIncome.Location.Y + (lblLegendIncome.Height - 12) / 2 : 12;
-            g.FillEllipse(new SolidBrush(incomeColor), new Rectangle(5, yIncome, 12, 12));
-
-            int yExpense = lblLegendExpense != null ? lblLegendExpense.Location.Y + (lblLegendExpense.Height - 12) / 2 : 37;
-            g.FillEllipse(new SolidBrush(expenseColor), new Rectangle(5, yExpense, 12, 12));
         }
 
         private void BtnTransfer_Click(object sender, EventArgs e)
@@ -401,224 +402,48 @@ namespace GUI.Client
             }
         }
 
-        // Properties to allow binding/updating data from outside
-        public string UserName
-        {
-            get { return lblUserName.Text; }
-            set { lblUserName.Text = value; }
-        }
+        // --- Properties cho Binding dữ liệu từ bên ngoài ---
 
         public string BalanceAmount
         {
-            get { return lblBalanceAmount.Text; }
-            set { lblBalanceAmount.Text = value; }
+            get { return lblBalanceAmount != null ? lblBalanceAmount.Text : ""; }
+            set { if (lblBalanceAmount != null) lblBalanceAmount.Text = value; }
         }
 
         public string SavingsAmount
         {
-            get { return lblSavingsAmount.Text; }
-            set { lblSavingsAmount.Text = value; }
+            get { return lblSavingsAmount != null ? lblSavingsAmount.Text : ""; }
+            set { if (lblSavingsAmount != null) lblSavingsAmount.Text = value; }
         }
 
         public string LoansAmount
         {
-            get { return lblLoansAmount.Text; }
-            set { lblLoansAmount.Text = value; }
+            get { return lblLoansAmount != null ? lblLoansAmount.Text : ""; }
+            set { if (lblLoansAmount != null) lblLoansAmount.Text = value; }
         }
 
         public string CardNumber
         {
-            get { return lblCardNumber.Text; }
-            set { lblCardNumber.Text = value; }
-        }
-
-        private void PnlBalanceChart_Paint(object sender, PaintEventArgs e)
-        {
-            if (balanceData == null || balanceData.Count == 0)
-                return;
-
-            Graphics g = e.Graphics;
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            Control panel = sender as Control;
-            if (panel == null) return;
-
-            int width = panel.Width;
-            int height = panel.Height;
-
-            // Padding
-            int paddingLeft = 50;
-            int paddingRight = 20;
-            int paddingTop = 30;
-            int paddingBottom = 40;
-
-            int chartWidth = width - paddingLeft - paddingRight;
-            int chartHeight = height - paddingTop - paddingBottom;
-
-            // Find min and max values
-            decimal maxValue = balanceData.Max();
-            decimal minValue = balanceData.Min();
-            decimal valueRange = maxValue - minValue;
-            if (valueRange == 0) valueRange = 1;
-
-            // Draw Y-axis labels and grid lines
-            Brush gridBrush = new SolidBrush(Color.FromArgb(220, 230, 245)); // Xanh nhạt cho lưới
-            Brush labelBrush = new SolidBrush(Color.FromArgb(50, 100, 180)); // Xanh đậm cho nhãn
-            Font labelFont = new Font("Arial", 8);
-
-            int gridLines = 5;
-            for (int i = 0; i <= gridLines; i++)
-            {
-                decimal value = minValue + (valueRange / gridLines) * i;
-                int y = paddingTop + chartHeight - (int)((value - minValue) / valueRange * chartHeight);
-
-                // Draw grid line
-                g.DrawLine(new Pen(gridBrush), paddingLeft, y, width - paddingRight, y);
-
-                // Draw Y-axis label
-                string label = ((int)value).ToString();
-                SizeF labelSize = g.MeasureString(label, labelFont);
-                g.DrawString(label, labelFont, labelBrush, paddingLeft - labelSize.Width - 5, y - labelSize.Height / 2);
-            }
-
-            // Draw X-axis
-            g.DrawLine(new Pen(Color.FromArgb(220, 230, 245), 2), paddingLeft, paddingTop + chartHeight, width - paddingRight, paddingTop + chartHeight);
-
-            // Draw data points and lines
-            Pen chartLinePen = new Pen(Color.White, 3); // Cập nhật sang viền trắng để giống mẫu
-            Brush pointBrush = new SolidBrush(Color.DodgerBlue);
-
-            List<PointF> points = new List<PointF>();
-
-            for (int i = 0; i < balanceData.Count; i++)
-            {
-                decimal value = balanceData[i];
-                int x = paddingLeft + (int)(i * (double)chartWidth / (balanceData.Count - 1));
-                int y = paddingTop + chartHeight - (int)((value - minValue) / valueRange * chartHeight);
-
-                points.Add(new PointF(x, y));
-            }
-
-            // Fill gradient under curve
-            if (points.Count > 1)
-            {
-                using (System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath())
-                {
-                    path.AddCurve(points.ToArray(), 0.3f); // Thêm điểm vẽ đường uốn lượn
-
-                    // Thêm cạnh đi xuống và đóng vùng để tô màu
-                    path.AddLine(points[points.Count - 1].X, paddingTop + chartHeight, points[points.Count - 1].X, paddingTop + chartHeight);
-                    path.AddLine(points[points.Count - 1].X, paddingTop + chartHeight, points[0].X, paddingTop + chartHeight);
-                    path.CloseFigure();
-
-                    // Vẽ Gradient ngả từ trên xanh xuống nhạt dần
-                    Rectangle gradientRect = new Rectangle(paddingLeft, paddingTop, chartWidth, chartHeight);
-                    if (gradientRect.Height > 0 && gradientRect.Width > 0)
-                    {
-                        using (System.Drawing.Drawing2D.LinearGradientBrush fillBrush = 
-                               new System.Drawing.Drawing2D.LinearGradientBrush(
-                               gradientRect, Color.FromArgb(180, 50, 150, 255), Color.FromArgb(20, 50, 150, 255), 
-                               System.Drawing.Drawing2D.LinearGradientMode.Vertical))
-                        {
-                            g.FillPath(fillBrush, path);
-                        }
-                    }
-                }
-
-                // Vẽ đường curve phía trên cùng
-                g.DrawCurve(chartLinePen, points.ToArray(), 0.3f);
-            }
-
-            // Draw points
-            for (int i = 0; i < points.Count; i++)
-            {
-                g.FillEllipse(pointBrush, points[i].X - 4, points[i].Y - 4, 8, 8);
-                g.DrawEllipse(new Pen(Color.White, 2), points[i].X - 4, points[i].Y - 4, 8, 8);
-            }
-
-            // Draw X-axis labels (Month)
-            for (int i = 0; i < dateLabels.Count; i++)
-            {
-                int x = paddingLeft + (int)(i * (double)chartWidth / (balanceData.Count - 1));
-                string label = dateLabels[i];
-                SizeF labelSize = g.MeasureString(label, labelFont);
-                g.DrawString(label, labelFont, labelBrush, x - labelSize.Width / 2, paddingTop + chartHeight + 5);
-            }
-
-            // Cleanup
-            chartLinePen.Dispose();
-            pointBrush.Dispose();
-            gridBrush.Dispose();
-            labelBrush.Dispose();
-            labelFont.Dispose();
-        }
-
-        private void pnlBalanceChart_Paint(object sender, PaintEventArgs e)
-        {
-            // This event is handled by PnlBalanceChart_Paint for pnlBalanceChart.Panel
-        }
-
-        private void lblViewAll1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlBalanceCards_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblBalanceHistoryTitle_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblMoreBanking_Click(object sender, EventArgs e)
-        {
-
+            get { return lblCardNumber != null ? lblCardNumber.Text : ""; }
+            set { if (lblCardNumber != null) lblCardNumber.Text = value; }
         }
 
         private void ucClientHome_Load(object sender, EventArgs e)
         {
-
+            // Xử lý logic khi Load nếu cần thiết
         }
 
-        private void pnlMyBalance_Paint(object sender, PaintEventArgs e)
+        private void lblLoansAmount_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void pnlHistoryTransactions_Paint(object sender, PaintEventArgs e)
+        private void chart1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnTransfer_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LLHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
-        private void pnlMyLoans_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void kryptonGroup3_Panel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void txtTransferAmount_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSavings_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

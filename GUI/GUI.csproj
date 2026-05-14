@@ -48,7 +48,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -148,6 +148,12 @@
     <Compile Include="Client\ucClientHome.Designer.cs">
       <DependentUpon>ucClientHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client\ucHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\ucHistory.Designer.cs">
+      <DependentUpon>ucHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client\uccreateSaving.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -163,12 +169,6 @@
     </Compile>
     <Compile Include="Client\ucInvoicePayment.Designer.cs">
       <DependentUpon>ucInvoicePayment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Client\ucHistory.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Client\ucHistory.Designer.cs">
-      <DependentUpon>ucHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="Client\ucNotifications.cs">
       <SubType>UserControl</SubType>
@@ -188,6 +188,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\UserSession.cs" />
+    <Compile Include="ToastNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucBalanceChanges.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucBalanceChanges.Designer.cs">
+      <DependentUpon>ucBalanceChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucConfirmDeposit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -217,6 +226,12 @@
     </Compile>
     <Compile Include="ucListSaving.Designer.cs">
       <DependentUpon>ucListSaving.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucPaymentHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucPaymentHistory.Designer.cs">
+      <DependentUpon>ucPaymentHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="ucSavingCardTerm.cs">
       <SubType>UserControl</SubType>
@@ -279,6 +294,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ucBalanceChanges.resx">
+      <DependentUpon>ucBalanceChanges.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucConfirmDeposit.resx">
       <DependentUpon>ucConfirmDeposit.cs</DependentUpon>
     </EmbeddedResource>
@@ -293,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucListSaving.resx">
       <DependentUpon>ucListSaving.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucPaymentHistory.resx">
+      <DependentUpon>ucPaymentHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucSavingCardTerm.resx">
       <DependentUpon>ucSavingCardTerm.cs</DependentUpon>
@@ -377,6 +399,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\e5c31d18-8b54-4ddf-9fab-07d4c5671275.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_usjhvtusjhvtusjh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_fn819bfn819bfn81.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_nmlp76nmlp76nmlp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_usjhvtusjhvtusjh1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nội dung đoạn văn bản của bạn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nội dung đoạn văn bản của bạn %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nội dung đoạn văn bản của bạn %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nội dung đoạn văn bản của bạn %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nội dung đoạn văn bản của bạn.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Không có tiêu đề.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pig1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pig2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -11,6 +11,7 @@ namespace DTO.Models
         public int InvoiceID { get; set; }
         public string AccountNumber { get; set; }
         public int ProviderID { get; set; }
+        public string ProviderName { get; set; }
         public string BillCode { get; set; }
         public decimal Amount { get; set; }
         public string Status { get; set; }

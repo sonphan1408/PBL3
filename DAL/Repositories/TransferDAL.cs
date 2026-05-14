@@ -90,22 +90,40 @@ namespace DAL.Repositories
                 {
                     try
                     {
-                        // 1. Deduct from sender account
+                        // 1. Lấy tài khoản người gửi
                         var senderAccount = db.Accounts.FirstOrDefault(a => a.AccountNumber == senderAccountNumber);
                         if (senderAccount == null)
                             throw new Exception("Tài khoản người gửi không tồn tại");
 
-                        senderAccount.Balance -= (decimal)amount;
+                        decimal senderBalanceBefore = (decimal)senderAccount.Balance;
 
-                        // 2. Add to recipient account
+                        // 2. Lấy tài khoản người nhận
                         var recipientAccount = db.Accounts.FirstOrDefault(a => a.AccountNumber == recipientAccountNumber);
                         if (recipientAccount == null)
                             throw new Exception("Tài khoản người nhận không tồn tại");
 
+                        decimal recipientBalanceBefore = (decimal)recipientAccount.Balance;
+
+                        // 3. Trừ tiền người gửi, cộng tiền người nhận
+                        senderAccount.Balance -= (decimal)amount;
                         recipientAccount.Balance += (decimal)amount;
 
-                        db.SaveChanges();
+                        // 4. Ghi bản ghi giao dịch vào InternalTransactions
+                        var internalTransaction = new InternalTransaction
+                        {
+                            TransactionID  = Guid.NewGuid(),
+                            TypeID         = 1, // 1 = chuyển khoản nội bộ
+                            FromAccount    = senderAccountNumber,
+                            ToAccount      = recipientAccountNumber,
+                            Amount         = amount,
+                            BalanceBefore  = senderBalanceBefore,
+                            BalanceAfter   = (decimal)senderAccount.Balance,
+                            Description    = string.IsNullOrWhiteSpace(notes) ? "Chuyển khoản" : notes,
+                            CreatedAt      = DateTime.Now
+                        };
+                        db.InternalTransactions.Add(internalTransaction);
 
+                        db.SaveChanges();
                         transaction.Commit();
                         return true;
                     }

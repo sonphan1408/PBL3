@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D; // Bổ sung thêm thư viện này để dùng được GraphicsPath
 using System.Windows.Forms;
@@ -8,11 +8,13 @@ namespace GUI.Client
 {
     public partial class frmClientDashboard : Form
     {
-       
+
         ucClientHome home;
         ucSaving saving;
         ucHistory history;
         ucInvoicePayment invoice;
+        ucPaymentHistory paymentHistory;
+        ucBalanceChanges balanceChanges;
         ucNotifications notifications;
         ucTransfer transfer;
         ucConfirmSaving confirmSaving;
@@ -36,12 +38,29 @@ namespace GUI.Client
             //createSaving = new uccreateSaving();
             //createSaving.NavigateTo = addUserControl;
             //confirmSaving = new ucConfirmSaving();
-            
+
 
             history = new ucHistory();
             invoice = new ucInvoicePayment();
+            paymentHistory = new ucPaymentHistory();
+            balanceChanges = new ucBalanceChanges();
             notifications = new ucNotifications();
             transfer = new ucTransfer();
+            
+            // Subscribe to balance change events - refresh UI when balance changes
+            UserSession.BalanceChanged += () => 
+            {
+                System.Diagnostics.Debug.WriteLine("[frmClientDashboard] BalanceChanged event - triggering UI refresh");
+                if (history != null)
+                    history.RefreshData();
+                if (balanceChanges != null)
+                    balanceChanges.RefreshData();
+                if (home != null)
+                    home.RefreshData();
+                if (paymentHistory != null)
+                    paymentHistory.RefreshData();
+            };
+            
             addUserControl(home);
         }
 
@@ -280,26 +299,31 @@ namespace GUI.Client
         // --- CÁC SỰ KIỆN NÚT BẤM ---
         private void btnHome_Click(object sender, EventArgs e)
         {
+            lblPageTitle.Text = "Home";
             addUserControl(home);
         }
 
-       
+
         private void btnSaving_Click(object sender, EventArgs e)
         {
+            lblPageTitle.Text = "Saving";
             addUserControl(listSaving);
         }
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
+            lblPageTitle.Text = "History";
             addUserControl(history);
         }
 
         private void btnTransfer_Click(object sender, EventArgs e)
         {
+            lblPageTitle.Text = "Transfer";
             addUserControl(transfer);
         }
         private void btnPayment_Click(object sender, EventArgs e)
         {
+            lblPageTitle.Text = "Payment";
             addUserControl(invoice);
         }
 
@@ -342,25 +366,72 @@ namespace GUI.Client
         // ✅ Handler khi có notification event
         private void UserSession_OnNotification(string message, string type)
         {
-            // Refresh notifications từ database
-            RefreshNotifications();
+            // Đảm bảo chạy trên UI thread
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => UserSession_OnNotification(message, type)));
+                return;
+            }
+
+            try
+            {
+                // Luôn cập nhật badge trước
+                UpdateNotificationBadge();
+
+                // Load lại danh sách notification từ DB (đã được lưu trước đó)
+                LoadNotificationsToDropdown();
+
+                // Hiển thị panel notification
+                pnlNotificationDropdown.Visible = true;
+                pnlNotificationDropdown.BringToFront();
+
+                System.Diagnostics.Debug.WriteLine($"[Dashboard] Notification panel refreshed: {message}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in UserSession_OnNotification: " + ex.Message);
+            }
         }
 
-        // ✅ Refresh notifications
+        // ✅ Refresh notifications (gọi khi cần)
         private void RefreshNotifications()
         {
             try
             {
+                UpdateNotificationBadge();
                 LoadNotificationsToDropdown();
                 pnlNotificationDropdown.Visible = true;
                 pnlNotificationDropdown.BringToFront();
-                UpdateNotificationBadge();
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error refreshing notifications: " + ex.Message);
             }
         }
+
+        public void ShowPaymentScreen()
+        {
+            addUserControl(invoice);
+        }
+
+        public void ShowHistoryScreen()
+        {
+            addUserControl(history);
+        }
+
+        // ✅ New public methods for navigation from UserControls
+        public void NavigateToTransactionHistory()
+        {
+            lblPageTitle.Text = "Transaction History";
+            addUserControl(history);
+        }
+
+        public void NavigateToPaymentHistory()
+        {
+            lblPageTitle.Text = "Payment History";
+            addUserControl(paymentHistory);
+        }
+
         private void pnlLogo_Paint(object sender, PaintEventArgs e) { }
         private void textBox1_TextChanged(object sender, EventArgs e) { }
         private void guna2TextBox1_TextChanged(object sender, EventArgs e) { }
@@ -376,6 +447,23 @@ namespace GUI.Client
         private void panel4_Paint(object sender, PaintEventArgs e) { }
         private void button3_Click(object sender, EventArgs e) { }
         private void button5_Click(object sender, EventArgs e) { }
-        private void button8_Click(object sender, EventArgs e) { }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Payment History";
+            addUserControl(paymentHistory);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Balance Changes";
+            addUserControl(balanceChanges);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Transaction History";
+            addUserControl(history);
+        }
     }
 }

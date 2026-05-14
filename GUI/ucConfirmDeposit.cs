@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using GUI.Client;
 using GUI.Session;
 using System;
@@ -92,6 +92,10 @@ namespace GUI
                     MessageBox.Show("Tài khoản tiết kiệm đã gui them !.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     panelCheckPassword.Visible = false;
                     txtCheckPassword.Clear();
+
+                    // ✅ Hiển thị Toast Notification
+                    ToastNotification.ShowDeposit(_depositAmount);
+
                     UserSession.UpdateBalance(_depositAmount);
                     UserSession.LoadSavingData();
                     ucListSaving listSaving = new ucListSaving();

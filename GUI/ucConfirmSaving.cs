@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Client;
 using GUI.Session;
@@ -110,6 +110,10 @@ namespace GUI
                     MessageBox.Show("Tài khoản tiết kiệm đã được tạo thành công!.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     panelCheckPassword.Visible = false;
                     txtCheckPassword.Clear();
+
+                    // ✅ Hiển thị Toast Notification
+                    ToastNotification.ShowSaving(Data.PrincipalAmount, Data.TermMonths);
+
                     UserSession.UpdateBalance(Data.PrincipalAmount);
                     UserSession.LoadSavingData();
 
