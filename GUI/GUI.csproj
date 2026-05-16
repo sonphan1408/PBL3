@@ -448,6 +448,18 @@
   <ItemGroup>
     <None Include="Resources\pig2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\z7831974167475_b39e40a519702bf8a24b3fb652bed943.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\z7831998582636_eb6300e32b6721904a0725b0bfced509.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hhhhh.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -133,6 +133,9 @@
   <data name="pngtree-circle-password-icon-vectors-png-image_17380571" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pngtree-circle-password-icon-vectors-png-image_17380571.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="z7831998582636_eb6300e32b6721904a0725b0bfced509" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\z7831998582636_eb6300e32b6721904a0725b0bfced509.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pngtree-vector-forward-icon-png-image_925823" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pngtree-vector-forward-icon-png-image_925823.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -193,6 +196,9 @@
   <data name="Gemini_Generated_Image_jyaunrjyaunrjyau" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gemini_Generated_Image_jyaunrjyaunrjyau.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Gemini_Generated_Image_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Gemini_Generated_Image_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Nội dung đoạn văn bản của bạn1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Nội dung đoạn văn bản của bạn.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -202,11 +208,17 @@
   <data name="pngtree-outline-user-icon-png-image_1727916" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pngtree-outline-user-icon-png-image_1727916.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pig2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pig2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="unnamed1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\unnamed1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="z7831974167475_b39e40a519702bf8a24b3fb652bed943" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\z7831974167475_b39e40a519702bf8a24b3fb652bed943.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Gemini_Generated_Image_usjhvtusjhvtusjh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gemini_Generated_Image_usjhvtusjhvtusjh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,7 +226,7 @@
   <data name="1.Featureimage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1.Featureimage.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pig2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pig2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="hhhhh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hhhhh.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

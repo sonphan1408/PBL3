@@ -81,12 +81,12 @@ namespace GUI
             dgvPaymentHistory.Columns.Clear();
 
             // Add columns
-            dgvPaymentHistory.Columns.Add("Invoice", "Invoice");
-            dgvPaymentHistory.Columns.Add("BillingTo", "Billing To");
-            dgvPaymentHistory.Columns.Add("Status", "Status");
-            dgvPaymentHistory.Columns.Add("PaymentDate", "Payment Date");
-            dgvPaymentHistory.Columns.Add("Amount", "Amount");
-            dgvPaymentHistory.Columns.Add("PaymentFor", "Payment For");
+            dgvPaymentHistory.Columns.Add("Invoice", "Mã hóa đơn");
+            dgvPaymentHistory.Columns.Add("BillingTo", "Bên nhận");
+            dgvPaymentHistory.Columns.Add("Status", "Trạng thái");
+            dgvPaymentHistory.Columns.Add("PaymentDate", "Ngày thanh toán");
+            dgvPaymentHistory.Columns.Add("Amount", "Số tiền");
+            dgvPaymentHistory.Columns.Add("PaymentFor", "Thanh toán cho");
 
             // Set column widths
             dgvPaymentHistory.Columns["Invoice"].Width = 100;
@@ -166,7 +166,7 @@ namespace GUI
                     string status = invoice.Status ?? "UNKNOWN";
                     string paymentDate = invoice.DueDate != DateTime.MinValue ? invoice.DueDate.ToString("yyyy-MM-dd") : "-";
                     string amount = "$" + invoice.Amount.ToString("F2");
-                    string paymentFor = "BANK TRANSFER";
+                    string paymentFor = "CHUYỂN KHOẢN";
 
                     dgvPaymentHistory.Rows.Add(invoiceId, billingTo, status, paymentDate, amount, paymentFor);
                 }

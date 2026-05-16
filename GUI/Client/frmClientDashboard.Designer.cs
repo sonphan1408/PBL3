@@ -28,9 +28,8 @@ namespace GUI.Client
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmClientDashboard));
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.pnlNav = new System.Windows.Forms.Panel();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -39,28 +38,29 @@ namespace GUI.Client
             this.btnSaving = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.pnlLogo = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.pnlHeader = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblPageTitle = new System.Windows.Forms.Label();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lblNotificationBadge = new System.Windows.Forms.Label();
+            this.btnNotification = new System.Windows.Forms.Button();
             this.lblUserName = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.pnlLogo = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlSidebar.SuspendLayout();
-            this.pnlLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.White;
+            this.pnlSidebar.Controls.Add(this.pnlNav);
             this.pnlSidebar.Controls.Add(this.button9);
             this.pnlSidebar.Controls.Add(this.button8);
             this.pnlSidebar.Controls.Add(this.button7);
@@ -74,22 +74,30 @@ namespace GUI.Client
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(219, 853);
+            this.pnlSidebar.Size = new System.Drawing.Size(254, 853);
             this.pnlSidebar.TabIndex = 0;
             this.pnlSidebar.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSidebar_Paint);
+            // 
+            // pnlNav
+            // 
+            this.pnlNav.BackColor = System.Drawing.Color.DodgerBlue;
+            this.pnlNav.Location = new System.Drawing.Point(0, 193);
+            this.pnlNav.Name = "pnlNav";
+            this.pnlNav.Size = new System.Drawing.Size(3, 100);
+            this.pnlNav.TabIndex = 1;
             // 
             // button9
             // 
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.button9.ForeColor = System.Drawing.Color.DimGray;
-            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button9.Location = new System.Drawing.Point(0, 349);
+            this.button9.Location = new System.Drawing.Point(0, 402);
             this.button9.Name = "button9";
-            this.button9.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.button9.Size = new System.Drawing.Size(188, 32);
+            this.button9.Padding = new System.Windows.Forms.Padding(45, 0, 0, 0);
+            this.button9.Size = new System.Drawing.Size(254, 35);
             this.button9.TabIndex = 11;
-            this.button9.Text = "- Transaction History";
+            this.button9.Text = "• Lịch sử giao dịch";
             this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
@@ -99,14 +107,14 @@ namespace GUI.Client
             this.button8.BackColor = System.Drawing.Color.White;
             this.button8.FlatAppearance.BorderSize = 0;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.button8.ForeColor = System.Drawing.Color.DimGray;
-            this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button8.Location = new System.Drawing.Point(0, 317);
+            this.button8.Location = new System.Drawing.Point(0, 367);
             this.button8.Name = "button8";
-            this.button8.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.button8.Size = new System.Drawing.Size(188, 32);
+            this.button8.Padding = new System.Windows.Forms.Padding(45, 0, 0, 0);
+            this.button8.Size = new System.Drawing.Size(254, 35);
             this.button8.TabIndex = 10;
-            this.button8.Text = "- Balance Changes";
+            this.button8.Text = "• Biến động số dư";
             this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
@@ -116,14 +124,14 @@ namespace GUI.Client
             this.button7.BackColor = System.Drawing.Color.White;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.button7.ForeColor = System.Drawing.Color.DimGray;
-            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(0, 285);
+            this.button7.Location = new System.Drawing.Point(0, 332);
             this.button7.Name = "button7";
-            this.button7.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.button7.Size = new System.Drawing.Size(188, 32);
+            this.button7.Padding = new System.Windows.Forms.Padding(45, 0, 0, 0);
+            this.button7.Size = new System.Drawing.Size(254, 35);
             this.button7.TabIndex = 9;
-            this.button7.Text = "- Payment History";
+            this.button7.Text = "• Lịch sử thanh toán";
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -132,14 +140,14 @@ namespace GUI.Client
             // 
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(0, 253);
+            this.button6.Location = new System.Drawing.Point(0, 287);
             this.button6.Name = "button6";
-            this.button6.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.button6.Size = new System.Drawing.Size(188, 32);
+            this.button6.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.button6.Size = new System.Drawing.Size(254, 45);
             this.button6.TabIndex = 8;
-            this.button6.Text = "History";
+            this.button6.Text = "  🕒   Lịch sử";
             this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.btnHistory_Click);
@@ -148,14 +156,14 @@ namespace GUI.Client
             // 
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(0, 215);
+            this.button5.Location = new System.Drawing.Point(0, 242);
             this.button5.Name = "button5";
-            this.button5.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.button5.Size = new System.Drawing.Size(188, 32);
+            this.button5.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.button5.Size = new System.Drawing.Size(254, 45);
             this.button5.TabIndex = 7;
-            this.button5.Text = "Loan";
+            this.button5.Text = "  🏦   Loan";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -163,14 +171,14 @@ namespace GUI.Client
             // 
             this.btnSaving.FlatAppearance.BorderSize = 0;
             this.btnSaving.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaving.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnSaving.ForeColor = System.Drawing.Color.Black;
-            this.btnSaving.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaving.Location = new System.Drawing.Point(0, 177);
+            this.btnSaving.Location = new System.Drawing.Point(0, 197);
             this.btnSaving.Name = "btnSaving";
-            this.btnSaving.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.btnSaving.Size = new System.Drawing.Size(188, 32);
+            this.btnSaving.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.btnSaving.Size = new System.Drawing.Size(254, 45);
             this.btnSaving.TabIndex = 6;
-            this.btnSaving.Text = "Saving";
+            this.btnSaving.Text = "  🐷   Saving";
             this.btnSaving.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSaving.UseVisualStyleBackColor = true;
             this.btnSaving.Click += new System.EventHandler(this.btnSaving_Click);
@@ -179,67 +187,46 @@ namespace GUI.Client
             // 
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(0, 139);
+            this.button3.Location = new System.Drawing.Point(0, 152);
             this.button3.Name = "button3";
-            this.button3.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.button3.Size = new System.Drawing.Size(188, 32);
+            this.button3.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.button3.Size = new System.Drawing.Size(254, 45);
             this.button3.TabIndex = 5;
-            this.button3.Text = "Payments";
+            this.button3.Text = "  💳   Payments";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.btnPayment_Click);
             // 
             // button2
             // 
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 101);
+            this.button2.Location = new System.Drawing.Point(0, 107);
             this.button2.Name = "button2";
-            this.button2.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.button2.Size = new System.Drawing.Size(188, 32);
+            this.button2.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.button2.Size = new System.Drawing.Size(254, 45);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Chuyển Khoản";
+            this.button2.Text = "  💸   Chuyển Khoản";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnTransfer_Click);
-            // 
-            // pnlLogo
-            // 
-            this.pnlLogo.BackColor = System.Drawing.Color.White;
-            this.pnlLogo.Controls.Add(this.pictureBox1);
-            this.pnlLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLogo.Location = new System.Drawing.Point(0, 0);
-            this.pnlLogo.Name = "pnlLogo";
-            this.pnlLogo.Size = new System.Drawing.Size(219, 62);
-            this.pnlLogo.TabIndex = 0;
-            this.pnlLogo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlLogo_Paint);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(14, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(166, 56);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(0, 63);
+            this.button1.Location = new System.Drawing.Point(0, 62);
             this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(188, 32);
+            this.button1.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.button1.Size = new System.Drawing.Size(254, 45);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Dashboard\r\n";
+            this.button1.Text = "  🏠   Dashboard";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnHome_Click);
@@ -251,9 +238,9 @@ namespace GUI.Client
             this.pnlHeader.Controls.Add(this.pnlSearch);
             this.pnlHeader.Controls.Add(this.panel4);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(219, 0);
+            this.pnlHeader.Location = new System.Drawing.Point(254, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(1561, 62);
+            this.pnlHeader.Size = new System.Drawing.Size(1526, 62);
             this.pnlHeader.TabIndex = 1;
             // 
             // panel1
@@ -262,15 +249,16 @@ namespace GUI.Client
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(249, 51);
+            this.panel1.Size = new System.Drawing.Size(249, 53);
             this.panel1.TabIndex = 0;
             // 
             // lblPageTitle
             // 
             this.lblPageTitle.AutoSize = true;
-            this.lblPageTitle.Location = new System.Drawing.Point(19, 19);
+            this.lblPageTitle.Font = new System.Drawing.Font("Segoe UI", 11.07692F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPageTitle.Location = new System.Drawing.Point(16, 10);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(45, 16);
+            this.lblPageTitle.Size = new System.Drawing.Size(68, 28);
             this.lblPageTitle.TabIndex = 0;
             this.lblPageTitle.Text = "Home";
             // 
@@ -280,24 +268,56 @@ namespace GUI.Client
             this.pnlSearch.Location = new System.Drawing.Point(258, 3);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Padding = new System.Windows.Forms.Padding(11, 10, 11, 10);
-            this.pnlSearch.Size = new System.Drawing.Size(436, 51);
+            this.pnlSearch.Size = new System.Drawing.Size(407, 51);
             this.pnlSearch.TabIndex = 1;
             this.pnlSearch.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSearch_Paint);
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.lblNotificationBadge);
+            this.panel4.Controls.Add(this.btnNotification);
             this.panel4.Controls.Add(this.lblUserName);
-            this.panel4.Location = new System.Drawing.Point(700, 3);
+            this.panel4.Location = new System.Drawing.Point(671, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(300, 51);
+            this.panel4.Size = new System.Drawing.Size(413, 53);
             this.panel4.TabIndex = 3;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint_1);
+            // 
+            // lblNotificationBadge
+            // 
+            this.lblNotificationBadge.BackColor = System.Drawing.Color.Red;
+            this.lblNotificationBadge.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+            this.lblNotificationBadge.ForeColor = System.Drawing.Color.White;
+            this.lblNotificationBadge.Location = new System.Drawing.Point(32, 5);
+            this.lblNotificationBadge.Name = "lblNotificationBadge";
+            this.lblNotificationBadge.Size = new System.Drawing.Size(20, 20);
+            this.lblNotificationBadge.TabIndex = 3;
+            this.lblNotificationBadge.Text = "0";
+            this.lblNotificationBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNotificationBadge.Visible = false;
+            // 
+            // btnNotification
+            // 
+            this.btnNotification.BackColor = System.Drawing.Color.Transparent;
+            this.btnNotification.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNotification.FlatAppearance.BorderSize = 0;
+            this.btnNotification.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNotification.Font = new System.Drawing.Font("Segoe UI Emoji", 16F);
+            this.btnNotification.ForeColor = System.Drawing.Color.White;
+            this.btnNotification.Location = new System.Drawing.Point(12, 0);
+            this.btnNotification.Name = "btnNotification";
+            this.btnNotification.Size = new System.Drawing.Size(40, 50);
+            this.btnNotification.TabIndex = 2;
+            this.btnNotification.Text = "🔔";
+            this.btnNotification.UseVisualStyleBackColor = false;
+            this.btnNotification.Click += new System.EventHandler(this.BtnNotification_Click);
             // 
             // lblUserName
             // 
             this.lblUserName.AutoSize = true;
             this.lblUserName.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.lblUserName.ForeColor = System.Drawing.Color.White;
-            this.lblUserName.Location = new System.Drawing.Point(80, 16);
+            this.lblUserName.Location = new System.Drawing.Point(104, 16);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(110, 22);
             this.lblUserName.TabIndex = 7;
@@ -309,11 +329,28 @@ namespace GUI.Client
             this.pnlMain.BackgroundImage = global::GUI.Properties.Resources._656362958_1425254056280893_416290663166627344_n;
             this.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(219, 62);
+            this.pnlMain.Location = new System.Drawing.Point(254, 62);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1561, 791);
+            this.pnlMain.Size = new System.Drawing.Size(1526, 791);
             this.pnlMain.TabIndex = 2;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
+            // 
+            // pnlLogo
+            // 
+            this.pnlLogo.BackgroundImage = global::GUI.Properties.Resources._647600484_930136546239914_1486468665117018077_n;
+            this.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlLogo.Location = new System.Drawing.Point(12, 3);
+            this.pnlLogo.Name = "pnlLogo";
+            this.pnlLogo.Size = new System.Drawing.Size(222, 59);
+            this.pnlLogo.TabIndex = 12;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // frmClientDashboard
             // 
@@ -328,13 +365,12 @@ namespace GUI.Client
             this.Text = "Giao diện chính";
             this.Load += new System.EventHandler(this.frmClientDashboard_Load);
             this.pnlSidebar.ResumeLayout(false);
-            this.pnlLogo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlHeader.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -342,6 +378,7 @@ namespace GUI.Client
         #endregion
 
         private System.Windows.Forms.Panel pnlSidebar;
+        private System.Windows.Forms.Panel pnlNav;
         private System.Windows.Forms.FlowLayoutPanel pnlHeader;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Timer timer1;
@@ -361,5 +398,7 @@ namespace GUI.Client
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label lblUserName;
+        private System.Windows.Forms.Button btnNotification;
+        private System.Windows.Forms.Label lblNotificationBadge;
     }
 }

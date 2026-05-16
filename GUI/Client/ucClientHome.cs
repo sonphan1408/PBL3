@@ -265,20 +265,102 @@ namespace GUI.Client
             if (lstHistory == null) return;
             lstHistory.Items.Clear();
 
+            // Set up owner draw for custom rendering
+            lstHistory.DrawMode = DrawMode.OwnerDrawFixed;
+            lstHistory.ItemHeight = 44;
+            // Match the surrounding panel's light blue background
+            lstHistory.BackColor = Color.FromArgb(179, 207, 255);
+            
+            // Subscribe to DrawItem event (ensure single subscription)
+            lstHistory.DrawItem -= LstHistory_DrawItem;
+            lstHistory.DrawItem += LstHistory_DrawItem;
+
             if (transactions != null && transactions.Count > 0)
             {
                 foreach (var transaction in transactions)
                 {
-                    string type = transaction.Description ?? "Transaction";
-                    lstHistory.Items.Add(type);
-                    lstHistory.Items.Add("$" + transaction.Amount.ToString("F2"));
-                    lstHistory.Items.Add(transaction.CreatedAt.ToString("yyyy-MM-dd"));
-                    lstHistory.Items.Add("");
+                    lstHistory.Items.Add(transaction);
                 }
             }
             else
             {
                 lstHistory.Items.Add("No transactions found");
+            }
+        }
+
+        private void LstHistory_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            e.DrawBackground();
+
+            ListBox listBox = sender as ListBox;
+            var item = listBox.Items[e.Index];
+
+            // Draw subtle separator line between items
+            using (Pen pen = new Pen(Color.FromArgb(150, 180, 230)))
+            {
+                e.Graphics.DrawLine(pen, e.Bounds.Left + 4, e.Bounds.Bottom - 1, e.Bounds.Right - 4, e.Bounds.Bottom - 1);
+            }
+
+            if (item is TransactionDTO transaction)
+            {
+                // Truncate description to fit in the left column
+                string description = transaction.Description ?? "Transaction";
+                if (description.Length > 14) description = description.Substring(0, 12) + "...";
+
+                string toAcc = (transaction.ToAccount ?? "").Trim().Replace("\0", "");
+                string myAcc = (currentAccount.AccountNumber ?? "").Trim().Replace("\0", "");
+                bool isIncome = string.Equals(toAcc, myAcc, StringComparison.OrdinalIgnoreCase) || toAcc.Contains(myAcc);
+                decimal amountValue = transaction.Amount;
+                string amountStr = (isIncome ? "+" : "-") + amountValue.ToString("N0").Replace(",", ".") + " VND";
+                Color amountColor = isIncome ? Color.FromArgb(20, 160, 80) : Color.FromArgb(200, 50, 40);
+
+                string dateStr = transaction.CreatedAt.ToString("dd/MM/yyyy");
+
+                int totalWidth = e.Bounds.Width;
+                int leftPad = e.Bounds.Left + 6;
+                // Column widths: description=28%, amount=38%, date=34% of total
+                int descWidth  = (int)(totalWidth * 0.28);
+                int amtWidth   = (int)(totalWidth * 0.38);
+                int dateWidth  = totalWidth - descWidth - amtWidth;
+
+                using (Font regularFont = new Font("Times New Roman", 9f))
+                {
+                    StringFormat centerLeft  = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Near };
+                    StringFormat centerRight = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far };
+
+                    // Description — left column
+                    using (Brush textBrush = new SolidBrush(Color.FromArgb(30, 30, 30)))
+                    {
+                        e.Graphics.DrawString(description, regularFont, textBrush,
+                            new Rectangle(leftPad, e.Bounds.Top, descWidth, e.Bounds.Height), centerLeft);
+                    }
+
+                    // Amount — middle column, right-aligned
+                    using (Brush amountBrush = new SolidBrush(amountColor))
+                    {
+                        e.Graphics.DrawString(amountStr, regularFont, amountBrush,
+                            new Rectangle(leftPad + descWidth, e.Bounds.Top, amtWidth, e.Bounds.Height), centerRight);
+                    }
+
+                    // Date — right column, right-aligned
+                    using (Brush dateBrush = new SolidBrush(Color.FromArgb(80, 80, 100)))
+                    {
+                        e.Graphics.DrawString(dateStr, regularFont, dateBrush,
+                            new Rectangle(leftPad + descWidth + amtWidth, e.Bounds.Top, dateWidth - 6, e.Bounds.Height), centerRight);
+                    }
+
+                    centerLeft.Dispose();
+                    centerRight.Dispose();
+                }
+            }
+            else
+            {
+                using (Brush textBrush = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.DrawString(item.ToString(), listBox.Font, textBrush, e.Bounds, new StringFormat { LineAlignment = StringAlignment.Center });
+                }
             }
         }
 
@@ -444,6 +526,21 @@ namespace GUI.Client
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstSavingsItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picDonutChart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTransferAmount_TextChanged(object sender, EventArgs e)
         {
 
         }

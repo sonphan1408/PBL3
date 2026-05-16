@@ -1,4 +1,4 @@
-﻿namespace GUI
+namespace GUI
 {
     partial class ucPaymentHistory
     {
@@ -94,7 +94,7 @@
             this.lblInterestRatesTitle.Name = "lblInterestRatesTitle";
             this.lblInterestRatesTitle.Size = new System.Drawing.Size(347, 29);
             this.lblInterestRatesTitle.TabIndex = 0;
-            this.lblInterestRatesTitle.Text = "INTEREST RATES BY TERM";
+            this.lblInterestRatesTitle.Text = "LÃI SUẤT THEO KỲ HẠN";
             // 
             // pnlDigitalSavings
             // 
@@ -129,7 +129,7 @@
             this.lblDigitalSavings.Name = "lblDigitalSavings";
             this.lblDigitalSavings.Size = new System.Drawing.Size(175, 29);
             this.lblDigitalSavings.TabIndex = 0;
-            this.lblDigitalSavings.Text = "Digital Savings";
+            this.lblDigitalSavings.Text = "Tiết kiệm số";
             // 
             // pnlBalance
             // 
@@ -164,7 +164,7 @@
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(97, 29);
             this.lblBalance.TabIndex = 0;
-            this.lblBalance.Text = "Balance";
+            this.lblBalance.Text = "Số dư";
             // 
             // pnlTable
             // 

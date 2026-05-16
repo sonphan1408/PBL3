@@ -31,9 +31,9 @@ namespace GUI.Client
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblBalanceAmount = new System.Windows.Forms.Label();
             this.lblSavingsAmount = new System.Windows.Forms.Label();
             this.lblLoansAmount = new System.Windows.Forms.Label();
@@ -76,7 +76,7 @@ namespace GUI.Client
             this.lblBalanceAmount.BackColor = System.Drawing.Color.Transparent;
             this.lblBalanceAmount.Font = new System.Drawing.Font("Times New Roman", 18.27692F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBalanceAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblBalanceAmount.Location = new System.Drawing.Point(46, 82);
+            this.lblBalanceAmount.Location = new System.Drawing.Point(62, 81);
             this.lblBalanceAmount.Name = "lblBalanceAmount";
             this.lblBalanceAmount.Size = new System.Drawing.Size(127, 37);
             this.lblBalanceAmount.TabIndex = 1;
@@ -88,7 +88,7 @@ namespace GUI.Client
             this.lblSavingsAmount.BackColor = System.Drawing.Color.Transparent;
             this.lblSavingsAmount.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold);
             this.lblSavingsAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblSavingsAmount.Location = new System.Drawing.Point(351, 81);
+            this.lblSavingsAmount.Location = new System.Drawing.Point(348, 82);
             this.lblSavingsAmount.Name = "lblSavingsAmount";
             this.lblSavingsAmount.Size = new System.Drawing.Size(35, 38);
             this.lblSavingsAmount.TabIndex = 1;
@@ -100,7 +100,7 @@ namespace GUI.Client
             this.lblLoansAmount.BackColor = System.Drawing.Color.Transparent;
             this.lblLoansAmount.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold);
             this.lblLoansAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblLoansAmount.Location = new System.Drawing.Point(641, 82);
+            this.lblLoansAmount.Location = new System.Drawing.Point(619, 82);
             this.lblLoansAmount.Name = "lblLoansAmount";
             this.lblLoansAmount.Size = new System.Drawing.Size(35, 38);
             this.lblLoansAmount.TabIndex = 1;
@@ -113,7 +113,7 @@ namespace GUI.Client
             this.lblCardNumber.BackColor = System.Drawing.Color.Transparent;
             this.lblCardNumber.Font = new System.Drawing.Font("Times New Roman", 19.93846F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCardNumber.ForeColor = System.Drawing.Color.White;
-            this.lblCardNumber.Location = new System.Drawing.Point(923, 117);
+            this.lblCardNumber.Location = new System.Drawing.Point(852, 98);
             this.lblCardNumber.Name = "lblCardNumber";
             this.lblCardNumber.Size = new System.Drawing.Size(180, 41);
             this.lblCardNumber.TabIndex = 1;
@@ -124,17 +124,17 @@ namespace GUI.Client
             this.chart1.BackColor = System.Drawing.Color.Transparent;
             this.chart1.BorderlineColor = System.Drawing.Color.Blue;
             this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(53, 250);
+            chartArea6.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart1.Legends.Add(legend6);
+            this.chart1.Location = new System.Drawing.Point(38, 221);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(751, 207);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chart1.Series.Add(series6);
+            this.chart1.Size = new System.Drawing.Size(687, 183);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             this.chart1.Click += new System.EventHandler(this.chart1_Click);
@@ -248,7 +248,7 @@ namespace GUI.Client
             this.LLHistory.AutoSize = true;
             this.LLHistory.BackColor = System.Drawing.Color.Transparent;
             this.LLHistory.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LLHistory.Location = new System.Drawing.Point(1118, 240);
+            this.LLHistory.Location = new System.Drawing.Point(997, 212);
             this.LLHistory.Name = "LLHistory";
             this.LLHistory.Size = new System.Drawing.Size(88, 20);
             this.LLHistory.TabIndex = 3;
@@ -261,9 +261,9 @@ namespace GUI.Client
             this.lstHistory.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lstHistory.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstHistory.ItemHeight = 20;
-            this.lstHistory.Location = new System.Drawing.Point(874, 295);
+            this.lstHistory.Location = new System.Drawing.Point(731, 255);
             this.lstHistory.Name = "lstHistory";
-            this.lstHistory.Size = new System.Drawing.Size(292, 180);
+            this.lstHistory.Size = new System.Drawing.Size(313, 160);
             this.lstHistory.TabIndex = 0;
             // 
             // txtTransferAmount
@@ -271,11 +271,12 @@ namespace GUI.Client
             this.txtTransferAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTransferAmount.Font = new System.Drawing.Font("Times New Roman", 16.06154F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTransferAmount.ForeColor = System.Drawing.Color.Black;
-            this.txtTransferAmount.Location = new System.Drawing.Point(874, 601);
+            this.txtTransferAmount.Location = new System.Drawing.Point(743, 568);
             this.txtTransferAmount.Name = "txtTransferAmount";
-            this.txtTransferAmount.Size = new System.Drawing.Size(278, 41);
+            this.txtTransferAmount.Size = new System.Drawing.Size(332, 41);
             this.txtTransferAmount.TabIndex = 1;
             this.txtTransferAmount.Text = "Enter amount...";
+            this.txtTransferAmount.TextChanged += new System.EventHandler(this.txtTransferAmount_TextChanged);
             // 
             // btnTransfer
             // 
@@ -283,9 +284,9 @@ namespace GUI.Client
             this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransfer.Font = new System.Drawing.Font("Times New Roman", 16.06154F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTransfer.ForeColor = System.Drawing.Color.White;
-            this.btnTransfer.Location = new System.Drawing.Point(874, 648);
+            this.btnTransfer.Location = new System.Drawing.Point(743, 624);
             this.btnTransfer.Name = "btnTransfer";
-            this.btnTransfer.Size = new System.Drawing.Size(278, 41);
+            this.btnTransfer.Size = new System.Drawing.Size(332, 41);
             this.btnTransfer.TabIndex = 1;
             this.btnTransfer.Text = "Chuyển khoản";
             this.btnTransfer.UseVisualStyleBackColor = false;
@@ -295,7 +296,7 @@ namespace GUI.Client
             this.LLSaving.AutoSize = true;
             this.LLSaving.BackColor = System.Drawing.Color.Transparent;
             this.LLSaving.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LLSaving.Location = new System.Drawing.Point(708, 537);
+            this.LLSaving.Location = new System.Drawing.Point(601, 468);
             this.LLSaving.Name = "LLSaving";
             this.LLSaving.Size = new System.Drawing.Size(88, 20);
             this.LLSaving.TabIndex = 3;
@@ -308,10 +309,11 @@ namespace GUI.Client
             this.lstSavingsItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lstSavingsItems.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstSavingsItems.ItemHeight = 20;
-            this.lstSavingsItems.Location = new System.Drawing.Point(470, 574);
+            this.lstSavingsItems.Location = new System.Drawing.Point(414, 505);
             this.lstSavingsItems.Name = "lstSavingsItems";
-            this.lstSavingsItems.Size = new System.Drawing.Size(326, 120);
+            this.lstSavingsItems.Size = new System.Drawing.Size(291, 160);
             this.lstSavingsItems.TabIndex = 2;
+            this.lstSavingsItems.SelectedIndexChanged += new System.EventHandler(this.lstSavingsItems_SelectedIndexChanged);
             // 
             // contextMenuStrip1
             // 
@@ -334,7 +336,7 @@ namespace GUI.Client
             this.lblTotalIncomeAmount.AutoSize = true;
             this.lblTotalIncomeAmount.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalIncomeAmount.Font = new System.Drawing.Font("Times New Roman", 8.861538F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalIncomeAmount.Location = new System.Drawing.Point(273, 639);
+            this.lblTotalIncomeAmount.Location = new System.Drawing.Point(201, 568);
             this.lblTotalIncomeAmount.Name = "lblTotalIncomeAmount";
             this.lblTotalIncomeAmount.Size = new System.Drawing.Size(45, 19);
             this.lblTotalIncomeAmount.TabIndex = 3;
@@ -345,7 +347,7 @@ namespace GUI.Client
             this.lblTotalExpenseAmount.AutoSize = true;
             this.lblTotalExpenseAmount.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalExpenseAmount.Font = new System.Drawing.Font("Times New Roman", 8.861538F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalExpenseAmount.Location = new System.Drawing.Point(273, 601);
+            this.lblTotalExpenseAmount.Location = new System.Drawing.Point(201, 524);
             this.lblTotalExpenseAmount.Name = "lblTotalExpenseAmount";
             this.lblTotalExpenseAmount.Size = new System.Drawing.Size(45, 19);
             this.lblTotalExpenseAmount.TabIndex = 1;
@@ -354,18 +356,19 @@ namespace GUI.Client
             // picDonutChart
             // 
             this.picDonutChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.picDonutChart.Location = new System.Drawing.Point(53, 574);
+            this.picDonutChart.Location = new System.Drawing.Point(38, 505);
             this.picDonutChart.Name = "picDonutChart";
-            this.picDonutChart.Size = new System.Drawing.Size(182, 125);
+            this.picDonutChart.Size = new System.Drawing.Size(147, 158);
             this.picDonutChart.TabIndex = 17;
             this.picDonutChart.TabStop = false;
+            this.picDonutChart.Click += new System.EventHandler(this.picDonutChart_Click);
             // 
             // LLPaySec
             // 
             this.LLPaySec.AutoSize = true;
             this.LLPaySec.BackColor = System.Drawing.Color.Transparent;
             this.LLPaySec.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LLPaySec.Location = new System.Drawing.Point(299, 537);
+            this.LLPaySec.Location = new System.Drawing.Point(250, 456);
             this.LLPaySec.Name = "LLPaySec";
             this.LLPaySec.Size = new System.Drawing.Size(88, 20);
             this.LLPaySec.TabIndex = 16;
@@ -378,7 +381,7 @@ namespace GUI.Client
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::GUI.Properties.Resources.Nội_dung_đoạn_văn_bản_của_bạn1;
+            this.BackgroundImage = global::GUI.Properties.Resources.hhhhh;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.lblTotalIncomeAmount);
@@ -397,7 +400,7 @@ namespace GUI.Client
             this.Controls.Add(this.lblCardNumber);
             this.DoubleBuffered = true;
             this.Name = "ucClientHome";
-            this.Size = new System.Drawing.Size(1248, 758);
+            this.Size = new System.Drawing.Size(1202, 711);
             this.Load += new System.EventHandler(this.ucClientHome_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.pnlLegend.ResumeLayout(false);

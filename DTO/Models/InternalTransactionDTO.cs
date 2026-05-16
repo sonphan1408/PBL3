@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +8,6 @@ namespace DTO.Models
 {
     public class InternalTransactionDTO : TransactionDTO
     {
-        public new string ToAccount { get; set; }
+        // No need to redeclare ToAccount here, it's already in TransactionDTO
     }
 }

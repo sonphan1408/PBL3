@@ -97,14 +97,14 @@ namespace GUI.Client
 
         private void SetupSearchPlaceholder()
         {
-            if (textBox1.Text == "Search transactions...")
+            if (textBox1.Text == "Tìm kiếm giao dịch...")
             {
                 textBox1.ForeColor = System.Drawing.Color.Gray;
             }
             
             textBox1.Enter += (s, e) =>
             {
-                if (textBox1.Text == "Search transactions...")
+                if (textBox1.Text == "Tìm kiếm giao dịch...")
                 {
                     textBox1.Text = "";
                     textBox1.ForeColor = System.Drawing.Color.Black;
@@ -115,7 +115,7 @@ namespace GUI.Client
             {
                 if (string.IsNullOrWhiteSpace(textBox1.Text))
                 {
-                    textBox1.Text = "Search transactions...";
+                    textBox1.Text = "Tìm kiếm giao dịch...";
                     textBox1.ForeColor = System.Drawing.Color.Gray;
                 }
             };
@@ -124,26 +124,39 @@ namespace GUI.Client
         private void InitializeDataGridView()
         {
             dataGridView1.Columns.Clear();
-            
-            // Add columns
-            dataGridView1.Columns.Add("TransactionID", "ID Transaction");
-            dataGridView1.Columns.Add("TransactionType", "Type");
-            dataGridView1.Columns.Add("FromAccount", "Sender");
-            dataGridView1.Columns.Add("ToAccount", "Receiver");
-            dataGridView1.Columns.Add("Amount", "Amount");
-            dataGridView1.Columns.Add("BalanceBefore", "Balance Before");
-            dataGridView1.Columns.Add("BalanceAfter", "Balance After");
-            dataGridView1.Columns.Add("CreatedAt", "Date");
+
+            // Add columns matching the target design
+            dataGridView1.Columns.Add("TransactionID", "Mã giao dịch");
+            dataGridView1.Columns.Add("TransactionType", "Loại");
+            dataGridView1.Columns.Add("FromAccount", "Người gửi");
+            dataGridView1.Columns.Add("ToAccount", "Người nhận");
+            dataGridView1.Columns.Add("Amount", "Số tiền");
+            dataGridView1.Columns.Add("Status", "Trạng thái");
+            dataGridView1.Columns.Add("TimeRequest", "Thời gian yêu cầu");
+            dataGridView1.Columns.Add("TimeApprove", "Thời gian duyệt");
 
             // Set column widths
-            dataGridView1.Columns["TransactionID"].Width = 150;
-            dataGridView1.Columns["TransactionType"].Width = 80;
-            dataGridView1.Columns["FromAccount"].Width = 120;
-            dataGridView1.Columns["ToAccount"].Width = 120;
+            dataGridView1.Columns["TransactionID"].Width = 120;
+            dataGridView1.Columns["TransactionType"].Width = 60;
+            dataGridView1.Columns["FromAccount"].Width = 130;
+            dataGridView1.Columns["ToAccount"].Width = 130;
             dataGridView1.Columns["Amount"].Width = 100;
-            dataGridView1.Columns["BalanceBefore"].Width = 120;
-            dataGridView1.Columns["BalanceAfter"].Width = 120;
-            dataGridView1.Columns["CreatedAt"].Width = 100;
+            dataGridView1.Columns["Status"].Width = 60;
+            dataGridView1.Columns["TimeRequest"].Width = 160;
+            dataGridView1.Columns["TimeApprove"].Width = 160;
+
+            // Restore original dark blue header style
+            var headerStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            headerStyle.BackColor = System.Drawing.Color.FromArgb(25, 55, 99);
+            headerStyle.ForeColor = System.Drawing.Color.White;
+            headerStyle.Font = new System.Drawing.Font("Segoe UI", 10f, System.Drawing.FontStyle.Bold);
+            headerStyle.SelectionBackColor = System.Drawing.Color.FromArgb(25, 55, 99);
+            dataGridView1.ColumnHeadersDefaultCellStyle = headerStyle;
+            dataGridView1.EnableHeadersVisualStyles = false;
+
+            // Alternating rows: original white / light gray
+            dataGridView1.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9f);
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(250, 250, 250);
         }
 
         private void SetupEventHandlers()
@@ -154,10 +167,10 @@ namespace GUI.Client
             // Setup Combobox options for sorting
             RECNET.DropDownStyle = ComboBoxStyle.DropDownList;
             RECNET.Items.Clear();
-            RECNET.Items.Add("All Transactions");
-            RECNET.Items.Add("Recent");
-            RECNET.Items.Add("Amount increasing");
-            RECNET.Items.Add("Amount decreasing");
+            RECNET.Items.Add("Tất cả giao dịch");
+            RECNET.Items.Add("Gần đây nhất");
+            RECNET.Items.Add("Số tiền tăng dần");
+            RECNET.Items.Add("Số tiền giảm dần");
             RECNET.SelectedIndex = 0;
             
             RECNET.SelectedIndexChanged += (s, e) => FilterTransactions();
@@ -185,7 +198,7 @@ namespace GUI.Client
             List<TransactionDTO> displayList = new List<TransactionDTO>(allTransactions);
             
             // Apply filtering
-            if (searchText != "search transactions..." && !string.IsNullOrWhiteSpace(searchText))
+            if (searchText != "tìm kiếm giao dịch..." && !string.IsNullOrWhiteSpace(searchText))
             {
                 displayList = displayList.FindAll(t =>
                     t.TransactionID.ToString().ToLower().Contains(searchText) ||
@@ -199,15 +212,15 @@ namespace GUI.Client
             // Apply sorting
             string sortOption = RECNET.SelectedItem?.ToString();
             
-            if (sortOption == "Amount increasing")
+            if (sortOption == "Số tiền tăng dần")
             {
                 displayList.Sort((a, b) => a.Amount.CompareTo(b.Amount));
             }
-            else if (sortOption == "Amount decreasing")
+            else if (sortOption == "Số tiền giảm dần")
             {
                 displayList.Sort((a, b) => b.Amount.CompareTo(a.Amount));
             }
-            else // "Recent" or "All Transactions"
+            else // "Gần đây nhất" or "Tất cả giao dịch"
             {
                 displayList.Sort((a, b) => b.CreatedAt.CompareTo(a.CreatedAt));
             }
@@ -279,19 +292,20 @@ namespace GUI.Client
                     int rowIndex = dataGridView1.Rows.Add();
                     DataGridViewRow row = dataGridView1.Rows[rowIndex];
 
-                    row.Cells["TransactionID"].Value = transaction.TransactionID.ToString().Substring(0, Math.Min(8, transaction.TransactionID.ToString().Length));
+                    string txId = transaction.TransactionID.ToString();
+                    row.Cells["TransactionID"].Value = txId.Substring(0, Math.Min(8, txId.Length));
                     row.Cells["TransactionType"].Value = transaction.TypeID;
                     row.Cells["FromAccount"].Value = transaction.FromAccount ?? "-";
                     row.Cells["ToAccount"].Value = transaction.ToAccount ?? "-";
-                    row.Cells["Amount"].Value = $"${transaction.Amount:N2}";
-                    row.Cells["BalanceBefore"].Value = $"${transaction.BalanceBefore:N2}";
-                    row.Cells["BalanceAfter"].Value = $"${transaction.BalanceAfter:N2}";
-                    row.Cells["CreatedAt"].Value = transaction.CreatedAt.ToString("yyyy-MM-dd");
+                    row.Cells["Amount"].Value = transaction.Amount.ToString("N0");
+                    row.Cells["Status"].Value = "True";
+                    row.Cells["TimeRequest"].Value = transaction.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss");
+                    row.Cells["TimeApprove"].Value = transaction.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss");
 
-                    // Alternate row colors
+                    // Alternate row colors (original style)
                     if (rowIndex % 2 == 0)
                     {
-                        row.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+                        row.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(250, 250, 250);
                     }
                     else
                     {

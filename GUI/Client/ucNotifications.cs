@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -159,7 +159,7 @@ namespace GUI.Client
             // Draw timestamp
             Font timeFont = new Font("Segoe UI", 8);
             RectangleF timeRect = new RectangleF(e.Bounds.X + 50, e.Bounds.Y + 32, e.Bounds.Width - 70, 20);
-            e.Graphics.DrawString(notif.CreatedAt.ToString("yyyy-MM-dd HH:mm"), timeFont, new SolidBrush(Color.Gray), timeRect);
+            e.Graphics.DrawString(notif.CreatedAt.ToString("dd/MM/yyyy HH:mm"), timeFont, new SolidBrush(Color.Gray), timeRect);
 
             e.DrawFocusRectangle();
         }
