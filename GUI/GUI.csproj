@@ -145,6 +145,9 @@
     <Compile Include="Client\ucClientHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Client\RoundedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Client\ucClientHome.Designer.cs">
       <DependentUpon>ucClientHome.cs</DependentUpon>
     </Compile>
@@ -459,6 +462,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hhhhh.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hhhhh1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

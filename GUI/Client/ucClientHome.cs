@@ -61,6 +61,26 @@ namespace GUI.Client
                 LoadDataFromDatabase();
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // Draw beautiful abstract background decorations (Glassmorphism style blobs)
+            using (SolidBrush b1 = new SolidBrush(Color.FromArgb(25, 30, 144, 255))) // Faint Blue
+            {
+                e.Graphics.FillEllipse(b1, -150, -150, 600, 600);
+            }
+            using (SolidBrush b2 = new SolidBrush(Color.FromArgb(20, 0, 191, 255))) // Faint Cyan
+            {
+                e.Graphics.FillEllipse(b2, this.Width - 500, this.Height - 400, 700, 700);
+            }
+            using (SolidBrush b3 = new SolidBrush(Color.FromArgb(20, 138, 43, 226))) // Faint Purple
+            {
+                e.Graphics.FillEllipse(b3, this.Width / 2 - 300, this.Height - 350, 600, 600);
+            }
+        }
+
         private void InitializeUI()
         {
             // Setup button click event
@@ -74,15 +94,7 @@ namespace GUI.Client
                 this.picDonutChart.Paint += PicDonutChart_Paint;
             }
 
-            // Định dạng font chữ đậm cho tổng thu/chi
-            if (lblTotalExpenseAmount != null)
-            {
-                lblTotalExpenseAmount.Font = new Font(lblTotalExpenseAmount.Font, FontStyle.Bold);
-            }
-            if (lblTotalIncomeAmount != null)
-            {
-                lblTotalIncomeAmount.Font = new Font(lblTotalIncomeAmount.Font, FontStyle.Bold);
-            }
+
 
             if (LLHistory != null)
             {
@@ -93,8 +105,6 @@ namespace GUI.Client
             {
                 LLPaySec.LinkClicked += LLPaySec_LinkClicked;
             }
-
-            // Note: Đã xóa phần ẩn chart1 và vẽ picChart thủ công vì UI mới đang dùng trực tiếp chart1
         }
 
         private void LLHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -265,11 +275,7 @@ namespace GUI.Client
             if (lstHistory == null) return;
             lstHistory.Items.Clear();
 
-            // Set up owner draw for custom rendering
-            lstHistory.DrawMode = DrawMode.OwnerDrawFixed;
-            lstHistory.ItemHeight = 44;
-            // Match the surrounding panel's light blue background
-            lstHistory.BackColor = Color.FromArgb(179, 207, 255);
+
             
             // Subscribe to DrawItem event (ensure single subscription)
             lstHistory.DrawItem -= LstHistory_DrawItem;
@@ -465,7 +471,7 @@ namespace GUI.Client
             Rectangle innerRect = new Rectangle((width - innerSize) / 2, (height - innerSize) / 2, innerSize, innerSize);
 
             // Cập nhật màu nền ở giữa vòng Donut khớp với màu nền UI
-            using (SolidBrush innerBrush = new SolidBrush(Color.SkyBlue))
+            using (SolidBrush innerBrush = new SolidBrush(Color.FromArgb(226, 240, 255)))
             {
                 g.FillEllipse(innerBrush, innerRect);
             }
@@ -541,6 +547,11 @@ namespace GUI.Client
         }
 
         private void txtTransferAmount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlBankCard_Paint(object sender, PaintEventArgs e)
         {
 
         }
