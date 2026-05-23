@@ -163,7 +163,7 @@ namespace GUI.Client
             this.RECNET.Size = new System.Drawing.Size(200, 28);
             this.RECNET.StateCommon.ComboBox.Content.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.RECNET.TabIndex = 4;
-            this.RECNET.Text = "All Transactions";
+            this.RECNET.Text = "Tất cả giao dịch";
             // 
             // button1
             // 

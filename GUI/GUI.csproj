@@ -281,6 +281,9 @@
     <EmbeddedResource Include="Client\ucHistory.resx">
       <DependentUpon>ucHistory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucNotifications.resx">
+      <DependentUpon>ucNotifications.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Client\ucSaving.resx">
       <DependentUpon>ucSaving.cs</DependentUpon>
     </EmbeddedResource>

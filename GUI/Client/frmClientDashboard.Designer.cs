@@ -30,6 +30,7 @@ namespace GUI.Client
         {
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.pnlNav = new System.Windows.Forms.Panel();
+            this.btnNotifications = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@ namespace GUI.Client
             this.btnSaving = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.pnlLogo = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.pnlHeader = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -48,7 +50,6 @@ namespace GUI.Client
             this.btnNotification = new System.Windows.Forms.Button();
             this.lblUserName = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.pnlLogo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlSidebar.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -61,6 +62,7 @@ namespace GUI.Client
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.White;
             this.pnlSidebar.Controls.Add(this.pnlNav);
+            this.pnlSidebar.Controls.Add(this.btnNotifications);
             this.pnlSidebar.Controls.Add(this.button9);
             this.pnlSidebar.Controls.Add(this.button8);
             this.pnlSidebar.Controls.Add(this.button7);
@@ -85,6 +87,22 @@ namespace GUI.Client
             this.pnlNav.Name = "pnlNav";
             this.pnlNav.Size = new System.Drawing.Size(3, 100);
             this.pnlNav.TabIndex = 1;
+            // 
+            // btnNotifications
+            // 
+            this.btnNotifications.FlatAppearance.BorderSize = 0;
+            this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNotifications.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnNotifications.ForeColor = System.Drawing.Color.Black;
+            this.btnNotifications.Location = new System.Drawing.Point(0, 332);
+            this.btnNotifications.Name = "btnNotifications";
+            this.btnNotifications.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.btnNotifications.Size = new System.Drawing.Size(254, 45);
+            this.btnNotifications.TabIndex = 12;
+            this.btnNotifications.Text = "  🔔   Thông báo";
+            this.btnNotifications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNotifications.UseVisualStyleBackColor = true;
+            this.btnNotifications.Click += new System.EventHandler(this.btnNotifications_Click);
             // 
             // button9
             // 
@@ -163,7 +181,7 @@ namespace GUI.Client
             this.button5.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.button5.Size = new System.Drawing.Size(254, 45);
             this.button5.TabIndex = 7;
-            this.button5.Text = "  🏦   Loan";
+            this.button5.Text = "  🏦   Khoản vay";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -178,7 +196,7 @@ namespace GUI.Client
             this.btnSaving.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.btnSaving.Size = new System.Drawing.Size(254, 45);
             this.btnSaving.TabIndex = 6;
-            this.btnSaving.Text = "  🐷   Saving";
+            this.btnSaving.Text = "  🐷   Tiết kiệm";
             this.btnSaving.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSaving.UseVisualStyleBackColor = true;
             this.btnSaving.Click += new System.EventHandler(this.btnSaving_Click);
@@ -194,7 +212,7 @@ namespace GUI.Client
             this.button3.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.button3.Size = new System.Drawing.Size(254, 45);
             this.button3.TabIndex = 5;
-            this.button3.Text = "  💳   Payments";
+            this.button3.Text = "  💳   Thanh toán";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.btnPayment_Click);
@@ -215,6 +233,15 @@ namespace GUI.Client
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnTransfer_Click);
             // 
+            // pnlLogo
+            // 
+            this.pnlLogo.BackgroundImage = global::GUI.Properties.Resources._647600484_930136546239914_1486468665117018077_n;
+            this.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlLogo.Location = new System.Drawing.Point(12, 3);
+            this.pnlLogo.Name = "pnlLogo";
+            this.pnlLogo.Size = new System.Drawing.Size(222, 59);
+            this.pnlLogo.TabIndex = 12;
+            // 
             // button1
             // 
             this.button1.FlatAppearance.BorderSize = 0;
@@ -226,7 +253,7 @@ namespace GUI.Client
             this.button1.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.button1.Size = new System.Drawing.Size(254, 45);
             this.button1.TabIndex = 3;
-            this.button1.Text = "  🏠   Dashboard";
+            this.button1.Text = "  🏠   Trang chủ";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnHome_Click);
@@ -260,7 +287,7 @@ namespace GUI.Client
             this.lblPageTitle.Name = "lblPageTitle";
             this.lblPageTitle.Size = new System.Drawing.Size(68, 28);
             this.lblPageTitle.TabIndex = 0;
-            this.lblPageTitle.Text = "Home";
+            this.lblPageTitle.Text = "Trang chủ";
             // 
             // pnlSearch
             // 
@@ -335,15 +362,6 @@ namespace GUI.Client
             this.pnlMain.TabIndex = 2;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             // 
-            // pnlLogo
-            // 
-            this.pnlLogo.BackgroundImage = global::GUI.Properties.Resources._647600484_930136546239914_1486468665117018077_n;
-            this.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlLogo.Location = new System.Drawing.Point(12, 3);
-            this.pnlLogo.Name = "pnlLogo";
-            this.pnlLogo.Size = new System.Drawing.Size(222, 59);
-            this.pnlLogo.TabIndex = 12;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
@@ -400,5 +418,6 @@ namespace GUI.Client
         private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.Button btnNotification;
         private System.Windows.Forms.Label lblNotificationBadge;
+        private System.Windows.Forms.Button btnNotifications;
     }
 }

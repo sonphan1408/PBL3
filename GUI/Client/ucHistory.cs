@@ -70,7 +70,7 @@ namespace GUI.Client
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error in ucHistory_Load: " + ex.Message);
-                MessageBox.Show("Error loading history: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải lịch sử: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -238,7 +238,7 @@ namespace GUI.Client
                 if (UserSession.CurrentUser == null)
                 {
                     System.Diagnostics.Debug.WriteLine("[ucHistory] CurrentUser is null");
-                    MessageBox.Show("Please login first", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Vui lòng đăng nhập trước", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -269,7 +269,7 @@ namespace GUI.Client
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[ucHistory] Error loading data: {ex.Message}\n{ex.StackTrace}");
-                MessageBox.Show("Error loading data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

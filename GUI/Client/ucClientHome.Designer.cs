@@ -612,10 +612,11 @@ namespace GUI.Client
             // 
             // lstSavingsItems
             // 
-            this.lstSavingsItems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.lstSavingsItems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.lstSavingsItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstSavingsItems.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lstSavingsItems.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstSavingsItems.ItemHeight = 20;
+            this.lstSavingsItems.ItemHeight = 44;
             this.lstSavingsItems.Location = new System.Drawing.Point(10, 50);
             this.lstSavingsItems.Name = "lstSavingsItems";
             this.lstSavingsItems.Size = new System.Drawing.Size(300, 140);
@@ -659,7 +660,7 @@ namespace GUI.Client
             this.txtTransferAmount.Name = "txtTransferAmount";
             this.txtTransferAmount.Size = new System.Drawing.Size(340, 41);
             this.txtTransferAmount.TabIndex = 1;
-            this.txtTransferAmount.Text = "Enter amount...";
+            this.txtTransferAmount.Text = "Nhập số tiền...";
             this.txtTransferAmount.TextChanged += new System.EventHandler(this.txtTransferAmount_TextChanged);
             // 
             // btnTransfer

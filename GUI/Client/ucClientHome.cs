@@ -133,7 +133,7 @@ namespace GUI.Client
                 currentAccount = AccountService.GetAccountByUsername(UserSession.CurrentUser.Username);
                 if (currentAccount == null)
                 {
-                    MessageBox.Show("Cannot find account information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không tìm thấy thông tin tài khoản.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -141,13 +141,19 @@ namespace GUI.Client
                 currentCustomer = AccountService.GetCustomerInfo(currentAccount.CustomerID);
                 if (currentCustomer == null)
                 {
-                    MessageBox.Show("Cannot find customer information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không tìm thấy thông tin khách hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 // Update UI with account info
-                BalanceAmount = "$" + currentAccount.Balance.ToString("F2");
+                BalanceAmount = "$" + currentAccount.Balance.ToString("N2");
                 CardNumber = currentAccount.AccountNumber;
+
+                // Cập nhật Tiết kiệm và Khoản vay từ Database
+                int totalSavings = FinancialService.GetTotalSavingsAccounts(currentCustomer.CustomerID);
+                int totalLoans = FinancialService.GetTotalLoansCount(currentCustomer.CustomerID);
+                SavingsAmount = totalSavings.ToString();
+                LoansAmount = totalLoans.ToString();
 
                 // Load transactions
                 transactions = TransactionService.GetTransactionsByAccount(currentAccount.AccountNumber, 10);
@@ -164,7 +170,7 @@ namespace GUI.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -266,7 +272,7 @@ namespace GUI.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading balance history: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải lịch sử số dư: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -290,7 +296,7 @@ namespace GUI.Client
             }
             else
             {
-                lstHistory.Items.Add("No transactions found");
+                lstHistory.Items.Add("Không có giao dịch nào");
             }
         }
 
@@ -312,7 +318,7 @@ namespace GUI.Client
             if (item is TransactionDTO transaction)
             {
                 // Truncate description to fit in the left column
-                string description = transaction.Description ?? "Transaction";
+                string description = transaction.Description ?? "Giao dịch";
                 if (description.Length > 14) description = description.Substring(0, 12) + "...";
 
                 string toAcc = (transaction.ToAccount ?? "").Trim().Replace("\0", "");
@@ -375,6 +381,10 @@ namespace GUI.Client
             if (lstSavingsItems == null) return;
             lstSavingsItems.Items.Clear();
 
+            // Đăng ký sự kiện DrawItem
+            lstSavingsItems.DrawItem -= LstSavingsItems_DrawItem;
+            lstSavingsItems.DrawItem += LstSavingsItems_DrawItem;
+
             try
             {
                 List<SavingContractsDTO> savings = FinancialService.GetSavingContractsByAccountNumber(UserSession.CurrentUser.AccountNumber);
@@ -383,18 +393,82 @@ namespace GUI.Client
                 {
                     foreach (var saving in savings)
                     {
-                        string item = $"{saving.SavingType.PadRight(20)} ${saving.PrincipalAmount.ToString("F2")}";
-                        lstSavingsItems.Items.Add(item);
+                        lstSavingsItems.Items.Add(saving);
                     }
                 }
                 else
                 {
-                    lstSavingsItems.Items.Add("No savings accounts");
+                    lstSavingsItems.Items.Add("Không có tài khoản tiết kiệm");
                 }
             }
             catch (Exception ex)
             {
-                lstSavingsItems.Items.Add("Error loading savings: " + ex.Message);
+                lstSavingsItems.Items.Add("Lỗi khi tải tiết kiệm: " + ex.Message);
+            }
+        }
+
+        private void LstSavingsItems_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+            e.DrawBackground();
+
+            ListBox listBox = sender as ListBox;
+            var item = listBox.Items[e.Index];
+
+            // Vẽ đường gạch dưới phân cách các dòng
+            using (Pen pen = new Pen(Color.FromArgb(150, 180, 230)))
+            {
+                e.Graphics.DrawLine(pen, e.Bounds.Left + 4, e.Bounds.Bottom - 1, e.Bounds.Right - 4, e.Bounds.Bottom - 1);
+            }
+
+            if (item is SavingContractsDTO saving)
+            {
+                string description = saving.SavingType ?? "Tiết kiệm";
+                if (description.Length > 14) description = description.Substring(0, 12) + "...";
+
+                decimal amountValue = saving.PrincipalAmount;
+                string amountStr = amountValue.ToString("N0").Replace(",", ".") + " VND";
+                Color amountColor = Color.FromArgb(20, 160, 80); // Màu xanh cho tiền tiết kiệm
+
+                string dateStr = saving.StartDate.ToString("dd/MM/yyyy");
+
+                int totalWidth = e.Bounds.Width;
+                int leftPad = e.Bounds.Left + 6;
+                int descWidth  = (int)(totalWidth * 0.35);
+                int amtWidth   = (int)(totalWidth * 0.35);
+                int dateWidth  = totalWidth - descWidth - amtWidth;
+
+                using (Font regularFont = new Font("Times New Roman", 9f))
+                {
+                    StringFormat centerLeft = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center };
+                    StringFormat centerRight = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
+
+                    using (Brush textBrush = new SolidBrush(Color.Black))
+                    {
+                        e.Graphics.DrawString(description, regularFont, textBrush,
+                            new Rectangle(leftPad, e.Bounds.Top, descWidth, e.Bounds.Height), centerLeft);
+                    }
+                    using (Brush amountBrush = new SolidBrush(amountColor))
+                    {
+                        e.Graphics.DrawString(amountStr, regularFont, amountBrush,
+                            new Rectangle(leftPad + descWidth, e.Bounds.Top, amtWidth, e.Bounds.Height), centerRight);
+                    }
+                    using (Brush dateBrush = new SolidBrush(Color.FromArgb(80, 80, 100)))
+                    {
+                        e.Graphics.DrawString(dateStr, regularFont, dateBrush,
+                            new Rectangle(leftPad + descWidth + amtWidth, e.Bounds.Top, dateWidth - 6, e.Bounds.Height), centerRight);
+                    }
+                    
+                    centerLeft.Dispose();
+                    centerRight.Dispose();
+                }
+            }
+            else
+            {
+                using (Brush textBrush = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.DrawString(item.ToString(), listBox.Font, textBrush, e.Bounds, new StringFormat { LineAlignment = StringAlignment.Center });
+                }
             }
         }
 
@@ -419,7 +493,7 @@ namespace GUI.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading payment summary: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải tổng quan thanh toán: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -481,12 +555,12 @@ namespace GUI.Client
         {
             if (!string.IsNullOrWhiteSpace(txtTransferAmount.Text))
             {
-                MessageBox.Show($"Transfer of {txtTransferAmount.Text} initiated successfully!", "Transfer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Chuyển khoản {txtTransferAmount.Text} thành công!", "Chuyển khoản", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtTransferAmount.Clear();
             }
             else
             {
-                MessageBox.Show("Please enter an amount to transfer.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập số tiền cần chuyển.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

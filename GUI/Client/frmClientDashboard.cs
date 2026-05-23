@@ -6,7 +6,7 @@ using GUI.Session;
 
 namespace GUI.Client
 {
-    public partial class frmClientDashboard : Form
+    public partial class frmClientDashboard : Form, IMessageFilter
     {
 
         ucClientHome home;
@@ -27,6 +27,7 @@ namespace GUI.Client
         public frmClientDashboard()
         {
             InitializeComponent();
+            Application.AddMessageFilter(this);
 
             // Hiển thị Full Name từ database
             string fullName = BLL.Services.AccountService.GetFullNameByCustomerId(UserSession.CurrentUser.CustomerID);
@@ -208,7 +209,7 @@ namespace GUI.Client
             btnViewAll.Cursor = Cursors.Hand;
             btnViewAll.Click += (s, e) => {
                 pnlNotificationDropdown.Visible = false;
-                MessageBox.Show("Mở màn hình tất cả thông báo!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnNotifications_Click(null, null); // Chuyển hướng sang màn hình Thông báo
             };
             pnlNotificationDropdown.Controls.Add(btnViewAll);
 
@@ -330,22 +331,59 @@ namespace GUI.Client
             button7.Visible = false;
             button8.Visible = false;
             button9.Visible = false;
+            // Dịch btnNotifications lên ngay dưới Lịch sử
+            btnNotifications.Top = button6.Bottom;
         }
 
         // --- CÁC SỰ KIỆN NÚT BẤM ---
         private void btnHome_Click(object sender, EventArgs e)
         {
             HideHistorySubMenu();
-            lblPageTitle.Text = "Home";
+            lblPageTitle.Text = "Trang chủ";
             SetActiveButton(button1);
             addUserControl(home);
         }
 
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            Application.RemoveMessageFilter(this);
+            base.OnFormClosed(e);
+        }
+
+        public bool PreFilterMessage(ref Message m)
+        {
+            const int WM_LBUTTONDOWN = 0x0201;
+            const int WM_RBUTTONDOWN = 0x0204;
+            const int WM_MBUTTONDOWN = 0x0207;
+
+            if (m.Msg == WM_LBUTTONDOWN || m.Msg == WM_RBUTTONDOWN || m.Msg == WM_MBUTTONDOWN)
+            {
+                if (pnlNotificationDropdown != null && pnlNotificationDropdown.Visible)
+                {
+                    // Lấy vị trí chuột trên màn hình
+                    Point mousePos = Control.MousePosition;
+
+                    // Kiểm tra xem chuột có nằm trong Dropdown hay Nút chuông không
+                    bool isInsideDropdown = pnlNotificationDropdown.ClientRectangle.Contains(pnlNotificationDropdown.PointToClient(mousePos));
+                    bool isInsideBtn = false;
+                    if (btnNotification != null)
+                    {
+                        isInsideBtn = btnNotification.ClientRectangle.Contains(btnNotification.PointToClient(mousePos));
+                    }
+
+                    if (!isInsideDropdown && !isInsideBtn)
+                    {
+                        pnlNotificationDropdown.Visible = false;
+                    }
+                }
+            }
+            return false;
+        }
 
         private void btnSaving_Click(object sender, EventArgs e)
         {
             HideHistorySubMenu();
-            lblPageTitle.Text = "Saving";
+            lblPageTitle.Text = "Tiết kiệm";
             SetActiveButton(btnSaving);
             addUserControl(listSaving);
         }
@@ -358,6 +396,18 @@ namespace GUI.Client
             button8.Visible = !isExpanded;
             button9.Visible = !isExpanded;
 
+            // Dịch btnNotifications theo trạng thái sub-menu
+            if (!isExpanded)
+            {
+                // Sub-menu vừa mở → đẩy Thông báo xuống dưới button9
+                btnNotifications.Top = button9.Bottom;
+            }
+            else
+            {
+                // Sub-menu vừa đóng → kéo Thông báo lên ngay dưới Lịch sử
+                btnNotifications.Top = button6.Bottom;
+            }
+
             // Chỉ highlight nút, không thay đổi nội dung bên phải
             SetActiveButton(button6);
         }
@@ -365,14 +415,14 @@ namespace GUI.Client
         private void btnTransfer_Click(object sender, EventArgs e)
         {
             HideHistorySubMenu();
-            lblPageTitle.Text = "Transfer";
+            lblPageTitle.Text = "Chuyển khoản";
             SetActiveButton(button2);
             addUserControl(transfer);
         }
         private void btnPayment_Click(object sender, EventArgs e)
         {
             HideHistorySubMenu();
-            lblPageTitle.Text = "Payment";
+            lblPageTitle.Text = "Thanh toán";
             SetActiveButton(button3);
             addUserControl(invoice);
         }
@@ -455,13 +505,13 @@ namespace GUI.Client
         // ✅ New public methods for navigation from UserControls
         public void NavigateToTransactionHistory()
         {
-            lblPageTitle.Text = "Transaction History";
+            lblPageTitle.Text = "Lịch sử giao dịch";
             addUserControl(history);
         }
 
         public void NavigateToPaymentHistory()
         {
-            lblPageTitle.Text = "Payment History";
+            lblPageTitle.Text = "Lịch sử thanh toán";
             addUserControl(paymentHistory);
         }
 
@@ -500,6 +550,15 @@ namespace GUI.Client
             lblPageTitle.Text = "Lịch sử giao dịch";
             SetActiveButton(button9);
             addUserControl(history);
+        }
+
+        private void btnNotifications_Click(object sender, EventArgs e)
+        {
+            HideHistorySubMenu();
+            lblPageTitle.Text = "Thông báo";
+            SetActiveButton(btnNotifications);
+            notifications.LoadNotifications();
+            addUserControl(notifications);
         }
 
         private void panel4_Paint_1(object sender, PaintEventArgs e)
