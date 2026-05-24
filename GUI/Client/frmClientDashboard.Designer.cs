@@ -47,6 +47,7 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.btnAccountInfo = new System.Windows.Forms.Button();
             this.pnlSidebar.SuspendLayout();
             this.pnlLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -58,6 +59,7 @@
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.White;
+            this.pnlSidebar.Controls.Add(this.btnAccountInfo);
             this.pnlSidebar.Controls.Add(this.button6);
             this.pnlSidebar.Controls.Add(this.button5);
             this.pnlSidebar.Controls.Add(this.btnSaving);
@@ -133,6 +135,7 @@
             this.button3.Text = "Payments";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.btnPayment_Click);
             // 
             // button2
             // 
@@ -250,7 +253,6 @@
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.Color.White;
-            this.pnlMain.BackgroundImage = global::GUI.Properties.Resources._656362958_1425254056280893_416290663166627344_n;
             this.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(195, 62);
@@ -258,6 +260,22 @@
             this.pnlMain.Size = new System.Drawing.Size(1387, 791);
             this.pnlMain.TabIndex = 2;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
+            // 
+            // btnAccountInfo
+            // 
+            this.btnAccountInfo.FlatAppearance.BorderSize = 0;
+            this.btnAccountInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAccountInfo.ForeColor = System.Drawing.Color.Black;
+            this.btnAccountInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAccountInfo.Location = new System.Drawing.Point(0, 291);
+            this.btnAccountInfo.Name = "btnAccountInfo";
+            this.btnAccountInfo.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnAccountInfo.Size = new System.Drawing.Size(167, 32);
+            this.btnAccountInfo.TabIndex = 9;
+            this.btnAccountInfo.Text = "Thông tin tài khoản";
+            this.btnAccountInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAccountInfo.UseVisualStyleBackColor = true;
+            this.btnAccountInfo.Click += new System.EventHandler(this.btnAccountInfo_Click);
             // 
             // frmClientDashboard
             // 
@@ -267,6 +285,8 @@
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlSidebar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmClientDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Giao diện chính";
@@ -302,5 +322,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label lblUserName;
+        private System.Windows.Forms.Button btnAccountInfo;
     }
 }

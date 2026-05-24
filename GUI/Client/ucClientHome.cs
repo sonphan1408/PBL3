@@ -11,6 +11,7 @@ namespace GUI.Client
 {
     public partial class ucClientHome : UserControl
     {
+
         // Data from SQL Server
         private AccountCustomerDTO currentAccount;
         private CustomerDTO currentCustomer;
@@ -23,6 +24,7 @@ namespace GUI.Client
         private List<decimal> balanceData = new List<decimal> { 600, 500, 400, 400, 500, 400, 500, 600, 1000 };
         private List<string> dateLabels = new List<string> { "06/2025", "06/2025", "06/2025", "06/2025", "06/2025", "06/2025", "06/2025", "06/2025", "06/2025" };
 
+        public Action<UserControl> NavigateTo { get; set; }
         public ucClientHome()
         {
             InitializeComponent();
@@ -371,6 +373,14 @@ namespace GUI.Client
                 MessageBox.Show("Please enter an amount to transfer.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        public void ReloadBalance()
+        {
+            // Đọc số dư mới nhất từ Session
+            decimal currentBal = GUI.Session.UserSession.CurrentUser.Balance;
+
+            // Gán lại vào Label trên giao diện Home
+            lblBalanceAmount.Text = currentBal.ToString("N0") + " VND";
+        }
 
         // Properties to allow binding/updating data from outside
         public string UserName
@@ -551,7 +561,8 @@ namespace GUI.Client
 
         private void ucClientHome_Load(object sender, EventArgs e)
         {
-
+            // Gọi hàm cập nhật số dư ngay khi trang chủ vừa load lên
+            ReloadBalance();
         }
 
         private void pnlMyBalance_Paint(object sender, PaintEventArgs e)

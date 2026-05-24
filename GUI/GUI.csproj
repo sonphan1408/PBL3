@@ -142,6 +142,12 @@
     <Compile Include="Client\frmClientDashboard.Designer.cs">
       <DependentUpon>frmClientDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client\ucChangePassword.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\ucChangePassword.Designer.cs">
+      <DependentUpon>ucChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client\ucClientHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -153,6 +159,24 @@
     </Compile>
     <Compile Include="Client\uccreateSaving.Designer.cs">
       <DependentUpon>uccreateSaving.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\ucPaymentInternet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\ucPaymentInternet.Designer.cs">
+      <DependentUpon>ucPaymentInternet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\ucPaymentPhone.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\ucPaymentPhone.Designer.cs">
+      <DependentUpon>ucPaymentPhone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\ucPaymentWater.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\ucPaymentWater.Designer.cs">
+      <DependentUpon>ucPaymentWater.cs</DependentUpon>
     </Compile>
     <Compile Include="Client\ucTransfer.cs">
       <SubType>UserControl</SubType>
@@ -184,6 +208,18 @@
     <Compile Include="Client\ucSaving.Designer.cs">
       <DependentUpon>ucSaving.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client\ucPaymentElectricity.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\ucPaymentElectricity.Designer.cs">
+      <DependentUpon>ucPaymentElectricity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\ucAccountInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\ucAccountInfo.Designer.cs">
+      <DependentUpon>ucAccountInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\UserSession.cs" />
@@ -205,8 +241,14 @@
     <EmbeddedResource Include="Authentication\MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Client\frmBill.resx">
+      <DependentUpon>frmBill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Client\frmClientDashboard.resx">
       <DependentUpon>frmClientDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucChangePassword.resx">
+      <DependentUpon>ucChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Client\ucClientHome.resx">
       <DependentUpon>ucClientHome.cs</DependentUpon>
@@ -217,11 +259,29 @@
     <EmbeddedResource Include="Client\ucHistory.resx">
       <DependentUpon>ucHistory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucInvoicePayment.resx">
+      <DependentUpon>ucInvoicePayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucPaymentElectricity.resx">
+      <DependentUpon>ucPaymentElectricity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucPaymentInternet.resx">
+      <DependentUpon>ucPaymentInternet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucPaymentPhone.resx">
+      <DependentUpon>ucPaymentPhone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucPaymentWater.resx">
+      <DependentUpon>ucPaymentWater.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Client\ucSaving.resx">
       <DependentUpon>ucSaving.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Client\ucTransfer.resx">
       <DependentUpon>ucTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucAccountInfo.resx">
+      <DependentUpon>ucAccountInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -307,6 +367,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\656362958_1425254056280893_416290663166627344_n1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AccountInfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChangePassword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Payment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PaymentElectricityNew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PaymentInternetNew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PaymentPhoneNew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PaymentWaterNew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Avatar.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

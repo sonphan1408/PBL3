@@ -8,5 +8,15 @@ namespace GUI.Client
         {
             InitializeComponent();
         }
+
+        private void kryptonTextBox2_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void kryptonTextBox5_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

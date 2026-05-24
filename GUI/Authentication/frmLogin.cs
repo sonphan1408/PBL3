@@ -83,7 +83,10 @@ namespace GUI.Authentication
 
             try
             {
-               AccountCustomerDTO account = AuthService.LoginCustomer(TaiKhoan.Text, MatKhau.Text);
+                // 🌟 1. LƯU TẠM MẬT KHẨU TRƯỚC KHI BỊ XÓA
+                string Matkhaukhachnhap = MatKhau.Text;
+
+                AccountCustomerDTO account = AuthService.LoginCustomer(TaiKhoan.Text, MatKhau.Text);
 
                 TaiKhoan.Text = "Username";
                 MatKhau.Text = "Password";
@@ -94,6 +97,8 @@ namespace GUI.Authentication
 
                 if(account != null)
                 {
+                    account.Password = Matkhaukhachnhap; // 🌟 2. KHÔNG XÓA MẬT KHẨU, TRUYỀN VỀ DTO ĐỂ LƯU TRONG SESSION
+
                     UserSession.CurrentUser = account;
                     this.Hide();
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo");
