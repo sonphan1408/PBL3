@@ -268,3 +268,5 @@ ASALocalRun/
 
 # Snapshots
 *.snap
+/DAL/App.config
+/GUI/App.config
