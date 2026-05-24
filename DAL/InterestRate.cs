@@ -14,9 +14,18 @@ namespace DAL
     
     public partial class InterestRate
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public InterestRate()
+        {
+            this.LoanContracts = new HashSet<LoanContract>();
+        }
+    
         public int RateID { get; set; }
         public string Category { get; set; }
         public Nullable<int> TermMonths { get; set; }
         public Nullable<decimal> RateValue { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanContract> LoanContracts { get; set; }
     }
 }
