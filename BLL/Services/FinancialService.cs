@@ -72,9 +72,9 @@ namespace BLL.Services
 
         //    return result;
         //}
-        private static string GenerateContractID()
+       public static string GenerateContractID(string type)
         {
-            string prefix = "TK";
+            string prefix = type; 
             string timePart = DateTime.Now.ToString("yyMMddHHmmss");
             string miliSecond = DateTime.Now.ToString("fff");
             string newContractID = prefix + timePart + miliSecond;
@@ -106,7 +106,7 @@ namespace BLL.Services
         public static SavingContractsDTO CreateSavingDraft(decimal principalAmount, int termMonths, string savingType, string goal, decimal rate, string accountNumber)
         {
             SavingContractsDTO draft = new SavingContractsDTO();
-            draft.ContractID = GenerateContractID();
+            draft.ContractID = GenerateContractID("TK");
             draft.TermMonths = termMonths;
             draft.PrincipalAmount = principalAmount;
             draft.SavingType = savingType;
@@ -125,57 +125,56 @@ namespace BLL.Services
 
         public static bool CreateSavingAccount(SavingContractsDTO savingContract)
         {
-            bool deducted = false;
             string accountNumber = savingContract.AccountNumber;
             try
             {
-
-
-                // Lấy số dư tài khoản hiện tại
-                decimal currentBalance = AccountService.GetAccountBalance(accountNumber);
-
-                // Kiểm tra xem có đủ tiền không
-                if (currentBalance < savingContract.PrincipalAmount)
+                // 🌟 BẬT TÍNH NĂNG BẢO VỆ GIAO DỊCH (TRANSACTION)
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    throw new Exception("Tài khoản không đủ tiền để tạo tiết kiệm! Số tiền cần: " + savingContract.PrincipalAmount.ToString("N0") + ", Số dư: " + currentBalance.ToString("N0"));
+                    // Bước 1: Lấy số dư tài khoản hiện tại
+                    decimal currentBalance = AccountService.GetAccountBalance(accountNumber);
+
+                    // Bước 2: Kiểm tra xem có đủ tiền không
+                    if (currentBalance < savingContract.PrincipalAmount)
+                    {
+                        throw new Exception("Tài khoản không đủ tiền để tạo tiết kiệm! Số tiền cần: " + savingContract.PrincipalAmount.ToString("N0") + ", Số dư: " + currentBalance.ToString("N0"));
+                    }
+
+                    // Bước 3: Trừ tiền từ tài khoản
+                    bool deducted = AccountService.DeductAccountBalance(accountNumber, savingContract.PrincipalAmount);
+
+                    if (!deducted)
+                    {
+                        throw new Exception("Lỗi khi trừ tiền từ tài khoản!");
+                    }
+
+                    // Bước 4: Cập nhật status thành "Active" và balance của saving
+                    savingContract.Status = "Active";
+                    savingContract.CurrentBalance = savingContract.PrincipalAmount;
+
+                    // Bước 5: Lưu tiết kiệm vào database
+                    bool saved = FinancialDAL.CreateSavingAccount(savingContract);
+
+                    if (!saved)
+                    {
+                        throw new Exception("Lỗi khi tạo tài khoản tiết kiệm!");
+                    }
+
+                    // Bước 6: Tạo ghi chép SavingTransaction
+                    FinancialDAL.CreateSavingTransaction(savingContract.ContractID, "Opening", savingContract.PrincipalAmount, "Mở tài khoản tiết kiệm");
+
+                    // 🌟 CHỐT HẠ: Lệnh này báo cho SQL Server biết "Mọi thứ đã an toàn, hãy lưu thật vào DB đi"
+                    scope.Complete();
+
+                    return true;
                 }
-
-                // Trừ tiền từ tài khoản
-                deducted = AccountService.DeductAccountBalance(accountNumber, savingContract.PrincipalAmount);
-
-                if (!deducted)
-                {
-                    throw new Exception("Lỗi khi trừ tiền từ tài khoản!");
-                }
-
-                // Cập nhật status thành "Active" và balance của saving
-                savingContract.Status = "Active";
-                savingContract.CurrentBalance = savingContract.PrincipalAmount;
-
-                // Lưu tiết kiệm vào database
-                bool saved = FinancialDAL.CreateSavingAccount(savingContract);
-
-
-                if (!saved)
-                {
-
-
-                    throw new Exception("Lỗi khi tạo tài khoản tiết kiệm!");
-                }
-
-
-                // Tạo ghi chép SavingTransaction
-                FinancialDAL.CreateSavingTransaction(savingContract.ContractID, "Opening", savingContract.PrincipalAmount, "Mở tài khoản tiết kiệm");
-
-                return true;
             }
             catch (Exception ex)
-
             {
-                if (deducted)
-                {
-                    AccountService.AddAccountBalance(accountNumber, savingContract.PrincipalAmount);
-                }
+                // BẠN KHÔNG CẦN CODE HOÀN TIỀN THỦ CÔNG NỮA!
+                // Nếu lỗi xảy ra, dòng 'scope.Complete()' chưa được gọi. 
+                // SQL Server sẽ tự động Rollback (trả lại tiền y như cũ) 100% an toàn kể cả khi cúp điện.
+
                 string detailError = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 throw new Exception("Lỗi hệ thống: " + detailError);
             }
@@ -223,31 +222,42 @@ namespace BLL.Services
         {
             try
             {
-                DateTime curDate = DateTime.Now;
-                if (curDate < savingContract.EndDate)
+                // 🌟 BẬT TÍNH NĂNG BẢO VỀ GIAO DỊCH (TRANSACTION)
+                using (TransactionScope scope = new TransactionScope())
                 {
-
-                    bool isUpdate = UpdateFinalSettlement(savingContract.ContractID, finalAmount, newAccruedInterest, curDate);
-                    if (!isUpdate)
+                    DateTime curDate = DateTime.Now;
+                    if (curDate < savingContract.EndDate)
                     {
-                        throw new Exception("Lỗi khi tất toán!");
+                        // Bước 1: Cập nhật tình trạng tất toán
+                        bool isUpdate = UpdateFinalSettlement(savingContract.ContractID, finalAmount, newAccruedInterest, curDate);
+                        if (!isUpdate)
+                        {
+                            throw new Exception("Lỗi khi tất toán!");
+                        }
 
+                        // Bước 2: Cộng tiền cuối cùng vào tài khoản
+                        bool isAddBalance = AccountService.AddAccountBalance(accountNumber, finalAmount);
+                        if (!isAddBalance)
+                        {
+                            throw new Exception("Lỗi khi tất toán!");
+                        }
 
+                        // Bước 3: Ghi nhận lịch sử giao dịch
+                        FinancialDAL.CreateSavingTransaction(savingContract.ContractID, "Closed", finalAmount, "Tất toán tài khoản tiết kiệm");
                     }
 
-                    bool isAddBalance = AccountService.AddAccountBalance(accountNumber, finalAmount);
-                    if (!isAddBalance)
-                    {
-                        throw new Exception("Lỗi khi tất toán!");
-                    }
-                    FinancialDAL.CreateSavingTransaction(savingContract.ContractID, "Closed", finalAmount, "Tất toán tài khoản tiết kiệm");
+                    // 🌟 CHỐT HẠ: Lệnh này báo cho SQL Server biết "Mọi thứ đã an toàn, hãy lưu thật vào DB đi"
+                    scope.Complete();
 
-
+                    return true;
                 }
-                return true;
             }
             catch (Exception ex)
             {
+                // BẠN KHÔNG CẦN CODE HOÀN TIỀN THỦ CÔNG NỮA!
+                // Nếu lỗi xảy ra, dòng 'scope.Complete()' chưa được gọi. 
+                // SQL Server sẽ tự động Rollback (trả lại tiền y như cũ) 100% an toàn kể cả khi cúp điện.
+
                 string detailError = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 throw new Exception("Lỗi hệ thống: " + detailError);
             }
@@ -316,6 +326,7 @@ namespace BLL.Services
             return typeStats;
 
         }
+       
 
     }
 }

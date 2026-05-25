@@ -14,8 +14,6 @@ namespace DAL.Repositories
             {
                 
              
-
-                
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var savings = db.SavingContracts
@@ -356,6 +354,7 @@ namespace DAL.Repositories
             {
                 throw new Exception("Lỗi khi tất toán tiết kiệm: " + ex.Message);
             }
+
         }
        
     }

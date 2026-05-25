@@ -12,15 +12,18 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class LoanRepayment
+    public partial class LoanSchedule
     {
-        public int RepaymentID { get; set; }
+        public int ScheduleID { get; set; }
         public string ContractID { get; set; }
-        public decimal PrincipalPaid { get; set; }
-        public decimal InterestPaid { get; set; }
-        public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string Notes { get; set; }
-        public decimal PenaltyPaid { get; set; }
+        public System.DateTime DueDate { get; set; }
+        public decimal ExpectedPrincipal { get; set; }
+        public decimal ExpectedInterest { get; set; }
+        public Nullable<decimal> PrincipalPaid { get; set; }
+        public Nullable<decimal> InterestPaid { get; set; }
+        public Nullable<decimal> PenaltyAmount { get; set; }
+        public string Status { get; set; }
+        public Nullable<decimal> PenaltyPaid { get; set; }
     
         public virtual LoanContract LoanContract { get; set; }
     }

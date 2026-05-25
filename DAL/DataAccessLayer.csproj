@@ -93,6 +93,9 @@
     <Compile Include="LoanRepayment.cs">
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoanSchedule.cs">
+      <DependentUpon>PBL3Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Notification.cs">
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>
@@ -117,6 +120,7 @@
     <Compile Include="Repositories\AuthDAL.cs" />
     <Compile Include="Repositories\FinancialDAL.cs" />
     <Compile Include="Repositories\InvoiceDAL.cs" />
+    <Compile Include="Repositories\LoanDAL.cs" />
     <Compile Include="Repositories\NotificationDAL.cs" />
     <Compile Include="Repositories\ReportDAL.cs" />
     <Compile Include="Repositories\TransactionDAL.cs" />

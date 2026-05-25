@@ -33,8 +33,6 @@ namespace DAL
         public virtual DbSet<InterestRate> InterestRates { get; set; }
         public virtual DbSet<InternalTransaction> InternalTransactions { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<LoanContract> LoanContracts { get; set; }
-        public virtual DbSet<LoanRepayment> LoanRepayments { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<SavingContract> SavingContracts { get; set; }
         public virtual DbSet<SavingTransaction> SavingTransactions { get; set; }
@@ -42,5 +40,8 @@ namespace DAL
         public virtual DbSet<ServiceType> ServiceTypes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TransactionType> TransactionTypes { get; set; }
+        public virtual DbSet<LoanContract> LoanContracts { get; set; }
+        public virtual DbSet<LoanRepayment> LoanRepayments { get; set; }
+        public virtual DbSet<LoanSchedule> LoanSchedules { get; set; }
     }
 }

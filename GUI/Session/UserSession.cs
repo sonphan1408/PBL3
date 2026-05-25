@@ -39,6 +39,7 @@ namespace GUI.Session
         }
         public static event Action BalanceChanged;
         public static event Action DataSavingChanged;
+        public static event Action DataLoanChanged;
 
 
 
@@ -46,10 +47,9 @@ namespace GUI.Session
         {
             if (CurrentUser != null)
             {
-                // Trừ tiền ngay trên RAM (Session)
+                
                 CurrentUser.Balance -= amountToDeduct;
 
-                // PHÁT LOA! Gọi tất cả những Form nào đang đăng ký nghe sự kiện này
                 BalanceChanged?.Invoke();
             }
         }
@@ -70,6 +70,12 @@ namespace GUI.Session
            
                 DataSavingChanged?.Invoke();
             
+        }
+        public static void LoadLoanData()
+        {
+
+            DataLoanChanged?.Invoke();
+
         }
 
 

@@ -59,6 +59,7 @@
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\LoanService.cs" />
     <Compile Include="Services\FinancialService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\PaymentService.cs" />

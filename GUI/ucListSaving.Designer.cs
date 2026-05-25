@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucListSaving));
             this.flowLayoutListSaving = new System.Windows.Forms.FlowLayoutPanel();
             this.lblTotalDeposit = new System.Windows.Forms.Label();
@@ -79,16 +79,16 @@
             // 
             // chartSavingType
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartSavingType.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartSavingType.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chartSavingType.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartSavingType.Legends.Add(legend1);
             this.chartSavingType.Location = new System.Drawing.Point(825, 227);
             this.chartSavingType.Name = "chartSavingType";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartSavingType.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartSavingType.Series.Add(series1);
             this.chartSavingType.Size = new System.Drawing.Size(456, 254);
             this.chartSavingType.TabIndex = 3;
             this.chartSavingType.Text = "chart1";

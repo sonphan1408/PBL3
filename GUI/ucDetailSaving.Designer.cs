@@ -206,6 +206,10 @@
             this.btnFinalSettlement.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.btnFinalSettlement.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.btnFinalSettlement.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFinalSettlement.StateTracking.Back.Color1 = System.Drawing.Color.RoyalBlue;
+            this.btnFinalSettlement.StateTracking.Back.Color2 = System.Drawing.Color.RoyalBlue;
+            this.btnFinalSettlement.StateTracking.Border.Color1 = System.Drawing.Color.DodgerBlue;
+            this.btnFinalSettlement.StateTracking.Border.Color2 = System.Drawing.Color.DodgerBlue;
             this.btnFinalSettlement.TabIndex = 24;
             this.btnFinalSettlement.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.btnFinalSettlement.Values.Text = "Tất toán";
@@ -239,8 +243,15 @@
             // 
             // btnFind
             // 
-            this.btnFind.Location = new System.Drawing.Point(861, 457);
+            this.btnFind.Location = new System.Drawing.Point(840, 457);
             this.btnFind.Name = "btnFind";
+            this.btnFind.OverrideDefault.Back.Color1 = System.Drawing.Color.RoyalBlue;
+            this.btnFind.OverrideDefault.Back.Color2 = System.Drawing.Color.RoyalBlue;
+            this.btnFind.OverrideFocus.Back.Color1 = System.Drawing.Color.DeepSkyBlue;
+            this.btnFind.OverrideFocus.Back.Color2 = System.Drawing.Color.DeepSkyBlue;
+            this.btnFind.OverrideFocus.Border.Color1 = System.Drawing.Color.DodgerBlue;
+            this.btnFind.OverrideFocus.Border.Color2 = System.Drawing.Color.DodgerBlue;
+            this.btnFind.OverrideFocus.Border.Width = 2;
             this.btnFind.Size = new System.Drawing.Size(258, 37);
             this.btnFind.StateCommon.Back.Color1 = System.Drawing.Color.RoyalBlue;
             this.btnFind.StateCommon.Back.Color2 = System.Drawing.Color.RoyalBlue;
@@ -248,6 +259,10 @@
             this.btnFind.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.btnFind.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.btnFind.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFind.StateCommon.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.btnFind.StateCommon.Content.ShortText.TextV = Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.btnFind.StatePressed.Back.Color1 = System.Drawing.Color.Black;
+            this.btnFind.StatePressed.Back.Color2 = System.Drawing.Color.Black;
             this.btnFind.TabIndex = 0;
             this.btnFind.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.btnFind.Values.Text = "Truy vấn";
@@ -264,6 +279,10 @@
             this.btnBack.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.btnBack.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.btnBack.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.StateTracking.Back.Color1 = System.Drawing.Color.RoyalBlue;
+            this.btnBack.StateTracking.Back.Color2 = System.Drawing.Color.RoyalBlue;
+            this.btnBack.StateTracking.Border.Color1 = System.Drawing.Color.DodgerBlue;
+            this.btnBack.StateTracking.Border.Color2 = System.Drawing.Color.DodgerBlue;
             this.btnBack.TabIndex = 28;
             this.btnBack.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.btnBack.Values.Text = "Quay lại";

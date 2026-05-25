@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D; // Bổ sung thêm thư viện này để dùng được GraphicsPath
+using System.Drawing.Drawing2D; 
 using System.Windows.Forms;
 using GUI.Session;
-
+using GUI.Client.Loan;
 namespace GUI.Client
 {
     public partial class frmClientDashboard : Form
@@ -15,9 +15,10 @@ namespace GUI.Client
         ucInvoicePayment invoice;
         ucNotifications notifications;
         ucTransfer transfer;
-        ucConfirmSaving confirmSaving;
+        ucConfirmLoan confirmSaving;
         uccreateSaving createSaving;
         ucListSaving listSaving;
+        ucLoanDashboard loanDashboard;
         
         public string CurrentUsername { get; private set; }
 
@@ -32,11 +33,17 @@ namespace GUI.Client
             listSaving.NavigateTo = addUserControl;
             listSaving.NavigateTo1 = addUserControl1;
 
+            loanDashboard = new ucLoanDashboard();
+            loanDashboard.NavigateTo = addUserControl;
+            loanDashboard.NavigateTo1 = addUserControl1;
+
+
+
             // Truyền hàm điều hướng vào ucSaving
             //createSaving = new uccreateSaving();
             //createSaving.NavigateTo = addUserControl;
             //confirmSaving = new ucConfirmSaving();
-            
+
 
             history = new ucHistory();
             invoice = new ucInvoicePayment();
@@ -377,5 +384,10 @@ namespace GUI.Client
         private void button3_Click(object sender, EventArgs e) { }
         private void button5_Click(object sender, EventArgs e) { }
         private void button8_Click(object sender, EventArgs e) { }
+
+        private void btnLoan_Click(object sender, EventArgs e)
+        {
+            addUserControl(loanDashboard);
+        }
     }
 }

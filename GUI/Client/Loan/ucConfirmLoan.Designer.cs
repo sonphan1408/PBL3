@@ -1,6 +1,6 @@
-﻿namespace GUI
+namespace GUI.Client.Loan
 {
-    partial class ucConfirmSaving
+    partial class ucConfirmLoan
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,16 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucConfirmSaving));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucConfirmLoan));
             this.lblTermMonths = new Krypton.Toolkit.KryptonLabel();
             this.lblRate = new Krypton.Toolkit.KryptonLabel();
-            this.lblPrincipalAmount = new Krypton.Toolkit.KryptonLabel();
+            this.lblLoanAmount = new Krypton.Toolkit.KryptonLabel();
             this.lblContractId = new Krypton.Toolkit.KryptonLabel();
             this.lblStartDate = new Krypton.Toolkit.KryptonLabel();
             this.lblEndDate = new Krypton.Toolkit.KryptonLabel();
-            this.lblSavingType = new Krypton.Toolkit.KryptonLabel();
-            this.lblGoal = new Krypton.Toolkit.KryptonLabel();
-            this.lblMaturityInterest = new Krypton.Toolkit.KryptonLabel();
             this.btnProvison = new Krypton.Toolkit.KryptonCheckBox();
             this.btnConfirm = new Krypton.Toolkit.KryptonButton();
             this.btnExit = new Krypton.Toolkit.KryptonButton();
@@ -77,22 +74,22 @@
             this.lblRate.TabIndex = 1;
             this.lblRate.Values.Text = "kryptonLabel1";
             // 
-            // lblPrincipalAmount
+            // lblLoanAmount
             // 
-            this.lblPrincipalAmount.AutoSize = false;
-            this.lblPrincipalAmount.Location = new System.Drawing.Point(770, 122);
-            this.lblPrincipalAmount.Name = "lblPrincipalAmount";
-            this.lblPrincipalAmount.Size = new System.Drawing.Size(190, 25);
-            this.lblPrincipalAmount.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
-            this.lblPrincipalAmount.StateCommon.ShortText.Color2 = System.Drawing.Color.Red;
-            this.lblPrincipalAmount.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrincipalAmount.TabIndex = 2;
-            this.lblPrincipalAmount.Values.Text = "kryptonLabel1";
+            this.lblLoanAmount.AutoSize = false;
+            this.lblLoanAmount.Location = new System.Drawing.Point(770, 122);
+            this.lblLoanAmount.Name = "lblLoanAmount";
+            this.lblLoanAmount.Size = new System.Drawing.Size(190, 25);
+            this.lblLoanAmount.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
+            this.lblLoanAmount.StateCommon.ShortText.Color2 = System.Drawing.Color.Red;
+            this.lblLoanAmount.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoanAmount.TabIndex = 2;
+            this.lblLoanAmount.Values.Text = "kryptonLabel1";
             // 
             // lblContractId
             // 
             this.lblContractId.AutoSize = false;
-            this.lblContractId.Location = new System.Drawing.Point(872, 348);
+            this.lblContractId.Location = new System.Drawing.Point(854, 376);
             this.lblContractId.Name = "lblContractId";
             this.lblContractId.Size = new System.Drawing.Size(300, 25);
             this.lblContractId.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -103,7 +100,7 @@
             // lblStartDate
             // 
             this.lblStartDate.AutoSize = false;
-            this.lblStartDate.Location = new System.Drawing.Point(872, 394);
+            this.lblStartDate.Location = new System.Drawing.Point(854, 440);
             this.lblStartDate.Name = "lblStartDate";
             this.lblStartDate.Size = new System.Drawing.Size(190, 25);
             this.lblStartDate.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -113,42 +110,12 @@
             // lblEndDate
             // 
             this.lblEndDate.AutoSize = false;
-            this.lblEndDate.Location = new System.Drawing.Point(872, 442);
+            this.lblEndDate.Location = new System.Drawing.Point(854, 508);
             this.lblEndDate.Name = "lblEndDate";
             this.lblEndDate.Size = new System.Drawing.Size(190, 25);
             this.lblEndDate.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEndDate.TabIndex = 5;
             this.lblEndDate.Values.Text = "kryptonLabel3";
-            // 
-            // lblSavingType
-            // 
-            this.lblSavingType.AutoSize = false;
-            this.lblSavingType.Location = new System.Drawing.Point(872, 491);
-            this.lblSavingType.Name = "lblSavingType";
-            this.lblSavingType.Size = new System.Drawing.Size(190, 25);
-            this.lblSavingType.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSavingType.TabIndex = 6;
-            this.lblSavingType.Values.Text = "kryptonLabel4";
-            // 
-            // lblGoal
-            // 
-            this.lblGoal.AutoSize = false;
-            this.lblGoal.Location = new System.Drawing.Point(872, 588);
-            this.lblGoal.Name = "lblGoal";
-            this.lblGoal.Size = new System.Drawing.Size(190, 25);
-            this.lblGoal.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGoal.TabIndex = 7;
-            this.lblGoal.Values.Text = "kryptonLabel5";
-            // 
-            // lblMaturityInterest
-            // 
-            this.lblMaturityInterest.AutoSize = false;
-            this.lblMaturityInterest.Location = new System.Drawing.Point(872, 540);
-            this.lblMaturityInterest.Name = "lblMaturityInterest";
-            this.lblMaturityInterest.Size = new System.Drawing.Size(190, 25);
-            this.lblMaturityInterest.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaturityInterest.TabIndex = 8;
-            this.lblMaturityInterest.Values.Text = "kryptonLabel5";
             // 
             // btnProvison
             // 
@@ -230,7 +197,7 @@
             // 
             // panelCheckPassword
             // 
-            this.panelCheckPassword.Location = new System.Drawing.Point(377, 559);
+            this.panelCheckPassword.Location = new System.Drawing.Point(363, 526);
             // 
             // panelCheckPassword.Panel
             // 
@@ -253,7 +220,6 @@
             this.btnExitCheckPassword.Size = new System.Drawing.Size(35, 35);
             this.btnExitCheckPassword.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.btnExitCheckPassword.StateCommon.Back.Color2 = System.Drawing.Color.White;
-            this.btnExitCheckPassword.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnExitCheckPassword.StateCommon.Back.Image")));
             this.btnExitCheckPassword.StateCommon.Back.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnExitCheckPassword.TabIndex = 12;
             this.btnExitCheckPassword.Values.DropDownArrowColor = System.Drawing.Color.Empty;
@@ -262,16 +228,16 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(123, 206);
+            this.kryptonLabel2.Location = new System.Drawing.Point(137, 202);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(500, 31);
             this.kryptonLabel2.StateCommon.ShortText.Color1 = System.Drawing.Color.Cyan;
             this.kryptonLabel2.StateCommon.ShortText.Color2 = System.Drawing.Color.Silver;
             this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonLabel2.TabIndex = 14;
-            this.kryptonLabel2.Values.Text = "Xác nhận gửi tiết kiệm";
+            this.kryptonLabel2.Values.Text = "Xác nhận vay vốn";
             // 
-            // ucConfirmSaving
+            // ucConfirmLoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -282,18 +248,15 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnProvison);
-            this.Controls.Add(this.lblMaturityInterest);
-            this.Controls.Add(this.lblGoal);
-            this.Controls.Add(this.lblSavingType);
             this.Controls.Add(this.lblEndDate);
             this.Controls.Add(this.lblStartDate);
             this.Controls.Add(this.lblContractId);
-            this.Controls.Add(this.lblPrincipalAmount);
+            this.Controls.Add(this.lblLoanAmount);
             this.Controls.Add(this.lblRate);
             this.Controls.Add(this.lblTermMonths);
-            this.Name = "ucConfirmSaving";
+            this.Name = "ucConfirmLoan";
             this.Size = new System.Drawing.Size(1387, 791);
-            this.Load += new System.EventHandler(this.ucConfirmSaving_Load);
+            this.Load += new System.EventHandler(this.ucConfirmLoan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelCheckPassword.Panel)).EndInit();
             this.panelCheckPassword.Panel.ResumeLayout(false);
             this.panelCheckPassword.Panel.PerformLayout();
@@ -308,13 +271,10 @@
 
         private Krypton.Toolkit.KryptonLabel lblTermMonths;
         private Krypton.Toolkit.KryptonLabel lblRate;
-        private Krypton.Toolkit.KryptonLabel lblPrincipalAmount;
+        private Krypton.Toolkit.KryptonLabel lblLoanAmount;
         private Krypton.Toolkit.KryptonLabel lblContractId;
         private Krypton.Toolkit.KryptonLabel lblStartDate;
         private Krypton.Toolkit.KryptonLabel lblEndDate;
-        private Krypton.Toolkit.KryptonLabel lblSavingType;
-        private Krypton.Toolkit.KryptonLabel lblGoal;
-        private Krypton.Toolkit.KryptonLabel lblMaturityInterest;
         private Krypton.Toolkit.KryptonCheckBox btnProvison;
         private Krypton.Toolkit.KryptonButton btnConfirm;
         private Krypton.Toolkit.KryptonButton btnExit;
