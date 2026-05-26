@@ -58,6 +58,9 @@
     <Compile Include="Models\ExternalBankDTO.cs" />
     <Compile Include="Models\ExternalTransactionDTO.cs" />
     <Compile Include="Models\FileName.cs" />
+    <Compile Include="Models\LoanContractDTO.cs" />
+    <Compile Include="Models\LoanRepaymentDTO.cs" />
+    <Compile Include="Models\LoanSchedulesDTO.cs" />
     <Compile Include="Models\SavingContractsDTO.cs" />
     <Compile Include="Models\InterestRateDTO.cs" />
     <Compile Include="Models\InternalTransactionDTO.cs" />

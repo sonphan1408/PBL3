@@ -35,7 +35,7 @@ namespace GUI.Client
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnLoan = new System.Windows.Forms.Button();
             this.btnSaving = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -65,7 +65,7 @@ namespace GUI.Client
             this.pnlSidebar.Controls.Add(this.button8);
             this.pnlSidebar.Controls.Add(this.button7);
             this.pnlSidebar.Controls.Add(this.button6);
-            this.pnlSidebar.Controls.Add(this.button5);
+            this.pnlSidebar.Controls.Add(this.btnLoan);
             this.pnlSidebar.Controls.Add(this.btnSaving);
             this.pnlSidebar.Controls.Add(this.button3);
             this.pnlSidebar.Controls.Add(this.button2);
@@ -144,20 +144,21 @@ namespace GUI.Client
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.btnHistory_Click);
             // 
-            // button5
+            // btnLoan
             // 
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(0, 215);
-            this.button5.Name = "button5";
-            this.button5.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.button5.Size = new System.Drawing.Size(188, 32);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Loan";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnLoan.FlatAppearance.BorderSize = 0;
+            this.btnLoan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoan.ForeColor = System.Drawing.Color.Black;
+            this.btnLoan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoan.Location = new System.Drawing.Point(0, 215);
+            this.btnLoan.Name = "btnLoan";
+            this.btnLoan.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnLoan.Size = new System.Drawing.Size(167, 32);
+            this.btnLoan.TabIndex = 7;
+            this.btnLoan.Text = "Loan";
+            this.btnLoan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoan.UseVisualStyleBackColor = true;
+            this.btnLoan.Click += new System.EventHandler(this.btnLoan_Click);
             // 
             // btnSaving
             // 
@@ -355,7 +356,7 @@ namespace GUI.Client
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnSaving;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnLoan;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;

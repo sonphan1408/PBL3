@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DTO.Models;
+using DAL;
 
 namespace DAL.Repositories
 {

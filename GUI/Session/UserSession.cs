@@ -64,6 +64,7 @@ namespace GUI.Session
         }
         public static event Action BalanceChanged;
         public static event Action DataSavingChanged;
+        public static event Action DataLoanChanged;
 
 
 
@@ -71,8 +72,9 @@ namespace GUI.Session
         {
             if (CurrentUser != null)
             {
-                // Trừ tiền ngay trên RAM (Session)
+                
                 CurrentUser.Balance -= amountToDeduct;
+
                 
                 System.Diagnostics.Debug.WriteLine($"[UserSession] UpdateBalance: Deducting {amountToDeduct}, New balance: {CurrentUser.Balance}");
 
@@ -98,6 +100,12 @@ namespace GUI.Session
            
                 DataSavingChanged?.Invoke();
             
+        }
+        public static void LoadLoanData()
+        {
+
+            DataLoanChanged?.Invoke();
+
         }
 
 

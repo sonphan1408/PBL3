@@ -1,6 +1,5 @@
 using BLL.Services;
 using DTO.Models;
-using GUI.Client;
 using GUI.Session;
 using System;
 using System.Collections.Generic;
@@ -12,52 +11,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GUI
+namespace GUI.Client.Loan
 {
-    public partial class ucConfirmSaving : UserControl
+    public partial class ucConfirmLoan : UserControl
     {
         public Action<UserControl> NavigateTo;
         public Action<UserControl> NavigateTo1;
-        private SavingContractsDTO Data;
-        public ucConfirmSaving(SavingContractsDTO draff)
+        private LoanContractDTO Data;
+        public ucConfirmLoan(LoanContractDTO draff)
         {
             InitializeComponent();
             Data = draff;
         }
 
-        private void ucConfirmSaving_Load(object sender, EventArgs e)
+        private void ucConfirmLoan_Load(object sender, EventArgs e)
         {
             // Ẩn panel check password ban đầu
            panelCheckPassword.Visible = false;
-            
+
             if (Data != null)
             {
-                
-                
-                lblPrincipalAmount.Text = Data.PrincipalAmount.ToString("N0") + " VNĐ";
+
+
+                lblLoanAmount.Text = Data.LoanAmount.ToString("N0") + " VNĐ";
                 lblContractId.Text = Data.ContractID.ToString();
                 lblTermMonths.Text = Data.TermMonths.ToString() + " tháng";
                 lblRate.Text = Data.InterestRate.ToString("0.00") + " %/năm";
-                if(Data.SavingType == "Installment")
-                {
-                    lblSavingType.Text = "Gửi góp";
-                }
-                else
-                {
-                    lblSavingType.Text = "Có kỳ hạn";
-                }
-
-               lblMaturityInterest.Text = Data.AccruedInterest.ToString("N0") + " VNĐ";
+              
 
                 lblStartDate.Text = Data.StartDate.ToString("dd/MM/yyyy");
                 lblEndDate.Text = Data.EndDate.ToString("dd/MM/yyyy");
-                lblGoal.Text = Data.Goal;
 
                 // Gắn event cho các nút
                 btnConfirm.Click += BtnConfirm_Click;
                 btnPassword.Click += BtnPassword_Click;
                 btnExit.Click += BtnExit_Click;
-               
+
             }
         }
 
@@ -70,7 +59,7 @@ namespace GUI
                 return;
             }
             panelCheckPassword.Visible = true;
-           
+
             txtCheckPassword.Focus();
 
         }
@@ -100,32 +89,25 @@ namespace GUI
                     return;
                 }
 
-                // Mật khẩu chính xác, tạo tài khoản tiết kiệm với xác thực mật khẩu, trừ tiền và tạo ghi chép
-                bool success = FinancialService.CreateSavingAccount(Data);
-
-                if (success)
+                bool isCreated = LoanService.ProcessNewLoanRegistration(Data);
+                if (!isCreated)
                 {
-                    MessageBox.Show("Tài khoản tiết kiệm đã được tạo thành công!.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    panelCheckPassword.Visible = false;
-                    txtCheckPassword.Clear();
-
-                    // ✅ Hiển thị Toast Notification
-                    ToastNotification.ShowSaving(Data.PrincipalAmount, Data.TermMonths);
-
-                    UserSession.UpdateBalance(Data.PrincipalAmount);
-                    UserSession.LoadSavingData();
-
-                   ucListSaving listSaving = new ucListSaving();
-                    listSaving.NavigateTo = this.NavigateTo;
-                    listSaving.NavigateTo1 = this.NavigateTo1;
-
-                    NavigateTo(listSaving);
-                }
-                else
-                {
-                    MessageBox.Show("Lỗi khi tạo tài khoản tiết kiệm!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Có lỗi xảy ra khi tạo hợp đồng vay. Vui lòng thử lại sau!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     isProcessing = false;
+                    return;
                 }
+                // Mật khẩu chính xác, tạo hợp đồng vay
+                MessageBox.Show("Hợp đồng vay đã được xác nhận thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                panelCheckPassword.Visible = false;
+                txtCheckPassword.Clear();
+                //UserSession.LoadLoanData();
+                UserSession.AddBalance(Data.LoanAmount);
+                UserSession.LoadLoanData();
+                ucLoanDashboard loan = new ucLoanDashboard();
+                loan.NavigateTo = this.NavigateTo;
+                loan.NavigateTo1 = this.NavigateTo1;
+
+                NavigateTo(loan);
             }
             catch (Exception ex)
             {

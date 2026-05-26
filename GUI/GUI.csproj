@@ -142,6 +142,48 @@
     <Compile Include="Client\frmClientDashboard.Designer.cs">
       <DependentUpon>frmClientDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client\Loan\ucCardLoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\Loan\ucCardLoan.Designer.cs">
+      <DependentUpon>ucCardLoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\Loan\ucConfirmLoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\Loan\ucConfirmLoan.Designer.cs">
+      <DependentUpon>ucConfirmLoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\Loan\ucCreateLoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\Loan\ucCreateLoan.Designer.cs">
+      <DependentUpon>ucCreateLoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\Loan\ucDetailLoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\Loan\ucDetailLoan.Designer.cs">
+      <DependentUpon>ucDetailLoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\Loan\ucListLoanSchedule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\Loan\ucListLoanSchedule.Designer.cs">
+      <DependentUpon>ucListLoanSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\Loan\ucLoanDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\Loan\ucLoanDashboard.Designer.cs">
+      <DependentUpon>ucLoanDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client\Loan\ucLoanRepayment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\Loan\ucLoanRepayment.Designer.cs">
+      <DependentUpon>ucLoanRepayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client\ucClientHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -268,6 +310,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Client\frmClientDashboard.resx">
       <DependentUpon>frmClientDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\Loan\ucCardLoan.resx">
+      <DependentUpon>ucCardLoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\Loan\ucConfirmLoan.resx">
+      <DependentUpon>ucConfirmLoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\Loan\ucCreateLoan.resx">
+      <DependentUpon>ucCreateLoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\Loan\ucDetailLoan.resx">
+      <DependentUpon>ucDetailLoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\Loan\ucListLoanSchedule.resx">
+      <DependentUpon>ucListLoanSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\Loan\ucLoanDashboard.resx">
+      <DependentUpon>ucLoanDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\Loan\ucLoanRepayment.resx">
+      <DependentUpon>ucLoanRepayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Client\ucClientHome.resx">
       <DependentUpon>ucClientHome.cs</DependentUpon>

@@ -18,6 +18,7 @@ namespace DAL
         public LoanContract()
         {
             this.LoanRepayments = new HashSet<LoanRepayment>();
+            this.LoanSchedules = new HashSet<LoanSchedule>();
         }
     
         public string ContractID { get; set; }
@@ -29,8 +30,11 @@ namespace DAL
         public System.DateTime EndDate { get; set; }
         public string Collateral { get; set; }
         public string Status { get; set; }
+        public int TermMonths { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanRepayment> LoanRepayments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanSchedule> LoanSchedules { get; set; }
     }
 }
