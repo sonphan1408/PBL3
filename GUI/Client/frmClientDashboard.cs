@@ -460,5 +460,22 @@ namespace GUI.Client
         {
             addUserControl(loanDashboard);
         }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Payment History";
+            addUserControl(paymentHistory);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Balance Changes";
+            addUserControl(balanceChanges);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Transaction History";
+            addUserControl(history);
+        }
     }
 }
