@@ -361,7 +361,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DigitalBankingDBModelStoreContainer">
+        <EntityContainer Name="PBL3ModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
@@ -432,7 +432,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DigitalBankingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PBL3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountNumber" />
@@ -886,9 +886,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DigitalBankingDBModelStoreContainer" CdmEntityContainer="DigitalBankingDBEntities">
+        <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="DigitalBankingDBEntities">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.Account">
+            <EntityTypeMapping TypeName="PBL3Model.Account">
               <MappingFragment StoreEntitySet="Accounts">
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
@@ -901,7 +901,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.Customer">
+            <EntityTypeMapping TypeName="PBL3Model.Customer">
               <MappingFragment StoreEntitySet="Customers">
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -918,7 +918,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.Employee">
+            <EntityTypeMapping TypeName="PBL3Model.Employee">
               <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -929,7 +929,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ExternalBanks">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.ExternalBank">
+            <EntityTypeMapping TypeName="PBL3Model.ExternalBank">
               <MappingFragment StoreEntitySet="ExternalBanks">
                 <ScalarProperty Name="BankCode" ColumnName="BankCode" />
                 <ScalarProperty Name="BankName" ColumnName="BankName" />
@@ -938,7 +938,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ExternalTransactions">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.ExternalTransaction">
+            <EntityTypeMapping TypeName="PBL3Model.ExternalTransaction">
               <MappingFragment StoreEntitySet="ExternalTransactions">
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="FromAccount" ColumnName="FromAccount" />
@@ -956,7 +956,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InterestRates">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.InterestRate">
+            <EntityTypeMapping TypeName="PBL3Model.InterestRate">
               <MappingFragment StoreEntitySet="InterestRates">
                 <ScalarProperty Name="RateID" ColumnName="RateID" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
@@ -966,7 +966,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InternalTransactions">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.InternalTransaction">
+            <EntityTypeMapping TypeName="PBL3Model.InternalTransaction">
               <MappingFragment StoreEntitySet="InternalTransactions">
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="FromAccount" ColumnName="FromAccount" />
@@ -981,7 +981,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Invoices">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.Invoice">
+            <EntityTypeMapping TypeName="PBL3Model.Invoice">
               <MappingFragment StoreEntitySet="Invoices">
                 <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
@@ -994,7 +994,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Notifications">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.Notification">
+            <EntityTypeMapping TypeName="PBL3Model.Notification">
               <MappingFragment StoreEntitySet="Notifications">
                 <ScalarProperty Name="NotiID" ColumnName="NotiID" />
                 <ScalarProperty Name="ReceiverAccount" ColumnName="ReceiverAccount" />
@@ -1006,7 +1006,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SavingContracts">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.SavingContract">
+            <EntityTypeMapping TypeName="PBL3Model.SavingContract">
               <MappingFragment StoreEntitySet="SavingContracts">
                 <ScalarProperty Name="ContractID" ColumnName="ContractID" />
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
@@ -1024,7 +1024,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SavingTransactions">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.SavingTransaction">
+            <EntityTypeMapping TypeName="PBL3Model.SavingTransaction">
               <MappingFragment StoreEntitySet="SavingTransactions">
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="ContractID" ColumnName="ContractID" />
@@ -1036,7 +1036,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ServiceProviders">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.ServiceProvider">
+            <EntityTypeMapping TypeName="PBL3Model.ServiceProvider">
               <MappingFragment StoreEntitySet="ServiceProviders">
                 <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
                 <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
@@ -1045,7 +1045,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ServiceTypes">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.ServiceType">
+            <EntityTypeMapping TypeName="PBL3Model.ServiceType">
               <MappingFragment StoreEntitySet="ServiceTypes">
                 <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
                 <ScalarProperty Name="ServiceTypeName" ColumnName="ServiceTypeName" />
@@ -1065,7 +1065,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TransactionTypes">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.TransactionType">
+            <EntityTypeMapping TypeName="PBL3Model.TransactionType">
               <MappingFragment StoreEntitySet="TransactionTypes">
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />

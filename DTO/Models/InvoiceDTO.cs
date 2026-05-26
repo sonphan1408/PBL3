@@ -15,6 +15,7 @@ namespace DTO.Models
         public string BillCode { get; set; }
         public decimal Amount { get; set; }
         public string Status { get; set; }
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
+        public string ProviderName { get; set; }
     }
 }

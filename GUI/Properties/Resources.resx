@@ -121,6 +121,14 @@
   <data name="11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PaymentInternetNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PaymentInternetNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unnamed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\unnamed.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pngtree-circle-password-icon-vectors-png-image_1738057" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pngtree-circle-password-icon-vectors-png-image_1738057.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   <data name="bro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,6 +153,14 @@
   <data name="Gemini_Generated_Image_zg4wvdzg4wvdzg4w" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gemini_Generated_Image_zg4wvdzg4wvdzg4w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Payment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Payment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="656362958_1425254056280893_416290663166627344_n" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\656362958_1425254056280893_416290663166627344_n.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unnamed1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\unnamed1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   <data name="pig1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pig1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -159,6 +175,9 @@
   </data>
   <data name="1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="656362958_1425254056280893_416290663166627344_n1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\656362958_1425254056280893_416290663166627344_n1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="unnamed2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\unnamed2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,6 +212,11 @@
   <data name="Gemini_Generated_Image_jyaunrjyaunrjyau" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gemini_Generated_Image_jyaunrjyaunrjyau.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PaymentElectricityNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PaymentElectricityNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AccountInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AccountInfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   <data name="Nội dung đoạn văn bản của bạn1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Nội dung đoạn văn bản của bạn.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -214,6 +238,14 @@
   <data name="1.Featureimage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1.Featureimage.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PaymentPhoneNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PaymentPhoneNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pngtree-circle-password-icon-vectors-png-image_17380571" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pngtree-circle-password-icon-vectors-png-image_17380571.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   <data name="pig2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pig2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

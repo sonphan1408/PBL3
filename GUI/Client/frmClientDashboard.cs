@@ -25,6 +25,8 @@ namespace GUI.Client
         public string CurrentUsername { get; private set; }
 
         
+        ucAccountInfo accountinfo;
+
         public frmClientDashboard()
         {
             InitializeComponent();
@@ -45,6 +47,11 @@ namespace GUI.Client
             //createSaving = new uccreateSaving();
             //createSaving.NavigateTo = addUserControl;
             //confirmSaving = new ucConfirmSaving();
+            invoice = new ucInvoicePayment();
+            invoice.NavigateTo = addUserControl;
+
+            accountinfo = new ucAccountInfo();
+            accountinfo.NavigateTo = addUserControl;
 
 
             history = new ucHistory();
@@ -306,6 +313,10 @@ namespace GUI.Client
         // --- CÁC SỰ KIỆN NÚT BẤM ---
         private void btnHome_Click(object sender, EventArgs e)
         {
+            // Cập nhật lại số dư trước khi lôi nó ra hiển thị
+            home.ReloadBalance();
+
+            // Đưa ucClientHome ra màn hình chính
             lblPageTitle.Text = "Home";
             addUserControl(home);
         }
@@ -331,6 +342,8 @@ namespace GUI.Client
         private void btnPayment_Click(object sender, EventArgs e)
         {
             lblPageTitle.Text = "Payment";
+            invoice = new ucInvoicePayment();
+            invoice.NavigateTo = addUserControl;
             addUserControl(invoice);
         }
 
@@ -439,6 +452,15 @@ namespace GUI.Client
             addUserControl(paymentHistory);
         }
 
+        public void RefreshDashboardBalance()
+        {
+            // Kích hoạt hàm làm mới số tiền của trang Home đang nằm ẩn bên dưới
+            if (home != null)
+            {
+                home.ReloadBalance();
+            }
+        }
+
         private void pnlLogo_Paint(object sender, PaintEventArgs e) { }
         private void textBox1_TextChanged(object sender, EventArgs e) { }
         private void guna2TextBox1_TextChanged(object sender, EventArgs e) { }
@@ -476,6 +498,21 @@ namespace GUI.Client
         {
             lblPageTitle.Text = "Transaction History";
             addUserControl(history);
+        }
+
+        private void btnAccountInfo_Click(object sender, EventArgs e)
+        {
+            {
+                // 1. Tạo đối tượng của màn hình Thông tin tài khoản
+                accountinfo = new ucAccountInfo();
+
+                accountinfo.NavigateTo = addUserControl; // Truyền hàm điều hướng vào ucAccountInfo
+
+                // 3. Xóa ruột cũ của Panel chính và thêm ruột mới vào (giả sử panel bên phải của bạn tên là pnlMain)
+                pnlMain.Controls.Clear();
+                accountinfo.Dock = DockStyle.Fill; // Ép nó phình to lấp đầy panel
+                pnlMain.Controls.Add(accountinfo);
+            }
         }
     }
 }

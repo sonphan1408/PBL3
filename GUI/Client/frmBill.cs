@@ -69,5 +69,15 @@ namespace GUI.Client
                 tb.Width = newWidth;
             }
         }
+
+        private void kryptonTextBox2_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void kryptonTextBox5_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

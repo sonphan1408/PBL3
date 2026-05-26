@@ -52,7 +52,8 @@ namespace DAL.Repositories
                             DateOfBirth = (DateTime)customer.DateOfBirth,
                             Address = customer.Address,
                             PhoneNumber = customer.PhoneNumber,
-                            Email = customer.Email
+                            Email = customer.Email,
+                            AvatarPath = customer.AvatarPath
                         };
                     }
                     return null;
@@ -177,6 +178,59 @@ namespace DAL.Repositories
             catch (Exception ex)
             {
                 throw new Exception("Lỗi khi cộng tiền: " + ex.Message);
+            }
+        }
+        // 🌟 BỔ SUNG: HÀM CẬP NHẬT THÔNG TIN BẰNG ENTITY FRAMEWORK
+        public static bool UpdateCustomerInfo(string accountNumber, string fullName, string phone, string email, string address)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities())
+                {
+                    var account = db.Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
+                    if (account != null)
+                    {
+                        var customer = db.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
+                        if (customer != null)
+                        {
+                            customer.FullName = fullName;
+                            customer.PhoneNumber = phone;
+                            customer.Email = email;
+                            customer.Address = address;
+
+                            db.SaveChanges();
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi cập nhật thông tin khách hàng: " + ex.Message);
+            }
+        }
+
+        // Hàm đổi mật khẩu
+        public static bool ChangePassword(string accountNumber, string newPassword)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities())
+                {
+                    var account = db.Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
+                    if (account != null)
+                    {
+                        account.Password = newPassword;
+                        db.SaveChanges(); // Ép EF lưu xuống SQL Server
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi đổi mật khẩu: " + ex.Message);
             }
         }
         public static string GetFullNameByCustomerId(int customerId)
