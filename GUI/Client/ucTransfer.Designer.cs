@@ -49,12 +49,12 @@ namespace GUI.Client
             // btnTim
             // 
             this.btnTim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTim.Location = new System.Drawing.Point(1135, 236);
+            this.btnTim.Location = new System.Drawing.Point(1137, 241);
             this.btnTim.Name = "btnTim";
-            this.btnTim.Size = new System.Drawing.Size(47, 45);
+            this.btnTim.Size = new System.Drawing.Size(33, 31);
             this.btnTim.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.btnTim.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
-            this.btnTim.StateCommon.Back.Image = global::GUI.Properties.Resources.canva_magnifier_outline_icon_MAEgJresBTg;
+            this.btnTim.StateCommon.Back.Image = global::GUI.Properties.Resources.f9bb81e576c1a361c61a8c08945b2c48_search_icon;
             this.btnTim.StateCommon.Back.ImageStyle = Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnTim.StateCommon.Border.Color1 = System.Drawing.Color.Black;
             this.btnTim.StateCommon.Border.Color2 = System.Drawing.Color.Black;
@@ -174,9 +174,9 @@ namespace GUI.Client
             this.btnSelectBank.FlatAppearance.BorderSize = 0;
             this.btnSelectBank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectBank.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnSelectBank.Location = new System.Drawing.Point(327, 318);
+            this.btnSelectBank.Location = new System.Drawing.Point(327, 325);
             this.btnSelectBank.Name = "btnSelectBank";
-            this.btnSelectBank.Size = new System.Drawing.Size(32, 35);
+            this.btnSelectBank.Size = new System.Drawing.Size(28, 28);
             this.btnSelectBank.TabIndex = 12;
             this.btnSelectBank.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSelectBank.UseVisualStyleBackColor = false;

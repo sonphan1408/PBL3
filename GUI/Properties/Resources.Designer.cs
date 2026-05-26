@@ -184,6 +184,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap f9bb81e576c1a361c61a8c08945b2c48_search_icon {
+            get {
+                object obj = ResourceManager.GetObject("f9bb81e576c1a361c61a8c08945b2c48-search-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Gemini_Generated_Image_fn819bfn819bfn81 {
             get {
                 object obj = ResourceManager.GetObject("Gemini_Generated_Image_fn819bfn819bfn81", resourceCulture);
@@ -277,6 +287,16 @@ namespace GUI.Properties {
         internal static System.Drawing.Bitmap Gemini_Generated_Image_zg4wvdzg4wvdzg4w {
             get {
                 object obj = ResourceManager.GetObject("Gemini_Generated_Image_zg4wvdzg4wvdzg4w", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap images__1_ {
+            get {
+                object obj = ResourceManager.GetObject("images (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -407,6 +427,16 @@ namespace GUI.Properties {
         internal static System.Drawing.Bitmap pngtree_outline_user_icon_png_image_1727916 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-outline-user-icon-png-image_1727916", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_search_line_icon_png_image_9030917 {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-search-line-icon-png-image_9030917", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
