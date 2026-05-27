@@ -15,7 +15,7 @@ namespace DAL.Repositories
         {
             using (var db = new DigitalBankingDBEntities())
             {
-                // Dùng LINQ lọc dữ liệu và map thẳng vào DTO
+                // Dung linq de lay danh sach hoa don chua thanh toan theo account va service type, sau do map sang DTO
                 var result = db.Invoices
                     .Where(i => i.AccountNumber == accountNumber
                              && i.Status == "Unpaid"
@@ -29,7 +29,7 @@ namespace DAL.Repositories
                         Amount = i.Amount,
                         Status = i.Status,
                         DueDate = i.DueDate,
-                        ProviderName = i.ServiceProvider.ProviderName // Lấy từ bảng liên kết
+                        ProviderName = i.ServiceProvider.ProviderName 
                     })
                     .ToList();
 
@@ -37,10 +37,9 @@ namespace DAL.Repositories
             }
         }
 
-        // Viết vào bên trong class ở tầng DAL của bạn
+
         public List<string> GetProviders(int serviceTypeId)
         {
-            // Tầng DAL đã có sẵn Entity Framework nên viết bằng db thoải mái
             using (var db = new DigitalBankingDBEntities())
             {
                 return db.ServiceProviders
@@ -54,8 +53,6 @@ namespace DAL.Repositories
         {
             using (var context = new DigitalBankingDBEntities())
             {
-                // return context.Invoices.Where(i => i.AccountNumber == accountNumber).ToList();
-                // Need Include Provider to get Name
                 return context.Invoices.Include("ServiceProvider").Where(i => i.AccountNumber == accountNumber).ToList();
             }
         }

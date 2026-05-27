@@ -180,7 +180,7 @@ namespace DAL.Repositories
                 throw new Exception("Lỗi khi cộng tiền: " + ex.Message);
             }
         }
-        // 🌟 BỔ SUNG: HÀM CẬP NHẬT THÔNG TIN BẰNG ENTITY FRAMEWORK
+        // Ham update thong tin khach hang
         public static bool UpdateCustomerInfo(string accountNumber, string fullName, string phone, string email, string address)
         {
             try
@@ -211,7 +211,7 @@ namespace DAL.Repositories
             }
         }
 
-        // Hàm đổi mật khẩu
+        // Ham doi mat khau
         public static bool ChangePassword(string accountNumber, string newPassword)
         {
             try
@@ -222,7 +222,7 @@ namespace DAL.Repositories
                     if (account != null)
                     {
                         account.Password = newPassword;
-                        db.SaveChanges(); // Ép EF lưu xuống SQL Server
+                        db.SaveChanges(); // dung lenh nay de cap nhat thay doi vao database
                         return true;
                     }
                     return false;
@@ -237,26 +237,26 @@ namespace DAL.Repositories
         {
             try
             {
-                using (var db = new DigitalBankingDBEntities()) // Gọi DB Context của bạn
+                using (var db = new DigitalBankingDBEntities()) // Goi db context de truy cap database
                 {
-                    // 1. Tìm khách hàng có ID khớp với tham số truyền vào
+                    // tim khach hang co ID trung voi customerId truyen vao
                     var khachHang = db.Customers.FirstOrDefault(c => c.CustomerID == customerId);
 
-                    // 2. Nếu tìm thấy, trả về tên
+                    // neu tim thay khach hang, tra ve ten day du cua khach hang
                     if (khachHang != null)
                     {
-                        return khachHang.FullName; // Thay 'FullName' bằng tên cột thật trong DB của bạn nếu khác
+                        return khachHang.FullName; // thay fullName bang ten day du cua khach hang trong database
                     }
 
-                    // 3. Nếu không tìm thấy (ID không tồn tại)
+                    // Neu khong tim thay khach hang, tra ve thong bao khong tim thay
                     return "Không tìm thấy khách hàng";
                 }
             }
             catch (Exception ex)
             {
-                // Bắt lỗi rớt mạng SQL hoặc lỗi truy vấn
+                // Bat loi va in ra thong bao loi, tra ve chuoi rong de giao dien khong bi loi khi hien thi chu null
                 Console.WriteLine("Lỗi lấy tên khách hàng: " + ex.Message);
-                return ""; // Trả về chuỗi rỗng để giao diện không bị lỗi hiển thị chữ null
+                return ""; 
             }
         }
     }

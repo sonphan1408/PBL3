@@ -10,8 +10,8 @@ namespace DTO.Models
     {
         public int CustomerID { get; set; }
         public string FullName { get; set; }
-        public string CCCD { get; set; } // Số khách hàng tự nhập
-        public string IDCard { get; set; } // Mã 9 số hệ thống tự sinh
+        public string CCCD { get; set; } // So khach hang tu nhap
+        public string IDCard { get; set; } // Ma khach hang tu sinh ra (VD: 19900101 + 3 so ngau nhien)
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Address { get; set; }

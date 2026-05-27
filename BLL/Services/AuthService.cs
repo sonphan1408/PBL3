@@ -9,23 +9,20 @@ using DAL.Repositories;
 
 namespace BLL.Services
 {
-    // Đã đổi internal thành public
     public class AuthService
     {
         private AuthDAL _authDAL = new AuthDAL();
 
         public string RegisterNewCustomer(CustomerDTO customer, AccountCustomerDTO account, string confirmPassword)
         {
-            // --- 1. KIỂM TRA VALIDATION (Theo đúng thứ tự từ trên xuống dưới của Form) ---
+            // Kiem tra validation
 
-            // Nhóm 1: Thông tin cá nhân
             if (string.IsNullOrWhiteSpace(customer.FullName) || !Regex.IsMatch(customer.FullName, @"^(\p{Lu}\p{Ll}* )+\p{Lu}\p{Ll}*$"))
                 return "Họ tên không hợp lệ. Vui lòng viết hoa chữ cái đầu mỗi từ và cách nhau 1 khoảng trắng (VD: Hà Đỗ Ngọc Thái).";
 
             if (string.IsNullOrWhiteSpace(customer.Gender))
                 return "Vui lòng chọn giới tính.";
 
-            // Kiểm tra Địa chỉ (Linh hoạt nhưng chống nhập rác)
             if (string.IsNullOrWhiteSpace(customer.Address) ||
                 customer.Address.Trim().Length < 15 ||
                 !customer.Address.Contains(",") ||
@@ -45,7 +42,6 @@ namespace BLL.Services
             if (string.IsNullOrWhiteSpace(customer.PhoneNumber) || !Regex.IsMatch(customer.PhoneNumber, @"^0\d{9}$"))
                 return "Số điện thoại phải có đúng 10 số và bắt đầu bằng số 0.";
 
-            // Nhóm 2: Thông tin tài khoản đăng nhập
             if (string.IsNullOrWhiteSpace(account.Username) || account.Username.Length < 6)
                 return "Tên đăng nhập không được để trống và phải từ 6 ký tự.";
 
@@ -59,18 +55,15 @@ namespace BLL.Services
                 return "Mật khẩu xác nhận không khớp!";
 
 
-            // --- 2. GỌI XUỐNG TẦNG DAL ĐỂ LƯU VÀO DATABASE ---
+            // Goi DAL de kiem tra trung lap va luu thong tin
             try
             {
-                // Nếu vượt qua hết các trạm kiểm tra ở trên, tiến hành lưu
                 _authDAL.RegisterCustomerAndAccount(customer, account);
 
-                // Trả về kết quả thành công kèm số tài khoản ngân hàng
                 return "Tạo thành công tài khoản mới";
             }
             catch (Exception ex)
             {
-                // Nếu có lỗi từ database (ví dụ: trùng Username, CCCD...)
                 return "Lỗi đăng ký (Có thể Tên đăng nhập, CCCD hoặc SĐT đã tồn tại).\nChi tiết: " + ex.Message;
             }
         }

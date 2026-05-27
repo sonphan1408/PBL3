@@ -20,12 +20,12 @@ namespace DAL.Repositories
             {
                 using (var db = new DigitalBankingDBEntities())
                 {
-                    // Tìm tài khoản khách hàng khớp user, pass và phải đang hoạt động (Active)
+                    // Tim tai khoan trong database voi username, password va status la "Active"
                     var account = db.Accounts.FirstOrDefault(a => a.Username == username
                                                                && a.Password == password
                                                                && a.Status == "Active");
 
-                    // Nếu tìm thấy, tạo mới một CustomerDTO để hứng dữ liệu và trả về
+                    // Neu tim thay tai khoan, tra ve AccountCustomerDTO, nguoc lai tra ve null
                     if (account != null)
                     {
                         return new AccountCustomerDTO
@@ -118,7 +118,7 @@ namespace DAL.Repositories
                     {
                         try
                         {
-                            // 1. Tạo và lưu Customer mới
+                            // tao moi doi tuong Customer moi va gan gia tri tu customerDTO
                             var newCustomer = new Customer
                             {
                                 FullName = customer.FullName,
@@ -170,9 +170,6 @@ namespace DAL.Repositories
             {
                 using (var db = new DigitalBankingDBEntities())
                 {
-                    // TODO: Employee table not implemented yet
-                    // var employee = db.Employees.FirstOrDefault(e => e.Username == username && e.Password == password);
-                    // For now, returning null
                     return null;
                 }
             }
