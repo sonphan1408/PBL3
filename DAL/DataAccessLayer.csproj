@@ -69,6 +69,9 @@
     <Compile Include="Customer.cs">
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>PBL3Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ExternalBank.cs">
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>
@@ -128,6 +131,7 @@
     <Compile Include="SavingContract.cs">
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SavingContractExtensions.cs" />
     <Compile Include="SavingTransaction.cs">
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>
@@ -135,6 +139,9 @@
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiceType.cs">
+      <DependentUpon>PBL3Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>PBL3Model.tt</DependentUpon>
     </Compile>
     <Compile Include="TransactionType.cs">

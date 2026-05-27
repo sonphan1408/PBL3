@@ -12,11 +12,12 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class InterestRate
+    public partial class Employee
     {
-        public int RateID { get; set; }
-        public string Category { get; set; }
-        public Nullable<int> TermMonths { get; set; }
-        public Nullable<decimal> RateValue { get; set; }
+        public int EmployeeID { get; set; }
+        public string FullName { get; set; }
+        public string Role { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

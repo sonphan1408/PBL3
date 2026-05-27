@@ -33,7 +33,6 @@ namespace DAL
         public string Goal { get; set; }
         public string SavingType { get; set; }
     
-        public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SavingTransaction> SavingTransactions { get; set; }
     }
