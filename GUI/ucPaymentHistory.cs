@@ -15,6 +15,7 @@ namespace GUI
     public partial class ucPaymentHistory : UserControl
     {
         private bool _isInitialized = false; // guard: chỉ refresh sau khi Load đã chạy
+        private PaymentService _paymentService = new PaymentService();
 
         public ucPaymentHistory()
         {
@@ -150,7 +151,7 @@ namespace GUI
                 string accountNumber = UserSession.CurrentUser.AccountNumber;
 
                 // Get invoices from database
-                var invoices = PaymentService.GetInvoicesByAccount(accountNumber);
+                var invoices = _paymentService.GetInvoicesByAccount(accountNumber);
 
                 if (invoices == null || invoices.Count == 0)
                 {
@@ -164,7 +165,7 @@ namespace GUI
                     string invoiceId = "INV" + invoice.InvoiceID.ToString().PadLeft(4, '0');
                     string billingTo = invoice.ProviderName ?? "N/A";
                     string status = invoice.Status ?? "UNKNOWN";
-                    string paymentDate = invoice.DueDate != DateTime.MinValue ? invoice.DueDate.ToString("yyyy-MM-dd") : "-";
+                    string paymentDate = invoice.DueDate.HasValue && invoice.DueDate.Value != DateTime.MinValue ? invoice.DueDate.Value.ToString("yyyy-MM-dd") : "-";
                     string amount = "$" + invoice.Amount.ToString("F2");
                     string paymentFor = "CHUYỂN KHOẢN";
 

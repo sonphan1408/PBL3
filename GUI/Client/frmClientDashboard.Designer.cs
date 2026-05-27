@@ -174,18 +174,19 @@ namespace GUI.Client
             // 
             // btnLoan
             // 
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.Location = new System.Drawing.Point(0, 242);
-            this.button5.Name = "button5";
-            this.button5.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.button5.Size = new System.Drawing.Size(254, 45);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "  🏦   Khoản vay";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.UseVisualStyleBackColor = true;
+            // button5 initialization removed - using btnLoan instead
+            // this.button5.FlatAppearance.BorderSize = 0;
+            // this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            // this.button5.Font = new System.Drawing.Font("Segoe UI", 10F);
+            // this.button5.ForeColor = System.Drawing.Color.Black;
+            // this.button5.Location = new System.Drawing.Point(0, 242);
+            // this.button5.Name = "button5";
+            // this.button5.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            // this.button5.Size = new System.Drawing.Size(254, 45);
+            // this.button5.TabIndex = 7;
+            // this.button5.Text = "  🏦   Khoản vay";
+            // this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // this.button5.UseVisualStyleBackColor = true;
             // 
             // btnSaving
             // 

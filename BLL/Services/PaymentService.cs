@@ -61,12 +61,30 @@ namespace BLL.Services
             return filteredList;
         }
 
-        // --- Đặt hàm này vào trong class PaymentService (Tầng BLL) ---
-
         /// <summary>
-        /// Hàm xử lý nghiệp vụ nạp tiền điện thoại
-        /// Trả về chuỗi rỗng ("") nếu thành công, trả về câu thông báo nếu có lỗi.
+        /// Get all invoices by account number
         /// </summary>
-        
+        public List<InvoiceDTO> GetInvoicesByAccount(string accountNumber)
+        {
+            try
+            {
+                var invoices = InvoiceDAL.GetInvoicesByAccount(accountNumber);
+                return invoices.Select(i => new InvoiceDTO
+                {
+                    InvoiceID = i.InvoiceID,
+                    AccountNumber = i.AccountNumber,
+                    ProviderID = i.ProviderID,
+                    ProviderName = i.ServiceProvider?.ProviderName ?? "N/A",
+                    BillCode = i.BillCode,
+                    Amount = i.Amount,
+                    Status = i.Status,
+                    DueDate = i.DueDate
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi lấy dữ liệu thanh toán: " + ex.Message);
+            }
+        }
     }
 }

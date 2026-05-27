@@ -36,6 +36,7 @@ namespace DAL.Repositories
                 return result;
             }
         }
+
         // Viết vào bên trong class ở tầng DAL của bạn
         public List<string> GetProviders(int serviceTypeId)
         {
@@ -48,8 +49,7 @@ namespace DAL.Repositories
                          .ToList();
             }
         }
-    public class InvoiceDAL
-    {
+
         public static List<Invoice> GetInvoicesByAccount(string accountNumber)
         {
             using (var context = new DigitalBankingDBEntities())

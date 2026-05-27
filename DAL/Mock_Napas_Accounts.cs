@@ -12,12 +12,11 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Mock_Napas_Accounts
     {
-        public int EmployeeID { get; set; }
+        public int MockID { get; set; }
+        public string AccountNumber { get; set; }
+        public string BankCode { get; set; }
         public string FullName { get; set; }
-        public string Role { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 }

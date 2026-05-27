@@ -16,6 +16,5 @@ namespace DTO.Models
         public decimal Amount { get; set; }
         public string Status { get; set; }
         public DateTime? DueDate { get; set; }
-        public string ProviderName { get; set; }
     }
 }

@@ -26,11 +26,11 @@ namespace DAL
         public decimal LoanAmount { get; set; }
         public decimal RemainingBalance { get; set; }
         public decimal InterestRate { get; set; }
+        public int TermMonths { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
-        public string Collateral { get; set; }
         public string Status { get; set; }
-        public int TermMonths { get; set; }
+        public string Collateral { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanRepayment> LoanRepayments { get; set; }

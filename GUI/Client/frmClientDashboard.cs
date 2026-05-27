@@ -558,7 +558,6 @@ namespace GUI.Client
         private void panel4_Paint(object sender, PaintEventArgs e) { }
         private void button3_Click(object sender, EventArgs e) { }
         private void button5_Click(object sender, EventArgs e) { }
-        private void button8_Click(object sender, EventArgs e) { }
 
         private void btnLoan_Click(object sender, EventArgs e)
         {
