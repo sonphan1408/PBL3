@@ -536,5 +536,6 @@ namespace GUI.Client
         private System.Windows.Forms.Label lblSubtitle2;
         private System.Windows.Forms.Label lblWelcomeText;
         private System.Windows.Forms.PictureBox picAvatar;
+        private System.Windows.Forms.Button btnAccountInfo;
     }
 }
