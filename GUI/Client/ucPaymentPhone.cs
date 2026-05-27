@@ -10,16 +10,14 @@ namespace GUI.Client
 {
     public partial class ucPaymentPhone : UserControl
     {
-        // 1. Khai báo tầng Service để xử lý nghiệp vụ
+        // khai bao service de goi ham lay du lieu 
         private PaymentService _paymentService = new PaymentService();
 
-        // 2. Các biến kiểm soát trạng thái máy (State Machine)
         private decimal _selectedAmount = 0;
-        private int _paymentStep = 1;         // 1: Chọn mệnh giá, 2: Nhập mật khẩu/Số tiền khác
-        private bool _isCustomAmount = false; // Đánh dấu nếu chọn ô "Số khác"
-        private KryptonTextBox _selectedKryptonBox = null; // Lưu lại ô đang chọn để highlight
+        private int _paymentStep = 1;         // 1: chon sdt + menh gia, 2: xac nhan + nhap mat khau
+        private bool _isCustomAmount = false; // neu chon o "So khac" thi truong hop nay se true, nguoc lai la false de biet dang o che do menh gia co san hay nhap tay
+        private KryptonTextBox _selectedKryptonBox = null; // highlight o menh gia dang chon
 
-        // 3. Cầu nối Delegate dùng để quay lại màn hình chính Payments
         public Action<UserControl> NavigateTo { get; set; }
 
         public ucPaymentPhone()
@@ -34,22 +32,15 @@ namespace GUI.Client
 
             LoadBalanceUI();
 
-            // Đổ dữ liệu các nhà mạng Điện thoại (ServiceTypeID = 4)
             cboProvider.DataSource = _paymentService.GetProviders(4);
 
-            // 🌟 1. Gọi hàm tự động vẽ 6 ô mệnh giá vào Panel bạn đã tạo
             GenerateAmountOptions();
 
-            // Bắt đầu ở Trạng thái 1: Chọn số điện thoại & Mệnh giá
             SetPaymentState(1);
 
-            // Tải danh sách các số điện thoại đang chờ nạp
             LoadPendingInvoices(4);
         }
 
-        /// <summary>
-        /// Hàm tự động vẽ 6 ô KryptonTextBox bo góc vào trong pnlAmountSelection
-        /// </summary>
         private void GenerateAmountOptions()
         {
             if (pnlAmountSelection == null) return;
@@ -67,28 +58,24 @@ namespace GUI.Client
                 int row = i / 3;
                 int col = i % 3;
 
-                // 1. Tạo Group làm khung bo góc
                 KryptonGroup card = new KryptonGroup();
                 card.Name = names[i];
                 card.Size = new Size(boxWidth, boxHeight);
                 card.Location = new Point(padding + col * (boxWidth + padding), padding + row * (boxHeight + padding));
                 card.Cursor = Cursors.Hand;
 
-                // Cấu hình bo góc cho Group
                 card.StateCommon.Border.Rounding = 8;
                 card.StateCommon.Border.Color1 = Color.LightGray;
                 card.StateCommon.Border.Width = 1;
                 card.StateCommon.Back.Color1 = Color.White;
 
-                // 2. Tạo Label đặt bên trong Group
                 Label lbl = new Label();
                 lbl.Text = amounts[i];
                 lbl.Font = new Font("Segoe UI", 12f, FontStyle.Bold);
-                lbl.Dock = DockStyle.Fill; // Lệnh này ép Label tự động phình to lấp đầy 100% khoảng trống bên trong khung
+                lbl.Dock = DockStyle.Fill; 
                 lbl.TextAlign = ContentAlignment.MiddleCenter;
-                lbl.BackColor = Color.Transparent; // Để hiện màu nền của Group
+                lbl.BackColor = Color.Transparent; 
 
-                // 3. Sự kiện Click vào Group hoặc Label đều như nhau
                 card.Click += KryptonGroupAmount_Click;
                 lbl.Click += KryptonGroupAmount_Click;
                 card.Panel.Click += KryptonGroupAmount_Click;
@@ -98,24 +85,19 @@ namespace GUI.Client
             }
         }
 
-        /// <summary>
-        /// Sự kiện xảy ra khi người dùng nhấp vào 1 trong 6 ô mệnh giá
-        /// </summary>
-        private KryptonGroup _selectedGroup = null; // Biến này lưu khung đang được chọn
+        /// su kien xay ra khi nhap vao 1 trong 6 o menh gia
+        private KryptonGroup _selectedGroup = null; 
 
         private void KryptonGroupAmount_Click(object sender, EventArgs e)
         {
-            // Tìm cái Group (nếu người dùng lỡ bấm vào Label, parent của nó chính là Group)
             KryptonGroup clickedGroup = (sender is KryptonGroup) ? (KryptonGroup)sender : (KryptonGroup)((Control)sender).Parent.Parent;
 
-            // Tẩy màu cũ
             if (_selectedGroup != null) _selectedGroup.StateCommon.Back.Color1 = Color.White;
 
-            // Tô màu mới
             _selectedGroup = clickedGroup;
             _selectedGroup.StateCommon.Back.Color1 = Color.LightCyan;
 
-            // Logic lấy tiền
+            // logic lay tien
             if (_selectedGroup.Name == "cardOther")
             {
                 _isCustomAmount = true;
@@ -129,16 +111,14 @@ namespace GUI.Client
             }
         }
 
-        /// <summary>
-        /// Hàm quản lý 2 trạng thái hiển thị của màn hình Nạp tiền
-        /// </summary>
+        /// Ham quan ly hien thi giao dien 2 trang thai khi chon menh gia va xac nhan
         private void SetPaymentState(int step)
         {
             _paymentStep = step;
 
-            if (_paymentStep == 1) // BƯỚC 1: CHỌN MỆNH GIÁ
+            if (_paymentStep == 1) // chon menh gia va nhap so dien thoai
             {
-                pnlAmountSelection.Visible = true; // Hiện panel chứa 6 ô KryptonTextBox
+                pnlAmountSelection.Visible = true; 
                 pnlAmountSelection.BringToFront();
 
                 lblAmount.Visible = false;
@@ -150,27 +130,27 @@ namespace GUI.Client
                 txtAmount.Clear();
                 txtPassword.Clear();
             }
-            else if (_paymentStep == 2) // BƯỚC 2: XÁC NHẬN & THANH TOÁN
+            else if (_paymentStep == 2) // xac nhan thong tin va nhap mat khau de thanh toan
             {
-                pnlAmountSelection.Visible = false; // Ẩn panel chọn mệnh giá
+                pnlAmountSelection.Visible = false; 
 
                 lblAmount.Visible = true;
                 txtAmount.Visible = true;
                 lblPassword.Visible = true;
                 txtPassword.Visible = true;
 
-                txtPhoneNumber.ReadOnly = true; // Khóa số điện thoại lại
+                txtPhoneNumber.ReadOnly = true; 
 
                 if (_isCustomAmount)
                 {
-                    // Trường hợp "Số khác": Mở khóa ô tiền cho phép nhập tay
+                    // truong hop nhap so khac: mo khoa o nhap tien, de nguoi dung tu nhap so tien vao
                     txtAmount.ReadOnly = false;
                     txtAmount.Clear();
                     txtAmount.Focus();
                 }
                 else
                 {
-                    // Trường hợp mệnh giá cố định: Khóa ô tiền, tự điền chữ
+                    // truong hop chon menh gia co san: hien thi so tien da chon, va khoa o nhap tien
                     txtAmount.ReadOnly = true;
                     txtAmount.Text = _selectedAmount.ToString("N0") + " VND";
                     txtPassword.Focus();
@@ -178,9 +158,7 @@ namespace GUI.Client
             }
         }
 
-        /// <summary>
-        /// Tải danh sách số điện thoại cần nạp và tạo Card tối giản
-        /// </summary>
+        /// load danh sach cac so dien thoai 
         private void LoadPendingInvoices(int serviceTypeId)
         {
             pnlUnpaidList.Controls.Clear();
@@ -209,7 +187,6 @@ namespace GUI.Client
                 {
                     KryptonGroup card = CreateSimplePhoneCard(inv.BillCode, yPosition);
 
-                    // Click vào Card sẽ đổ số ĐT sang form và đưa về Bước 1 để chọn mệnh giá
                     card.Click += (s, e) => FillInvoiceToForm(inv);
                     card.Panel.Click += (s, e) => FillInvoiceToForm(inv);
                     foreach (Control child in card.Panel.Controls)
@@ -257,7 +234,6 @@ namespace GUI.Client
             cboProvider.Text = invoice.ProviderName;
             txtPhoneNumber.Text = invoice.BillCode;
 
-            // Đảm bảo đưa người dùng về Bước 1 để họ tự chọn mệnh giá nạp
             SetPaymentState(1);
         }
 
@@ -282,7 +258,7 @@ namespace GUI.Client
                     {
                         FillInvoiceToForm(matchInvoice);
                     }
-                    // Nếu gõ số lạ không lưu trong Database, hệ thống vẫn cho phép nạp bình thường (ở lại Bước 1)
+                    // Neu go so dien thoai khong luu trong database thi se hien thong bao
                 }
                 catch (Exception ex)
                 {
@@ -307,24 +283,18 @@ namespace GUI.Client
             }
         }
 
-        /// <summary>
-        /// Nút Xác nhận gánh 2 nhiệm vụ (Next và Pay)
-        /// </summary>
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             string phoneNumber = txtPhoneNumber.Text.Trim();
 
-            // Kiểm tra số điện thoại hợp lệ: bắt đầu bằng 0, có 10 chữ số, chỉ chứa số
+            // Kiem tra so dien thoai hop le: khong duoc de trong, phai co 10 chu so, bat dau bang 0, va chi chua cac chu so
             if (string.IsNullOrEmpty(phoneNumber) || phoneNumber.Length != 10 || !phoneNumber.StartsWith("0") || !System.Text.RegularExpressions.Regex.IsMatch(phoneNumber, @"^\d+$"))
             {
                 MessageBox.Show("Số điện thoại nhập sai, vui lòng nhập lại!\n(Số điện thoại hợp lệ phải bắt đầu bằng 0 và có độ dài 10 chữ số)", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPhoneNumber.Focus();
                 return;
             }
-
-            // ==========================================
-            // ĐANG Ở BƯỚC 1: BẤM ĐỂ CHUYỂN SANG BƯỚC 2
-            // ==========================================
+            // bam confirm lan dau tien de chon menh gia va so dien thoai, bam lan thu 2 de xac nhan va thanh toan
             if (_paymentStep == 1)
             {
                 if (_selectedGroup == null)
@@ -334,18 +304,13 @@ namespace GUI.Client
                 }
                 SetPaymentState(2);
             }
-            // ==========================================
-            // ĐANG Ở BƯỚC 2: BẤM ĐỂ THANH TOÁN
-            // ==========================================
             else if (_paymentStep == 2)
             {
-                // Kiểm tra ràng buộc bội số 10.000 nếu là ô "Số khác"
+                // Kiem tra rang buoc 
                 if (_isCustomAmount)
                 {
-                    // 1. Dùng Regex lọc lấy CHỈ CÁC CHỮ SỐ (Loại bỏ các ký tự phẩy, chấm, chữ VNĐ)
                     string digitsOnly = System.Text.RegularExpressions.Regex.Replace(txtAmount.Text, @"[^\d]", "");
 
-                    // 2. Chuyển sang kiểu long (số nguyên) để phép chia dư (%) chính xác tuyệt đối
                     if (string.IsNullOrEmpty(digitsOnly) || !long.TryParse(digitsOnly, out long customAmount) || customAmount <= 0)
                     {
                         MessageBox.Show("Vui lòng nhập số tiền hợp lệ!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -353,7 +318,7 @@ namespace GUI.Client
                         return;
                     }
 
-                    // 3. Kiểm tra khắt khe điều kiện bội số của 10.000 (Nhập 30 sẽ báo lỗi ngay)
+                    // Kiem tra dieu kien tien nhap vao phai la boi so cua 10,000 VND
                     if (customAmount % 10000 != 0)
                     {
                         MessageBox.Show($"Số tiền bạn đang nhập là {customAmount.ToString("N0")} VND.\nVui lòng nhập đầy đủ chữ số và phải là bội số của 10,000 VND (Ví dụ: 30000, 50000...)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);

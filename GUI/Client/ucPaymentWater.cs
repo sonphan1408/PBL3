@@ -7,67 +7,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Krypton.Toolkit;         // Sử dụng namespace mới đã sửa lỗi CS0246
-using BLL.Services;            // Tầng xử lý nghiệp vụ PaymentService
-using DTO.Models;              // Đối tượng InvoiceDTO
+using Krypton.Toolkit;
+using BLL.Services;            // PaymentService
+using DTO.Models;              // InvoiceDTO
 
 namespace GUI.Client
 {
     public partial class ucPaymentWater : UserControl
     {
-        // 1. Khai báo tầng Service để xử lý nghiệp vụ
+        // khai bao service de goi ham lay du lieu 
         private PaymentService _paymentService = new PaymentService();
 
-        private decimal _selectedAmount = 0; // Lưu tạm số tiền của hóa đơn đang chọn
+        private decimal _selectedAmount = 0; // Luu tam so tien cua hoa don dien duoc chon
 
-        // 2. Cầu nối Delegate dùng để quay lại màn hình chính Payments
         public Action<UserControl> NavigateTo { get; set; }
 
         public ucPaymentWater()
         {
             InitializeComponent();
 
-            // Đăng ký sự kiện Load cho giao diện
             this.Load += ucPaymentWater_Load;
         }
 
-        /// <summary>
-        /// Sự kiện chạy khi bắt đầu mở giao diện Thanh toán Nước
-        /// </summary>
         private void ucPaymentWater_Load(object sender, EventArgs e)      
         {
-            // Cấu hình ComboBox cố định danh sách, không cho gõ bậy
             cboProvider.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            // 🌟 Hiện số dư ngay khi mở Form
+            // Hien thi so du
             LoadBalanceUI();
 
-            // 🌟 Đổ dữ liệu các công ty Nước (ServiceTypeID = 2) vào ComboBox
+            // Do du lieu nha cung cap
             cboProvider.DataSource = _paymentService.GetProviders(2);
 
-            // Trạng thái 1: Mặc định ẩn các ô Số tiền, Mật khẩu khi chưa chọn hóa đơn
+            // An cac o nhap lieu nang cao luc dau, chi hien thi sau khi chon duoc hoa don dien can thanh toan
             SetAdvancedFormVisible(false);
-            // BẮT ĐẦU LOAD: Chỉ truyền số 2 (Dịch vụ NƯỚC) xuống để lọc danh sách bên phải
+            // load danh sach hoa don dien dang cho xu ly len panel ben phai
             LoadPendingInvoices(2);
         }
+        /// Ham goi BLL de lay danh sach hoa don dien
 
-        /// <summary>
-        /// Hàm gọi BLL lấy dữ liệu hóa đơn nước và tự động vẽ lên panel bên phải
-        /// </summary>
         private void LoadPendingInvoices(int serviceTypeId)
         {
-            // Làm sạch danh sách cũ
             pnlUnpaidList.Controls.Clear();
 
             try
             {
-                // Lấy số tài khoản đang đăng nhập từ Session hệ thống
+                // Lay so tai khoan dang dang nhap tu Session de truyen vao BLL
                 string currentAccountNumber = GUI.Session.UserSession.CurrentUser.AccountNumber;
 
-                // Gọi Service lọc đúng các hóa đơn chưa thanh toán của dịch vụ nước (ID = 2)
+                // Goi BLL lay danh sach hoa don dien dang cho xu ly cua khach hang
                 List<InvoiceDTO> unpaidWaterInvoices = _paymentService.GetPendingInvoices(currentAccountNumber, serviceTypeId);
 
-                // Nếu khách hàng không nợ tiền nước nào thì hiển thị thông báo trống
+                // Neu khong no tien dien
                 if (unpaidWaterInvoices == null || unpaidWaterInvoices.Count == 0)
                 {
                     Label lblEmpty = new Label
@@ -82,38 +73,31 @@ namespace GUI.Client
                     return;
                 }
 
-                // Tiến hành chạy vòng lặp dựng các Card hóa đơn nước
+                // Tao cac card hien thi thong tin co ban cua tung hoa don dien va them vao panel ben phai
                 int yPosition = 10;
                 foreach (InvoiceDTO inv in unpaidWaterInvoices)
                 {
-                    // Đúc một cái khung KryptonGroup bo góc
                     KryptonGroup card = CreateInvoiceCard(inv, yPosition);
 
-                    // Bấm vào vùng trống của Card hoặc lòng Panel đều kích hoạt đổ dữ liệu sang trái
                     card.Click += (s, e) => FillInvoiceToForm(inv);
                     card.Panel.Click += (s, e) => FillInvoiceToForm(inv);
 
-                    // Bấm vào các chữ (Label) bên trong Card cũng kích hoạt đổ dữ liệu
                     foreach (Control child in card.Panel.Controls)
                     {
                         child.Click += (s, e) => FillInvoiceToForm(inv);
                     }
 
-                    // Thêm Card vào thùng chứa lớn bên phải
                     pnlUnpaidList.Controls.Add(card);
-                    yPosition += card.Height + 15; // Tịnh tiến khoảng cách trục Y xuống dưới
+                    yPosition += card.Height + 15; 
                 }
             }
             catch (Exception ex)
             {
-                // Đã sửa về MessageBox mặc định của Windows để tránh lỗi chồng hàm CS1503
                 MessageBox.Show("Không thể tải danh sách hóa đơn nước: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// Thiet ke cau truc va giao dien co ban cho tung card hien thi thong tin hoa don dien
 
-        /// <summary>
-        /// Thiết kế cấu trúc bo góc và chữ hiển thị bên trong Card hóa đơn
-        /// </summary>
         private KryptonGroup CreateInvoiceCard(InvoiceDTO invoice, int yPos)
         {
             KryptonGroup card = new KryptonGroup();
@@ -121,7 +105,6 @@ namespace GUI.Client
             card.Location = new Point(10, yPos);
             card.Cursor = Cursors.Hand;
 
-            // Style bo góc mượt mà cho thẻ hóa đơn
             card.StateCommon.Border.Rounding = 12;
             card.StateCommon.Border.Color1 = Color.LightGray;
             card.StateCommon.Back.Color1 = Color.White;
@@ -130,7 +113,7 @@ namespace GUI.Client
             {
                 Text = invoice.ProviderName,
                 Font = new Font("Segoe UI", 11f, FontStyle.Bold),
-                ForeColor = Color.FromArgb(21, 41, 88), // Màu xanh thương hiệu
+                ForeColor = Color.FromArgb(21, 41, 88), 
                 Location = new Point(15, 12),
                 AutoSize = true
             };
@@ -171,30 +154,23 @@ namespace GUI.Client
 
             return card;
         }
+        /// Do du lieu chi tiet cua hoa don dien duoc chon vao cac o ben trai de hien thi va xac nhan thanh toan
 
-        /// <summary>
-        /// Đổ ngược dữ liệu hóa đơn nước sang Form bên trái và mở rộng sang Trạng thái 2
-        /// </summary>
         private void FillInvoiceToForm(InvoiceDTO invoice)
         {
             cboProvider.Text = invoice.ProviderName;
             txtCustomerCode.Text = invoice.BillCode;
             txtAmount.Text = invoice.Amount.ToString("N0") + " VND";
 
-            // 🌟 Lưu lại số tiền để lát nữa đem đi trừ
             _selectedAmount = invoice.Amount;
 
-            // Khóa cứng ô nhập mã lại, không cho người dùng sửa lung tung sau khi đã chọn bill nhạy cảm
             txtCustomerCode.ReadOnly = true;
 
-            // Bật hiển thị các ô Mật khẩu và Số tiền lên màn hình
             SetAdvancedFormVisible(true);
             txtPassword.Focus();
         }
+        /// Ham an hien cac o nhap lieu va cac label lien quan
 
-        /// <summary>
-        /// Hàm quản lý ẩn/hiện đồng bộ các Control nâng cao ở form bên trái
-        /// </summary>
         private void SetAdvancedFormVisible(bool isVisible)
         {
             lblAmount.Visible = isVisible;
@@ -208,10 +184,8 @@ namespace GUI.Client
                 txtCustomerCode.ReadOnly = false;
             }
         }
+        /// su kien go thu cong
 
-        /// <summary>
-        /// Xử lý sự kiện gõ tìm kiếm thủ công Mã hóa đơn bằng bàn phím rồi nhấn Enter
-        /// </summary>
         private void txtCustomerCode_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -225,7 +199,6 @@ namespace GUI.Client
                 try
                 {
                     string currentAccountNumber = GUI.Session.UserSession.CurrentUser.AccountNumber;
-                    // Lấy riêng list hóa đơn nước (2) về để đối chiếu tìm kiếm nhanh
                     List<InvoiceDTO> unpaidInvoices = _paymentService.GetPendingInvoices(currentAccountNumber, 2);
 
                     InvoiceDTO matchInvoice = unpaidInvoices.Find(i => i.BillCode.Equals(searchCode, StringComparison.OrdinalIgnoreCase));
@@ -247,26 +220,17 @@ namespace GUI.Client
             }
         }
 
-        /// <summary>
-        /// Xử lý sự kiện khi nhấn nút "Thoát" để điều hướng tráo đổi UserControl quay ngược về trang tổng Payments
-        /// </summary>
         private void btnExit_Click(object sender, EventArgs e)
         {
             ucInvoicePayment ucInvoices = new ucInvoicePayment();
 
-            // Gắn lại cầu nối để khi về trang tổng, người dùng bấm nút khác vẫn chuyển trang tiếp được
             ucInvoices.NavigateTo = this.NavigateTo;
 
-            // Gọi Delegate yêu cầu Dashboard đổi ruột hiển thị
             NavigateTo?.Invoke(ucInvoices);
         }
 
-        /// <summary>
-        /// Nút xác nhận thanh toán cuối cùng
-        /// </summary>
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            // 1. Gom dữ liệu từ trên màn hình
             string inputPassword = txtPassword.Text.Trim();
             string billCode = txtCustomerCode.Text.Trim();
 
@@ -276,7 +240,7 @@ namespace GUI.Client
                 return;
             }
 
-            // Kiểm tra xem số dư có đủ để thanh toán không
+            // Kiem tra so du
             decimal currentBal = GUI.Session.UserSession.CurrentUser.Balance;
             if (currentBal < _selectedAmount)
             {
@@ -284,17 +248,15 @@ namespace GUI.Client
                 return;
             }
 
-            // Lấy mật khẩu chuẩn từ Session của người dùng đang đăng nhập
             string currentUserPassword = GUI.Session.UserSession.CurrentUser.Password;
 
-            // GỌI BLL: Không tự trừ tiền và không tự xét số dư ở GUI nữa
+            // Goi BLL de xu ly logic thanh toan va tra ve thong diep loi neu co, neu thanh cong se tra ve chuoi rong
             string errorMessage = _paymentService.ProcessPayment(inputPassword, currentUserPassword, billCode, _selectedAmount, ref currentBal);
 
-            //MessageBox.Show($"Bạn gõ: [{inputPassword}]\nHệ thống lưu: [{currentUserPassword}]", "Debug Check");
 
-            if (string.IsNullOrEmpty(errorMessage)) // BLL trả về rỗng -> Giao dịch hoàn hảo
+            if (string.IsNullOrEmpty(errorMessage)) // BLL xu ly thanh cong, tra ve chuoi rong, va cap nhat so du moi vao bien currentBal
             {
-                // Cập nhật lại số dư từ BLL vào Session
+                // Cap nhat lai so du moi vao Session
                 GUI.Session.UserSession.CurrentUser.Balance = currentBal;
                 LoadBalanceUI();
 
@@ -306,12 +268,11 @@ namespace GUI.Client
 
                 MessageBox.Show("Thanh toán hóa đơn nước thành công!", "Giao dịch thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Dọn dẹp giao diện và gọi LoadPendingInvoices để "giấu" Card đi
                 txtCustomerCode.Clear();
                 SetAdvancedFormVisible(false);
                 LoadPendingInvoices(1);
             }
-            else // BLL báo lỗi
+            else // Bll bao loi
             {
                 MessageBox.Show(errorMessage, "Lỗi giao dịch", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPassword.Clear();
@@ -319,13 +280,11 @@ namespace GUI.Client
             }
         }
 
-        // Viết thêm hàm này để hiển thị số dư từ Session lên giao diện
+        // Ham hien thi so du tai khoan len giao dien, goi khi load form va sau khi thanh toan thanh cong de cap nhat so du moi
         private void LoadBalanceUI()
         {
-            // Lấy số dư hiện tại từ Session (Nếu null thì mặc định là 0)
             decimal currentBal = GUI.Session.UserSession.CurrentUser.Balance;
 
-            // Gán vào Label bạn vừa kéo thả lúc nãy
             kryptonLabel1.Text = currentBal.ToString("N0") + " VND";
         }
     }

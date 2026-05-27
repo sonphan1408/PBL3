@@ -11,59 +11,49 @@ namespace BLL.Services
     {
         private InvoiceDAL _invoiceDAL = new InvoiceDAL();
 
-        // 🌟 THỦ THUẬT TEST: Danh sách tĩnh lưu tạm các mã hóa đơn/số điện thoại đã thanh toán
         public static List<string> TempPaidBills = new List<string>();
 
         public List<string> GetProviders(int serviceTypeId)
         {
-            // Gọi hàm GetProviders từ tầng DAL mà bạn vừa tạo ở bước trước
             return _invoiceDAL.GetProviders(serviceTypeId);
         }
-        // Hàm xử lý thanh toán, trả về true nếu thành công, false nếu thất bại (ví dụ: sai mật khẩu)
+        // Ham xu ly thanh toan, tra ve thong diep loi neu co, neu thanh cong thi tra ve chuoi rong
         public string ProcessPayment(string inputPassword, string actualPassword, string targetCode, decimal amount, ref decimal currentBalance)
         {
-            // 1. Kiểm tra Mật khẩu
+            // Kiem tra mat khau
             if (inputPassword != actualPassword)
             {
                 return "Mật khẩu xác nhận không chính xác!";
             }
 
-            // 2. Kiểm tra Số dư
+            // Kiem tra so du
             if (currentBalance < amount)
             {
                 return "Số dư tài khoản không đủ để thực hiện giao dịch!";
             }
 
-            // 3. Trừ tiền trực tiếp vào RAM (Session)
+            // Tru tien truc tiep trong ham xu ly thanh toan de dam bao tinh nhat quan va dong bo
             currentBalance -= amount;
 
-            // 4. Lưu mã hóa đơn/số điện thoại vào RAM để làm mượt giao diện
+            // Luu lai hoa don da duoc thanh toan vao danh sach tam thoi 
             if (!TempPaidBills.Contains(targetCode))
             {
                 TempPaidBills.Add(targetCode);
             }
 
-            return ""; // Giao dịch thành công ảo
+            return ""; 
         }
 
-        /// <summary>
-        /// Hàm kéo hóa đơn đã được nâng cấp thêm logic "Né" các hóa đơn đã test
-        /// </summary>
+        // Ham lay danh sach hoa don dang cho xu ly, loai bo nhung hoa don da duoc thanh toan (co trong TempPaidBills)
         public List<InvoiceDTO> GetPendingInvoices(string accountNumber, int serviceTypeId)
         {
-            // 1. Lấy dữ liệu gốc từ DB
             var allPending = _invoiceDAL.GetPendingInvoices(accountNumber, serviceTypeId);
 
-            // 2. Lọc bỏ những hóa đơn nằm trong danh sách "Đã thanh toán ảo" (TempPaidBills)
-            // Nhờ dòng lệnh này, cả ucInvoicePayment và ucPaymentElectricity đều sẽ tự động làm biến mất Card!
+            // Loc bo nhung hoa don da duoc thanh toan (co trong TempPaidBills) de hien thi cho nguoi dung, tranh truong hop da thanh toan roi ma van hien thi trong danh sach dang cho xu ly
             var filteredList = allPending.Where(inv => !TempPaidBills.Contains(inv.BillCode)).ToList();
 
             return filteredList;
         }
-
-        /// <summary>
-        /// Get all invoices by account number
-        /// </summary>
         public List<InvoiceDTO> GetInvoicesByAccount(string accountNumber)
         {
             try

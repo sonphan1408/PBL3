@@ -10,34 +10,30 @@ namespace GUI.Client
 {
     public partial class ucInvoicePayment : UserControl
     {
-        // 1. Khai báo tầng Service để gọi các hàm nghiệp vụ
+        // Khai bao service de goi ham lay du lieu 
         private PaymentService _paymentService = new PaymentService();
 
-        // 2. Cầu nối Delegate dùng để tráo đổi UserControl trên Form chính
+        // Delegate de nhan yeu cau chuyen trang tu cac uc con (Dien, Nuoc, Internet, Dthoai) ve Form me
         public Action<UserControl> NavigateTo { get; set; }
 
         public ucInvoicePayment()
         {
             InitializeComponent();
-            // Đăng ký sự kiện Load cho UserControl
             this.Load += ucInvoicePayment_Load;
         }
 
         private void ucInvoicePayment_Load(object sender, EventArgs e)
         {
-            // Tải toàn bộ các khoản thanh toán gần đây (tất cả dịch vụ) lên danh sách
             LoadAllPendingInvoices();
         }
 
-        // 3. SỰ KIỆN CHUYỂN TRANG CHO CÁC NÚT DỊCH VỤ
         private void btnElectricity_Click(object sender, EventArgs e)
         {
             ucPaymentElectricity ucElectricity = new ucPaymentElectricity();
 
-            // Chữ 'T' phải viết hoa cho đúng với khai báo Action bên trên
             ucElectricity.NavigateTo = this.NavigateTo;
 
-            // Gọi hàm Delegate để yêu cầu Form mẹ đổi sang giao diện Điện
+            // Goi ham Delegate de yeu cau Form me doi sang giao dien Dien
             NavigateTo?.Invoke(ucElectricity);          
         }
 
@@ -45,10 +41,9 @@ namespace GUI.Client
         {
             ucPaymentWater ucWater = new ucPaymentWater();
 
-            // Chữ 'T' phải viết hoa cho đúng với khai báo Action bên trên
             ucWater.NavigateTo = this.NavigateTo;
 
-            // Gọi hàm Delegate để yêu cầu Form mẹ đổi sang giao diện Nước
+            // Goi ham Delegate de yeu cau Form me doi sang giao dien Nuoc
             NavigateTo?.Invoke(ucWater);
         }
 
@@ -56,10 +51,9 @@ namespace GUI.Client
         {
             ucPaymentInternet ucInternet = new ucPaymentInternet();
 
-            // Chữ 'T' phải viết hoa cho đúng với khai báo Action bên trên
             ucInternet.NavigateTo = this.NavigateTo;
 
-            // Gọi hàm Delegate để yêu cầu Form mẹ đổi sang giao diện Internet
+            // Goi ham Delegate de yeu cau Form me doi sang giao dien Internet
             NavigateTo?.Invoke(ucInternet);
         }
 
@@ -67,26 +61,23 @@ namespace GUI.Client
         {
             ucPaymentPhone ucPhone = new ucPaymentPhone();
 
-            // Chữ 'T' phải viết hoa cho đúng với khai báo Action bên trên
             ucPhone.NavigateTo = this.NavigateTo;
 
-            // Gọi hàm Delegate để yêu cầu Form mẹ đổi sang giao diện Điện thoại
+            // Goi ham Delegate de yeu cau Form me doi sang giao dien nap tien dien thoai
             NavigateTo?.Invoke(ucPhone);
         }
 
 
-        // 4. HÀM XỬ LÝ GIAO DIỆN DANH SÁCH BÊN PHẢI
+        // Ham in ra hoa don can xu ly 
         private void LoadAllPendingInvoices()
         {
-            // Giả sử panel bên phải của bạn tên là pnlUnpaidList (hoặc pnlRecentInvoices)
-            pnlUnpaidList.Controls.Clear();
+\            pnlUnpaidList.Controls.Clear();
 
             try
             {
                 string currentAccountNumber = GUI.Session.UserSession.CurrentUser.AccountNumber;
                 List<InvoiceDTO> allInvoices = new List<InvoiceDTO>();
 
-                // Kéo dữ liệu của cả Điện (1), Nước (2), Internet (3) gộp chung vào 1 danh sách
                 var electricity = _paymentService.GetPendingInvoices(currentAccountNumber, 1);
                 var water = _paymentService.GetPendingInvoices(currentAccountNumber, 2);
                 var internet = _paymentService.GetPendingInvoices(currentAccountNumber, 3);
@@ -95,7 +86,7 @@ namespace GUI.Client
                 if (water != null) allInvoices.AddRange(water);
                 if (internet != null) allInvoices.AddRange(internet);
 
-                // Nếu không có nợ nào
+                // Neu khong co non nao can xu ly thi hien thong bao
                 if (allInvoices.Count == 0)
                 {
                     Label lblEmpty = new Label
@@ -110,7 +101,7 @@ namespace GUI.Client
                     return;
                 }
 
-                // Render danh sách thẻ
+                // Danh sach the hien hoa don, moi the la 1 hoa don, sap xep theo ngay het han tang dan
                 int yPosition = 10;
                 foreach (InvoiceDTO inv in allInvoices)
                 {

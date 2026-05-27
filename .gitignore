@@ -270,3 +270,5 @@ ASALocalRun/
 *.snap
 /DAL/App.config
 /GUI/App.config
+/DAL/App.config
+/GUI/App.config

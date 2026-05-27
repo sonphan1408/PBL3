@@ -20,28 +20,24 @@ namespace GUI.Client
         {
             InitializeComponent();
         }
-
-        // Sự kiện chạy khi vừa mở trang Thông tin tài khoản
         private void ucAccountInfo_Load(object sender, EventArgs e)
         {
             try
             {
-                // 1. Cắt viền Avatar thành hình tròn (Code cũ của bạn)
+                // Cat avatar 
                 System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
                 path.AddEllipse(0, 0, picAvatar.Width, picAvatar.Height);
                 picAvatar.Region = new Region(path);
 
-                // 2. Load thông tin người dùng từ Session
+                // load thong tin tai khoan tu session 
                 var currentAccount = GUI.Session.UserSession.CurrentUser;
                 if (currentAccount != null)
                 {
-                    // 🌟 CÁCH SỬA LỖI Ở ĐÂY: 
-                    // Gọi Database lấy lại toàn bộ thông tin Account dựa vào Username (để chắc chắn có CustomerID chuẩn)
+                    // Goi database de lay thong tin khach hang, tranh truong hop thong tin trong session bi sai lech voi database (Vi co the tai khoan vua bi cap nhat o 1 noi khac, ma session chua kip cap nhat)
                     var dbAccount = AccountService.GetAccountByUsername(currentAccount.Username);
 
                     if (dbAccount != null)
                     {
-                        // Dùng dbAccount.CustomerID thay vì currentAccount.CustomerID
                         var customerInfo = AccountService.GetCustomerInfo(dbAccount.CustomerID);
 
                         if (customerInfo != null)
@@ -54,7 +50,7 @@ namespace GUI.Client
                         }
                     }
 
-                    // Đổ thông tin tài khoản
+                    // thong tin tai khoan thi lay tu session la chinh xac roi, khong can goi database nua
                     txtUsername.Text = currentAccount.Username;
                     txtUsername.ReadOnly = true;
                     lblBalance.Text = currentAccount.Balance.ToString("N0") + " VND";
@@ -62,7 +58,6 @@ namespace GUI.Client
             }
             catch (Exception ex)
             {
-                // 🌟 NẾU CÓ LỖI NGẦM, NÓ SẼ HÉT LÊN Ở ĐÂY CHO MÌNH BIẾT
                 MessageBox.Show("Lỗi khi load giao diện: " + ex.Message + "\n\nChi tiết: " + ex.StackTrace,
                                 "Bắt quả tang lỗi ngầm",
                                 MessageBoxButtons.OK,
@@ -71,7 +66,7 @@ namespace GUI.Client
         }
         
 
-        // Hàm hỗ trợ Load ảnh chống bị khóa file (Lock File)
+        // Ham load avatar
         private void LoadAvatar(string avatarPath)
         {
             try
@@ -86,21 +81,18 @@ namespace GUI.Client
                 }
                 else
                 {
-                    // Nếu khách hàng chưa có ảnh, có thể để trống hoặc gán 1 ảnh mặc định ở đây
+                    // Neu chua co anh dai dien, hoac duong dan khong hop le, thi hien thi avatar mac dinh
                     // picAvatar.Image = Properties.Resources.default_avatar;
                 }
             }
             catch (Exception ex)
             {
-                // Log lỗi nhẹ nhàng, không làm sập phần mềm
                 Console.WriteLine("Lỗi tải ảnh đại diện: " + ex.Message);
             }
         }
 
-        // Sự kiện khi bấm nút Thoát
         private void btnExit_Click(object sender, EventArgs e)
         {
-            // Gọi lại trang chủ (Dashboard)
             ucClientHome ucHome = new ucClientHome();
             ucHome.NavigateTo = this.NavigateTo;
             NavigateTo?.Invoke(ucHome);
@@ -108,16 +100,13 @@ namespace GUI.Client
 
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
-            // Gọi trang Đổi mật khẩu
             ucChangePassword ucChangePass = new ucChangePassword();
             ucChangePass.NavigateTo = this.NavigateTo;
             NavigateTo?.Invoke(ucChangePass);
         }
 
-        // Sự kiện khi bấm nút Cập nhật
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // Lấy người dùng hiện tại
             var currentAccount = GUI.Session.UserSession.CurrentUser;
 
             string newFullName = txtFullName.Text.Trim();
@@ -125,14 +114,14 @@ namespace GUI.Client
             string newEmail = txtEmail.Text.Trim();
             string newAddress = txtAddress.Text.Trim();
 
-            // Gọi thẳng BLL: Ném dữ liệu cho BLL tự lo việc Validate Regex và gọi xuống SQL
+            // Goi thang BLL de cap nhat thong tin
             string errorMessage = AccountService.UpdateCustomerInfo(currentAccount.AccountNumber, newFullName, newPhoneNumber, newEmail, newAddress);
 
             if (errorMessage == "")
             {
                 MessageBox.Show("Cập nhật thông tin tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // (Tùy chọn) Ra lệnh cho Form mẹ cập nhật lại chữ trên góc phải màn hình
+                // Goi form dashboard
                 var dashboardForm = this.FindForm() as frmClientDashboard;
                 if (dashboardForm != null)
                 {
@@ -141,7 +130,7 @@ namespace GUI.Client
             }
             else
             {
-                // BLL báo lỗi (Nhập sai định dạng, thiếu độ dài...) -> In thẳng lỗi của BLL ra cho khách đọc
+                // BLL bao loi
                 MessageBox.Show(errorMessage, "Cảnh báo nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
