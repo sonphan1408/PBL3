@@ -515,6 +515,7 @@ namespace GUI.Client
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnAccountInfo;
         private System.Windows.Forms.FlowLayoutPanel panel1;
         private System.Windows.Forms.Label lblPageTitle;
         private System.Windows.Forms.Panel pnlSearch;

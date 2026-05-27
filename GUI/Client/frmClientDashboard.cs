@@ -17,8 +17,8 @@ namespace GUI.Client
         ucBalanceChanges balanceChanges;
         ucNotifications notifications;
         ucTransfer transfer;
-        ucConfirmLoan confirmSaving;
-        uccreateSaving createSaving;
+     
+        
         ucListSaving listSaving;
         ucLoanDashboard loanDashboard;
         
@@ -48,10 +48,7 @@ namespace GUI.Client
 
 
 
-            // Truyền hàm điều hướng vào ucSaving
-            //createSaving = new uccreateSaving();
-            //createSaving.NavigateTo = addUserControl;
-            //confirmSaving = new ucConfirmSaving();
+           
             invoice = new ucInvoicePayment();
             invoice.NavigateTo = addUserControl;
 
@@ -456,21 +453,7 @@ namespace GUI.Client
         { 
             SetupNotificationIcon();
 
-            // Make avatar circular if it exists
-            if (picAvatar != null)
-            {
-                GraphicsPath pAvt = new GraphicsPath();
-                pAvt.AddEllipse(0, 0, picAvatar.Width, picAvatar.Height);
-                picAvatar.Region = new Region(pAvt);
-            }
-
-            // Make notification button circular
-            if (btnNotification != null)
-            {
-                GraphicsPath pBtn = new GraphicsPath();
-                pBtn.AddEllipse(0, 0, btnNotification.Width, btnNotification.Height);
-                btnNotification.Region = new Region(pBtn);
-            }
+            // Ẩn sub-menu History khi khởi động
             button7.Visible = false;
             button8.Visible = false;
             button9.Visible = false;
@@ -608,27 +591,6 @@ namespace GUI.Client
         }
 
         private void panel4_Paint_1(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            
-            int radius = 20; 
-            Rectangle rect = new Rectangle(5, 2, panel4.Width - 10, panel4.Height - 6);
-            
-            GraphicsPath path = new GraphicsPath();
-            path.AddArc(rect.X, rect.Y, radius * 2, radius * 2, 180, 90);
-            path.AddArc(rect.Right - radius * 2, rect.Y, radius * 2, radius * 2, 270, 90);
-            path.AddArc(rect.Right - radius * 2, rect.Bottom - radius * 2, radius * 2, radius * 2, 0, 90);
-            path.AddArc(rect.X, rect.Bottom - radius * 2, radius * 2, radius * 2, 90, 90);
-            path.CloseFigure();
-            
-            using (Pen pen = new Pen(Color.FromArgb(150, 255, 255, 255), 1.5f)) 
-            {
-                g.DrawPath(pen, path);
-            }
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
