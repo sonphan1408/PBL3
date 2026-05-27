@@ -49,7 +49,7 @@ namespace BLL.Services
         }
         public static string UpdateCustomerInfo(string accountNumber, string fullName, string phone, string email, string address)
         {
-            // 1. KIỂM TRA VALIDATION (BLL làm nhiệm vụ gác cổng)
+            // kiem tra validation
             if (string.IsNullOrWhiteSpace(fullName) || !Regex.IsMatch(fullName, @"^(\p{Lu}\p{Ll}* )+\p{Lu}\p{Ll}*$"))
                 return "Họ tên không hợp lệ. Vui lòng viết hoa chữ cái đầu mỗi từ (VD: Phan Le Son).";
 
@@ -59,14 +59,14 @@ namespace BLL.Services
             if (string.IsNullOrWhiteSpace(email) || !Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
                 return "Email không đúng định dạng.";
 
-            // 2. GỌI XUỐNG TẦNG DAL (Chỉ nhờ DAL làm việc với Database)
+            // Goi DAL de cap nhat thong tin
             try
             {
-                // Gọi hàm UpdateCustomerInfo bên AccountDAL
+                // Goi ham update trong DAL, neu thanh cong tra ve chuoi rong, neu khong tra ve thong bao loi
                 bool isSuccess = AccountDAL.UpdateCustomerInfo(accountNumber, fullName, phone, email, address);
 
                 if (isSuccess)
-                    return ""; // Trả về chuỗi rỗng nghĩa là thành công hoàn toàn
+                    return ""; // tra ve chuoi rong nghia la thanh cong 100%
                 else
                     return "Không tìm thấy thông tin tài khoản để cập nhật.";
             }
@@ -77,20 +77,19 @@ namespace BLL.Services
         }
         public static string ChangePassword(string accountNumber, string oldPasswordInput, string newPassword, string confirmPassword)
         {
-            // 1. Kiểm tra rỗng
             if (string.IsNullOrWhiteSpace(oldPasswordInput) || string.IsNullOrWhiteSpace(newPassword) || string.IsNullOrWhiteSpace(confirmPassword))
             {
                 return "Vui lòng nhập đầy đủ thông tin mật khẩu.";
             }
 
-            // 2. Kiểm tra mật khẩu cũ có chính xác không (Gọi hàm có sẵn của DAL)
+            // Kiem tra mat khau cu co chinh xac khong
             string actualOldPassword = AccountDAL.GetPasswordByAccountNumber(accountNumber);
             if (actualOldPassword != oldPasswordInput)
             {
                 return "Mật khẩu hiện tại không chính xác.";
             }
 
-            // 3. Kiểm tra điều kiện mật khẩu mới
+            // Kiem tra mat khau moi co it nhat 5 ky tu khong va khong trung voi mat khau cu
             if (newPassword.Length < 5)
             {
                 return "Mật khẩu mới phải có ít nhất 5 ký tự.";
@@ -100,18 +99,18 @@ namespace BLL.Services
                 return "Mật khẩu mới không được trùng với mật khẩu hiện tại.";
             }
 
-            // 4. Kiểm tra xác nhận mật khẩu mới
+            // Kiem tra mat khau moi va xac nhan mat khau co khop nhau khong
             if (newPassword != confirmPassword)
             {
                 return "Xác nhận mật khẩu không khớp.";
             }
 
-            // 5. Nếu vượt qua mọi bài kiểm tra, gọi DAL để lưu vào Database
+            // Neu dat duoc tat ca cac dieu kien thi goi DAL de cap nhat mat khau
             try
             {
                 bool isSuccess = AccountDAL.ChangePassword(accountNumber, newPassword);
                 if (isSuccess)
-                    return ""; // Trả về chuỗi rỗng nghĩa là thành công 100%
+                    return ""; // Tra ve chuoi rong nghia la thanh cong 100%
                 else
                     return "Không tìm thấy tài khoản để cập nhật.";
             }

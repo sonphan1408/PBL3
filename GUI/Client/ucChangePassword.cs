@@ -33,19 +33,18 @@ namespace GUI.Client
             string newPass = txtNewPassword.Text;
             string confirmPass = txtConfirmPassword.Text;
 
-            // Quăng hết việc kiểm tra logic cho BLL lo
+            // De BLL xu ly logic doi mat khau va tra ve thong diep loi neu co
             string errorMessage = AccountService.ChangePassword(currentAccount.AccountNumber, oldPass, newPass, confirmPass);
 
             if (errorMessage == "")
             {
                 MessageBox.Show("Đổi mật khẩu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Xóa trắng các ô nhập liệu để bảo mật
                 txtOldPassword.Clear();
                 txtNewPassword.Clear();
                 txtConfirmPassword.Clear();
 
-                // Cập nhật lại Session để hệ thống ghi nhận mật khẩu mới
+                // Cap nhat mat khau moi vao session
                 GUI.Session.UserSession.CurrentUser.Password = newPass;
             }
             else
