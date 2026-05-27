@@ -86,7 +86,7 @@ namespace GUI.Client
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(254, 853);
+            this.pnlSidebar.Size = new System.Drawing.Size(280, 853);
             this.pnlSidebar.TabIndex = 0;
             this.pnlSidebar.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSidebar_Paint);
             // 
@@ -107,7 +107,7 @@ namespace GUI.Client
             this.btnNotifications.Location = new System.Drawing.Point(0, 332);
             this.btnNotifications.Name = "btnNotifications";
             this.btnNotifications.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnNotifications.Size = new System.Drawing.Size(254, 45);
+            this.btnNotifications.Size = new System.Drawing.Size(280, 45);
             this.btnNotifications.TabIndex = 12;
             this.btnNotifications.Text = "  🔔   Thông báo";
             this.btnNotifications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -123,7 +123,7 @@ namespace GUI.Client
             this.button9.Location = new System.Drawing.Point(0, 402);
             this.button9.Name = "button9";
             this.button9.Padding = new System.Windows.Forms.Padding(45, 0, 0, 0);
-            this.button9.Size = new System.Drawing.Size(254, 35);
+            this.button9.Size = new System.Drawing.Size(280, 35);
             this.button9.TabIndex = 11;
             this.button9.Text = "• Lịch sử giao dịch";
             this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -140,7 +140,7 @@ namespace GUI.Client
             this.button8.Location = new System.Drawing.Point(0, 367);
             this.button8.Name = "button8";
             this.button8.Padding = new System.Windows.Forms.Padding(45, 0, 0, 0);
-            this.button8.Size = new System.Drawing.Size(254, 35);
+            this.button8.Size = new System.Drawing.Size(280, 35);
             this.button8.TabIndex = 10;
             this.button8.Text = "• Biến động số dư";
             this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -157,7 +157,7 @@ namespace GUI.Client
             this.button7.Location = new System.Drawing.Point(0, 332);
             this.button7.Name = "button7";
             this.button7.Padding = new System.Windows.Forms.Padding(45, 0, 0, 0);
-            this.button7.Size = new System.Drawing.Size(254, 35);
+            this.button7.Size = new System.Drawing.Size(280, 35);
             this.button7.TabIndex = 9;
             this.button7.Text = "• Lịch sử thanh toán";
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -173,7 +173,7 @@ namespace GUI.Client
             this.button6.Location = new System.Drawing.Point(0, 287);
             this.button6.Name = "button6";
             this.button6.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.button6.Size = new System.Drawing.Size(254, 45);
+            this.button6.Size = new System.Drawing.Size(280, 45);
             this.button6.TabIndex = 8;
             this.button6.Text = "  🕒   Lịch sử";
             this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -182,19 +182,19 @@ namespace GUI.Client
             // 
             // btnLoan
             // 
-            // button5 initialization removed - using btnLoan instead
-            // this.button5.FlatAppearance.BorderSize = 0;
-            // this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            // this.button5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            // this.button5.ForeColor = System.Drawing.Color.Black;
-            // this.button5.Location = new System.Drawing.Point(0, 242);
-            // this.button5.Name = "button5";
-            // this.button5.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            // this.button5.Size = new System.Drawing.Size(254, 45);
-            // this.button5.TabIndex = 7;
-            // this.button5.Text = "  🏦   Khoản vay";
-            // this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // this.button5.UseVisualStyleBackColor = true;
+            this.btnLoan.FlatAppearance.BorderSize = 0;
+            this.btnLoan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoan.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnLoan.ForeColor = System.Drawing.Color.Black;
+            this.btnLoan.Location = new System.Drawing.Point(0, 242);
+            this.btnLoan.Name = "btnLoan";
+            this.btnLoan.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.btnLoan.Size = new System.Drawing.Size(280, 45);
+            this.btnLoan.TabIndex = 7;
+            this.btnLoan.Text = "  🏦   Khoản vay";
+            this.btnLoan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoan.UseVisualStyleBackColor = true;
+            this.btnLoan.Click += new System.EventHandler(this.btnLoan_Click);
             // 
             // btnSaving
             // 
@@ -205,7 +205,7 @@ namespace GUI.Client
             this.btnSaving.Location = new System.Drawing.Point(0, 197);
             this.btnSaving.Name = "btnSaving";
             this.btnSaving.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnSaving.Size = new System.Drawing.Size(254, 45);
+            this.btnSaving.Size = new System.Drawing.Size(280, 45);
             this.btnSaving.TabIndex = 6;
             this.btnSaving.Text = "  🐷   Tiết kiệm";
             this.btnSaving.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -221,7 +221,7 @@ namespace GUI.Client
             this.button3.Location = new System.Drawing.Point(0, 152);
             this.button3.Name = "button3";
             this.button3.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.button3.Size = new System.Drawing.Size(254, 45);
+            this.button3.Size = new System.Drawing.Size(280, 45);
             this.button3.TabIndex = 5;
             this.button3.Text = "  💳   Thanh toán";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -237,7 +237,7 @@ namespace GUI.Client
             this.button2.Location = new System.Drawing.Point(0, 107);
             this.button2.Name = "button2";
             this.button2.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.button2.Size = new System.Drawing.Size(254, 45);
+            this.button2.Size = new System.Drawing.Size(280, 45);
             this.button2.TabIndex = 4;
             this.button2.Text = "  💸   Chuyển Khoản";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -247,7 +247,7 @@ namespace GUI.Client
             // pnlLogo
             // 
             this.pnlLogo.BackgroundImage = global::GUI.Properties.Resources._647600484_930136546239914_1486468665117018077_n;
-            this.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pnlLogo.Location = new System.Drawing.Point(12, 3);
             this.pnlLogo.Name = "pnlLogo";
             this.pnlLogo.Size = new System.Drawing.Size(222, 59);
@@ -262,7 +262,7 @@ namespace GUI.Client
             this.button1.Location = new System.Drawing.Point(0, 62);
             this.button1.Name = "button1";
             this.button1.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(254, 45);
+            this.button1.Size = new System.Drawing.Size(280, 45);
             this.button1.TabIndex = 3;
             this.button1.Text = "  🏠   Trang chủ";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -276,10 +276,10 @@ namespace GUI.Client
             this.pnlHeader.Controls.Add(this.pnlSearch);
             this.pnlHeader.Controls.Add(this.panel4);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(254, 0);
+            this.pnlHeader.Location = new System.Drawing.Point(280, 0);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.pnlHeader.Size = new System.Drawing.Size(1526, 62);
+            this.pnlHeader.Size = new System.Drawing.Size(1500, 62);
             this.pnlHeader.TabIndex = 1;
             // 
             // panel1
@@ -445,9 +445,9 @@ namespace GUI.Client
             this.pnlMain.BackColor = System.Drawing.Color.White;
             this.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(254, 62);
+            this.pnlMain.Location = new System.Drawing.Point(280, 62);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1526, 791);
+            this.pnlMain.Size = new System.Drawing.Size(1500, 791);
             this.pnlMain.TabIndex = 2;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             // 
@@ -463,14 +463,15 @@ namespace GUI.Client
             // 
             this.btnAccountInfo.FlatAppearance.BorderSize = 0;
             this.btnAccountInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAccountInfo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnAccountInfo.ForeColor = System.Drawing.Color.Black;
             this.btnAccountInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAccountInfo.Location = new System.Drawing.Point(0, 291);
+            this.btnAccountInfo.Location = new System.Drawing.Point(0, 377);
             this.btnAccountInfo.Name = "btnAccountInfo";
-            this.btnAccountInfo.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnAccountInfo.Size = new System.Drawing.Size(167, 32);
+            this.btnAccountInfo.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.btnAccountInfo.Size = new System.Drawing.Size(280, 45);
             this.btnAccountInfo.TabIndex = 9;
-            this.btnAccountInfo.Text = "Thông tin tài khoản";
+            this.btnAccountInfo.Text = "  👤   Thông tin tài khoản";
             this.btnAccountInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAccountInfo.UseVisualStyleBackColor = true;
             this.btnAccountInfo.Click += new System.EventHandler(this.btnAccountInfo_Click);
