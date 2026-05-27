@@ -41,11 +41,17 @@ namespace GUI.Client
             this.button2 = new System.Windows.Forms.Button();
             this.pnlLogo = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.pnlHeader = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.lblPageTitle = new System.Windows.Forms.Label();
+            this.pnlSeparator = new System.Windows.Forms.Panel();
+            this.pnlSubtitles = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblSubtitle1 = new System.Windows.Forms.Label();
+            this.lblSubtitle2 = new System.Windows.Forms.Label();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.picAvatar = new System.Windows.Forms.PictureBox();
+            this.lblWelcomeText = new System.Windows.Forms.Label();
             this.lblNotificationBadge = new System.Windows.Forms.Label();
             this.btnNotification = new System.Windows.Forms.Button();
             this.lblUserName = new System.Windows.Forms.Label();
@@ -54,7 +60,9 @@ namespace GUI.Client
             this.pnlSidebar.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.pnlSubtitles.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -267,48 +275,127 @@ namespace GUI.Client
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(254, 0);
             this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.pnlHeader.Size = new System.Drawing.Size(1526, 62);
             this.pnlHeader.TabIndex = 1;
             // 
             // panel1
             // 
+            this.panel1.AutoSize = true;
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Controls.Add(this.lblPageTitle);
+            this.panel1.Controls.Add(this.pnlSeparator);
+            this.panel1.Controls.Add(this.pnlSubtitles);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(249, 53);
+            this.panel1.Size = new System.Drawing.Size(503, 62);
             this.panel1.TabIndex = 0;
+            this.panel1.WrapContents = false;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // lblPageTitle
             // 
             this.lblPageTitle.AutoSize = true;
             this.lblPageTitle.Font = new System.Drawing.Font("Segoe UI", 11.07692F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPageTitle.Location = new System.Drawing.Point(16, 10);
+            this.lblPageTitle.Location = new System.Drawing.Point(10, 10);
+            this.lblPageTitle.Margin = new System.Windows.Forms.Padding(10, 10, 5, 0);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(68, 28);
+            this.lblPageTitle.Size = new System.Drawing.Size(105, 28);
             this.lblPageTitle.TabIndex = 0;
             this.lblPageTitle.Text = "Trang chủ";
+            // 
+            // pnlSeparator
+            // 
+            this.pnlSeparator.BackColor = System.Drawing.Color.White;
+            this.pnlSeparator.Location = new System.Drawing.Point(120, 10);
+            this.pnlSeparator.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.pnlSeparator.Name = "pnlSeparator";
+            this.pnlSeparator.Size = new System.Drawing.Size(2, 28);
+            this.pnlSeparator.TabIndex = 1;
+            // 
+            // pnlSubtitles
+            // 
+            this.pnlSubtitles.AutoSize = true;
+            this.pnlSubtitles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlSubtitles.Controls.Add(this.lblSubtitle1);
+            this.pnlSubtitles.Controls.Add(this.lblSubtitle2);
+            this.pnlSubtitles.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnlSubtitles.Location = new System.Drawing.Point(135, 0);
+            this.pnlSubtitles.Margin = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.pnlSubtitles.Name = "pnlSubtitles";
+            this.pnlSubtitles.Size = new System.Drawing.Size(368, 48);
+            this.pnlSubtitles.TabIndex = 2;
+            this.pnlSubtitles.WrapContents = false;
+            // 
+            // lblSubtitle1
+            // 
+            this.lblSubtitle1.AutoSize = true;
+            this.lblSubtitle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubtitle1.ForeColor = System.Drawing.Color.White;
+            this.lblSubtitle1.Location = new System.Drawing.Point(0, 0);
+            this.lblSubtitle1.Margin = new System.Windows.Forms.Padding(0);
+            this.lblSubtitle1.Name = "lblSubtitle1";
+            this.lblSubtitle1.Size = new System.Drawing.Size(173, 25);
+            this.lblSubtitle1.TabIndex = 0;
+            this.lblSubtitle1.Text = "More than banking";
+            // 
+            // lblSubtitle2
+            // 
+            this.lblSubtitle2.AutoSize = true;
+            this.lblSubtitle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubtitle2.ForeColor = System.Drawing.Color.White;
+            this.lblSubtitle2.Location = new System.Drawing.Point(0, 25);
+            this.lblSubtitle2.Margin = new System.Windows.Forms.Padding(0);
+            this.lblSubtitle2.Name = "lblSubtitle2";
+            this.lblSubtitle2.Size = new System.Drawing.Size(368, 23);
+            this.lblSubtitle2.TabIndex = 1;
+            this.lblSubtitle2.Text = "A smarter way to manage your financial future.";
             // 
             // pnlSearch
             // 
             this.pnlSearch.BackColor = System.Drawing.Color.DodgerBlue;
-            this.pnlSearch.Location = new System.Drawing.Point(258, 3);
+            this.pnlSearch.Location = new System.Drawing.Point(549, 3);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Padding = new System.Windows.Forms.Padding(11, 10, 11, 10);
-            this.pnlSearch.Size = new System.Drawing.Size(407, 51);
+            this.pnlSearch.Size = new System.Drawing.Size(153, 51);
             this.pnlSearch.TabIndex = 1;
             this.pnlSearch.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSearch_Paint);
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.picAvatar);
+            this.panel4.Controls.Add(this.lblWelcomeText);
             this.panel4.Controls.Add(this.lblNotificationBadge);
             this.panel4.Controls.Add(this.btnNotification);
             this.panel4.Controls.Add(this.lblUserName);
-            this.panel4.Location = new System.Drawing.Point(671, 3);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(1156, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(413, 53);
+            this.panel4.Size = new System.Drawing.Size(350, 62);
             this.panel4.TabIndex = 3;
             this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint_1);
+            // 
+            // picAvatar
+            // 
+            this.picAvatar.Image = global::GUI.Properties.Resources.pngtree_user_icon_png_image_1796659;
+            this.picAvatar.Location = new System.Drawing.Point(295, 11);
+            this.picAvatar.Name = "picAvatar";
+            this.picAvatar.Size = new System.Drawing.Size(40, 40);
+            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picAvatar.TabIndex = 9;
+            this.picAvatar.TabStop = false;
+            // 
+            // lblWelcomeText
+            // 
+            this.lblWelcomeText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcomeText.ForeColor = System.Drawing.Color.White;
+            this.lblWelcomeText.Location = new System.Drawing.Point(55, 10);
+            this.lblWelcomeText.Name = "lblWelcomeText";
+            this.lblWelcomeText.Size = new System.Drawing.Size(235, 20);
+            this.lblWelcomeText.TabIndex = 8;
+            this.lblWelcomeText.Text = "Welcome";
+            this.lblWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblNotificationBadge
             // 
@@ -325,15 +412,15 @@ namespace GUI.Client
             // 
             // btnNotification
             // 
-            this.btnNotification.BackColor = System.Drawing.Color.Transparent;
+            this.btnNotification.BackColor = System.Drawing.Color.White;
             this.btnNotification.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNotification.FlatAppearance.BorderSize = 0;
             this.btnNotification.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNotification.Font = new System.Drawing.Font("Segoe UI Emoji", 16F);
-            this.btnNotification.ForeColor = System.Drawing.Color.White;
-            this.btnNotification.Location = new System.Drawing.Point(12, 0);
+            this.btnNotification.Font = new System.Drawing.Font("Segoe UI Emoji", 14F);
+            this.btnNotification.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.btnNotification.Location = new System.Drawing.Point(12, 10);
             this.btnNotification.Name = "btnNotification";
-            this.btnNotification.Size = new System.Drawing.Size(40, 50);
+            this.btnNotification.Size = new System.Drawing.Size(40, 40);
             this.btnNotification.TabIndex = 2;
             this.btnNotification.Text = "🔔";
             this.btnNotification.UseVisualStyleBackColor = false;
@@ -341,14 +428,14 @@ namespace GUI.Client
             // 
             // lblUserName
             // 
-            this.lblUserName.AutoSize = true;
-            this.lblUserName.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.ForeColor = System.Drawing.Color.White;
-            this.lblUserName.Location = new System.Drawing.Point(104, 16);
+            this.lblUserName.Location = new System.Drawing.Point(55, 30);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(110, 22);
+            this.lblUserName.Size = new System.Drawing.Size(235, 25);
             this.lblUserName.TabIndex = 7;
             this.lblUserName.Text = "User Name";
+            this.lblUserName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // pnlMain
             // 
@@ -384,10 +471,13 @@ namespace GUI.Client
             this.Load += new System.EventHandler(this.frmClientDashboard_Load);
             this.pnlSidebar.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pnlSubtitles.ResumeLayout(false);
+            this.pnlSubtitles.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -397,7 +487,7 @@ namespace GUI.Client
 
         private System.Windows.Forms.Panel pnlSidebar;
         private System.Windows.Forms.Panel pnlNav;
-        private System.Windows.Forms.FlowLayoutPanel pnlHeader;
+        private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button1;
@@ -405,7 +495,7 @@ namespace GUI.Client
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel panel1;
         private System.Windows.Forms.Label lblPageTitle;
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Panel panel4;
@@ -419,5 +509,11 @@ namespace GUI.Client
         private System.Windows.Forms.Button btnNotification;
         private System.Windows.Forms.Label lblNotificationBadge;
         private System.Windows.Forms.Button btnNotifications;
+        private System.Windows.Forms.Panel pnlSeparator;
+        private System.Windows.Forms.FlowLayoutPanel pnlSubtitles;
+        private System.Windows.Forms.Label lblSubtitle1;
+        private System.Windows.Forms.Label lblSubtitle2;
+        private System.Windows.Forms.Label lblWelcomeText;
+        private System.Windows.Forms.PictureBox picAvatar;
     }
 }
