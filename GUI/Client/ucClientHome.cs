@@ -151,11 +151,11 @@ namespace GUI.Client
                 BalanceAmount = "$" + currentAccount.Balance.ToString("N2");
                 CardNumber = currentAccount.AccountNumber;
 
-                // Cập nhật Tiết kiệm và Khoản vay từ Database
-                int totalSavings = FinancialService.GetTotalSavingsAccounts(currentCustomer.CustomerID);
-                int totalLoans = FinancialService.GetTotalLoansCount(currentCustomer.CustomerID);
-                SavingsAmount = totalSavings.ToString();
-                LoansAmount = totalLoans.ToString();
+                // Cập nhật Tiết kiệm và Khoản vay từ Database (Lấy tổng số tiền thay vì số lượng)
+                decimal totalSavingsAmount = FinancialService.GetTotalSavings(currentCustomer.CustomerID);
+                decimal totalLoansAmount = FinancialService.GetTotalLoans(currentCustomer.CustomerID);
+                SavingsAmount = "$" + totalSavingsAmount.ToString("N2");
+                LoansAmount = "$" + totalLoansAmount.ToString("N2");
 
                 // Load transactions
                 transactions = TransactionService.GetTransactionsByAccount(currentAccount.AccountNumber, 10);
