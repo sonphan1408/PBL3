@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DTO.Models;
 using DAL.Repositories;
 
@@ -17,10 +18,10 @@ namespace BLL.Services
 
             var account = _transferDAL.GetAccountByAccountNumber(accountNumber);
             if (account == null)
-                throw new Exception("Không tìm thấy tài khoản người nhận.");
+                throw new Exception($"Không tìm thấy tài khoản người nhận: {accountNumber}");
 
             if (account.Status != "Active")
-                throw new Exception("Tài khoản người nhận không hoạt động.");
+                throw new Exception($"Tài khoản {accountNumber} có trạng thái '{account.Status}', không thể chuyển khoản. Tài khoản cần có trạng thái 'Active'.");
 
             return account;
         }
@@ -52,6 +53,18 @@ namespace BLL.Services
             }
         }
 
+        public string GetExternalAccountName(string accountNumber, string bankCode)
+        {
+            try
+            {
+                return _transferDAL.GetExternalAccountName(accountNumber, bankCode);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi lấy thông tin tài khoản: " + ex.Message);
+            }
+        }
+
         private void ValidateTransferAmount(decimal amount)
         {
             if (amount <= 0)
@@ -80,11 +93,34 @@ namespace BLL.Services
         {
             try
             {
+                // Default to HTTS Bank (internal transfer)
+                return ExecuteTransfer(senderUsername, recipientAccountNumber, amount, notes, "HTTS");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi chuyển khoản: " + ex.Message);
+            }
+        }
+
+        public bool ExecuteTransfer(string senderUsername, string recipientAccountNumber, decimal amount, string notes, string bankCode)
+        {
+            try
+            {
                 // 1. Get sender account
                 AccountCustomerDTO senderAccount = GetSenderByUsername(senderUsername);
 
-                // 2. Get recipient account
-                AccountCustomerDTO recipientAccount = GetRecipientByAccountNumber(recipientAccountNumber);
+                // 2. Get recipient account (validate exists) - use appropriate method based on bankCode
+                AccountCustomerDTO recipientAccount;
+                if (bankCode == "HTTS")
+                {
+                    // Internal transfer
+                    recipientAccount = GetRecipientByAccountNumber(recipientAccountNumber);
+                }
+                else
+                {
+                    // External transfer
+                    recipientAccount = GetRecipientByAccountNumberAndBank(recipientAccountNumber, bankCode);
+                }
 
                 // 3. Validate transfer amount
                 ValidateTransferAmount(amount);
@@ -92,11 +128,14 @@ namespace BLL.Services
                 // 4. Validate sufficient balance
                 ValidateSufficientBalance(senderAccount.Balance, amount);
 
-                // 5. Validate different accounts
-                ValidateDifferentAccounts(senderAccount.AccountNumber, recipientAccount.AccountNumber);
+                // 5. Validate different accounts (only for internal transfers)
+                if (bankCode == "HTTS")
+                {
+                    ValidateDifferentAccounts(senderAccount.AccountNumber, recipientAccount.AccountNumber);
+                }
 
-                // 6. Execute transfer in DAL
-                return _transferDAL.ExecuteTransfer(senderAccount.AccountNumber, recipientAccount.AccountNumber, amount, notes);
+                // 6. Execute transfer in DAL with bankCode
+                return _transferDAL.ExecuteTransfer(senderAccount.AccountNumber, recipientAccount.AccountNumber, amount, notes, bankCode);
             }
             catch (Exception ex)
             {
@@ -115,6 +154,33 @@ namespace BLL.Services
             {
                 throw new Exception("Lỗi khi lấy số dư: " + ex.Message);
             }
+        }
+
+        public List<ExternalBankDTO> GetAllExternalBanks()
+        {
+            try
+            {
+                return _transferDAL.GetAllExternalBanks();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi lấy danh sách ngân hàng: " + ex.Message);
+            }
+        }
+
+        public AccountCustomerDTO GetRecipientByAccountNumberAndBank(string accountNumber, string bankCode)
+        {
+            if (string.IsNullOrWhiteSpace(accountNumber))
+                throw new Exception("Vui lòng nhập số tài khoản người nhận.");
+
+            var account = _transferDAL.GetRecipientByAccountNumberAndBank(accountNumber, bankCode);
+            if (account == null)
+                throw new Exception("Không tìm thấy tài khoản người nhận.");
+
+            if (account.Status != "Active")
+                throw new Exception("Tài khoản người nhận không hoạt động.");
+
+            return account;
         }
     }
 }

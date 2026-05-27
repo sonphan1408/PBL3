@@ -16,11 +16,10 @@ namespace DAL
     {
         public int RepaymentID { get; set; }
         public string ContractID { get; set; }
-        public decimal PrincipalPaid { get; set; }
-        public decimal InterestPaid { get; set; }
+        public Nullable<decimal> PrincipalPaid { get; set; }
+        public Nullable<decimal> InterestPaid { get; set; }
+        public Nullable<decimal> PenaltyPaid { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string Notes { get; set; }
-        public decimal PenaltyPaid { get; set; }
     
         public virtual LoanContract LoanContract { get; set; }
     }

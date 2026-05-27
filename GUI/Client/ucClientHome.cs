@@ -63,6 +63,26 @@ namespace GUI.Client
                 LoadDataFromDatabase();
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // Draw beautiful abstract background decorations (Glassmorphism style blobs)
+            using (SolidBrush b1 = new SolidBrush(Color.FromArgb(25, 30, 144, 255))) // Faint Blue
+            {
+                e.Graphics.FillEllipse(b1, -150, -150, 600, 600);
+            }
+            using (SolidBrush b2 = new SolidBrush(Color.FromArgb(20, 0, 191, 255))) // Faint Cyan
+            {
+                e.Graphics.FillEllipse(b2, this.Width - 500, this.Height - 400, 700, 700);
+            }
+            using (SolidBrush b3 = new SolidBrush(Color.FromArgb(20, 138, 43, 226))) // Faint Purple
+            {
+                e.Graphics.FillEllipse(b3, this.Width / 2 - 300, this.Height - 350, 600, 600);
+            }
+        }
+
         private void InitializeUI()
         {
             // Setup button click event
@@ -76,15 +96,7 @@ namespace GUI.Client
                 this.picDonutChart.Paint += PicDonutChart_Paint;
             }
 
-            // Định dạng font chữ đậm cho tổng thu/chi
-            if (lblTotalExpenseAmount != null)
-            {
-                lblTotalExpenseAmount.Font = new Font(lblTotalExpenseAmount.Font, FontStyle.Bold);
-            }
-            if (lblTotalIncomeAmount != null)
-            {
-                lblTotalIncomeAmount.Font = new Font(lblTotalIncomeAmount.Font, FontStyle.Bold);
-            }
+
 
             if (LLHistory != null)
             {
@@ -95,8 +107,6 @@ namespace GUI.Client
             {
                 LLPaySec.LinkClicked += LLPaySec_LinkClicked;
             }
-
-            // Note: Đã xóa phần ẩn chart1 và vẽ picChart thủ công vì UI mới đang dùng trực tiếp chart1
         }
 
         private void LLHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -125,7 +135,7 @@ namespace GUI.Client
                 currentAccount = AccountService.GetAccountByUsername(UserSession.CurrentUser.Username);
                 if (currentAccount == null)
                 {
-                    MessageBox.Show("Cannot find account information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không tìm thấy thông tin tài khoản.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -133,13 +143,19 @@ namespace GUI.Client
                 currentCustomer = AccountService.GetCustomerInfo(currentAccount.CustomerID);
                 if (currentCustomer == null)
                 {
-                    MessageBox.Show("Cannot find customer information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không tìm thấy thông tin khách hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 // Update UI with account info
-                BalanceAmount = "$" + currentAccount.Balance.ToString("F2");
+                BalanceAmount = "$" + currentAccount.Balance.ToString("N2");
                 CardNumber = currentAccount.AccountNumber;
+
+                // Cập nhật Tiết kiệm và Khoản vay từ Database
+                int totalSavings = FinancialService.GetTotalSavingsAccounts(currentCustomer.CustomerID);
+                int totalLoans = FinancialService.GetTotalLoansCount(currentCustomer.CustomerID);
+                SavingsAmount = totalSavings.ToString();
+                LoansAmount = totalLoans.ToString();
 
                 // Load transactions
                 transactions = TransactionService.GetTransactionsByAccount(currentAccount.AccountNumber, 10);
@@ -156,7 +172,7 @@ namespace GUI.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -258,7 +274,7 @@ namespace GUI.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading balance history: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải lịch sử số dư: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -267,20 +283,98 @@ namespace GUI.Client
             if (lstHistory == null) return;
             lstHistory.Items.Clear();
 
+
+            
+            // Subscribe to DrawItem event (ensure single subscription)
+            lstHistory.DrawItem -= LstHistory_DrawItem;
+            lstHistory.DrawItem += LstHistory_DrawItem;
+
             if (transactions != null && transactions.Count > 0)
             {
                 foreach (var transaction in transactions)
                 {
-                    string type = transaction.Description ?? "Transaction";
-                    lstHistory.Items.Add(type);
-                    lstHistory.Items.Add("$" + transaction.Amount.ToString("F2"));
-                    lstHistory.Items.Add(transaction.CreatedAt.ToString("yyyy-MM-dd"));
-                    lstHistory.Items.Add("");
+                    lstHistory.Items.Add(transaction);
                 }
             }
             else
             {
-                lstHistory.Items.Add("No transactions found");
+                lstHistory.Items.Add("Không có giao dịch nào");
+            }
+        }
+
+        private void LstHistory_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            e.DrawBackground();
+
+            ListBox listBox = sender as ListBox;
+            var item = listBox.Items[e.Index];
+
+            // Draw subtle separator line between items
+            using (Pen pen = new Pen(Color.FromArgb(150, 180, 230)))
+            {
+                e.Graphics.DrawLine(pen, e.Bounds.Left + 4, e.Bounds.Bottom - 1, e.Bounds.Right - 4, e.Bounds.Bottom - 1);
+            }
+
+            if (item is TransactionDTO transaction)
+            {
+                // Truncate description to fit in the left column
+                string description = transaction.Description ?? "Giao dịch";
+                if (description.Length > 14) description = description.Substring(0, 12) + "...";
+
+                string toAcc = (transaction.ToAccount ?? "").Trim().Replace("\0", "");
+                string myAcc = (currentAccount.AccountNumber ?? "").Trim().Replace("\0", "");
+                bool isIncome = string.Equals(toAcc, myAcc, StringComparison.OrdinalIgnoreCase) || toAcc.Contains(myAcc);
+                decimal amountValue = transaction.Amount;
+                string amountStr = (isIncome ? "+" : "-") + amountValue.ToString("N0").Replace(",", ".") + " VND";
+                Color amountColor = isIncome ? Color.FromArgb(20, 160, 80) : Color.FromArgb(200, 50, 40);
+
+                string dateStr = transaction.CreatedAt.ToString("dd/MM/yyyy");
+
+                int totalWidth = e.Bounds.Width;
+                int leftPad = e.Bounds.Left + 6;
+                // Column widths: description=28%, amount=38%, date=34% of total
+                int descWidth  = (int)(totalWidth * 0.28);
+                int amtWidth   = (int)(totalWidth * 0.38);
+                int dateWidth  = totalWidth - descWidth - amtWidth;
+
+                using (Font regularFont = new Font("Times New Roman", 9f))
+                {
+                    StringFormat centerLeft  = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Near };
+                    StringFormat centerRight = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far };
+
+                    // Description — left column
+                    using (Brush textBrush = new SolidBrush(Color.FromArgb(30, 30, 30)))
+                    {
+                        e.Graphics.DrawString(description, regularFont, textBrush,
+                            new Rectangle(leftPad, e.Bounds.Top, descWidth, e.Bounds.Height), centerLeft);
+                    }
+
+                    // Amount — middle column, right-aligned
+                    using (Brush amountBrush = new SolidBrush(amountColor))
+                    {
+                        e.Graphics.DrawString(amountStr, regularFont, amountBrush,
+                            new Rectangle(leftPad + descWidth, e.Bounds.Top, amtWidth, e.Bounds.Height), centerRight);
+                    }
+
+                    // Date — right column, right-aligned
+                    using (Brush dateBrush = new SolidBrush(Color.FromArgb(80, 80, 100)))
+                    {
+                        e.Graphics.DrawString(dateStr, regularFont, dateBrush,
+                            new Rectangle(leftPad + descWidth + amtWidth, e.Bounds.Top, dateWidth - 6, e.Bounds.Height), centerRight);
+                    }
+
+                    centerLeft.Dispose();
+                    centerRight.Dispose();
+                }
+            }
+            else
+            {
+                using (Brush textBrush = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.DrawString(item.ToString(), listBox.Font, textBrush, e.Bounds, new StringFormat { LineAlignment = StringAlignment.Center });
+                }
             }
         }
 
@@ -288,6 +382,10 @@ namespace GUI.Client
         {
             if (lstSavingsItems == null) return;
             lstSavingsItems.Items.Clear();
+
+            // Đăng ký sự kiện DrawItem
+            lstSavingsItems.DrawItem -= LstSavingsItems_DrawItem;
+            lstSavingsItems.DrawItem += LstSavingsItems_DrawItem;
 
             try
             {
@@ -297,18 +395,82 @@ namespace GUI.Client
                 {
                     foreach (var saving in savings)
                     {
-                        string item = $"{saving.SavingType.PadRight(20)} ${saving.PrincipalAmount.ToString("F2")}";
-                        lstSavingsItems.Items.Add(item);
+                        lstSavingsItems.Items.Add(saving);
                     }
                 }
                 else
                 {
-                    lstSavingsItems.Items.Add("No savings accounts");
+                    lstSavingsItems.Items.Add("Không có tài khoản tiết kiệm");
                 }
             }
             catch (Exception ex)
             {
-                lstSavingsItems.Items.Add("Error loading savings: " + ex.Message);
+                lstSavingsItems.Items.Add("Lỗi khi tải tiết kiệm: " + ex.Message);
+            }
+        }
+
+        private void LstSavingsItems_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+            e.DrawBackground();
+
+            ListBox listBox = sender as ListBox;
+            var item = listBox.Items[e.Index];
+
+            // Vẽ đường gạch dưới phân cách các dòng
+            using (Pen pen = new Pen(Color.FromArgb(150, 180, 230)))
+            {
+                e.Graphics.DrawLine(pen, e.Bounds.Left + 4, e.Bounds.Bottom - 1, e.Bounds.Right - 4, e.Bounds.Bottom - 1);
+            }
+
+            if (item is SavingContractsDTO saving)
+            {
+                string description = saving.SavingType ?? "Tiết kiệm";
+                if (description.Length > 14) description = description.Substring(0, 12) + "...";
+
+                decimal amountValue = saving.PrincipalAmount;
+                string amountStr = amountValue.ToString("N0").Replace(",", ".") + " VND";
+                Color amountColor = Color.FromArgb(20, 160, 80); // Màu xanh cho tiền tiết kiệm
+
+                string dateStr = saving.StartDate.ToString("dd/MM/yyyy");
+
+                int totalWidth = e.Bounds.Width;
+                int leftPad = e.Bounds.Left + 6;
+                int descWidth  = (int)(totalWidth * 0.35);
+                int amtWidth   = (int)(totalWidth * 0.35);
+                int dateWidth  = totalWidth - descWidth - amtWidth;
+
+                using (Font regularFont = new Font("Times New Roman", 9f))
+                {
+                    StringFormat centerLeft = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center };
+                    StringFormat centerRight = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
+
+                    using (Brush textBrush = new SolidBrush(Color.Black))
+                    {
+                        e.Graphics.DrawString(description, regularFont, textBrush,
+                            new Rectangle(leftPad, e.Bounds.Top, descWidth, e.Bounds.Height), centerLeft);
+                    }
+                    using (Brush amountBrush = new SolidBrush(amountColor))
+                    {
+                        e.Graphics.DrawString(amountStr, regularFont, amountBrush,
+                            new Rectangle(leftPad + descWidth, e.Bounds.Top, amtWidth, e.Bounds.Height), centerRight);
+                    }
+                    using (Brush dateBrush = new SolidBrush(Color.FromArgb(80, 80, 100)))
+                    {
+                        e.Graphics.DrawString(dateStr, regularFont, dateBrush,
+                            new Rectangle(leftPad + descWidth + amtWidth, e.Bounds.Top, dateWidth - 6, e.Bounds.Height), centerRight);
+                    }
+                    
+                    centerLeft.Dispose();
+                    centerRight.Dispose();
+                }
+            }
+            else
+            {
+                using (Brush textBrush = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.DrawString(item.ToString(), listBox.Font, textBrush, e.Bounds, new StringFormat { LineAlignment = StringAlignment.Center });
+                }
             }
         }
 
@@ -333,7 +495,7 @@ namespace GUI.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading payment summary: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải tổng quan thanh toán: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -385,7 +547,7 @@ namespace GUI.Client
             Rectangle innerRect = new Rectangle((width - innerSize) / 2, (height - innerSize) / 2, innerSize, innerSize);
 
             // Cập nhật màu nền ở giữa vòng Donut khớp với màu nền UI
-            using (SolidBrush innerBrush = new SolidBrush(Color.SkyBlue))
+            using (SolidBrush innerBrush = new SolidBrush(Color.FromArgb(226, 240, 255)))
             {
                 g.FillEllipse(innerBrush, innerRect);
             }
@@ -395,12 +557,12 @@ namespace GUI.Client
         {
             if (!string.IsNullOrWhiteSpace(txtTransferAmount.Text))
             {
-                MessageBox.Show($"Transfer of {txtTransferAmount.Text} initiated successfully!", "Transfer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Chuyển khoản {txtTransferAmount.Text} thành công!", "Chuyển khoản", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtTransferAmount.Clear();
             }
             else
             {
-                MessageBox.Show("Please enter an amount to transfer.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập số tiền cần chuyển.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         public void ReloadBalance()
@@ -460,6 +622,26 @@ namespace GUI.Client
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstSavingsItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picDonutChart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTransferAmount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlBankCard_Paint(object sender, PaintEventArgs e)
         {
 
         }

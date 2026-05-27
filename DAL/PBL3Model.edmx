@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DigitalBankingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DigitalBankingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="AccountNumber" />
@@ -24,7 +24,7 @@
           <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CCCD" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="IDCard" Type="varchar" MaxLength="20" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IDCard" Type="varchar" MaxLength="20" StoreGeneratedPattern="Computed" />
           <Property Name="Gender" Type="nvarchar" MaxLength="10" />
           <Property Name="DateOfBirth" Type="date" />
           <Property Name="Address" Type="nvarchar" MaxLength="255" />
@@ -32,16 +32,6 @@
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="AvatarPath" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedAt" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Employees">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Role" Type="nvarchar" MaxLength="50" />
-          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="ExternalBanks">
           <Key>
@@ -108,42 +98,51 @@
             <PropertyRef Name="ContractID" />
           </Key>
           <Property Name="ContractID" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RateID" Type="int" Nullable="false" />
           <Property Name="LoanAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="RemainingBalance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="InterestRate" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="EndDate" Type="datetime" Nullable="false" />
-          <Property Name="Collateral" Type="nvarchar" MaxLength="255" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="TermMonths" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Collateral" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="LoanRepayments">
           <Key>
             <PropertyRef Name="RepaymentID" />
           </Key>
           <Property Name="RepaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ContractID" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PrincipalPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="InterestPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ContractID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PrincipalPaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="InterestPaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PenaltyPaid" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PaymentDate" Type="datetime" />
-          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
-          <Property Name="PenaltyPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="LoanSchedules">
           <Key>
             <PropertyRef Name="ScheduleID" />
           </Key>
           <Property Name="ScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ContractID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContractID" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="DueDate" Type="date" Nullable="false" />
           <Property Name="ExpectedPrincipal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ExpectedInterest" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="PenaltyAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PenaltyPaid" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PrincipalPaid" Type="decimal" Precision="18" Scale="2" />
           <Property Name="InterestPaid" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="PenaltyAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Status" Type="nvarchar" MaxLength="20" />
-          <Property Name="PenaltyPaid" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Mock_Napas_Accounts">
+          <Key>
+            <PropertyRef Name="MockID" />
+          </Key>
+          <Property Name="MockID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BankCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -160,29 +159,29 @@
           <Key>
             <PropertyRef Name="ContractID" />
           </Key>
-          <Property Name="ContractID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContractID" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PrincipalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CurrentBalance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="InterestRate" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="AccruedInterest" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="EndDate" Type="datetime" Nullable="false" />
-          <Property Name="Goal" Type="nvarchar" MaxLength="255" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="TermMonths" Type="int" Nullable="false" />
-          <Property Name="SavingTypes" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AccruedInterest" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Goal" Type="nvarchar" MaxLength="255" />
+          <Property Name="SavingType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SavingTransactions">
           <Key>
             <PropertyRef Name="TransactionID" />
           </Key>
           <Property Name="TransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ContractID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContractID" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="TransactionType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TransactionDate" Type="datetime" />
-          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ServiceProviders">
           <Key>
@@ -199,16 +198,6 @@
           <Property Name="ServiceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ServiceTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ServiceIcon" Type="varchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TransactionTypes">
           <Key>
@@ -277,6 +266,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Internal_Type">
+          <End Role="TransactionTypes" Type="Self.TransactionTypes" Multiplicity="1" />
+          <End Role="InternalTransactions" Type="Self.InternalTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionTypes">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="InternalTransactions">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Invoice_Acc">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
@@ -301,6 +302,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Loan_Account">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="LoanContracts" Type="Self.LoanContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="LoanContracts">
+              <PropertyRef Name="AccountNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loan_Rate">
+          <End Role="InterestRates" Type="Self.InterestRates" Multiplicity="1" />
+          <End Role="LoanContracts" Type="Self.LoanContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterestRates">
+              <PropertyRef Name="RateID" />
+            </Principal>
+            <Dependent Role="LoanContracts">
+              <PropertyRef Name="RateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LoanRepay_Contract">
           <End Role="LoanContracts" Type="Self.LoanContracts" Multiplicity="1" />
           <End Role="LoanRepayments" Type="Self.LoanRepayments" Multiplicity="*" />
@@ -309,6 +334,18 @@
               <PropertyRef Name="ContractID" />
             </Principal>
             <Dependent Role="LoanRepayments">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanSchedule_Contract">
+          <End Role="LoanContracts" Type="Self.LoanContracts" Multiplicity="1" />
+          <End Role="LoanSchedules" Type="Self.LoanSchedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanContracts">
+              <PropertyRef Name="ContractID" />
+            </Principal>
+            <Dependent Role="LoanSchedules">
               <PropertyRef Name="ContractID" />
             </Dependent>
           </ReferentialConstraint>
@@ -337,6 +374,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Saving_Account">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="SavingContracts" Type="Self.SavingContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="SavingContracts">
+              <PropertyRef Name="AccountNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SavingTrans_Contract">
           <End Role="SavingContracts" Type="Self.SavingContracts" Multiplicity="1" />
           <End Role="SavingTransactions" Type="Self.SavingTransactions" Multiplicity="*" />
@@ -349,22 +398,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Schedule_LoanContract">
-          <End Role="LoanContracts" Type="Self.LoanContracts" Multiplicity="1" />
-          <End Role="LoanSchedules" Type="Self.LoanSchedules" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoanContracts">
-              <PropertyRef Name="ContractID" />
-            </Principal>
-            <Dependent Role="LoanSchedules">
-              <PropertyRef Name="ContractID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="PBL3ModelStoreContainer">
+        <Function Name="sp_MockNapas_GetAccountName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountNumber" Type="varchar" Mode="In" />
+          <Parameter Name="BankCode" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="DigitalBankingDBModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExternalBanks" EntityType="Self.ExternalBanks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExternalTransactions" EntityType="Self.ExternalTransactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InterestRates" EntityType="Self.InterestRates" Schema="dbo" store:Type="Tables" />
@@ -373,12 +413,12 @@
           <EntitySet Name="LoanContracts" EntityType="Self.LoanContracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanRepayments" EntityType="Self.LoanRepayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanSchedules" EntityType="Self.LoanSchedules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mock_Napas_Accounts" EntityType="Self.Mock_Napas_Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SavingContracts" EntityType="Self.SavingContracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SavingTransactions" EntityType="Self.SavingTransactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceProviders" EntityType="Self.ServiceProviders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceTypes" EntityType="Self.ServiceTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionTypes" EntityType="Self.TransactionTypes" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Account_Customer" Association="Self.FK_Account_Customer">
             <End Role="Customers" EntitySet="Customers" />
@@ -400,6 +440,10 @@
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="InternalTransactions" EntitySet="InternalTransactions" />
           </AssociationSet>
+          <AssociationSet Name="FK_Internal_Type" Association="Self.FK_Internal_Type">
+            <End Role="TransactionTypes" EntitySet="TransactionTypes" />
+            <End Role="InternalTransactions" EntitySet="InternalTransactions" />
+          </AssociationSet>
           <AssociationSet Name="FK_Invoice_Acc" Association="Self.FK_Invoice_Acc">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Invoices" EntitySet="Invoices" />
@@ -408,9 +452,21 @@
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
+          <AssociationSet Name="FK_Loan_Account" Association="Self.FK_Loan_Account">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="LoanContracts" EntitySet="LoanContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loan_Rate" Association="Self.FK_Loan_Rate">
+            <End Role="InterestRates" EntitySet="InterestRates" />
+            <End Role="LoanContracts" EntitySet="LoanContracts" />
+          </AssociationSet>
           <AssociationSet Name="FK_LoanRepay_Contract" Association="Self.FK_LoanRepay_Contract">
             <End Role="LoanContracts" EntitySet="LoanContracts" />
             <End Role="LoanRepayments" EntitySet="LoanRepayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanSchedule_Contract" Association="Self.FK_LoanSchedule_Contract">
+            <End Role="LoanContracts" EntitySet="LoanContracts" />
+            <End Role="LoanSchedules" EntitySet="LoanSchedules" />
           </AssociationSet>
           <AssociationSet Name="FK_Noti_Acc" Association="Self.FK_Noti_Acc">
             <End Role="Accounts" EntitySet="Accounts" />
@@ -420,19 +476,20 @@
             <End Role="ServiceTypes" EntitySet="ServiceTypes" />
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
           </AssociationSet>
+          <AssociationSet Name="FK_Saving_Account" Association="Self.FK_Saving_Account">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="SavingContracts" EntitySet="SavingContracts" />
+          </AssociationSet>
           <AssociationSet Name="FK_SavingTrans_Contract" Association="Self.FK_SavingTrans_Contract">
             <End Role="SavingContracts" EntitySet="SavingContracts" />
             <End Role="SavingTransactions" EntitySet="SavingTransactions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Schedule_LoanContract" Association="Self.FK_Schedule_LoanContract">
-            <End Role="LoanContracts" EntitySet="LoanContracts" />
-            <End Role="LoanSchedules" EntitySet="LoanSchedules" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="PBL3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DigitalBankingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountNumber" />
@@ -449,7 +506,9 @@
           <NavigationProperty Name="InternalTransactions" Relationship="Self.FK_Internal_From" FromRole="Accounts" ToRole="InternalTransactions" />
           <NavigationProperty Name="InternalTransactions1" Relationship="Self.FK_Internal_To" FromRole="Accounts" ToRole="InternalTransactions" />
           <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_Acc" FromRole="Accounts" ToRole="Invoices" />
+          <NavigationProperty Name="LoanContracts" Relationship="Self.FK_Loan_Account" FromRole="Accounts" ToRole="LoanContracts" />
           <NavigationProperty Name="Notifications" Relationship="Self.FK_Noti_Acc" FromRole="Accounts" ToRole="Notifications" />
+          <NavigationProperty Name="SavingContracts" Relationship="Self.FK_Saving_Account" FromRole="Accounts" ToRole="SavingContracts" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -458,7 +517,7 @@
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CCCD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IDCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IDCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
           <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -467,16 +526,6 @@
           <Property Name="AvatarPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Customer" FromRole="Customers" ToRole="Accounts" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="ExternalBank">
           <Key>
@@ -514,6 +563,7 @@
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TermMonths" Type="Int32" />
           <Property Name="RateValue" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="LoanContracts" Relationship="Self.FK_Loan_Rate" FromRole="InterestRates" ToRole="LoanContracts" />
         </EntityType>
         <EntityType Name="InternalTransaction">
           <Key>
@@ -530,6 +580,7 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Account" Relationship="Self.FK_Internal_From" FromRole="InternalTransactions" ToRole="Accounts" />
           <NavigationProperty Name="Account1" Relationship="Self.FK_Internal_To" FromRole="InternalTransactions" ToRole="Accounts" />
+          <NavigationProperty Name="TransactionType" Relationship="Self.FK_Internal_Type" FromRole="InternalTransactions" ToRole="TransactionTypes" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -544,6 +595,63 @@
           <Property Name="DueDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Account" Relationship="Self.FK_Invoice_Acc" FromRole="Invoices" ToRole="Accounts" />
           <NavigationProperty Name="ServiceProvider" Relationship="Self.FK_Invoice_Provider" FromRole="Invoices" ToRole="ServiceProviders" />
+        </EntityType>
+        <EntityType Name="LoanContract">
+          <Key>
+            <PropertyRef Name="ContractID" />
+          </Key>
+          <Property Name="ContractID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RateID" Type="Int32" Nullable="false" />
+          <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RemainingBalance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="InterestRate" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="TermMonths" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Collateral" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Loan_Account" FromRole="LoanContracts" ToRole="Accounts" />
+          <NavigationProperty Name="InterestRate1" Relationship="Self.FK_Loan_Rate" FromRole="LoanContracts" ToRole="InterestRates" />
+          <NavigationProperty Name="LoanRepayments" Relationship="Self.FK_LoanRepay_Contract" FromRole="LoanContracts" ToRole="LoanRepayments" />
+          <NavigationProperty Name="LoanSchedules" Relationship="Self.FK_LoanSchedule_Contract" FromRole="LoanContracts" ToRole="LoanSchedules" />
+        </EntityType>
+        <EntityType Name="LoanRepayment">
+          <Key>
+            <PropertyRef Name="RepaymentID" />
+          </Key>
+          <Property Name="RepaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrincipalPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="InterestPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PenaltyPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LoanContract" Relationship="Self.FK_LoanRepay_Contract" FromRole="LoanRepayments" ToRole="LoanContracts" />
+        </EntityType>
+        <EntityType Name="LoanSchedule">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="ScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpectedPrincipal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExpectedInterest" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PenaltyAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PenaltyPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PrincipalPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="InterestPaid" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="LoanContract" Relationship="Self.FK_LoanSchedule_Contract" FromRole="LoanSchedules" ToRole="LoanContracts" />
+        </EntityType>
+        <EntityType Name="Mock_Napas_Accounts">
+          <Key>
+            <PropertyRef Name="MockID" />
+          </Key>
+          <Property Name="MockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BankCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -561,18 +669,19 @@
           <Key>
             <PropertyRef Name="ContractID" />
           </Key>
-          <Property Name="ContractID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContractID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PrincipalAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CurrentBalance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="InterestRate" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="AccruedInterest" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Goal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TermMonths" Type="Int32" Nullable="false" />
-          <Property Name="SavingTypes" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccruedInterest" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Goal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SavingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Saving_Account" FromRole="SavingContracts" ToRole="Accounts" />
           <NavigationProperty Name="SavingTransactions" Relationship="Self.FK_SavingTrans_Contract" FromRole="SavingContracts" ToRole="SavingTransactions" />
         </EntityType>
         <EntityType Name="SavingTransaction">
@@ -580,11 +689,11 @@
             <PropertyRef Name="TransactionID" />
           </Key>
           <Property Name="TransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContractID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContractID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TransactionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TransactionDate" Type="DateTime" Precision="3" />
-          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SavingContract" Relationship="Self.FK_SavingTrans_Contract" FromRole="SavingTransactions" ToRole="SavingContracts" />
         </EntityType>
         <EntityType Name="ServiceProvider">
@@ -606,22 +715,13 @@
           <Property Name="ServiceIcon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ServiceProviders" Relationship="Self.FK_Provider_ServiceType" FromRole="ServiceTypes" ToRole="ServiceProviders" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="TransactionType">
           <Key>
             <PropertyRef Name="TypeID" />
           </Key>
           <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="InternalTransactions" Relationship="Self.FK_Internal_Type" FromRole="TransactionTypes" ToRole="InternalTransactions" />
         </EntityType>
         <Association Name="FK_Account_Customer">
           <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
@@ -683,6 +783,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Loan_Account">
+          <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+          <End Role="LoanContracts" Type="Self.LoanContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="LoanContracts">
+              <PropertyRef Name="AccountNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Noti_Acc">
           <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
           <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
@@ -692,6 +804,18 @@
             </Principal>
             <Dependent Role="Notifications">
               <PropertyRef Name="ReceiverAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Saving_Account">
+          <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+          <End Role="SavingContracts" Type="Self.SavingContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountNumber" />
+            </Principal>
+            <Dependent Role="SavingContracts">
+              <PropertyRef Name="AccountNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -707,6 +831,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Loan_Rate">
+          <End Role="InterestRates" Type="Self.InterestRate" Multiplicity="1" />
+          <End Role="LoanContracts" Type="Self.LoanContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterestRates">
+              <PropertyRef Name="RateID" />
+            </Principal>
+            <Dependent Role="LoanContracts">
+              <PropertyRef Name="RateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Internal_Type">
+          <End Role="TransactionTypes" Type="Self.TransactionType" Multiplicity="1" />
+          <End Role="InternalTransactions" Type="Self.InternalTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionTypes">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="InternalTransactions">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Invoice_Provider">
           <End Role="ServiceProviders" Type="Self.ServiceProvider" Multiplicity="1" />
           <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
@@ -716,6 +864,30 @@
             </Principal>
             <Dependent Role="Invoices">
               <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanRepay_Contract">
+          <End Role="LoanContracts" Type="Self.LoanContract" Multiplicity="1" />
+          <End Role="LoanRepayments" Type="Self.LoanRepayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanContracts">
+              <PropertyRef Name="ContractID" />
+            </Principal>
+            <Dependent Role="LoanRepayments">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanSchedule_Contract">
+          <End Role="LoanContracts" Type="Self.LoanContract" Multiplicity="1" />
+          <End Role="LoanSchedules" Type="Self.LoanSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanContracts">
+              <PropertyRef Name="ContractID" />
+            </Principal>
+            <Dependent Role="LoanSchedules">
+              <PropertyRef Name="ContractID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -746,18 +918,20 @@
         <EntityContainer Name="DigitalBankingDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="ExternalBanks" EntityType="Self.ExternalBank" />
           <EntitySet Name="ExternalTransactions" EntityType="Self.ExternalTransaction" />
           <EntitySet Name="InterestRates" EntityType="Self.InterestRate" />
           <EntitySet Name="InternalTransactions" EntityType="Self.InternalTransaction" />
           <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+          <EntitySet Name="LoanContracts" EntityType="Self.LoanContract" />
+          <EntitySet Name="LoanRepayments" EntityType="Self.LoanRepayment" />
+          <EntitySet Name="LoanSchedules" EntityType="Self.LoanSchedule" />
+          <EntitySet Name="Mock_Napas_Accounts" EntityType="Self.Mock_Napas_Accounts" />
           <EntitySet Name="Notifications" EntityType="Self.Notification" />
           <EntitySet Name="SavingContracts" EntityType="Self.SavingContract" />
           <EntitySet Name="SavingTransactions" EntityType="Self.SavingTransaction" />
           <EntitySet Name="ServiceProviders" EntityType="Self.ServiceProvider" />
           <EntitySet Name="ServiceTypes" EntityType="Self.ServiceType" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TransactionTypes" EntityType="Self.TransactionType" />
           <AssociationSet Name="FK_Account_Customer" Association="Self.FK_Account_Customer">
             <End Role="Customers" EntitySet="Customers" />
@@ -779,17 +953,41 @@
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
+          <AssociationSet Name="FK_Loan_Account" Association="Self.FK_Loan_Account">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="LoanContracts" EntitySet="LoanContracts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Noti_Acc" Association="Self.FK_Noti_Acc">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Saving_Account" Association="Self.FK_Saving_Account">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="SavingContracts" EntitySet="SavingContracts" />
           </AssociationSet>
           <AssociationSet Name="FK_External_Bank" Association="Self.FK_External_Bank">
             <End Role="ExternalBanks" EntitySet="ExternalBanks" />
             <End Role="ExternalTransactions" EntitySet="ExternalTransactions" />
           </AssociationSet>
+          <AssociationSet Name="FK_Loan_Rate" Association="Self.FK_Loan_Rate">
+            <End Role="InterestRates" EntitySet="InterestRates" />
+            <End Role="LoanContracts" EntitySet="LoanContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Internal_Type" Association="Self.FK_Internal_Type">
+            <End Role="TransactionTypes" EntitySet="TransactionTypes" />
+            <End Role="InternalTransactions" EntitySet="InternalTransactions" />
+          </AssociationSet>
           <AssociationSet Name="FK_Invoice_Provider" Association="Self.FK_Invoice_Provider">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanRepay_Contract" Association="Self.FK_LoanRepay_Contract">
+            <End Role="LoanContracts" EntitySet="LoanContracts" />
+            <End Role="LoanRepayments" EntitySet="LoanRepayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanSchedule_Contract" Association="Self.FK_LoanSchedule_Contract">
+            <End Role="LoanContracts" EntitySet="LoanContracts" />
+            <End Role="LoanSchedules" EntitySet="LoanSchedules" />
           </AssociationSet>
           <AssociationSet Name="FK_SavingTrans_Contract" Association="Self.FK_SavingTrans_Contract">
             <End Role="SavingContracts" EntitySet="SavingContracts" />
@@ -799,96 +997,19 @@
             <End Role="ServiceTypes" EntitySet="ServiceTypes" />
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
           </AssociationSet>
-          <EntitySet Name="LoanContracts" EntityType="DigitalBankingDBModel.LoanContract" />
-          <EntitySet Name="LoanRepayments" EntityType="DigitalBankingDBModel.LoanRepayment" />
-          <EntitySet Name="LoanSchedules" EntityType="DigitalBankingDBModel.LoanSchedule" />
-          <AssociationSet Name="FK_LoanRepay_Contract" Association="DigitalBankingDBModel.FK_LoanRepay_Contract">
-            <End Role="LoanContract" EntitySet="LoanContracts" />
-            <End Role="LoanRepayment" EntitySet="LoanRepayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Schedule_LoanContract" Association="DigitalBankingDBModel.FK_Schedule_LoanContract">
-            <End Role="LoanContract" EntitySet="LoanContracts" />
-            <End Role="LoanSchedule" EntitySet="LoanSchedules" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="LoanContract">
-          <Key>
-            <PropertyRef Name="ContractID" />
-          </Key>
-          <Property Name="ContractID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LoanAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="RemainingBalance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="InterestRate" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Collateral" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TermMonths" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="LoanRepayments" Relationship="DigitalBankingDBModel.FK_LoanRepay_Contract" FromRole="LoanContract" ToRole="LoanRepayment" />
-          <NavigationProperty Name="LoanSchedules" Relationship="DigitalBankingDBModel.FK_Schedule_LoanContract" FromRole="LoanContract" ToRole="LoanSchedule" />
-        </EntityType>
-        <EntityType Name="LoanRepayment">
-          <Key>
-            <PropertyRef Name="RepaymentID" />
-          </Key>
-          <Property Name="RepaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContractID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PrincipalPaid" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="InterestPaid" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
-          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="PenaltyPaid" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="LoanContract" Relationship="DigitalBankingDBModel.FK_LoanRepay_Contract" FromRole="LoanRepayment" ToRole="LoanContract" />
-        </EntityType>
-        <EntityType Name="LoanSchedule">
-          <Key>
-            <PropertyRef Name="ScheduleID" />
-          </Key>
-          <Property Name="ScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContractID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ExpectedPrincipal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ExpectedInterest" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="PrincipalPaid" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="InterestPaid" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PenaltyAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LoanContract" Relationship="DigitalBankingDBModel.FK_Schedule_LoanContract" FromRole="LoanSchedule" ToRole="LoanContract" />
-          <Property Name="PenaltyPaid" Type="Decimal" Precision="18" Scale="2" />
-        </EntityType>
-        <Association Name="FK_LoanRepay_Contract">
-          <End Type="DigitalBankingDBModel.LoanContract" Role="LoanContract" Multiplicity="1" />
-          <End Type="DigitalBankingDBModel.LoanRepayment" Role="LoanRepayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoanContract">
-              <PropertyRef Name="ContractID" />
-            </Principal>
-            <Dependent Role="LoanRepayment">
-              <PropertyRef Name="ContractID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Schedule_LoanContract">
-          <End Type="DigitalBankingDBModel.LoanContract" Role="LoanContract" Multiplicity="1" />
-          <End Type="DigitalBankingDBModel.LoanSchedule" Role="LoanSchedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoanContract">
-              <PropertyRef Name="ContractID" />
-            </Principal>
-            <Dependent Role="LoanSchedule">
-              <PropertyRef Name="ContractID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        </Schema>
+          <FunctionImport Name="sp_MockNapas_GetAccountName" ReturnType="Collection(String)">
+            <Parameter Name="AccountNumber" Mode="In" Type="String" />
+            <Parameter Name="BankCode" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="DigitalBankingDBEntities">
+        <EntityContainerMapping StorageEntityContainer="DigitalBankingDBModelStoreContainer" CdmEntityContainer="DigitalBankingDBEntities">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="PBL3Model.Account">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.Account">
               <MappingFragment StoreEntitySet="Accounts">
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
@@ -901,7 +1022,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="PBL3Model.Customer">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -917,19 +1038,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="PBL3Model.Employee">
-              <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ExternalBanks">
-            <EntityTypeMapping TypeName="PBL3Model.ExternalBank">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.ExternalBank">
               <MappingFragment StoreEntitySet="ExternalBanks">
                 <ScalarProperty Name="BankCode" ColumnName="BankCode" />
                 <ScalarProperty Name="BankName" ColumnName="BankName" />
@@ -938,7 +1048,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ExternalTransactions">
-            <EntityTypeMapping TypeName="PBL3Model.ExternalTransaction">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.ExternalTransaction">
               <MappingFragment StoreEntitySet="ExternalTransactions">
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="FromAccount" ColumnName="FromAccount" />
@@ -956,7 +1066,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InterestRates">
-            <EntityTypeMapping TypeName="PBL3Model.InterestRate">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.InterestRate">
               <MappingFragment StoreEntitySet="InterestRates">
                 <ScalarProperty Name="RateID" ColumnName="RateID" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
@@ -966,7 +1076,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InternalTransactions">
-            <EntityTypeMapping TypeName="PBL3Model.InternalTransaction">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.InternalTransaction">
               <MappingFragment StoreEntitySet="InternalTransactions">
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="FromAccount" ColumnName="FromAccount" />
@@ -981,7 +1091,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Invoices">
-            <EntityTypeMapping TypeName="PBL3Model.Invoice">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.Invoice">
               <MappingFragment StoreEntitySet="Invoices">
                 <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
@@ -993,8 +1103,63 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LoanContracts">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanContract">
+              <MappingFragment StoreEntitySet="LoanContracts">
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="RateID" ColumnName="RateID" />
+                <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+                <ScalarProperty Name="RemainingBalance" ColumnName="RemainingBalance" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="TermMonths" ColumnName="TermMonths" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Collateral" ColumnName="Collateral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanRepayments">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanRepayment">
+              <MappingFragment StoreEntitySet="LoanRepayments">
+                <ScalarProperty Name="RepaymentID" ColumnName="RepaymentID" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="PrincipalPaid" ColumnName="PrincipalPaid" />
+                <ScalarProperty Name="InterestPaid" ColumnName="InterestPaid" />
+                <ScalarProperty Name="PenaltyPaid" ColumnName="PenaltyPaid" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanSchedules">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanSchedule">
+              <MappingFragment StoreEntitySet="LoanSchedules">
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="ExpectedPrincipal" ColumnName="ExpectedPrincipal" />
+                <ScalarProperty Name="ExpectedInterest" ColumnName="ExpectedInterest" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PenaltyAmount" ColumnName="PenaltyAmount" />
+                <ScalarProperty Name="PenaltyPaid" ColumnName="PenaltyPaid" />
+                <ScalarProperty Name="PrincipalPaid" ColumnName="PrincipalPaid" />
+                <ScalarProperty Name="InterestPaid" ColumnName="InterestPaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mock_Napas_Accounts">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.Mock_Napas_Accounts">
+              <MappingFragment StoreEntitySet="Mock_Napas_Accounts">
+                <ScalarProperty Name="MockID" ColumnName="MockID" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Notifications">
-            <EntityTypeMapping TypeName="PBL3Model.Notification">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.Notification">
               <MappingFragment StoreEntitySet="Notifications">
                 <ScalarProperty Name="NotiID" ColumnName="NotiID" />
                 <ScalarProperty Name="ReceiverAccount" ColumnName="ReceiverAccount" />
@@ -1006,25 +1171,25 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SavingContracts">
-            <EntityTypeMapping TypeName="PBL3Model.SavingContract">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.SavingContract">
               <MappingFragment StoreEntitySet="SavingContracts">
                 <ScalarProperty Name="ContractID" ColumnName="ContractID" />
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
                 <ScalarProperty Name="PrincipalAmount" ColumnName="PrincipalAmount" />
                 <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
                 <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="TermMonths" ColumnName="TermMonths" />
                 <ScalarProperty Name="AccruedInterest" ColumnName="AccruedInterest" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Goal" ColumnName="Goal" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="TermMonths" ColumnName="TermMonths" />
-                <ScalarProperty Name="SavingTypes" ColumnName="SavingTypes" />
+                <ScalarProperty Name="Goal" ColumnName="Goal" />
+                <ScalarProperty Name="SavingType" ColumnName="SavingType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SavingTransactions">
-            <EntityTypeMapping TypeName="PBL3Model.SavingTransaction">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.SavingTransaction">
               <MappingFragment StoreEntitySet="SavingTransactions">
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="ContractID" ColumnName="ContractID" />
@@ -1036,7 +1201,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ServiceProviders">
-            <EntityTypeMapping TypeName="PBL3Model.ServiceProvider">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.ServiceProvider">
               <MappingFragment StoreEntitySet="ServiceProviders">
                 <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
                 <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
@@ -1045,7 +1210,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ServiceTypes">
-            <EntityTypeMapping TypeName="PBL3Model.ServiceType">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.ServiceType">
               <MappingFragment StoreEntitySet="ServiceTypes">
                 <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
                 <ScalarProperty Name="ServiceTypeName" ColumnName="ServiceTypeName" />
@@ -1053,71 +1218,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TransactionTypes">
-            <EntityTypeMapping TypeName="PBL3Model.TransactionType">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.TransactionType">
               <MappingFragment StoreEntitySet="TransactionTypes">
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LoanContracts">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanContract">
-              <MappingFragment StoreEntitySet="LoanContracts">
-                <ScalarProperty Name="TermMonths" ColumnName="TermMonths" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Collateral" ColumnName="Collateral" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
-                <ScalarProperty Name="RemainingBalance" ColumnName="RemainingBalance" />
-                <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LoanRepayments">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanRepayment">
-              <MappingFragment StoreEntitySet="LoanRepayments">
-                <ScalarProperty Name="PenaltyPaid" ColumnName="PenaltyPaid" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-                <ScalarProperty Name="InterestPaid" ColumnName="InterestPaid" />
-                <ScalarProperty Name="PrincipalPaid" ColumnName="PrincipalPaid" />
-                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
-                <ScalarProperty Name="RepaymentID" ColumnName="RepaymentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LoanSchedules">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanSchedule">
-              <MappingFragment StoreEntitySet="LoanSchedules">
-                <ScalarProperty Name="PenaltyPaid" ColumnName="PenaltyPaid" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PenaltyAmount" ColumnName="PenaltyAmount" />
-                <ScalarProperty Name="InterestPaid" ColumnName="InterestPaid" />
-                <ScalarProperty Name="PrincipalPaid" ColumnName="PrincipalPaid" />
-                <ScalarProperty Name="ExpectedInterest" ColumnName="ExpectedInterest" />
-                <ScalarProperty Name="ExpectedPrincipal" ColumnName="ExpectedPrincipal" />
-                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
-                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
-                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="sp_MockNapas_GetAccountName" FunctionName="DigitalBankingDBModel.Store.sp_MockNapas_GetAccountName" />
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

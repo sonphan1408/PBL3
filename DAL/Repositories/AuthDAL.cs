@@ -170,18 +170,9 @@ namespace DAL.Repositories
             {
                 using (var db = new DigitalBankingDBEntities())
                 {
-                    var employee = db.Employees.FirstOrDefault(e => e.Username == username && e.Password == password);
-                    if (employee != null)
-                    {
-                        return new AccountEmployeeDTO
-                        {
-                            EmployeeID = employee.EmployeeID.ToString(),
-                            FullName = employee.FullName,
-                            Username = employee.Username,
-                            Password = employee.Password,
-                            Role = employee.Role
-                        };
-                    }
+                    // TODO: Employee table not implemented yet
+                    // var employee = db.Employees.FirstOrDefault(e => e.Username == username && e.Password == password);
+                    // For now, returning null
                     return null;
                 }
             }

@@ -444,9 +444,9 @@ namespace DAL.Repositories
                         {
                             RepaymentID = r.RepaymentID,
                             ContractID = r.ContractID,
-                            PrincipalPaid = r.PrincipalPaid,
-                            InterestPaid = r.InterestPaid,
-                            PenaltyPaid = r.PenaltyPaid,
+                            PrincipalPaid = r.PrincipalPaid ?? 0m,
+                            InterestPaid = r.InterestPaid ?? 0m,
+                            PenaltyPaid = r.PenaltyPaid ?? 0m,
                             PaymentDate = r.PaymentDate.HasValue ? r.PaymentDate.Value : DateTime.MinValue
                         })
                         .ToList();
@@ -472,9 +472,9 @@ namespace DAL.Repositories
                         {
                             RepaymentID = r.RepaymentID,
                             ContractID = r.ContractID,
-                            PrincipalPaid = r.PrincipalPaid,
-                            InterestPaid = r.InterestPaid,
-                            PenaltyPaid = r.PenaltyPaid,
+                            PrincipalPaid = r.PrincipalPaid ?? 0m,
+                            InterestPaid = r.InterestPaid ?? 0m,
+                            PenaltyPaid = r.PenaltyPaid ?? 0m,
                             PaymentDate = r.PaymentDate.HasValue ? r.PaymentDate.Value : DateTime.MinValue
                         })
                         .ToList();
@@ -656,9 +656,9 @@ namespace DAL.Repositories
                              {
                                  RepaymentID = r.RepaymentID,
                                  ContractID = r.ContractID,
-                                 PrincipalPaid = r.PrincipalPaid,
-                                 InterestPaid = r.InterestPaid,
-                                 PenaltyPaid = r.PenaltyPaid,
+                                 PrincipalPaid = r.PrincipalPaid ?? 0m,
+                                 InterestPaid = r.InterestPaid ?? 0m,
+                                 PenaltyPaid = r.PenaltyPaid ?? 0m,
                                  PaymentDate = r.PaymentDate ?? DateTime.MinValue
                              };
 

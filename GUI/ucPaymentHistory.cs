@@ -15,6 +15,7 @@ namespace GUI
     public partial class ucPaymentHistory : UserControl
     {
         private bool _isInitialized = false; // guard: chỉ refresh sau khi Load đã chạy
+        private PaymentService _paymentService = new PaymentService();
 
         public ucPaymentHistory()
         {
@@ -81,12 +82,12 @@ namespace GUI
             dgvPaymentHistory.Columns.Clear();
 
             // Add columns
-            dgvPaymentHistory.Columns.Add("Invoice", "Invoice");
-            dgvPaymentHistory.Columns.Add("BillingTo", "Billing To");
-            dgvPaymentHistory.Columns.Add("Status", "Status");
-            dgvPaymentHistory.Columns.Add("PaymentDate", "Payment Date");
-            dgvPaymentHistory.Columns.Add("Amount", "Amount");
-            dgvPaymentHistory.Columns.Add("PaymentFor", "Payment For");
+            dgvPaymentHistory.Columns.Add("Invoice", "Mã hóa đơn");
+            dgvPaymentHistory.Columns.Add("BillingTo", "Bên nhận");
+            dgvPaymentHistory.Columns.Add("Status", "Trạng thái");
+            dgvPaymentHistory.Columns.Add("PaymentDate", "Ngày thanh toán");
+            dgvPaymentHistory.Columns.Add("Amount", "Số tiền");
+            dgvPaymentHistory.Columns.Add("PaymentFor", "Thanh toán cho");
 
             // Set column widths
             dgvPaymentHistory.Columns["Invoice"].Width = 100;
@@ -150,7 +151,7 @@ namespace GUI
                 string accountNumber = UserSession.CurrentUser.AccountNumber;
 
                 // Get invoices from database
-                var invoices = PaymentService.GetInvoicesByAccount(accountNumber);
+                var invoices = _paymentService.GetInvoicesByAccount(accountNumber);
 
                 if (invoices == null || invoices.Count == 0)
                 {
@@ -164,9 +165,9 @@ namespace GUI
                     string invoiceId = "INV" + invoice.InvoiceID.ToString().PadLeft(4, '0');
                     string billingTo = invoice.ProviderName ?? "N/A";
                     string status = invoice.Status ?? "UNKNOWN";
-                    string paymentDate = invoice.DueDate != DateTime.MinValue ? invoice.DueDate.ToString("yyyy-MM-dd") : "-";
+                    string paymentDate = invoice.DueDate.HasValue && invoice.DueDate.Value != DateTime.MinValue ? invoice.DueDate.Value.ToString("yyyy-MM-dd") : "-";
                     string amount = "$" + invoice.Amount.ToString("F2");
-                    string paymentFor = "BANK TRANSFER";
+                    string paymentFor = "CHUYỂN KHOẢN";
 
                     dgvPaymentHistory.Rows.Add(invoiceId, billingTo, status, paymentDate, amount, paymentFor);
                 }

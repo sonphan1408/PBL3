@@ -17,7 +17,7 @@ namespace GUI
     {
         private List<TransactionDTO> allTransactions = new List<TransactionDTO>();
         private string currentAccountNumber = "";
-        private const string SearchPlaceholder = "Search transactions...";
+        private const string SearchPlaceholder = "Tìm kiếm giao dịch...";
         private bool isDataLoaded = false;
 
         public ucBalanceChanges()
@@ -158,7 +158,7 @@ namespace GUI
                 if (transactions.Count == 0)
                 {
                     Label lblNoData = new Label();
-                    lblNoData.Text = "No transactions found";
+                    lblNoData.Text = "Không tìm thấy giao dịch nào";
                     lblNoData.Font = new Font("Segoe UI", 12F);
                     lblNoData.ForeColor = Color.Gray;
                     lblNoData.Padding = new Padding(20);
@@ -193,7 +193,9 @@ namespace GUI
                 panel.BorderStyle = BorderStyle.FixedSingle;
 
                 // Determine if it's a withdrawal or deposit
-                bool isWithdrawal = transaction.Amount < 0 || transaction.FromAccount == currentAccountNumber;
+                string fromAcc = (transaction.FromAccount ?? "").Trim().Replace("\0", "");
+                string myAcc = (currentAccountNumber ?? "").Trim().Replace("\0", "");
+                bool isWithdrawal = transaction.Amount < 0 || string.Equals(fromAcc, myAcc, StringComparison.OrdinalIgnoreCase) || fromAcc.Contains(myAcc);
                 Color borderColor = isWithdrawal ? Color.FromArgb(211, 84, 0) : Color.FromArgb(40, 167, 69);
                 Color backgroundColor = isWithdrawal ? Color.FromArgb(255, 245, 238) : Color.FromArgb(241, 248, 245);
                 Color textColor = isWithdrawal ? Color.FromArgb(139, 55, 0) : Color.FromArgb(25, 110, 45);
@@ -244,7 +246,7 @@ namespace GUI
                 lblAccountInfo.Size = new Size(400, 25);
                 lblAccountInfo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
                 lblAccountInfo.ForeColor = textColor;
-                lblAccountInfo.Text = $"Account: {transaction.FromAccount}";
+                lblAccountInfo.Text = $"Tài khoản: {transaction.FromAccount}";
                 panel.Controls.Add(lblAccountInfo);
 
                 // Description
@@ -253,7 +255,7 @@ namespace GUI
                 lblDescription.Size = new Size(400, 40);
                 lblDescription.Font = new Font("Segoe UI", 9F);
                 lblDescription.ForeColor = Color.FromArgb(100, 100, 100);
-                lblDescription.Text = $"Remainder:\n{transaction.Description}";
+                lblDescription.Text = $"Nội dung:\n{transaction.Description}";
                 lblDescription.AutoEllipsis = true;
                 panel.Controls.Add(lblDescription);
 
@@ -264,7 +266,7 @@ namespace GUI
                 lblAmount.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
                 lblAmount.TextAlign = ContentAlignment.TopRight;
                 lblAmount.ForeColor = borderColor;
-                lblAmount.Text = $"{(isWithdrawal ? "-" : "+")}{Math.Abs(transaction.Amount):F2}";
+                lblAmount.Text = $"{Math.Abs(transaction.Amount):F2}";
                 panel.Controls.Add(lblAmount);
 
                 // Balance after
@@ -314,6 +316,12 @@ namespace GUI
             ).ToList();
 
             DisplayTransactions(filtered);
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            // Kích hoạt tìm kiếm khi nhấn nút Search
+            TxtSearch_TextChanged(sender, e);
         }
     }
 }

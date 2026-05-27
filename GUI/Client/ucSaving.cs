@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Session;
 using Krypton.Toolkit;
@@ -70,7 +70,7 @@ namespace GUI.Client
             trackBarTerm.Minimum = 0;
             trackBarTerm.Maximum = allowedMonths.Length - 1;
             trackBarTerm.Value = 0;
-            lblTermMonths.Text = "1 months";
+            lblTermMonths.Text = "1 tháng";
             lblInterestRate.Text = "0%";
             lblMaturityInterest.Text = "0VNĐ";
             btnTermSaving.Checked = true;
