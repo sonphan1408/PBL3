@@ -193,6 +193,9 @@
     <Compile Include="Client\ucClientHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Client\RoundedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Client\ucClientHome.Designer.cs">
       <DependentUpon>ucClientHome.cs</DependentUpon>
     </Compile>
@@ -395,6 +398,9 @@
     <EmbeddedResource Include="Client\ucPaymentWater.resx">
       <DependentUpon>ucPaymentWater.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucNotifications.resx">
+      <DependentUpon>ucNotifications.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Client\ucSaving.resx">
       <DependentUpon>ucSaving.cs</DependentUpon>
     </EmbeddedResource>
@@ -591,6 +597,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Avatar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\z7831974167475_b39e40a519702bf8a24b3fb652bed943.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\z7831998582636_eb6300e32b6721904a0725b0bfced509.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hhhhh.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hhhhh1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

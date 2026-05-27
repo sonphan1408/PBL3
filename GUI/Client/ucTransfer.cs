@@ -160,7 +160,7 @@ namespace GUI.Client
                     // ✅ Hiển thị Toast Notification
                     ToastNotification.ShowTransfer(recipientName, _recipientAccount.AccountNumber, transferAmount);
 
-                    // Trigger notification with structured data
+                    // Trigger notification with structured data (for Sender)
                     var notificationData = new NotificationMessageDTO
                     {
                         OperationType = "transfer",
@@ -170,6 +170,13 @@ namespace GUI.Client
                         TransferAmount = transferAmount
                     };
                     UserSession.RaiseNotification(notificationData);
+
+                    // Create notification for the Recipient
+                    BLL.Services.NotificationService.CreateNotification(
+                        _recipientAccount.Username,
+                        $"Tài khoản nhận được +{transferAmount:N0} VND từ {senderName}. Nội dung: {notes}",
+                        "transaction"
+                    );
 
                     // Update balance in session
                     UserSession.UpdateBalance(transferAmount);

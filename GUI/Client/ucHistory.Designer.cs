@@ -1,4 +1,4 @@
-﻿namespace GUI.Client
+namespace GUI.Client
 {
     partial class ucHistory
     {
@@ -96,7 +96,7 @@
             this.lblTotalTransactions.Name = "lblTotalTransactions";
             this.lblTotalTransactions.Size = new System.Drawing.Size(246, 35);
             this.lblTotalTransactions.TabIndex = 0;
-            this.lblTotalTransactions.Text = "Total Transactions";
+            this.lblTotalTransactions.Text = "Tổng số giao dịch";
             // 
             // pnlBalance
             // 
@@ -141,7 +141,7 @@
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(114, 35);
             this.lblBalance.TabIndex = 0;
-            this.lblBalance.Text = "Balance";
+            this.lblBalance.Text = "Số dư";
             // 
             // pnlSearch
             // 
@@ -163,7 +163,7 @@
             this.RECNET.Size = new System.Drawing.Size(200, 28);
             this.RECNET.StateCommon.ComboBox.Content.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.RECNET.TabIndex = 4;
-            this.RECNET.Text = "All Transactions";
+            this.RECNET.Text = "Tất cả giao dịch";
             // 
             // button1
             // 
@@ -176,7 +176,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 38);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Search";
+            this.button1.Text = "Tìm kiếm";
             this.button1.UseVisualStyleBackColor = false;
             // 
             // textBox1
@@ -187,7 +187,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(250, 32);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "Search transactions...";
+            this.textBox1.Text = "Tìm kiếm giao dịch...";
             // 
             // dataGridView1
             // 

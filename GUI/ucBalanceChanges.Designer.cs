@@ -1,4 +1,4 @@
-﻿namespace GUI
+namespace GUI
 {
     partial class ucBalanceChanges
     {
@@ -31,13 +31,14 @@
             this.pnlHeaderBalance = new System.Windows.Forms.Panel();
             this.lblBalance = new System.Windows.Forms.Label();
             this.lblCurrentBalance = new System.Windows.Forms.Label();
+            this.picPiggyBank = new System.Windows.Forms.PictureBox();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.pnlTransactions = new System.Windows.Forms.FlowLayoutPanel();
-            this.picPiggyBank = new System.Windows.Forms.PictureBox();
             this.pnlHeaderBalance.SuspendLayout();
-            this.pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPiggyBank)).BeginInit();
+            this.pnlSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlHeaderBalance
@@ -59,7 +60,7 @@
             this.lblBalance.ForeColor = System.Drawing.Color.White;
             this.lblBalance.Location = new System.Drawing.Point(147, 50);
             this.lblBalance.Name = "lblBalance";
-            this.lblBalance.Size = new System.Drawing.Size(81, 32);
+            this.lblBalance.Size = new System.Drawing.Size(83, 35);
             this.lblBalance.TabIndex = 2;
             this.lblBalance.Text = "$0.00";
             // 
@@ -70,14 +71,26 @@
             this.lblCurrentBalance.ForeColor = System.Drawing.Color.White;
             this.lblCurrentBalance.Location = new System.Drawing.Point(148, 9);
             this.lblCurrentBalance.Name = "lblCurrentBalance";
-            this.lblCurrentBalance.Size = new System.Drawing.Size(218, 32);
+            this.lblCurrentBalance.Size = new System.Drawing.Size(222, 35);
             this.lblCurrentBalance.TabIndex = 1;
-            this.lblCurrentBalance.Text = "Current Balance";
+            this.lblCurrentBalance.Text = "Số dư hiện tại";
+            // 
+            // picPiggyBank
+            // 
+            this.picPiggyBank.BackgroundImage = global::GUI.Properties.Resources.pig;
+            this.picPiggyBank.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPiggyBank.Location = new System.Drawing.Point(40, 12);
+            this.picPiggyBank.Name = "picPiggyBank";
+            this.picPiggyBank.Size = new System.Drawing.Size(90, 82);
+            this.picPiggyBank.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picPiggyBank.TabIndex = 0;
+            this.picPiggyBank.TabStop = false;
             // 
             // pnlSearch
             // 
             this.pnlSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.pnlSearch.Controls.Add(this.txtSearch);
+            this.pnlSearch.Controls.Add(this.btnSearch);
             this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSearch.Location = new System.Drawing.Point(0, 100);
             this.pnlSearch.Name = "pnlSearch";
@@ -91,9 +104,24 @@
             this.txtSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.txtSearch.Location = new System.Drawing.Point(30, 15);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(400, 32);
+            this.txtSearch.Size = new System.Drawing.Size(280, 32);
             this.txtSearch.TabIndex = 0;
-            this.txtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(55)))), ((int)(((byte)(99)))));
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(320, 15);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(119, 32);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.Text = "Tìm kiếm";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // pnlTransactions
             // 
@@ -108,17 +136,6 @@
             this.pnlTransactions.TabIndex = 2;
             this.pnlTransactions.WrapContents = false;
             // 
-            // picPiggyBank
-            // 
-            this.picPiggyBank.BackgroundImage = global::GUI.Properties.Resources.pig;
-            this.picPiggyBank.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPiggyBank.Location = new System.Drawing.Point(40, 12);
-            this.picPiggyBank.Name = "picPiggyBank";
-            this.picPiggyBank.Size = new System.Drawing.Size(90, 82);
-            this.picPiggyBank.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picPiggyBank.TabIndex = 0;
-            this.picPiggyBank.TabStop = false;
-            // 
             // ucBalanceChanges
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -131,9 +148,9 @@
             this.Load += new System.EventHandler(this.ucBalanceChanges_Load);
             this.pnlHeaderBalance.ResumeLayout(false);
             this.pnlHeaderBalance.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPiggyBank)).EndInit();
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPiggyBank)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -146,6 +163,7 @@
         private System.Windows.Forms.PictureBox picPiggyBank;
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.FlowLayoutPanel pnlTransactions;
     }
 }

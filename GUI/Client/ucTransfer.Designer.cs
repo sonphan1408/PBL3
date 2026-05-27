@@ -143,7 +143,7 @@ namespace GUI.Client
             this.btnTim.StateCommon.Border.Rounding = 15F;
             this.btnTim.TabIndex = 2;
             this.btnTim.Values.DropDownArrowColor = System.Drawing.Color.Empty;
-            this.btnTim.Values.Text = "Find";
+            this.btnTim.Values.Text = "Tìm";
             // 
             // pnlFlow
             // 

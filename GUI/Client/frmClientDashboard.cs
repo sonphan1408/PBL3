@@ -6,7 +6,7 @@ using GUI.Session;
 using GUI.Client.Loan;
 namespace GUI.Client
 {
-    public partial class frmClientDashboard : Form
+    public partial class frmClientDashboard : Form, IMessageFilter
     {
 
         ucClientHome home;
@@ -30,6 +30,11 @@ namespace GUI.Client
         public frmClientDashboard()
         {
             InitializeComponent();
+            Application.AddMessageFilter(this);
+
+            // Hiển thị Full Name từ database
+            string fullName = BLL.Services.AccountService.GetFullNameByCustomerId(UserSession.CurrentUser.CustomerID);
+            lblUserName.Text = !string.IsNullOrEmpty(fullName) ? fullName : UserSession.CurrentUser.Username;
 
             home = new ucClientHome();
             listSaving = new ucListSaving();
@@ -75,7 +80,44 @@ namespace GUI.Client
                     paymentHistory.RefreshData();
             };
             
+            // Set initial state
+            pnlNav.Height = button1.Height;
+            pnlNav.Top = button1.Top;
+            pnlNav.Left = 0;
+            SetActiveButton(button1);
+
             addUserControl(home);
+        }
+
+        private void SetActiveButton(Button btn)
+        {
+            // 1. Reset ALL buttons in the sidebar to default state (White background, Black/Gray text)
+            foreach (Control c in pnlSidebar.Controls)
+            {
+                if (c is Button sidebarBtn)
+                {
+                    sidebarBtn.BackColor = Color.White;
+                    sidebarBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(245, 250, 255); // Subtle hover
+                    
+                    // Reset text color based on button type
+                    if (sidebarBtn.Height == 45) // Main buttons
+                        sidebarBtn.ForeColor = Color.Black;
+                    else // Sub buttons (dots)
+                        sidebarBtn.ForeColor = Color.DimGray;
+                }
+            }
+
+            // 2. Highlight ONLY the selected button
+            // Using a slightly more professional light blue for the background (closer to your theme)
+            btn.BackColor = Color.FromArgb(230, 240, 255); 
+            btn.ForeColor = Color.DodgerBlue;
+            
+            // 3. Update the vertical indicator (pnlNav)
+            pnlNav.Height = btn.Height;
+            pnlNav.Top = btn.Top;
+            pnlNav.BackColor = Color.DodgerBlue;
+            pnlNav.Visible = true;
+            pnlNav.BringToFront();
         }
 
         // Hàm tráo đổi UserControl của bạn (Đã chuẩn)
@@ -95,48 +137,17 @@ namespace GUI.Client
         }
 
 
-        // Khai báo các biến cho Icon thông báo
-        private Button btnNotification;
-        private Label lblNotificationBadge;
-        private Panel pnlNotificationDropdown; // Panel Dropdown cho thông báo
+        // Khai báo Panel Dropdown cho thông báo (Vẫn giữ ở đây vì nó là động)
+        private Panel pnlNotificationDropdown; 
 
         private void SetupNotificationIcon()
         {
-            // Thiết lập Nút thông báo
-            btnNotification = new Button();
-            btnNotification.Text = "🔔"; // Icon chuông bằng Unicode
-            btnNotification.Font = new Font("Segoe UI Emoji", 16F);
-            btnNotification.Size = new Size(40, 40);
-            btnNotification.Location = new Point(10, 5); // Đặt bên trái panel4
-            btnNotification.FlatStyle = FlatStyle.Flat;
-            btnNotification.FlatAppearance.BorderSize = 0;
-            btnNotification.BackColor = Color.Transparent;
-            btnNotification.ForeColor = Color.White;
-            btnNotification.Cursor = Cursors.Hand;
-            btnNotification.Click += BtnNotification_Click;
-
-            
-            lblNotificationBadge = new Label();
-            lblNotificationBadge.AutoSize = false;
-            lblNotificationBadge.Size = new Size(20, 20);
-            lblNotificationBadge.Location = new Point(32, 5);
-            lblNotificationBadge.BackColor = Color.Red;
-            lblNotificationBadge.ForeColor = Color.White;
-            lblNotificationBadge.Font = new Font("Arial", 8F, FontStyle.Bold);
-            lblNotificationBadge.TextAlign = ContentAlignment.MiddleCenter;
-
-            // Bo tròn Badge
+            // Thiết lập Bo tròn Badge (Vì designer không hỗ trợ bo tròn label)
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(0, 0, lblNotificationBadge.Width, lblNotificationBadge.Height);
             lblNotificationBadge.Region = new Region(path);
 
-            // Thêm vào panel4
-            panel4.Controls.Add(lblNotificationBadge);
-            panel4.Controls.Add(btnNotification);
-            lblNotificationBadge.BringToFront();
-
             SetupNotificationDropdown();
-
             UpdateNotificationBadge();
         }
 
@@ -147,6 +158,7 @@ namespace GUI.Client
             pnlNotificationDropdown.BackColor = Color.White;
             pnlNotificationDropdown.BorderStyle = BorderStyle.FixedSingle;
             pnlNotificationDropdown.Visible = false; // Mặc định ẩn
+            pnlNotificationDropdown.AutoScroll = false; // Tắt AutoScroll ở Panel cha
             
             // Xử lý góc bo tròn hoặc shadow nếu cần (để đơn giản ta dùng viền cơ bản)
 
@@ -182,13 +194,46 @@ namespace GUI.Client
         private void LoadNotificationsToDropdown()
         {
             pnlNotificationDropdown.Controls.Clear();
+            pnlNotificationDropdown.AutoScroll = false;
+
+            // 1. Tiêu đề (Cố định trên cùng)
+            Panel pnlTop = new Panel();
+            pnlTop.Size = new Size(pnlNotificationDropdown.Width, 40);
+            pnlTop.Location = new Point(0, 0);
+            pnlTop.BackColor = Color.White;
 
             Label lblTitle = new Label();
-            lblTitle.Text = "Notifications";
+            lblTitle.Text = "Thông báo";
             lblTitle.Font = new Font("Arial", 12F, FontStyle.Bold);
             lblTitle.Location = new Point(10, 10);
             lblTitle.AutoSize = true;
-            pnlNotificationDropdown.Controls.Add(lblTitle);
+            pnlTop.Controls.Add(lblTitle);
+            pnlNotificationDropdown.Controls.Add(pnlTop);
+
+            // 2. Nút Xem tất cả (Cố định dưới cùng)
+            Button btnViewAll = new Button();
+            btnViewAll.Text = "Xem tất cả";
+            btnViewAll.Size = new Size(pnlNotificationDropdown.Width, 40);
+            btnViewAll.Location = new Point(0, pnlNotificationDropdown.Height - 40);
+            btnViewAll.FlatStyle = FlatStyle.Flat;
+            btnViewAll.FlatAppearance.BorderSize = 0;
+            btnViewAll.ForeColor = Color.Red;
+            btnViewAll.BackColor = Color.White;
+            btnViewAll.Font = new Font("Arial", 10F, FontStyle.Bold);
+            btnViewAll.Cursor = Cursors.Hand;
+            btnViewAll.Click += (s, e) => {
+                pnlNotificationDropdown.Visible = false;
+                btnNotifications_Click(null, null); // Chuyển hướng sang màn hình Thông báo
+            };
+            pnlNotificationDropdown.Controls.Add(btnViewAll);
+
+            // 3. Vùng chứa danh sách thông báo (Cuộn được)
+            Panel pnlScroll = new Panel();
+            pnlScroll.Size = new Size(pnlNotificationDropdown.Width, pnlNotificationDropdown.Height - 80);
+            pnlScroll.Location = new Point(0, 40);
+            pnlScroll.AutoScroll = true;
+            pnlScroll.BackColor = Color.White;
+            pnlNotificationDropdown.Controls.Add(pnlScroll);
 
             // Fetch notifications
             var notifications = BLL.Services.NotificationService.GetRecentNotifications(UserSession.CurrentUser.Username);
@@ -198,22 +243,28 @@ namespace GUI.Client
                 Label lblEmpty = new Label();
                 lblEmpty.Text = "Không có thông báo nào.";
                 lblEmpty.Font = new Font("Arial", 10F);
-                lblEmpty.Location = new Point(10, 40);
+                lblEmpty.Location = new Point(10, 10);
                 lblEmpty.AutoSize = true;
-                pnlNotificationDropdown.Controls.Add(lblEmpty);
+                pnlScroll.Controls.Add(lblEmpty);
                 return;
             }
 
-            int yPos = 40;
+            int yPos = 0; // Bắt đầu từ 0 bên trong pnlScroll
             foreach (var noti in notifications)
             {
                 Panel pnlItem = new Panel();
-                pnlItem.Size = new Size(pnlNotificationDropdown.Width - 20, 70);
+                pnlItem.Size = new Size(pnlNotificationDropdown.Width - 25, 70);
                 pnlItem.Location = new Point(10, yPos);
                 pnlItem.BackColor = noti.IsRead ? Color.White : Color.AliceBlue; // Nổi bật thông báo chưa đọc
 
+                string displayType = noti.Type;
+                if (displayType.ToLower().Contains("transaction")) displayType = "Giao dịch";
+                else if (displayType.ToLower().Contains("deposit")) displayType = "Nạp tiền";
+                else if (displayType.ToLower().Contains("withdraw")) displayType = "Rút tiền";
+                else if (displayType.ToLower().Contains("saving")) displayType = "Tiết kiệm";
+                
                 Label lblType = new Label();
-                lblType.Text = noti.Type;
+                lblType.Text = displayType;
                 lblType.Font = new Font("Arial", 10F, FontStyle.Bold);
                 lblType.Location = new Point(50, 5);
                 lblType.AutoSize = true;
@@ -224,7 +275,6 @@ namespace GUI.Client
                 lblMessage.Font = new Font("Arial", 9F);
                 lblMessage.Location = new Point(50, 25);
                 lblMessage.Size = new Size(270, 40);
-                // Tự động xuống dòng
                 pnlItem.Controls.Add(lblMessage);
 
                 Label lblTime = new Label();
@@ -236,14 +286,11 @@ namespace GUI.Client
                 lblTime.TextAlign = ContentAlignment.TopRight;
                 pnlItem.Controls.Add(lblTime);
 
-                // Icon theo Type
                 PictureBox picIcon = new PictureBox();
                 picIcon.Size = new Size(30, 30);
                 picIcon.Location = new Point(10, 15);
                 picIcon.SizeMode = PictureBoxSizeMode.Zoom;
                 
-                // Set default icon color or image 
-                // Using Label as dummy icon (hoặc dùng ký tự emoji)
                 Label lblIcon = new Label();
                 lblIcon.Font = new Font("Segoe UI Emoji", 14F);
                 lblIcon.Size = new Size(30, 30);
@@ -251,34 +298,17 @@ namespace GUI.Client
                 lblIcon.Text = GetIconForType(noti.Type);
                 pnlItem.Controls.Add(lblIcon);
 
-                pnlNotificationDropdown.Controls.Add(pnlItem);
+                pnlScroll.Controls.Add(pnlItem);
                 yPos += 75;
             }
-
-            // Nút Xem tất cả
-            Button btnViewAll = new Button();
-            btnViewAll.Text = "View All";
-            btnViewAll.Dock = DockStyle.Bottom;
-            btnViewAll.FlatStyle = FlatStyle.Flat;
-            btnViewAll.FlatAppearance.BorderSize = 0;
-            btnViewAll.ForeColor = Color.Red;
-            btnViewAll.Font = new Font("Arial", 10F, FontStyle.Bold);
-            btnViewAll.Height = 40;
-            btnViewAll.Cursor = Cursors.Hand;
-            btnViewAll.Click += (s, e) => {
-                pnlNotificationDropdown.Visible = false;
-                // addUserControl(notifications);
-                MessageBox.Show("Mở màn hình tất cả thông báo!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            };
-            pnlNotificationDropdown.Controls.Add(btnViewAll);
         }
 
         private string GetTimeAgo(DateTime dt)
         {
             TimeSpan ts = DateTime.Now - dt;
-            if (ts.TotalMinutes < 60) return $"{(int)ts.TotalMinutes} minutes ago";
-            if (ts.TotalHours < 24) return $"{(int)ts.TotalHours} hours ago";
-            return $"{(int)ts.TotalDays} days ago";
+            if (ts.TotalMinutes < 60) return $"{(int)ts.TotalMinutes} phút trước";
+            if (ts.TotalHours < 24) return $"{(int)ts.TotalHours} giờ trước";
+            return $"{(int)ts.TotalDays} ngày trước";
         }
 
         private string GetIconForType(string type)
@@ -310,6 +340,15 @@ namespace GUI.Client
             }
         }
 
+        private void HideHistorySubMenu()
+        {
+            button7.Visible = false;
+            button8.Visible = false;
+            button9.Visible = false;
+            // Dịch btnNotifications lên ngay dưới Lịch sử
+            btnNotifications.Top = button6.Bottom;
+        }
+
         // --- CÁC SỰ KIỆN NÚT BẤM ---
         private void btnHome_Click(object sender, EventArgs e)
         {
@@ -317,32 +356,92 @@ namespace GUI.Client
             home.ReloadBalance();
 
             // Đưa ucClientHome ra màn hình chính
-            lblPageTitle.Text = "Home";
+            HideHistorySubMenu();
+            lblPageTitle.Text = "Trang chủ";
+            SetActiveButton(button1);
             addUserControl(home);
         }
 
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            Application.RemoveMessageFilter(this);
+            base.OnFormClosed(e);
+        }
+
+        public bool PreFilterMessage(ref Message m)
+        {
+            const int WM_LBUTTONDOWN = 0x0201;
+            const int WM_RBUTTONDOWN = 0x0204;
+            const int WM_MBUTTONDOWN = 0x0207;
+
+            if (m.Msg == WM_LBUTTONDOWN || m.Msg == WM_RBUTTONDOWN || m.Msg == WM_MBUTTONDOWN)
+            {
+                if (pnlNotificationDropdown != null && pnlNotificationDropdown.Visible)
+                {
+                    // Lấy vị trí chuột trên màn hình
+                    Point mousePos = Control.MousePosition;
+
+                    // Kiểm tra xem chuột có nằm trong Dropdown hay Nút chuông không
+                    bool isInsideDropdown = pnlNotificationDropdown.ClientRectangle.Contains(pnlNotificationDropdown.PointToClient(mousePos));
+                    bool isInsideBtn = false;
+                    if (btnNotification != null)
+                    {
+                        isInsideBtn = btnNotification.ClientRectangle.Contains(btnNotification.PointToClient(mousePos));
+                    }
+
+                    if (!isInsideDropdown && !isInsideBtn)
+                    {
+                        pnlNotificationDropdown.Visible = false;
+                    }
+                }
+            }
+            return false;
+        }
 
         private void btnSaving_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "Saving";
+            HideHistorySubMenu();
+            lblPageTitle.Text = "Tiết kiệm";
+            SetActiveButton(btnSaving);
             addUserControl(listSaving);
         }
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "History";
-            addUserControl(history);
+            // Toggle hiện/ẩn sub-menu, KHÔNG tự load giao diện
+            bool isExpanded = button7.Visible;
+            button7.Visible = !isExpanded;
+            button8.Visible = !isExpanded;
+            button9.Visible = !isExpanded;
+
+            // Dịch btnNotifications theo trạng thái sub-menu
+            if (!isExpanded)
+            {
+                // Sub-menu vừa mở → đẩy Thông báo xuống dưới button9
+                btnNotifications.Top = button9.Bottom;
+            }
+            else
+            {
+                // Sub-menu vừa đóng → kéo Thông báo lên ngay dưới Lịch sử
+                btnNotifications.Top = button6.Bottom;
+            }
+
+            // Chỉ highlight nút, không thay đổi nội dung bên phải
+            SetActiveButton(button6);
         }
 
         private void btnTransfer_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "Transfer";
+            HideHistorySubMenu();
+            lblPageTitle.Text = "Chuyển khoản";
+            SetActiveButton(button2);
             addUserControl(transfer);
         }
         private void btnPayment_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "Payment";
-            invoice = new ucInvoicePayment();
+            HideHistorySubMenu();
+            lblPageTitle.Text = "Thanh toán";
+            SetActiveButton(button3);
             invoice.NavigateTo = addUserControl;
             addUserControl(invoice);
         }
@@ -357,30 +456,13 @@ namespace GUI.Client
         { 
             SetupNotificationIcon();
 
+            // Ẩn sub-menu History khi khởi động
+            button7.Visible = false;
+            button8.Visible = false;
+            button9.Visible = false;
+
             // ✅ Subscribe vào event từ UserSession
             UserSession.OnNotification += UserSession_OnNotification;
-
-            //// Lấy tên người dùng hiện tại từ Database nếu có
-            //try
-            //{
-            //    DTO.Models.AccountDTO account = BLL.Services.AccountService.GetAccountByUsername(CurrentUsername);
-            //    if (account != null)
-            //    {
-            //        DTO.Models.CustomerDTO customer = BLL.Services.AccountService.GetCustomerInfo(account.CustomerID);
-            //        if (customer != null)
-            //        {
-            //            lblUserName.Text = customer.FullName;
-            //        }
-            //        else
-            //        {
-            //            lblUserName.Text = CurrentUsername;
-            //        }
-            //    }
-            //}
-            //catch
-            //{
-            //    lblUserName.Text = CurrentUsername;
-            //}
         }
 
         // ✅ Handler khi có notification event
@@ -442,13 +524,13 @@ namespace GUI.Client
         // ✅ New public methods for navigation from UserControls
         public void NavigateToTransactionHistory()
         {
-            lblPageTitle.Text = "Transaction History";
+            lblPageTitle.Text = "Lịch sử giao dịch";
             addUserControl(history);
         }
 
         public void NavigateToPaymentHistory()
         {
-            lblPageTitle.Text = "Payment History";
+            lblPageTitle.Text = "Lịch sử thanh toán";
             addUserControl(paymentHistory);
         }
 
@@ -484,20 +566,37 @@ namespace GUI.Client
         }
         private void button7_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "Payment History";
+            lblPageTitle.Text = "Lịch sử thanh toán";
+            SetActiveButton(button7);
             addUserControl(paymentHistory);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "Balance Changes";
+            lblPageTitle.Text = "Biến động số dư";
+            SetActiveButton(button8);
             addUserControl(balanceChanges);
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "Transaction History";
+            lblPageTitle.Text = "Lịch sử giao dịch";
+            SetActiveButton(button9);
             addUserControl(history);
+        }
+
+        private void btnNotifications_Click(object sender, EventArgs e)
+        {
+            HideHistorySubMenu();
+            lblPageTitle.Text = "Thông báo";
+            SetActiveButton(btnNotifications);
+            notifications.LoadNotifications();
+            addUserControl(notifications);
+        }
+
+        private void panel4_Paint_1(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void btnAccountInfo_Click(object sender, EventArgs e)
