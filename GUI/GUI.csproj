@@ -45,8 +45,12 @@
     <Reference Include="Krypton.Toolkit, Version=100.26.1.19, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <HintPath>..\packages\Krypton.Toolkit.100.26.1.19\lib\net472\Krypton.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="ReaLTaiizor, Version=3.7.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReaLTaiizor.3.7.7\lib\net472\ReaLTaiizor.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
@@ -230,6 +234,12 @@
     <Compile Include="Client\ucPaymentWater.Designer.cs">
       <DependentUpon>ucPaymentWater.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client\ucSelectBank.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client\ucSelectBank.Designer.cs">
+      <DependentUpon>ucSelectBank.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client\ucTransfer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -244,9 +254,6 @@
     </Compile>
     <Compile Include="Client\ucNotifications.Designer.cs">
       <DependentUpon>ucNotifications.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Client\ucTransfer.Designer.cs">
-      <DependentUpon>ucTransfer.cs</DependentUpon>
     </Compile>
     <Compile Include="Client\ucSaving.cs">
       <SubType>UserControl</SubType>
@@ -266,11 +273,17 @@
     <Compile Include="Client\ucAccountInfo.Designer.cs">
       <DependentUpon>ucAccountInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client\ucTransfer.Designer.cs">
+      <DependentUpon>ucTransfer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\UserSession.cs" />
     <Compile Include="ToastNotification.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransparentableTextBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ucBalanceChanges.cs">
       <SubType>UserControl</SubType>
@@ -403,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Client\ucSaving.resx">
       <DependentUpon>ucSaving.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client\ucSelectBank.resx">
+      <DependentUpon>ucSelectBank.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Client\ucTransfer.resx">
       <DependentUpon>ucTransfer.cs</DependentUpon>
@@ -612,6 +628,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hhhhh1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logoremover_1778832190309.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_iwockniwockniwoc.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_iwockniwockniwoc %281%29.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_iwockniwockniwoc %281%291.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\canva-magnifier-outline-icon-MAEgJresBTg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_iwockniwockniwoc %281%292.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\151851.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngtree-search-line-icon-png-image_9030917.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f9bb81e576c1a361c61a8c08945b2c48-search-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

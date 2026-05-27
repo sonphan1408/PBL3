@@ -25,7 +25,7 @@ namespace DAL.Repositories
                             AccountNumber = s.AccountNumber,
                             PrincipalAmount = s.PrincipalAmount,
                             TermMonths = s.TermMonths,
-                            SavingType = "",
+                            SavingType = s.SavingType,
                             InterestRate = s.InterestRate,
                             AccruedInterest = s.AccruedInterest ?? 0m,
                             Status = s.Status,
@@ -235,7 +235,8 @@ namespace DAL.Repositories
                         AccruedInterest = savingContract.AccruedInterest,
                         Status = savingContract.Status,
                         Goal = savingContract.Goal,
-                        TermMonths = savingContract.TermMonths
+                        TermMonths = savingContract.TermMonths,
+                        SavingType = savingContract.SavingType
                     };
 
                     db.SavingContracts.Add(newContract);

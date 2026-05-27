@@ -27,8 +27,11 @@
         <AssociationConnector Association="DigitalBankingDBModel.FK_Internal_From" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Internal_To" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Invoice_Acc" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_Loan_Account" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Noti_Acc" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_Saving_Account" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_External_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalBankingDBModel.FK_Loan_Rate" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Internal_Type" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Invoice_Provider" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_LoanRepay_Contract" ManuallyRouted="false" />
