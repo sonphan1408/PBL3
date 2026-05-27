@@ -92,7 +92,7 @@ namespace BLL.Services
                 // 2. Đếm số ngày thực tế giữa 2 kỳ
                 int actualDays = (currentDate - lastDate).Days;
 
-                // 3. TÍNH LÃI THEO CÔNG THỨC THỰC TẾ ACT/365
+                // 3. TÍNH LÃI THEO CÔNG THỨC 
                 decimal expectedInterest = Math.Round(currentBalance * (loanContract.InterestRate / (100m*365m)) * actualDays, 0);
 
                 schedules.Add(new LoanSchedulesDTO
@@ -261,7 +261,7 @@ namespace BLL.Services
 
                 }
 
-                //XỬ LÝ TRẢ NỢ TRƯỚC HẠN & TÁI SINH LỊCH TRÌNH
+                // Xử lý trả nợ trước hạn và tái sinh lịch trình
                 loanContract.RemainingBalance -= totalPrincipalCollected;
                 decimal actualAmountUsed = amountPaid;
                 List<LoanSchedulesDTO> newFutureSchedules = null;
@@ -277,7 +277,7 @@ namespace BLL.Services
                     if (moneyLeft >= amountNeededToClose)
                     {
                         // TRƯỜNG HỢP 1: ĐỦ TIỀN TẤT TOÁN TOÀN BỘ (Gốc + Phí Phạt)
-                        decimal excessMoney = moneyLeft - amountNeededToClose; // Tiền dư thừa thực sự
+                        decimal excessMoney = moneyLeft - amountNeededToClose; // Coi thử có dư ko
 
                         totalPrincipalCollected += loanContract.RemainingBalance;
                        
@@ -290,16 +290,15 @@ namespace BLL.Services
                     else
                     {
                         // TRƯỜNG HỢP 2: TRẢ TRƯỚC HẠN 1 PHẦN
-                        // Khách nộp 1 cục tiền, ngân hàng sẽ cắn 2% phí trên cục tiền đó, phần còn lại mới được đem đi giảm Gốc.
-                        // Công thức tính lùi: Gốc được giảm = moneyLeft / (1 + 2%)
+                        // Tính phần phạt được tính bằng 2% của sô tiène giảm 
                         decimal principalReduced = Math.Round(moneyLeft / (1 + prepaymentFeeRate), 0);
-                        decimal partialFee = moneyLeft - principalReduced; // Phần tiền ngân hàng cắn làm phí phạt
+                        decimal partialFee = moneyLeft - principalReduced; // phí phạt để giảm tiền nợ
 
                         loanContract.RemainingBalance -= principalReduced;
                         totalPrincipalCollected += principalReduced;
                         totalPenaltyCollected += partialFee;
 
-                        actualAmountUsed = amountPaid; // Ngân hàng nuốt trọn cục tiền này, ko có tiền thối
+                        actualAmountUsed = amountPaid; 
 
                         // GỌI HÀM SINH LẠI LỊCH MỚI VÌ DƯ NỢ ĐÃ GIẢM
                         var futurePending = loanSchedule.Where(s => !schedulesToUpdate.Contains(s)).ToList();

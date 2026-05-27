@@ -499,10 +499,7 @@ namespace DAL.Repositories
                 {
                     try
                     {
-                        // ==========================================
-                        // 1. CẬP NHẬT HỢP ĐỒNG
-                        // ==========================================
-                        // Kéo hợp đồng thật từ DB lên (nó sẽ tự động được EF theo dõi)
+                        // cập nhật hợp đồng
                         var existingContract = db.LoanContracts.Find(contractDTO.ContractID);
                         if (existingContract != null)
                         {
@@ -511,9 +508,7 @@ namespace DAL.Repositories
                             existingContract.Status = contractDTO.Status;
                         }
 
-                        // ==========================================
-                        // 2. CẬP NHẬT CÁC KỲ HẠN VỪA THANH TOÁN
-                        // ==========================================
+                        // Cập nhật các kỳ hạn vừa thanh toán
                         foreach (var dto in schedulesToUpdateDTO)
                         {
                             // Lấy ra kỳ hạn bằng ID (Giả sử DTO của bạn có thuộc tính ScheduleID)
@@ -529,9 +524,7 @@ namespace DAL.Repositories
                             }
                         }
 
-                        // ==========================================
-                        // 3. TÁI SINH LỊCH TRÌNH (TRẢ TRƯỚC HẠN)
-                        // ==========================================
+                        //Tái xinh lịch trình
                         if (newFutureSchedulesDTO != null && newFutureSchedulesDTO.Count > 0)
                         {
                             // Xóa lịch cũ
@@ -540,7 +533,7 @@ namespace DAL.Repositories
                                                        .ToList();
                             db.LoanSchedules.RemoveRange(oldFutureSchedules);
 
-                            // Thêm lịch mới (Map từ DTO sang Entity mới)
+                            // Thêm lịch mới 
                             List<LoanSchedule> newEntities = new List<LoanSchedule>();
                             foreach (var dto in newFutureSchedulesDTO)
                             {
@@ -559,10 +552,9 @@ namespace DAL.Repositories
                             db.LoanSchedules.AddRange(newEntities);
                         }
 
-                        // ==========================================
-                        // 4. LƯU LỊCH SỬ NỘP TIỀN
-                        // ==========================================
-                        // Map từ DTO sang Entity Lịch sử mới
+                        
+                        // 4. Lưu lịch sử thanh toán
+                        
                         db.LoanRepayments.Add(new LoanRepayment
                         {
                             ContractID = historyDTO.ContractID,
@@ -570,21 +562,16 @@ namespace DAL.Repositories
                             InterestPaid = historyDTO.InterestPaid,
                             PaymentDate = historyDTO.PaymentDate,
                             PenaltyPaid = historyDTO.PenaltyPaid
-                            // Nếu bảng của bạn có cột PenaltyPaid thì nhớ map thêm vào đây nhé
+                            
                         });
 
-                        // ==========================================
-                        // 5. TRỪ TIỀN TRONG THẺ CỦA KHÁCH
-                        // ==========================================
+                        // Trừ tiền
                         var account = db.Accounts.Find(contractDTO.AccountNumber);
                         if (account != null)
                         {
                             account.Balance -= actualAmountUsed;
                         }
 
-                        // ==========================================
-                        // 6. CHỐT SỔ VÀ LƯU VÀO DATABASE
-                        // ==========================================
                         db.SaveChanges();
                         transaction.Commit();
                     }
