@@ -545,11 +545,12 @@ namespace GUI.Client
         private void guna2TextBox1_TextChanged(object sender, EventArgs e) { }
         private void pnlMain_Paint(object sender, PaintEventArgs e) { }
         private void pnlSidebar_Paint(object sender, PaintEventArgs e) { }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
 
         // Code bo góc thanh tìm kiếm của bạn (Đã chuẩn)
         private void pnlSearch_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e) { }
