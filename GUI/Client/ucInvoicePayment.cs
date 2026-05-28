@@ -71,7 +71,7 @@ namespace GUI.Client
         // Ham in ra hoa don can xu ly 
         private void LoadAllPendingInvoices()
         {
-\            pnlUnpaidList.Controls.Clear();
+            pnlUnpaidList.Controls.Clear();
 
             try
             {

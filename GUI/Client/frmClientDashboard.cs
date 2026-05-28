@@ -344,7 +344,6 @@ namespace GUI.Client
             button9.Visible = false;
             // Dịch btnNotifications lên ngay dưới Lịch sử
             btnNotifications.Top = button6.Bottom;
-            btnAccountInfo.Top = btnNotifications.Bottom;
         }
 
         // --- CÁC SỰ KIỆN NÚT BẤM ---
@@ -423,9 +422,6 @@ namespace GUI.Client
                 // Sub-menu vừa đóng → kéo Thông báo lên ngay dưới Lịch sử
                 btnNotifications.Top = button6.Bottom;
             }
-            
-            // Dịch btnAccountInfo theo btnNotifications
-            btnAccountInfo.Top = btnNotifications.Bottom;
 
             // Chỉ highlight nút, không thay đổi nội dung bên phải
             SetActiveButton(button6);
@@ -549,12 +545,11 @@ namespace GUI.Client
         private void guna2TextBox1_TextChanged(object sender, EventArgs e) { }
         private void pnlMain_Paint(object sender, PaintEventArgs e) { }
         private void pnlSidebar_Paint(object sender, PaintEventArgs e) { }
-        private void panel1_Paint(object sender, PaintEventArgs e) { }
 
         // Code bo góc thanh tìm kiếm của bạn (Đã chuẩn)
         private void pnlSearch_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e) { }
@@ -602,16 +597,17 @@ namespace GUI.Client
 
         private void btnAccountInfo_Click(object sender, EventArgs e)
         {
-            HideHistorySubMenu();
-            lblPageTitle.Text = "Thông tin tài khoản";
-            SetActiveButton(btnAccountInfo);
+            {
+                // 1. Tạo đối tượng của màn hình Thông tin tài khoản
+                accountinfo = new ucAccountInfo();
 
-            accountinfo = new ucAccountInfo();
-            accountinfo.NavigateTo = addUserControl;
-            
-            pnlMain.Controls.Clear();
-            accountinfo.Dock = DockStyle.Fill;
-            pnlMain.Controls.Add(accountinfo);
+                accountinfo.NavigateTo = addUserControl; // Truyền hàm điều hướng vào ucAccountInfo
+
+                // 3. Xóa ruột cũ của Panel chính và thêm ruột mới vào (giả sử panel bên phải của bạn tên là pnlMain)
+                pnlMain.Controls.Clear();
+                accountinfo.Dock = DockStyle.Fill; // Ép nó phình to lấp đầy panel
+                pnlMain.Controls.Add(accountinfo);
+            }
         }
     }
 }

@@ -194,25 +194,27 @@ namespace BLL.Services
                         session.PenaltyAmount = totalPenaltyAccrued - session.PenaltyPaid;
                     }
                    
-                    if (session.PenaltyAmount > 0)
+                    if (session.PenaltyAmount > 0 && moneyLeft > 0)
                     {
                         if (moneyLeft >= session.PenaltyAmount)
                         {
-                            moneyLeft -= session.PenaltyAmount;
-                            totalPenaltyCollected += session.PenaltyAmount;
-                            session.PenaltyPaid += moneyLeft;
+                            decimal penaltyToPay = session.PenaltyAmount;
+                            moneyLeft -= penaltyToPay;
+                            totalPenaltyCollected += penaltyToPay;
+                            session.PenaltyPaid += penaltyToPay;
                             session.PenaltyAmount = 0;
                         }
                         else
                         {
                             totalPenaltyCollected += moneyLeft;
+                            session.PenaltyPaid += moneyLeft;
                             session.PenaltyAmount -= moneyLeft;
                             moneyLeft = 0;
                         }
                     }
-                    if (moneyLeft <= 0) { schedulesToUpdate.Add(session); continue; }
+                    
                     decimal interestDebt = session.ExpectedInterest - session.InterestPaid;
-                    if (interestDebt > 0)
+                    if (interestDebt > 0 && moneyLeft > 0)
                     {
                         if (moneyLeft >= interestDebt)
                         {
@@ -227,9 +229,9 @@ namespace BLL.Services
                             moneyLeft = 0;
                         }
                     }
-                    if (moneyLeft <= 0) { schedulesToUpdate.Add(session); continue; }
+                    
                     decimal principalDebt = session.ExpectedPrincipal - session.PrincipalPaid;
-                    if (principalDebt > 0)
+                    if (principalDebt > 0 && moneyLeft > 0)
                     {
                         if (moneyLeft >= principalDebt)
                         {
@@ -244,6 +246,7 @@ namespace BLL.Services
                             moneyLeft = 0;
                         }
                     }
+                    
                     if (session.PenaltyAmount == 0 && session.InterestPaid == session.ExpectedInterest && session.PrincipalPaid == session.ExpectedPrincipal)
                         session.Status = "Paid";
                     else if (session.DueDate < DateTime.Now.Date)
@@ -256,10 +259,6 @@ namespace BLL.Services
                     {
                         isFutureSchedule = true;
                     }
-
-
-
-
                 }
 
                 // Xử lý trả nợ trước hạn và tái sinh lịch trình
