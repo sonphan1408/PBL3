@@ -13,9 +13,6 @@ namespace BLL.Services
 
         public AccountCustomerDTO GetRecipientByAccountNumber(string accountNumber)
         {
-            if (string.IsNullOrWhiteSpace(accountNumber))
-                throw new Exception("Vui lòng nhập số tài khoản người nhận.");
-
             var account = _transferDAL.GetAccountByAccountNumber(accountNumber);
             if (account == null)
                 throw new Exception($"Không tìm thấy tài khoản người nhận: {accountNumber}");
@@ -106,35 +103,29 @@ namespace BLL.Services
         {
             try
             {
-                // 1. Get sender account
                 AccountCustomerDTO senderAccount = GetSenderByUsername(senderUsername);
 
-                // 2. Get recipient account (validate exists) - use appropriate method based on bankCode
                 AccountCustomerDTO recipientAccount;
                 if (bankCode == "HTTS")
                 {
-                    // Internal transfer
+                    // Nội bộ
                     recipientAccount = GetRecipientByAccountNumber(recipientAccountNumber);
                 }
                 else
                 {
-                    // External transfer
+                    // LNH
                     recipientAccount = GetRecipientByAccountNumberAndBank(recipientAccountNumber, bankCode);
                 }
 
-                // 3. Validate transfer amount
                 ValidateTransferAmount(amount);
 
-                // 4. Validate sufficient balance
                 ValidateSufficientBalance(senderAccount.Balance, amount);
 
-                // 5. Validate different accounts (only for internal transfers)
                 if (bankCode == "HTTS")
                 {
                     ValidateDifferentAccounts(senderAccount.AccountNumber, recipientAccount.AccountNumber);
                 }
 
-                // 6. Execute transfer in DAL with bankCode
                 return _transferDAL.ExecuteTransfer(senderAccount.AccountNumber, recipientAccount.AccountNumber, amount, notes, bankCode);
             }
             catch (Exception ex)
@@ -170,9 +161,6 @@ namespace BLL.Services
 
         public AccountCustomerDTO GetRecipientByAccountNumberAndBank(string accountNumber, string bankCode)
         {
-            if (string.IsNullOrWhiteSpace(accountNumber))
-                throw new Exception("Vui lòng nhập số tài khoản người nhận.");
-
             var account = _transferDAL.GetRecipientByAccountNumberAndBank(accountNumber, bankCode);
             if (account == null)
                 throw new Exception("Không tìm thấy tài khoản người nhận.");

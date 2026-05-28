@@ -12,7 +12,6 @@ namespace DAL.Repositories
         {
             try
             {
-                // Trim whitespace from account number
                 accountNumber = accountNumber?.Trim() ?? "";
 
                 using (var db = new DigitalBankingDBEntities())
@@ -126,7 +125,7 @@ namespace DAL.Repositories
                     {
                         return mockAccount.FullName;
                     }
-                    return "Unknown";
+                    return "";
                 }
             }
             catch (Exception ex)
@@ -139,7 +138,6 @@ namespace DAL.Repositories
         {
             try
             {
-                // Trim whitespace from account number
                 accountNumber = accountNumber?.Trim() ?? "";
 
                 // For HTTS Bank (internal transfer), search in internal accounts
@@ -202,33 +200,29 @@ namespace DAL.Repositories
                 {
                     try
                     {
-                        // Trim account numbers
                         senderAccountNumber = senderAccountNumber?.Trim() ?? "";
                         recipientAccountNumber = recipientAccountNumber?.Trim() ?? "";
                         bankCode = bankCode?.Trim() ?? "HTTS";
 
-                        // 1. Lấy tài khoản người gửi
                         var senderAccount = db.Accounts.FirstOrDefault(a => a.AccountNumber == senderAccountNumber);
                         if (senderAccount == null)
                             throw new Exception("Tài khoản người gửi không tồn tại");
 
                         decimal senderBalanceBefore = (decimal)senderAccount.Balance;
 
-                        // 2. Check nếu là chuyển khoản nội bộ (HTTS Bank)
                         if (bankCode == "HTTS")
                         {
-                            // Internal transfer - cần tài khoản người nhận nội bộ
+                            // nội bộ
                             var recipientAccount = db.Accounts.FirstOrDefault(a => a.AccountNumber == recipientAccountNumber);
                             if (recipientAccount == null)
                                 throw new Exception("Tài khoản người nhận không tồn tại");
 
                             decimal recipientBalanceBefore = (decimal)recipientAccount.Balance;
 
-                            // 3. Trừ tiền người gửi, cộng tiền người nhận
                             senderAccount.Balance -= (decimal)amount;
                             recipientAccount.Balance += (decimal)amount;
 
-                            // 4. Ghi bản ghi giao dịch vào InternalTransactions
+                            // 4. Ghi bản ghi giao dịch
                             var internalTransaction = new InternalTransaction
                             {
                                 TransactionID = Guid.NewGuid(),
@@ -245,15 +239,15 @@ namespace DAL.Repositories
                         }
                         else
                         {
-                            // External transfer - chỉ trừ tiền người gửi
+                            // LNH (trừ tiền ng gửi)
                             senderAccount.Balance -= (decimal)amount;
 
-                            // Lấy tên người nhận từ Mock_Napas_Accounts
+                            // Lấy tên người nhận từ Mock
                             var mockAccount = db.Mock_Napas_Accounts.FirstOrDefault(
                                 a => a.AccountNumber == recipientAccountNumber && a.BankCode == bankCode);
                             string recipientName = mockAccount?.FullName ?? "Unknown";
 
-                            // 4. Ghi bản ghi giao dịch vào ExternalTransactions
+                            //Ghi bản ghi giao dịch
                             var externalTransaction = new ExternalTransaction
                             {
                                 TransactionID = Guid.NewGuid(),

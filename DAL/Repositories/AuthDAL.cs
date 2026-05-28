@@ -20,12 +20,11 @@ namespace DAL.Repositories
             {
                 using (var db = new DigitalBankingDBEntities())
                 {
-                    // Tim tai khoan trong database voi username, password va status la "Active"
+                    //Tim tai khoan voi username, password, status = "Active"
                     var account = db.Accounts.FirstOrDefault(a => a.Username == username
                                                                && a.Password == password
                                                                && a.Status == "Active");
 
-                    // Neu tim thay tai khoan, tra ve AccountCustomerDTO, nguoc lai tra ve null
                     if (account != null)
                     {
                         return new AccountCustomerDTO
@@ -40,7 +39,6 @@ namespace DAL.Repositories
                         };
                     }
 
-                    
                     return null;
                 }
             }

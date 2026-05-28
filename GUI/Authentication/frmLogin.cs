@@ -83,7 +83,7 @@ namespace GUI.Authentication
 
             try
             {
-                // 🌟 1. LƯU TẠM MẬT KHẨU TRƯỚC KHI BỊ XÓA
+                //Lưu tạm mật khẩu để sau check đổi mật khẩu
                 string Matkhaukhachnhap = MatKhau.Text;
 
                 AccountCustomerDTO account = AuthService.LoginCustomer(TaiKhoan.Text, MatKhau.Text);
@@ -97,14 +97,13 @@ namespace GUI.Authentication
 
                 if(account != null)
                 {
-                    account.Password = Matkhaukhachnhap; // 🌟 2. KHÔNG XÓA MẬT KHẨU, TRUYỀN VỀ DTO ĐỂ LƯU TRONG SESSION
+                    account.Password = Matkhaukhachnhap;
 
                     UserSession.CurrentUser = account;
-                    this.Hide();
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo");
+                    this.Hide();
                     if (account.Role == "Customer")
                     {
-
                         frmClientDashboard customerForm = new frmClientDashboard();
                         customerForm.ShowDialog();
                     }
@@ -123,6 +122,8 @@ namespace GUI.Authentication
             }
         }
 
+        //Tắt luôn ctrinh khi bấm X (nch là cho đỡ phiền :v)
+        //Nếu bấm back thì quay lại Home
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!check_click_back)
