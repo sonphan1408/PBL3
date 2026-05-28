@@ -319,12 +319,12 @@ namespace GUI.Client
                     }
 
                     // Kiem tra dieu kien tien nhap vao phai la boi so cua 10,000 VND
-                    if (customAmount % 10000 != 0)
-                    {
-                        MessageBox.Show($"Số tiền bạn đang nhập là {customAmount.ToString("N0")} VND.\nVui lòng nhập đầy đủ chữ số và phải là bội số của 10,000 VND (Ví dụ: 30000, 50000...)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtAmount.Focus();
-                        return;
-                    }
+                    //if (customAmount % 10000 != 0)
+                    //{
+                    //    MessageBox.Show($"Số tiền bạn đang nhập là {customAmount.ToString("N0")} VND.\nVui lòng nhập đầy đủ chữ số và phải là bội số của 10,000 VND (Ví dụ: 30000, 50000...)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //    txtAmount.Focus();
+                    //    return;
+                    //}
                     _selectedAmount = customAmount;
                 }
 
@@ -338,7 +338,10 @@ namespace GUI.Client
                 decimal currentBal = GUI.Session.UserSession.CurrentUser.Balance;
                 string currentUserPassword = GUI.Session.UserSession.CurrentUser.Password;
 
-                string errorMessage = _paymentService.ProcessPayment(inputPassword, currentUserPassword, phoneNumber, _selectedAmount, ref currentBal);
+                // string errorMessage = _paymentService.ProcessPayment(...);
+
+                string errorMessage = _paymentService.ProcessPhonePayment(inputPassword, currentUserPassword, phoneNumber, _selectedAmount, ref currentBal);
+
 
                 if (string.IsNullOrEmpty(errorMessage))
                 {
