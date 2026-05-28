@@ -62,7 +62,7 @@ namespace BLL.Services
         {
             int day = (endDate.Date - startDate.Date).Days;
             if (day <= 0) return 0m;
-            decimal interest = (principalAmount * (rate / 100m) * day) / 365m;
+            decimal interest = Math.Round((principalAmount * (rate / 100m) * day) / 365m, 0);
             return interest;
         }
 
@@ -228,9 +228,7 @@ namespace BLL.Services
             }
             catch (Exception ex)
             {
-                // BẠN KHÔNG CẦN CODE HOÀN TIỀN THỦ CÔNG NỮA!
-                // Nếu lỗi xảy ra, dòng 'scope.Complete()' chưa được gọi. 
-                // SQL Server sẽ tự động Rollback (trả lại tiền y như cũ) 100% an toàn kể cả khi cúp điện.
+               
 
                 string detailError = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 throw new Exception("Lỗi hệ thống: " + detailError);
@@ -248,27 +246,27 @@ namespace BLL.Services
         {
             try
             {
-                // 🌟 BẬT TÍNH NĂNG BẢO VỆ GIAO DỊCH (TRANSACTION)
+               
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    // Bước 1: Trừ tiền tài khoản chính
+                    
                     bool deducted = AccountService.DeductAccountBalance(accountNumber, depositAmount);
                     if (!deducted)
                     {
                         throw new Exception("Lỗi trừ tiền tài khoản (Có thể số dư không đủ).");
                     }
 
-                    // Bước 2: Cộng tiền và cập nhật lãi vào sổ
+                    
                     bool isDeposit = FinancialDAL.UpdateDeposit(contractId, depositAmount, newInterest);
                     if (!isDeposit)
                     {
                         throw new Exception("Lỗi khi cập nhật tiền vào sổ tiết kiệm!");
                     }
 
-                    // Bước 3: Ghi nhận lịch sử giao dịch
+                   
                     FinancialDAL.CreateSavingTransaction(contractId, "Deposit", depositAmount, "Gửi thêm vào tài khoản tiết kiệm");
 
-                    // 🌟 CHỐT HẠ: Lệnh này báo cho SQL Server biết "Mọi thứ đã an toàn, hãy lưu thật vào DB đi"
+                   
                     scope.Complete();
 
                     return true;
@@ -276,9 +274,7 @@ namespace BLL.Services
             }
             catch (Exception ex)
             {
-                // BẠN KHÔNG CẦN CODE HOÀN TIỀN THỦ CÔNG NỮA!
-                // Nếu lỗi xảy ra, dòng 'scope.Complete()' chưa được gọi. 
-                // SQL Server sẽ tự động Rollback (trả lại tiền y như cũ) 100% an toàn kể cả khi cúp điện.
+               
 
                 string detailError = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 throw new Exception("Lỗi hệ thống: " + detailError);
@@ -289,7 +285,7 @@ namespace BLL.Services
             List<StatisticSavingTypesDTO> typeStats = data.GroupBy(s => s.SavingType)
          .Select(g => new StatisticSavingTypesDTO
          {
-             // Cú pháp: Nếu là Installment -> Gửi góp. Nếu Term -> Kỳ hạn. Còn lại -> Lấy tên gốc
+            
              Name = g.Key == "Installment" ? "Gửi góp" :
                     g.Key == "Term" ? "Kỳ hạn" :
                     (g.Key ?? "Khác"),

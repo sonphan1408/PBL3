@@ -94,7 +94,7 @@ namespace BLL.Services
                 int actualDays = (currentDate - lastDate).Days;
 
                 // 3. TÍNH LÃI THEO CÔNG THỨC 
-                decimal expectedInterest = Math.Round(currentBalance * (loanContract.InterestRate / 365m) * actualDays, 0);
+                decimal expectedInterest = Math.Round(currentBalance * (loanContract.InterestRate / 100m / 365m) * actualDays, 0);
 
                 schedules.Add(new LoanSchedulesDTO
                 {
@@ -122,7 +122,7 @@ namespace BLL.Services
             decimal lastMonthPrincipal = loanContract.LoanAmount - totalPrincipalDistributed;
 
             // Tính lãi tháng cuối theo số ngày thực tế
-            decimal lastMonthInterest = Math.Round(currentBalance * (loanContract.InterestRate / 365m) * lastActualDays, 0);
+            decimal lastMonthInterest = Math.Round(currentBalance * (loanContract.InterestRate / 100m / 365m) * lastActualDays, 0);
 
             schedules.Add(new LoanSchedulesDTO
             {
@@ -348,7 +348,7 @@ namespace BLL.Services
             {
                 DateTime dueDate = oldFutureSchedules[i].DueDate; // Giữ nguyên ngày trả nợ của lịch cũ
                 int actualDays = (dueDate - lastDate).Days;
-                decimal expectedInterest = Math.Round(currentBalance * (contract.InterestRate / 365m) * actualDays, 0);
+                decimal expectedInterest = Math.Round(currentBalance * (contract.InterestRate / 100m / 365m) * actualDays, 0);
 
                 // Tháng cuối xử lý sai số gốc
                 decimal expectedPrincipal = (i == remainingMonths - 1)
