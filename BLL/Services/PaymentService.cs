@@ -76,5 +76,14 @@ namespace BLL.Services
                 throw new Exception("Lỗi khi lấy dữ liệu thanh toán: " + ex.Message);
             }
         }
+        public string ProcessPhonePayment(string inputPassword, string actualPassword, string targetCode, decimal amount, ref decimal currentBalance)
+        {
+            if (amount % 10000 != 0)
+            {
+                return $"Số tiền nạp ({amount.ToString("N0")} VND) không hợp lệ. Vui lòng nhập bội số của 10,000 VND (VD: 20000, 50000...).";
+            }
+
+            return ProcessPayment(inputPassword, actualPassword, targetCode, amount, ref currentBalance);
+        }
     }
 }

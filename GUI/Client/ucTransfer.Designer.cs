@@ -64,6 +64,7 @@ namespace GUI.Client
             this.btnTim.TabIndex = 2;
             this.btnTim.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.btnTim.Values.Text = "";
+            this.btnTim.Click += new System.EventHandler(this.BtnFind_Click);
             // 
             // txtTenNguoiNhan
             // 
@@ -115,6 +116,7 @@ namespace GUI.Client
             this.btnCK.TabIndex = 8;
             this.btnCK.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             this.btnCK.Values.Text = "";
+            this.btnCK.Click += new System.EventHandler(this.BtnTransfer_Click);
             // 
             // txtNDCK
             // 
@@ -293,7 +295,6 @@ namespace GUI.Client
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ucTransfer";
             this.Size = new System.Drawing.Size(1241, 791);
-            this.Load += new System.EventHandler(this.ucTransfer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

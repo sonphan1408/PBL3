@@ -21,30 +21,25 @@ namespace GUI.Client
         public ucTransfer()
         {
             InitializeComponent();
-            SetupEventHandlers();
             LoadSenderInfo();
         }
 
         private void InitializeBankSelector()
         {
-            // Create ucSelectBank on-demand when needed
             if (_ucSelectBank == null)
             {
                 _ucSelectBank = new ucSelectBank();
                 _ucSelectBank.Location = new System.Drawing.Point(94, 334);
-                // Size to fit content properly without excessive white space
-                _ucSelectBank.Size = new System.Drawing.Size(350, 280);
+                _ucSelectBank.Size = new System.Drawing.Size(250, 280);
                 _ucSelectBank.BankSelected += (s, e) =>
                 {
                     _selectedBank = _ucSelectBank.SelectedBank;
                     if (lblNganHang != null)
                         lblNganHang.Text = _selectedBank.BankName;
-                    // Clear recipient when bank changes
                     if (txtTenNguoiNhan != null)
                         txtTenNguoiNhan.Text = "";
                     _recipientAccount = null;
 
-                    // Remove and dispose the selector after selection
                     if (this.Controls.Contains(_ucSelectBank))
                     {
                         this.Controls.Remove(_ucSelectBank);
@@ -52,18 +47,33 @@ namespace GUI.Client
                         _ucSelectBank = null;
                     }
 
-                    // Refresh the form to clean up any remaining artifacts
                     this.Refresh();
                 };
             }
         }
 
-        private void ShowBankSelector()
+        private void LoadSenderInfo()
+        {
+            try
+            {
+                _senderAccount = _transferService.GetSenderByUsername(UserSession.CurrentUser.Username);
+                if (_senderAccount != null)
+                {
+                    txtIDUser.Text = _senderAccount.AccountNumber;
+                    txtSoDu.Text = _senderAccount.Balance.ToString("N0") + " VND";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải thông tin người gửi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSelectBank_Click(object sender, EventArgs e)
         {
             InitializeBankSelector();
             if (_ucSelectBank != null)
             {
-                // Position ucSelectBank below lblNganHang
                 if (lblNganHang != null)
                 {
                     _ucSelectBank.Location = new System.Drawing.Point(
@@ -77,40 +87,6 @@ namespace GUI.Client
                     this.Controls.Add(_ucSelectBank);
                     _ucSelectBank.BringToFront();
                 }
-            }
-        }
-
-        private void SetupEventHandlers()
-        {
-            if (btnTim != null)
-                btnTim.Click += BtnFind_Click;
-            if (btnCK != null)
-                btnCK.Click += BtnTransfer_Click;
-            if (btnSelectBank != null)
-                btnSelectBank.Click += btnSelectBank_Click;
-        }
-
-        private void btnSelectBank_Click(object sender, EventArgs e)
-        {
-            ShowBankSelector();
-        }
-
-        private void LoadSenderInfo()
-        {
-            try
-            {
-                _senderAccount = _transferService.GetSenderByUsername(UserSession.CurrentUser.Username);
-                if (_senderAccount != null)
-                {
-                    if (txtIDUser != null)
-                        txtIDUser.Text = _senderAccount.AccountNumber;
-                    if (txtSoDu != null)
-                        txtSoDu.Text = _senderAccount.Balance.ToString("N0") + " VND";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải thông tin người gửi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -131,20 +107,16 @@ namespace GUI.Client
                 }
 
                 string accountNumber = txtIDNguoiNhan.Text.Trim();
-
-                // Determine if it's internal (HTTS Bank) or external transfer
-                bool isInternalTransfer = _selectedBank.BankCode == "HTTS";
-
                 try
                 {
-                    if (isInternalTransfer)
+                    if (_selectedBank.BankCode == "HTTS")
                     {
-                        // Internal transfer - search only in internal accounts
+                        // CK nội bộ
                         _recipientAccount = _transferService.GetRecipientByAccountNumber(accountNumber);
                     }
                     else
                     {
-                        // External transfer - search in external bank
+                        // CK liên ngân hàng
                         _recipientAccount = _transferService.GetRecipientByAccountNumberAndBank(accountNumber, _selectedBank.BankCode);
                     }
 
@@ -152,19 +124,18 @@ namespace GUI.Client
                     {
                         string recipientName = "";
 
-                        if (isInternalTransfer)
+                        if (_selectedBank.BankCode == "HTTS")
                         {
-                            // For internal transfer, get name from Customer table
+                            // Nội bộ
                             recipientName = _transferService.GetCustomerName(_recipientAccount.CustomerID);
                         }
                         else
                         {
-                            // For external transfer, get name from Mock_Napas_Accounts
+                            // Liên ngân hàng
                             recipientName = _transferService.GetExternalAccountName(accountNumber, _selectedBank.BankCode);
                         }
 
-                        if (txtTenNguoiNhan != null)
-                            txtTenNguoiNhan.Text = recipientName ?? "Người nhận";
+                        txtTenNguoiNhan.Text = recipientName;
                     }
                     else
                     {
@@ -190,13 +161,6 @@ namespace GUI.Client
             }
         }
 
-        private void SelectAmount(decimal amount)
-        {
-            _transferAmount = amount;
-            if (txtSoTien != null)
-                txtSoTien.Text = amount.ToString("N0");
-        }
-
         private void BtnTransfer_Click(object sender, EventArgs e)
         {
             try
@@ -207,21 +171,19 @@ namespace GUI.Client
                     return;
                 }
 
-                // Try to get amount from user input or from selected amount
                 decimal transferAmount = 0;
-
-                // Check if user manually entered an amount in txtSoTien
                 if (txtSoTien != null && !string.IsNullOrWhiteSpace(txtSoTien.Text))
                 {
                     string amountText = txtSoTien.Text.Replace(",", "").Replace(".", "").Trim();
-                    if (decimal.TryParse(amountText, out decimal parsedAmount))
+                    try
                     {
-                        transferAmount = parsedAmount;
+                        transferAmount = decimal.Parse(amountText);
                     }
-                }
-                else if (_transferAmount > 0)
-                {
-                    transferAmount = _transferAmount;
+                    catch
+                    {
+                        MessageBox.Show("Số tiền nhập không hợp lệ", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
 
                 if (transferAmount <= 0)
@@ -230,7 +192,7 @@ namespace GUI.Client
                     return;
                 }
 
-                // Validate sender account balance
+                // Check có đủ tiền ko
                 if (_senderAccount == null || _senderAccount.Balance < transferAmount)
                 {
                     MessageBox.Show("Số dư tài khoản không đủ", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -241,28 +203,22 @@ namespace GUI.Client
                 if (txtNDCK != null && !string.IsNullOrWhiteSpace(txtNDCK.Text))
                     notes = txtNDCK.Text;
 
-                // Get bankCode from selected bank
-                string bankCode = _selectedBank?.BankCode ?? "HTTS";
-
-                // Execute transfer with bankCode
+                string bankCode = _selectedBank?.BankCode;
                 bool result = _transferService.ExecuteTransfer(UserSession.CurrentUser.Username, _recipientAccount.AccountNumber, transferAmount, notes, bankCode);
 
                 if (result)
                 {
                     string senderName = _transferService.GetCustomerName(_senderAccount.CustomerID);
 
-                    // Get recipient name based on transfer type
                     string recipientName = "";
-                    bool isInternalTransfer = bankCode == "HTTS";
-
-                    if (isInternalTransfer)
+                    if (bankCode == "HTTS")
                     {
-                        // For internal transfer, get name from Customer table
+                        // Nội bộ
                         recipientName = _transferService.GetCustomerName(_recipientAccount.CustomerID);
                     }
                     else
                     {
-                        // For external transfer, get name from Mock_Napas_Accounts
+                        // Liên nh
                         recipientName = _transferService.GetExternalAccountName(_recipientAccount.AccountNumber, bankCode);
                     }
 
@@ -280,14 +236,13 @@ namespace GUI.Client
                     };
                     UserSession.RaiseNotification(notificationData);
 
-                    // Create notification for the Recipient
                     BLL.Services.NotificationService.CreateNotification(
                         _recipientAccount.Username,
                         $"Tài khoản nhận được +{transferAmount:N0} VND từ {senderName}. Nội dung: {notes}",
                         "transaction"
                     );
 
-                    // Update balance in session
+                    // Update tiền hiện tại của ng dùng
                     UserSession.UpdateBalance(transferAmount);
 
                     frmBill bill = new frmBill(
@@ -298,9 +253,10 @@ namespace GUI.Client
                         recipientName: recipientName,
                         notes: notes
                     );
-
-                    bill.FormClosed += (s, args) => { ClearForm(); LoadSenderInfo(); };
+                    
                     bill.ShowDialog();
+                    ClearForm();
+                    LoadSenderInfo();
                 }
                 else
                 {
@@ -325,15 +281,6 @@ namespace GUI.Client
                 txtTenNguoiNhan.Text = "";
             _recipientAccount = null;
             _transferAmount = 0;
-        }
-
-        private void ucTransfer_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void txtSoDu_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace DAL.Repositories
@@ -20,12 +19,11 @@ namespace DAL.Repositories
             {
                 using (var db = new DigitalBankingDBEntities())
                 {
-                    // Tim tai khoan trong database voi username, password va status la "Active"
+                    //Tim tai khoan voi username, password, status = "Active"
                     var account = db.Accounts.FirstOrDefault(a => a.Username == username
                                                                && a.Password == password
                                                                && a.Status == "Active");
 
-                    // Neu tim thay tai khoan, tra ve AccountCustomerDTO, nguoc lai tra ve null
                     if (account != null)
                     {
                         return new AccountCustomerDTO
@@ -40,7 +38,6 @@ namespace DAL.Repositories
                         };
                     }
 
-                    
                     return null;
                 }
             }
@@ -153,14 +150,14 @@ namespace DAL.Repositories
                         catch (Exception ex)
                         {
                             transaction.Rollback();
-                            MessageBox.Show("Lỗi Database: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            throw new Exception("Lỗi Database: " + ex.Message);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi đăng ký tài khoản: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new Exception("Lỗi khi đăng ký tài khoản: " + ex.Message);
             }
         }
 
