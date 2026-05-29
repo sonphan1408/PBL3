@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucListSaving));
             this.flowLayoutListSaving = new System.Windows.Forms.FlowLayoutPanel();
             this.lblTotalDeposit = new System.Windows.Forms.Label();
@@ -46,7 +46,7 @@
             this.flowLayoutListSaving.AutoScroll = true;
             this.flowLayoutListSaving.BackColor = System.Drawing.Color.White;
             this.flowLayoutListSaving.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutListSaving.Location = new System.Drawing.Point(41, 136);
+            this.flowLayoutListSaving.Location = new System.Drawing.Point(52, 136);
             this.flowLayoutListSaving.Name = "flowLayoutListSaving";
             this.flowLayoutListSaving.Size = new System.Drawing.Size(627, 591);
             this.flowLayoutListSaving.TabIndex = 0;
@@ -58,7 +58,7 @@
             this.lblTotalDeposit.AutoSize = true;
             this.lblTotalDeposit.BackColor = System.Drawing.Color.White;
             this.lblTotalDeposit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDeposit.Location = new System.Drawing.Point(754, 100);
+            this.lblTotalDeposit.Location = new System.Drawing.Point(769, 100);
             this.lblTotalDeposit.Name = "lblTotalDeposit";
             this.lblTotalDeposit.Size = new System.Drawing.Size(70, 25);
             this.lblTotalDeposit.TabIndex = 1;
@@ -79,23 +79,23 @@
             // 
             // chartSavingType
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartSavingType.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartSavingType.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chartSavingType.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartSavingType.Legends.Add(legend3);
             this.chartSavingType.Location = new System.Drawing.Point(825, 227);
             this.chartSavingType.Name = "chartSavingType";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartSavingType.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartSavingType.Series.Add(series3);
             this.chartSavingType.Size = new System.Drawing.Size(456, 254);
             this.chartSavingType.TabIndex = 3;
             this.chartSavingType.Text = "chart1";
             // 
             // btnTerm
             // 
-            this.btnTerm.Location = new System.Drawing.Point(773, 543);
+            this.btnTerm.Location = new System.Drawing.Point(800, 545);
             this.btnTerm.Name = "btnTerm";
             this.btnTerm.Size = new System.Drawing.Size(237, 167);
             this.btnTerm.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnTerm.StateCommon.Back.Image")));
@@ -108,7 +108,7 @@
             // 
             // btnInstallment
             // 
-            this.btnInstallment.Location = new System.Drawing.Point(1044, 543);
+            this.btnInstallment.Location = new System.Drawing.Point(1071, 545);
             this.btnInstallment.Name = "btnInstallment";
             this.btnInstallment.Size = new System.Drawing.Size(237, 167);
             this.btnInstallment.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnInstallment.StateCommon.Back.Image")));

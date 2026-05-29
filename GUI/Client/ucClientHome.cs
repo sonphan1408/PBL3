@@ -645,5 +645,10 @@ namespace GUI.Client
         {
 
         }
+
+        private void pnlBalance_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

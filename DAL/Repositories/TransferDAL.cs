@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DTO.Models;
 using DAL;
+using System.Web.UI.WebControls;
 
 namespace DAL.Repositories
 {
@@ -73,6 +74,7 @@ namespace DAL.Repositories
                 using (var db = new DigitalBankingDBEntities())
                 {
                     var customer = db.Customers.FirstOrDefault(c => c.CustomerID == customerID);
+
                     if (customer != null)
                     {
                         return customer.FullName;

@@ -136,7 +136,7 @@
             // 
             // pnlUnpaidList
             // 
-            this.pnlUnpaidList.Location = new System.Drawing.Point(745, 348);
+            this.pnlUnpaidList.Location = new System.Drawing.Point(764, 348);
             this.pnlUnpaidList.Name = "pnlUnpaidList";
             this.pnlUnpaidList.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.ContextMenuInner;
             this.pnlUnpaidList.Size = new System.Drawing.Size(549, 392);
@@ -195,7 +195,7 @@
             // 
             // pnlAmountSelection
             // 
-            this.pnlAmountSelection.Location = new System.Drawing.Point(92, 507);
+            this.pnlAmountSelection.Location = new System.Drawing.Point(100, 518);
             this.pnlAmountSelection.Name = "pnlAmountSelection";
             this.pnlAmountSelection.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.ContextMenuInner;
             this.pnlAmountSelection.Size = new System.Drawing.Size(604, 167);

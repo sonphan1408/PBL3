@@ -17,10 +17,7 @@ namespace BLL.Services
     {
         public static List<LoanSchedulesDTO> GetSchedulesByAccountNumber(string accountNumber)
         {
-            if (string.IsNullOrWhiteSpace(accountNumber))
-            {
-                return new List<LoanSchedulesDTO>();
-            }
+            
 
             return LoanDAL.GetSchedulesByAccountNumber(accountNumber.Trim());
         }
@@ -57,7 +54,7 @@ namespace BLL.Services
 
                     if (isContractSaved && isScheduleSaved && isDisbursed)
                     {
-                        scope.Complete(); // Lệnh này tương đương với Commit
+                        scope.Complete(); 
                         return true;
                     }
                     else
@@ -67,7 +64,7 @@ namespace BLL.Services
                 }
                 catch (Exception ex)
                 {
-                    // Bắt lỗi và đẩy lên cho Form hiển thị
+                   
                     throw new Exception("Lỗi Service khi xử lý khoản vay: " + ex.Message);
                 }
             }

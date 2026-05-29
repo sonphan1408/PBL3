@@ -414,13 +414,15 @@ namespace GUI.Client
             // Dịch btnNotifications theo trạng thái sub-menu
             if (!isExpanded)
             {
-                // Sub-menu vừa mở → đẩy Thông báo xuống dưới button9
+                
                 btnNotifications.Top = button9.Bottom;
+                btnAccountInfo.Top = btnNotification.Bottom;
             }
             else
             {
-                // Sub-menu vừa đóng → kéo Thông báo lên ngay dưới Lịch sử
+                
                 btnNotifications.Top = button6.Bottom;
+                btnAccountInfo.Top = btnNotification.Bottom;
             }
 
             // Chỉ highlight nút, không thay đổi nội dung bên phải

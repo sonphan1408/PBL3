@@ -90,7 +90,7 @@ namespace BLL.Services
         {
             try
             {
-                // Default to HTTS Bank (internal transfer)
+                // Noi bo
                 return ExecuteTransfer(senderUsername, recipientAccountNumber, amount, notes, "HTTS");
             }
             catch (Exception ex)

@@ -128,7 +128,7 @@
             // 
             // pnlUnpaidList
             // 
-            this.pnlUnpaidList.Location = new System.Drawing.Point(731, 221);
+            this.pnlUnpaidList.Location = new System.Drawing.Point(762, 221);
             this.pnlUnpaidList.Name = "pnlUnpaidList";
             this.pnlUnpaidList.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.ContextMenuInner;
             this.pnlUnpaidList.Size = new System.Drawing.Size(575, 526);

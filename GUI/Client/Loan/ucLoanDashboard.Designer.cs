@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucLoanDashboard));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnCreateLoan = new Krypton.Toolkit.KryptonButton();
             this.chartAmount = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.flowLayoutListLoan = new System.Windows.Forms.FlowLayoutPanel();
@@ -60,7 +60,7 @@
             // 
             // btnCreateLoan
             // 
-            this.btnCreateLoan.Location = new System.Drawing.Point(1084, 414);
+            this.btnCreateLoan.Location = new System.Drawing.Point(1116, 412);
             this.btnCreateLoan.Name = "btnCreateLoan";
             this.btnCreateLoan.Size = new System.Drawing.Size(245, 167);
             this.btnCreateLoan.StateCommon.Back.Color1 = System.Drawing.Color.White;
@@ -75,16 +75,16 @@
             // 
             // chartAmount
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartAmount.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartAmount.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chartAmount.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartAmount.Legends.Add(legend2);
             this.chartAmount.Location = new System.Drawing.Point(392, 128);
             this.chartAmount.Name = "chartAmount";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartAmount.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartAmount.Series.Add(series2);
             this.chartAmount.Size = new System.Drawing.Size(901, 245);
             this.chartAmount.TabIndex = 1;
             this.chartAmount.Text = "chart1";
@@ -95,7 +95,7 @@
             this.flowLayoutListLoan.AutoScroll = true;
             this.flowLayoutListLoan.BackColor = System.Drawing.Color.White;
             this.flowLayoutListLoan.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutListLoan.Location = new System.Drawing.Point(26, 426);
+            this.flowLayoutListLoan.Location = new System.Drawing.Point(42, 431);
             this.flowLayoutListLoan.Name = "flowLayoutListLoan";
             this.flowLayoutListLoan.Size = new System.Drawing.Size(776, 296);
             this.flowLayoutListLoan.TabIndex = 2;
@@ -151,7 +151,7 @@
             // 
             // btnPayment
             // 
-            this.btnPayment.Location = new System.Drawing.Point(818, 414);
+            this.btnPayment.Location = new System.Drawing.Point(850, 412);
             this.btnPayment.Name = "btnPayment";
             this.btnPayment.Size = new System.Drawing.Size(245, 167);
             this.btnPayment.StateCommon.Back.Color1 = System.Drawing.Color.Gray;
@@ -178,7 +178,7 @@
             // 
             // panelPaidAmount
             // 
-            this.panelPaidAmount.Location = new System.Drawing.Point(417, 118);
+            this.panelPaidAmount.Location = new System.Drawing.Point(381, 112);
             // 
             // panelPaidAmount.Panel
             // 
@@ -290,7 +290,7 @@
             // 
             // btnRepayment
             // 
-            this.btnRepayment.Location = new System.Drawing.Point(1084, 587);
+            this.btnRepayment.Location = new System.Drawing.Point(1116, 585);
             this.btnRepayment.Name = "btnRepayment";
             this.btnRepayment.Size = new System.Drawing.Size(245, 167);
             this.btnRepayment.StateCommon.Back.Color1 = System.Drawing.Color.White;
@@ -305,7 +305,7 @@
             // 
             // kryptonButton2
             // 
-            this.kryptonButton2.Location = new System.Drawing.Point(818, 587);
+            this.kryptonButton2.Location = new System.Drawing.Point(850, 585);
             this.kryptonButton2.Name = "kryptonButton2";
             this.kryptonButton2.Size = new System.Drawing.Size(245, 167);
             this.kryptonButton2.StateCommon.Back.Color1 = System.Drawing.Color.White;
