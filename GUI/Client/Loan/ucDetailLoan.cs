@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Session;
 using System;
@@ -104,6 +104,7 @@ namespace GUI.Client.Loan
             dgvLoanSchedules.BackgroundColor = Color.White;
             dgvLoanSchedules.RowTemplate.Height = 40;
             dgvLoanSchedules.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 246, 250);
+            dgvLoanSchedules.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // 2. Xóa cột cũ
             dgvLoanSchedules.Columns.Clear();
@@ -141,6 +142,15 @@ namespace GUI.Client.Loan
                 Name = "colTongDaTra",
                 DefaultCellStyle = new DataGridViewCellStyle { Format = "N0" }
             });
+
+            dgvLoanSchedules.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "ExpectedPrincipal",
+                HeaderText = "Tiền gốc (VNĐ)",
+                Name = "colTienGoc",
+                DefaultCellStyle = new DataGridViewCellStyle { Format = "N0" }
+            });
+
             dgvLoanSchedules.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "ExpectedInterest",
@@ -334,10 +344,17 @@ namespace GUI.Client.Loan
             txtAmount.Text = "";
             btnPassword.Visible = true;
             btnConfirm.Visible = false;
-            kryptonLabel1.Text = "Lưu ý: Bạn có thể nộp dư để khấu trừ vào nợ gốc";
+            if(schedule.DueDate < DateTime.Now)
+            {
+                kryptonLabel1.Text = "Bạn đã quá hạn hãy hoàn thành khoản vay chưa trả";
+            }
+            else
+            {
+                kryptonLabel1.Text = "Lưu ý: Bạn có thể nộp dư để khấu trừ vào nợ gốc";
+            }
 
             decimal amountToPay = schedule.TotalExpectedAmount - schedule.TotalPaidAmount;
-            lblExpectedTotalAmount.Text = amountToPay.ToString("N0") + " VNĐ";
+            lblExpectedTotalAmount.Text = "Số tiền cần thanh toán: " + amountToPay.ToString("N0") + " VNĐ";
 
             txtAmount.ReadOnly = false;
             panelPaidAmount.Visible = true;
@@ -468,6 +485,11 @@ namespace GUI.Client.Loan
                 MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isProcessingFinal = false;
             }
+        }
+
+        private void lblExpectedTotalAmount_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

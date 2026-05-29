@@ -174,7 +174,7 @@ namespace BLL.Services
                 decimal totalPrincipalCollected = 0;
                 decimal totalInterestCollected = 0;
                 decimal totalPenaltyCollected = 0;
-                decimal penaltyRate = loanContract.InterestRate * 1.5m;
+                decimal penaltyRate = loanContract.InterestRate * 1.5m / 100m;
 
                 List<LoanSchedulesDTO> schedulesToUpdate = new List<LoanSchedulesDTO>();
                 bool isFutureSchedule = false;
@@ -189,6 +189,7 @@ namespace BLL.Services
                         decimal principalDebtUnpaid = session.ExpectedPrincipal - (session.PrincipalPaid );
                         decimal totalPenaltyAccrued = Math.Round(principalDebtUnpaid * (penaltyRate / 365m) * overdueDays, 0);
                         session.PenaltyAmount = totalPenaltyAccrued - session.PenaltyPaid;
+                        if (session.PenaltyAmount < 0) session.PenaltyAmount = 0;
                     }
                    
                     if (session.PenaltyAmount > 0 && moneyLeft > 0)

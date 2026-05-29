@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Session;
 using System;
@@ -30,6 +30,7 @@ namespace GUI.Client.Loan
             dgvRepayments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvRepayments.BackgroundColor = Color.White;
             dgvRepayments.RowTemplate.Height = 42; 
+            dgvRepayments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             
             dgvRepayments.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 249, 250);

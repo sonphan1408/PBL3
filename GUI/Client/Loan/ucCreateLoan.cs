@@ -128,11 +128,7 @@ namespace GUI.Client.Loan
                 return;
             }
 
-            if (loanAmount > UserSession.CurrentUser.Balance)
-            {
-                MessageBox.Show("Số tiền vay không được vượt quá số dư của bạn", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+           
 
             // Validate term months
             if (cbTermMonths.SelectedItem == null)

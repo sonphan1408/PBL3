@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucPaymentWater));
             this.txtCustomerCode = new Krypton.Toolkit.KryptonTextBox();
             this.lbCustomerCode = new Krypton.Toolkit.KryptonLabel();
             this.lbProvider = new Krypton.Toolkit.KryptonLabel();
@@ -195,7 +196,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::GUI.Properties.Resources.PaymentWaterNew;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.txtCustomerCode);
             this.Controls.Add(this.lbCustomerCode);

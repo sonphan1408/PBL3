@@ -70,11 +70,11 @@ namespace GUI.Client
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.White;
-            this.pnlSidebar.Controls.Add(this.btnNotifications);
+            this.pnlSidebar.Controls.Add(this.button6);
             this.pnlSidebar.Controls.Add(this.btnAccountInfo);
             this.pnlSidebar.Controls.Add(this.pnlNav);
+            this.pnlSidebar.Controls.Add(this.btnNotifications);
             this.pnlSidebar.Controls.Add(this.button9);
-            this.pnlSidebar.Controls.Add(this.button6);
             this.pnlSidebar.Controls.Add(this.button8);
             this.pnlSidebar.Controls.Add(this.button7);
             this.pnlSidebar.Controls.Add(this.btnLoan);
@@ -96,7 +96,7 @@ namespace GUI.Client
             this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNotifications.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnNotifications.ForeColor = System.Drawing.Color.Black;
-            this.btnNotifications.Location = new System.Drawing.Point(0, 445);
+            this.btnNotifications.Location = new System.Drawing.Point(0, 518);
             this.btnNotifications.Name = "btnNotifications";
             this.btnNotifications.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.btnNotifications.Size = new System.Drawing.Size(283, 45);
@@ -113,7 +113,7 @@ namespace GUI.Client
             this.btnAccountInfo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnAccountInfo.ForeColor = System.Drawing.Color.Black;
             this.btnAccountInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAccountInfo.Location = new System.Drawing.Point(0, 496);
+            this.btnAccountInfo.Location = new System.Drawing.Point(-3, 293);
             this.btnAccountInfo.Name = "btnAccountInfo";
             this.btnAccountInfo.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.btnAccountInfo.Size = new System.Drawing.Size(283, 45);
@@ -137,7 +137,7 @@ namespace GUI.Client
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.button9.ForeColor = System.Drawing.Color.DimGray;
-            this.button9.Location = new System.Drawing.Point(0, 404);
+            this.button9.Location = new System.Drawing.Point(0, 477);
             this.button9.Name = "button9";
             this.button9.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.button9.Size = new System.Drawing.Size(283, 35);
@@ -153,7 +153,7 @@ namespace GUI.Client
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(3, 281);
+            this.button6.Location = new System.Drawing.Point(3, 344);
             this.button6.Name = "button6";
             this.button6.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.button6.Size = new System.Drawing.Size(283, 45);
@@ -170,7 +170,7 @@ namespace GUI.Client
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.button8.ForeColor = System.Drawing.Color.DimGray;
-            this.button8.Location = new System.Drawing.Point(3, 367);
+            this.button8.Location = new System.Drawing.Point(0, 436);
             this.button8.Name = "button8";
             this.button8.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.button8.Size = new System.Drawing.Size(283, 35);
@@ -187,7 +187,7 @@ namespace GUI.Client
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.button7.ForeColor = System.Drawing.Color.DimGray;
-            this.button7.Location = new System.Drawing.Point(3, 332);
+            this.button7.Location = new System.Drawing.Point(3, 395);
             this.button7.Name = "button7";
             this.button7.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.button7.Size = new System.Drawing.Size(283, 35);

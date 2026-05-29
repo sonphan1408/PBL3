@@ -30,10 +30,10 @@
         {
             this.panelHeader = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.panelContent = new System.Windows.Forms.Panel();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelTagline = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.panelContent.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +58,19 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 16);
             this.label1.TabIndex = 6;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnLogin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.btnLogin.ForeColor = System.Drawing.Color.White;
+            this.btnLogin.Location = new System.Drawing.Point(977, 33);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(139, 40);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "Đăng nhập";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // panelContent
             // 
@@ -97,19 +110,6 @@
             this.labelTagline.Size = new System.Drawing.Size(915, 70);
             this.labelTagline.TabIndex = 0;
             this.labelTagline.Text = "Your Trusted Financial Partner.";
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnLogin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(977, 33);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(124, 40);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // MainScreen
             // 

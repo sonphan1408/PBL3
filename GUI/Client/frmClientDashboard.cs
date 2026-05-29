@@ -416,13 +416,13 @@ namespace GUI.Client
             {
                 
                 btnNotifications.Top = button9.Bottom;
-                btnAccountInfo.Top = btnNotification.Bottom;
+               
             }
             else
             {
                 
                 btnNotifications.Top = button6.Bottom;
-                btnAccountInfo.Top = btnNotification.Bottom;
+               
             }
 
             // Chỉ highlight nút, không thay đổi nội dung bên phải

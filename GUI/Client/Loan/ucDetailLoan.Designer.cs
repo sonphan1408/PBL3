@@ -186,7 +186,7 @@
             this.lblStatus.BackColor = System.Drawing.Color.Transparent;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(1094, 659);
+            this.lblStatus.Location = new System.Drawing.Point(1139, 657);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(36, 28);
             this.lblStatus.TabIndex = 15;
@@ -265,6 +265,7 @@
             this.lblExpectedTotalAmount.Size = new System.Drawing.Size(109, 25);
             this.lblExpectedTotalAmount.TabIndex = 14;
             this.lblExpectedTotalAmount.Values.Text = "kryptonLabel2";
+            this.lblExpectedTotalAmount.Click += new System.EventHandler(this.lblExpectedTotalAmount_Click);
             // 
             // txtCheckPassword
             // 

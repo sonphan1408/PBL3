@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Session;
 using System;
@@ -32,6 +32,8 @@ namespace GUI.Client.Loan
 
             // DÒNG CODE "PHÉP THUẬT": Tự động giãn các cột để lấp đầy khoảng trống bên phải
             dgvLoanSchedules.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLoanSchedules.CellFormatting -= dgvLoanSchedules_CellFormatting;
+            dgvLoanSchedules.CellFormatting += dgvLoanSchedules_CellFormatting;
 
             dgvLoanSchedules.Columns.Clear();
 
@@ -125,24 +127,6 @@ namespace GUI.Client.Loan
                 if (schedules == null || schedules.Count == 0) return;
 
                 dgvLoanSchedules.DataSource = schedules;
-
-                // Tô màu cột trạng thái
-                foreach (DataGridViewRow row in dgvLoanSchedules.Rows)
-                {
-                    if (row.Cells["colStatus"].Value != null)
-                    {
-                        string status = row.Cells["colStatus"].Value.ToString();
-                        var style = row.Cells["colStatus"].Style;
-                        style.Font = new Font(dgvLoanSchedules.Font, FontStyle.Bold);
-
-                        if (status == "Paid")
-                            style.ForeColor = Color.ForestGreen;
-                        else if (status == "Overdue")
-                            style.ForeColor = Color.Firebrick;
-                        else
-                            style.ForeColor = Color.DarkOrange;
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -160,6 +144,36 @@ namespace GUI.Client.Loan
         {
 
             UserSession.DataLoanChanged -= LoadLoanScheduleData;
+        }
+
+        private void dgvLoanSchedules_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvLoanSchedules.Columns[e.ColumnIndex].Name == "colStatus" && e.Value != null)
+            {
+                string status = e.Value.ToString();
+                e.CellStyle.Font = new Font(dgvLoanSchedules.Font, FontStyle.Bold);
+
+                if (status == "Paid")
+                {
+                    e.Value = "Đã thanh toán"; 
+                    e.CellStyle.ForeColor = Color.ForestGreen;
+                }
+                else if (status == "Pending")
+                {
+                    e.Value = "Chưa thanh toán";
+                    e.CellStyle.ForeColor = Color.DarkOrange;
+                }
+                else if (status == "Overdue")
+                {
+                    e.Value = "Quá hạn";
+                    e.CellStyle.ForeColor = Color.Firebrick;
+                }
+                else if(status == "Partially Paid")
+                {
+                    e.Value = "Thanh toán một phần";
+                    e.CellStyle.ForeColor = Color.Firebrick;
+                }
+            }
         }
     }
 }

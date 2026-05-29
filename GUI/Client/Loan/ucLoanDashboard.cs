@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Session;
 using System;
@@ -415,7 +415,14 @@ namespace GUI.Client.Loan
             txtAmount.Text = "";
             btnPassword.Visible = true;
             btnConfirm.Visible = false;
-            kryptonLabel1.Text = "Lưu ý: Bạn có thể nộp dư để khấu trừ vào nợ gốc";
+            if (_nextSchedule.DueDate < DateTime.Now)
+            {
+                kryptonLabel1.Text = "Bạn đã quá hạn hãy hoàn thành khoản vay chưa trả";
+            }
+            else
+            {
+                kryptonLabel1.Text = "Lưu ý: Bạn có thể nộp dư để khấu trừ vào nợ gốc";
+            }
             decimal amountToPay = _nextSchedule.TotalExpectedAmount - _nextSchedule.TotalPaidAmount;
             lblExpectedTotalAmount.Text = "Số tiền bạn cần phải trả trong kỳ này là: " + amountToPay.ToString("N0") + " VNĐ";
             txtAmount.ReadOnly = false;

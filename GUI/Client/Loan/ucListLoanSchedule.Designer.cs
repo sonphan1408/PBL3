@@ -39,7 +39,7 @@
             this.dgvLoanSchedules.Name = "dgvLoanSchedules";
             this.dgvLoanSchedules.RowHeadersWidth = 51;
             this.dgvLoanSchedules.RowTemplate.Height = 24;
-            this.dgvLoanSchedules.Size = new System.Drawing.Size(1247, 629);
+            this.dgvLoanSchedules.Size = new System.Drawing.Size(1285, 629);
             this.dgvLoanSchedules.TabIndex = 0;
             // 
             // ucListLoanSchedule

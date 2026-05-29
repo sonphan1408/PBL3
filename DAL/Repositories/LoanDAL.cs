@@ -1,4 +1,4 @@
-﻿using DTO.Models;
+using DTO.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -52,7 +52,7 @@ namespace DAL.Repositories
                 // 1. Join và lấy dữ liệu thô (để tránh lỗi Entity Framework)
                 var query = from s in db.LoanSchedules
                             join c in db.LoanContracts on s.ContractID equals c.ContractID
-                            where c.AccountNumber == accountNumber
+                            where c.AccountNumber == accountNumber && s.Status != "Paid"
                             orderby s.DueDate ascending
                             select new
                             {
@@ -70,7 +70,7 @@ namespace DAL.Repositories
                 foreach (var item in rawData)
                 {
                     var s = item.ScheduleEntity;
-                    decimal penaltyRate = item.InterestRate * 1.5m;
+                    decimal penaltyRate = item.InterestRate * 1.5m / 100m;
 
                     decimal principalPaid = s.PrincipalPaid ?? 0;
                     decimal interestPaid = s.InterestPaid ?? 0;
@@ -233,7 +233,7 @@ namespace DAL.Repositories
 
                        
                         var contract = db.LoanContracts.FirstOrDefault(c => c.ContractID == contractID);
-                        decimal penaltyRate = contract != null ? contract.InterestRate * 1.5m : 0;
+                        decimal penaltyRate = contract != null ? contract.InterestRate * 1.5m/100m : 0;
 
                        
                         DateTime today = DateTime.Now.Date;
@@ -350,7 +350,7 @@ namespace DAL.Repositories
                 var contract = db.LoanContracts.AsNoTracking().FirstOrDefault(c => c.ContractID == contractId);
                 if (contract == null) return new List<LoanSchedulesDTO>();
 
-                decimal penaltyRate = contract.InterestRate * 1.5m;
+                decimal penaltyRate = contract.InterestRate * 1.5m / 100m;
                 DateTime today = DateTime.Now.Date;
 
 
@@ -509,6 +509,7 @@ namespace DAL.Repositories
                         }
 
                         // Cập nhật các kỳ hạn vừa thanh toán
+                        var updatedScheduleIds = schedulesToUpdateDTO.Select(x => x.ScheduleID).ToList();
                         foreach (var dto in schedulesToUpdateDTO)
                         {
                             // Lấy ra kỳ hạn bằng ID (Giả sử DTO của bạn có thuộc tính ScheduleID)
@@ -529,7 +530,9 @@ namespace DAL.Repositories
                         {
                             // Xóa lịch cũ
                             var oldFutureSchedules = db.LoanSchedules
-                                                       .Where(s => s.ContractID == contractDTO.ContractID && s.Status == "Pending")
+                                                       .Where(s => s.ContractID == contractDTO.ContractID 
+                                                                && s.Status == "Pending" 
+                                                                && !updatedScheduleIds.Contains(s.ScheduleID))
                                                        .ToList();
                             db.LoanSchedules.RemoveRange(oldFutureSchedules);
 
