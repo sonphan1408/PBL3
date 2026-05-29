@@ -168,8 +168,8 @@ namespace GUI
 
                 foreach (var transaction in transactions)
                 {
-                    Panel transactionPanel = CreateTransactionPanel(transaction);
-                    transactionPanel.Width = Math.Max(400, pnlTransactions.Width - 60); // Ngăn lỗi ArgumentException khi Width < 60
+                    int panelWidth = Math.Max(400, pnlTransactions.Width - 60); // Tính chiều rộng trước
+                    Panel transactionPanel = CreateTransactionPanel(transaction, panelWidth);
                     pnlTransactions.Controls.Add(transactionPanel);
                 }
                 
@@ -181,13 +181,14 @@ namespace GUI
             }
         }
 
-        private Panel CreateTransactionPanel(TransactionDTO transaction)
+        private Panel CreateTransactionPanel(TransactionDTO transaction, int width)
         {
             try
             {
                 System.Diagnostics.Debug.WriteLine($"[ucBalanceChanges] Creating panel for transaction: {transaction.TransactionID}");
                 
                 Panel panel = new Panel();
+                panel.Width = width;
                 panel.Height = 90;
                 panel.Margin = new Padding(0, 0, 0, 10);
                 panel.BorderStyle = BorderStyle.FixedSingle;
@@ -242,17 +243,18 @@ namespace GUI
 
                 // Account info
                 Label lblAccountInfo = new Label();
-                lblAccountInfo.Location = new Point(90, 15);
-                lblAccountInfo.Size = new Size(400, 25);
+                lblAccountInfo.Location = new Point(100, 15);
+                lblAccountInfo.Size = new Size(panel.Width - 270, 25);
                 lblAccountInfo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
                 lblAccountInfo.ForeColor = textColor;
                 lblAccountInfo.Text = $"Tài khoản: {transaction.FromAccount}";
+                lblAccountInfo.AutoEllipsis = true;
                 panel.Controls.Add(lblAccountInfo);
 
                 // Description
                 Label lblDescription = new Label();
-                lblDescription.Location = new Point(90, 40);
-                lblDescription.Size = new Size(400, 40);
+                lblDescription.Location = new Point(100, 40);
+                lblDescription.Size = new Size(panel.Width - 270, 40);
                 lblDescription.Font = new Font("Segoe UI", 9F);
                 lblDescription.ForeColor = Color.FromArgb(100, 100, 100);
                 lblDescription.Text = $"Nội dung:\n{transaction.Description}";

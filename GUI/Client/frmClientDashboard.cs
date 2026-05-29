@@ -151,7 +151,7 @@ namespace GUI.Client
         private void SetupNotificationDropdown()
         {
             pnlNotificationDropdown = new Panel();
-            pnlNotificationDropdown.Size = new Size(350, 400); // Kích thước dropdown theo ảnh mockup
+            pnlNotificationDropdown.Size = new Size(450, 400); // Kéo dài panel thông báo để text không bị che lấp
             pnlNotificationDropdown.BackColor = Color.White;
             pnlNotificationDropdown.BorderStyle = BorderStyle.FixedSingle;
             pnlNotificationDropdown.Visible = false; // Mặc định ẩn
@@ -271,7 +271,7 @@ namespace GUI.Client
                 lblMessage.Text = noti.Message;
                 lblMessage.Font = new Font("Arial", 9F);
                 lblMessage.Location = new Point(50, 25);
-                lblMessage.Size = new Size(270, 40);
+                lblMessage.Size = new Size(pnlItem.Width - 60, 40); // Tự động co giãn theo độ rộng panel để không bị che
                 pnlItem.Controls.Add(lblMessage);
 
                 Label lblTime = new Label();
@@ -283,15 +283,10 @@ namespace GUI.Client
                 lblTime.TextAlign = ContentAlignment.TopRight;
                 pnlItem.Controls.Add(lblTime);
 
-                PictureBox picIcon = new PictureBox();
-                picIcon.Size = new Size(30, 30);
-                picIcon.Location = new Point(10, 15);
-                picIcon.SizeMode = PictureBoxSizeMode.Zoom;
-                
                 Label lblIcon = new Label();
-                lblIcon.Font = new Font("Segoe UI Emoji", 14F);
-                lblIcon.Size = new Size(30, 30);
-                lblIcon.Location = new Point(10, 15);
+                lblIcon.Font = new Font("Segoe UI Emoji", 15F); // Tăng xíu cho dễ nhìn
+                lblIcon.AutoSize = true; // Tự động dãn khung để chuông không bị cắt dưới đáy
+                lblIcon.Location = new Point(10, 12); // Chỉnh lại tọa độ Y cho cân đối
                 lblIcon.Text = GetIconForType(noti.Type);
                 pnlItem.Controls.Add(lblIcon);
 
@@ -342,8 +337,9 @@ namespace GUI.Client
             button7.Visible = false;
             button8.Visible = false;
             button9.Visible = false;
-            // Dịch btnNotifications lên ngay dưới Lịch sử
+            // Dịch btnNotifications và btnAccountInfo lên ngay dưới Lịch sử
             btnNotifications.Top = button6.Bottom;
+            btnAccountInfo.Top = btnNotifications.Bottom;
         }
 
         // --- CÁC SỰ KIỆN NÚT BẤM ---
@@ -414,15 +410,13 @@ namespace GUI.Client
             // Dịch btnNotifications theo trạng thái sub-menu
             if (!isExpanded)
             {
-                
                 btnNotifications.Top = button9.Bottom;
-                btnAccountInfo.Top = btnNotification.Bottom;
+                btnAccountInfo.Top = btnNotifications.Bottom;
             }
             else
             {
-                
                 btnNotifications.Top = button6.Bottom;
-                btnAccountInfo.Top = btnNotification.Bottom;
+                btnAccountInfo.Top = btnNotifications.Bottom;
             }
 
             // Chỉ highlight nút, không thay đổi nội dung bên phải
@@ -455,10 +449,8 @@ namespace GUI.Client
         { 
             SetupNotificationIcon();
 
-            // Ẩn sub-menu History khi khởi động
-            button7.Visible = false;
-            button8.Visible = false;
-            button9.Visible = false;
+            // Ẩn sub-menu History khi khởi động và chỉnh vị trí các nút bên dưới
+            HideHistorySubMenu();
 
             // ✅ Subscribe vào event từ UserSession
             UserSession.OnNotification += UserSession_OnNotification;
@@ -561,6 +553,9 @@ namespace GUI.Client
 
         private void btnLoan_Click(object sender, EventArgs e)
         {
+            HideHistorySubMenu();
+            lblPageTitle.Text = "Khoản vay";
+            SetActiveButton(btnLoan);
             addUserControl(loanDashboard);
         }
         private void button7_Click(object sender, EventArgs e)
@@ -595,22 +590,74 @@ namespace GUI.Client
 
         private void panel4_Paint_1(object sender, PaintEventArgs e)
         {
+            Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
+            int paddingX = 5;
+            int paddingY = 5;
+            int width = panel4.Width - paddingX * 2 - 5;
+            int height = panel4.Height - paddingY * 2;
+            int arcDiameter = height;
+
+            if (arcDiameter <= 0 || width <= 0) return;
+
+            using (System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath())
+            {
+                // Hình viên thuốc (pill shape)
+                path.AddArc(paddingX, paddingY, arcDiameter, arcDiameter, 90, 180);
+                path.AddArc(paddingX + width - arcDiameter, paddingY, arcDiameter, arcDiameter, 270, 180);
+                path.CloseFigure();
+
+                // Tạo hiệu ứng viền kính (Glass border)
+                using (Pen penOuter = new Pen(Color.FromArgb(80, 255, 255, 255), 3f))
+                {
+                    g.DrawPath(penOuter, path);
+                }
+                
+                using (Pen penInner = new Pen(Color.FromArgb(200, 255, 255, 255), 1f))
+                {
+                    g.DrawPath(penInner, path);
+                }
+
+                // Tô nền mờ nhẹ để nổi bật cụm thông tin
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(15, 255, 255, 255)))
+                {
+                    g.FillPath(brush, path);
+                }
+            }
+
+            // Làm tròn góc cho avatar (nếu chưa tròn)
+            if (picAvatar != null && picAvatar.Region == null)
+            {
+                System.Drawing.Drawing2D.GraphicsPath avatarPath = new System.Drawing.Drawing2D.GraphicsPath();
+                avatarPath.AddEllipse(0, 0, picAvatar.Width, picAvatar.Height);
+                picAvatar.Region = new Region(avatarPath);
+            }
+            
+            // Làm tròn góc cho nút chuông (nếu cần)
+            if (btnNotification != null && btnNotification.Region == null)
+            {
+                System.Drawing.Drawing2D.GraphicsPath bellPath = new System.Drawing.Drawing2D.GraphicsPath();
+                bellPath.AddEllipse(0, 0, btnNotification.Width, btnNotification.Height);
+                btnNotification.Region = new Region(bellPath);
+            }
         }
 
         private void btnAccountInfo_Click(object sender, EventArgs e)
         {
-            {
-                // 1. Tạo đối tượng của màn hình Thông tin tài khoản
-                accountinfo = new ucAccountInfo();
+            HideHistorySubMenu();
+            lblPageTitle.Text = "Thông tin tài khoản";
+            SetActiveButton(btnAccountInfo);
 
-                accountinfo.NavigateTo = addUserControl; // Truyền hàm điều hướng vào ucAccountInfo
+            // 1. Tạo đối tượng của màn hình Thông tin tài khoản
+            accountinfo = new ucAccountInfo();
 
-                // 3. Xóa ruột cũ của Panel chính và thêm ruột mới vào (giả sử panel bên phải của bạn tên là pnlMain)
-                pnlMain.Controls.Clear();
-                accountinfo.Dock = DockStyle.Fill; // Ép nó phình to lấp đầy panel
-                pnlMain.Controls.Add(accountinfo);
-            }
+            accountinfo.NavigateTo = addUserControl; // Truyền hàm điều hướng vào ucAccountInfo
+
+            // 3. Xóa ruột cũ của Panel chính và thêm ruột mới vào (giả sử panel bên phải của bạn tên là pnlMain)
+            pnlMain.Controls.Clear();
+            accountinfo.Dock = DockStyle.Fill; // Ép nó phình to lấp đầy panel
+            pnlMain.Controls.Add(accountinfo);
         }
     }
 }

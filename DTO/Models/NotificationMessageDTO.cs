@@ -52,28 +52,28 @@ namespace DTO.Models
             switch (OperationType?.ToLower())
             {
                 case "transfer":
-                    return $"Transfer successful: Sent {TransferAmount:N0} VND to {RecipientName} ({RecipientAccount})";
+                    return $"Chuyển khoản thành công: Đã chuyển {TransferAmount:N0} VND cho {RecipientName} ({RecipientAccount})";
 
                 case "savings":
-                    return $"Savings account created: {PrincipalAmount:N0} VND, {TermMonths} months, Rate: {InterestRate}%";
+                    return $"Mở sổ tiết kiệm thành công: {PrincipalAmount:N0} VND, {TermMonths} tháng, Lãi suất: {InterestRate}%";
 
                 case "payment":
-                    return $"Invoice payment successful: {PaymentAmount:N0} VND for Invoice {InvoiceId}";
+                    return $"Thanh toán thành công: {PaymentAmount:N0} VND cho hóa đơn {InvoiceId}";
 
                 case "deposit":
-                    return $"Deposit successful: {Amount:N0} VND - {Description}";
+                    return $"Nạp tiền thành công: {Amount:N0} VND - {Description}";
 
                 case "withdrawal":
-                    return $"Withdrawal successful: {Amount:N0} VND - {Description}";
+                    return $"Rút tiền thành công: {Amount:N0} VND - {Description}";
 
                 case "error":
-                    return $"Error: {ErrorMessage}";
+                    return $"Lỗi: {ErrorMessage}";
 
                 case "warning":
-                    return Description ?? "Warning notification";
+                    return Description ?? "Cảnh báo hệ thống";
 
                 default:
-                    return Description ?? "Operation completed";
+                    return Description ?? "Giao dịch hoàn tất";
             }
         }
     }
