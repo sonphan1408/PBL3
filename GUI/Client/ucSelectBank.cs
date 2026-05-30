@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using BLL.Services;
 using DTO.Models;
@@ -37,7 +38,7 @@ namespace GUI.Client
                 var httpBank = new ExternalBankDTO
                 {
                     BankCode = "HTTS",
-                    BankName = "HTTS Bank",
+                    BankName = "HTTS",
                     FullName = "HTTS Bank - Chuyển khoản nội bộ"
                 };
                 _banks.Insert(0, httpBank);
@@ -67,29 +68,43 @@ namespace GUI.Client
             {
                 Size = new System.Drawing.Size(350, 60),
                 Margin = new Padding(0, 5, 0, 5),
-                BorderStyle = BorderStyle.None,
+                BorderStyle = BorderStyle.FixedSingle,
                 BackColor = System.Drawing.Color.White,
                 Cursor = Cursors.Hand
             };
 
-            // Bank Icon (placeholder)
+            // Bank Icon
             PictureBox pbIcon = new PictureBox
             {
-                Size = new System.Drawing.Size(40, 40),
-                Location = new System.Drawing.Point(10, 10),
+                Size = new System.Drawing.Size(50, 50),
+                Location = new System.Drawing.Point(5, 5),
                 SizeMode = PictureBoxSizeMode.StretchImage,
-                BackColor = System.Drawing.Color.Transparent
+                BackColor = System.Drawing.Color.White,
+                BorderStyle = BorderStyle.None
             };
 
-            // Load icon from resources if available, otherwise use placeholder
+            // Load icon from file path based on BankName
             try
             {
-                pbIcon.Image = GUI.Properties.Resources.ResourceManager.GetObject(bank.BankCode.ToLower()) as System.Drawing.Image;
+                string iconPath = GetBankIconPath(bank.BankName);
+                System.Diagnostics.Debug.WriteLine($"Loading icon for {bank.BankName}: {iconPath}");
+
+                if (!string.IsNullOrEmpty(iconPath) && File.Exists(iconPath))
+                {
+                    // Load image directly using Bitmap
+                    pbIcon.Image = new System.Drawing.Bitmap(iconPath);
+                    System.Diagnostics.Debug.WriteLine($"✓ Loaded icon for {bank.BankName}");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"✗ Icon file not found for {bank.BankName}: {iconPath}");
+                    pbIcon.BackColor = System.Drawing.Color.LightGray;
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                // Use a default icon or leave empty
-                pbIcon.Image = null;
+                System.Diagnostics.Debug.WriteLine($"✗ Error loading bank icon for {bank.BankName}: {ex.Message}");
+                pbIcon.BackColor = System.Drawing.Color.LightGray;
             }
 
             // Bank Name Label
@@ -100,7 +115,8 @@ namespace GUI.Client
                 Size = new System.Drawing.Size(280, 25),
                 Font = new System.Drawing.Font("Arial", 12, System.Drawing.FontStyle.Bold),
                 BackColor = System.Drawing.Color.Transparent,
-                ForeColor = System.Drawing.Color.Black
+                ForeColor = System.Drawing.Color.Black,
+                AutoSize = false
             };
 
             // Bank Full Name Label
@@ -111,7 +127,8 @@ namespace GUI.Client
                 Size = new System.Drawing.Size(280, 20),
                 Font = new System.Drawing.Font("Arial", 9),
                 BackColor = System.Drawing.Color.Transparent,
-                ForeColor = System.Drawing.Color.Gray
+                ForeColor = System.Drawing.Color.Gray,
+                AutoSize = false
             };
 
             itemPanel.Controls.Add(pbIcon);
@@ -133,6 +150,43 @@ namespace GUI.Client
             // No need to update lblSelectedBank since pnlSelectBank is hidden
             // Trigger event to notify parent that a bank was selected
             BankSelected?.Invoke(this, EventArgs.Empty);
+        }
+
+        private string GetBankIconPath(string bankName)
+        {
+            if (string.IsNullOrEmpty(bankName))
+                return null;
+
+            // Try multiple path possibilities
+            string[] possiblePaths = new string[]
+            {
+                // Path 1: Relative to application startup path
+                Path.Combine(Application.StartupPath, "Resources", "Banks", $"{bankName}.png"),
+
+                // Path 2: Relative to application startup path (go up directories for DLL)
+                Path.Combine(Application.StartupPath, "..", "..", "Resources", "Banks", $"{bankName}.png"),
+
+                // Path 3: Relative to application base directory
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Banks", $"{bankName}.png"),
+
+                // Path 4: Relative to application base directory (go up for DLL)
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Resources", "Banks", $"{bankName}.png"),
+            };
+
+            foreach (string path in possiblePaths)
+            {
+                string fullPath = Path.GetFullPath(path);
+                System.Diagnostics.Debug.WriteLine($"Checking path for {bankName}: {fullPath} - Exists: {File.Exists(fullPath)}");
+
+                if (File.Exists(fullPath))
+                {
+                    System.Diagnostics.Debug.WriteLine($"Found icon at: {fullPath}");
+                    return fullPath;
+                }
+            }
+
+            System.Diagnostics.Debug.WriteLine($"No icon found for {bankName}");
+            return null;
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

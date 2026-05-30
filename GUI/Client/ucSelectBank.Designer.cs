@@ -39,7 +39,7 @@ namespace GUI.Client
             this.pnlBankList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlBankList.Location = new System.Drawing.Point(3, 36);
             this.pnlBankList.Name = "pnlBankList";
-            this.pnlBankList.Size = new System.Drawing.Size(345, 310);
+            this.pnlBankList.Size = new System.Drawing.Size(374, 214);
             this.pnlBankList.TabIndex = 1;
             this.pnlBankList.WrapContents = false;
             // 
@@ -49,7 +49,7 @@ namespace GUI.Client
             this.txtSearch.Font = new System.Drawing.Font("Arial", 10F);
             this.txtSearch.Location = new System.Drawing.Point(3, 3);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(345, 27);
+            this.txtSearch.Size = new System.Drawing.Size(374, 27);
             this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -61,7 +61,7 @@ namespace GUI.Client
             this.Controls.Add(this.pnlBankList);
             this.Controls.Add(this.txtSearch);
             this.Name = "ucSelectBank";
-            this.Size = new System.Drawing.Size(350, 348);
+            this.Size = new System.Drawing.Size(380, 250);
             this.ResumeLayout(false);
             this.PerformLayout();
 

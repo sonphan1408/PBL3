@@ -49,7 +49,7 @@ namespace GUI.Client
             // btnTim
             // 
             this.btnTim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTim.Location = new System.Drawing.Point(654, 318);
+            this.btnTim.Location = new System.Drawing.Point(1103, 304);
             this.btnTim.Name = "btnTim";
             this.btnTim.Size = new System.Drawing.Size(33, 31);
             this.btnTim.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
@@ -72,7 +72,7 @@ namespace GUI.Client
             this.txtTenNguoiNhan.AutoSize = true;
             this.txtTenNguoiNhan.BackColor = System.Drawing.Color.Transparent;
             this.txtTenNguoiNhan.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTenNguoiNhan.Location = new System.Drawing.Point(94, 428);
+            this.txtTenNguoiNhan.Location = new System.Drawing.Point(151, 429);
             this.txtTenNguoiNhan.Name = "txtTenNguoiNhan";
             this.txtTenNguoiNhan.Size = new System.Drawing.Size(159, 33);
             this.txtTenNguoiNhan.TabIndex = 2;
@@ -121,9 +121,9 @@ namespace GUI.Client
             // txtNDCK
             // 
             this.txtNDCK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNDCK.Location = new System.Drawing.Point(795, 622);
+            this.txtNDCK.Location = new System.Drawing.Point(702, 618);
             this.txtNDCK.Name = "txtNDCK";
-            this.txtNDCK.Size = new System.Drawing.Size(354, 35);
+            this.txtNDCK.Size = new System.Drawing.Size(447, 35);
             this.txtNDCK.StateCommon.Content.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNDCK.TabIndex = 7;
             this.txtNDCK.Text = "";
@@ -131,9 +131,9 @@ namespace GUI.Client
             // txtSoTien
             // 
             this.txtSoTien.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtSoTien.Location = new System.Drawing.Point(242, 618);
+            this.txtSoTien.Location = new System.Drawing.Point(191, 617);
             this.txtSoTien.Name = "txtSoTien";
-            this.txtSoTien.Size = new System.Drawing.Size(175, 39);
+            this.txtSoTien.Size = new System.Drawing.Size(292, 39);
             this.txtSoTien.StateCommon.Content.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSoTien.TabIndex = 1;
             this.txtSoTien.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -159,7 +159,7 @@ namespace GUI.Client
             this.lblNganHang.BackColor = System.Drawing.Color.Transparent;
             this.lblNganHang.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblNganHang.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNganHang.Location = new System.Drawing.Point(80, 307);
+            this.lblNganHang.Location = new System.Drawing.Point(151, 318);
             this.lblNganHang.Name = "lblNganHang";
             this.lblNganHang.Size = new System.Drawing.Size(236, 33);
             this.lblNganHang.TabIndex = 11;
@@ -176,7 +176,7 @@ namespace GUI.Client
             this.btnSelectBank.FlatAppearance.BorderSize = 0;
             this.btnSelectBank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectBank.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnSelectBank.Location = new System.Drawing.Point(322, 314);
+            this.btnSelectBank.Location = new System.Drawing.Point(528, 307);
             this.btnSelectBank.Name = "btnSelectBank";
             this.btnSelectBank.Size = new System.Drawing.Size(28, 28);
             this.btnSelectBank.TabIndex = 12;
@@ -186,9 +186,9 @@ namespace GUI.Client
             // 
             // txtIDNguoiNhan
             // 
-            this.txtIDNguoiNhan.Location = new System.Drawing.Point(778, 314);
+            this.txtIDNguoiNhan.Location = new System.Drawing.Point(795, 312);
             this.txtIDNguoiNhan.Name = "txtIDNguoiNhan";
-            this.txtIDNguoiNhan.Size = new System.Drawing.Size(256, 39);
+            this.txtIDNguoiNhan.Size = new System.Drawing.Size(376, 39);
             this.txtIDNguoiNhan.StateCommon.Content.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtIDNguoiNhan.TabIndex = 13;
             // 
@@ -199,7 +199,7 @@ namespace GUI.Client
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(82, 284);
+            this.label1.Location = new System.Drawing.Point(103, 284);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 23);
             this.label1.TabIndex = 14;
@@ -212,7 +212,7 @@ namespace GUI.Client
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(774, 284);
+            this.label2.Location = new System.Drawing.Point(753, 284);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(137, 23);
             this.label2.TabIndex = 15;
@@ -225,7 +225,7 @@ namespace GUI.Client
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(121, 629);
+            this.label3.Location = new System.Drawing.Point(94, 623);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 23);
             this.label3.TabIndex = 16;
@@ -238,7 +238,7 @@ namespace GUI.Client
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(82, 396);
+            this.label4.Location = new System.Drawing.Point(103, 396);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(147, 23);
             this.label4.TabIndex = 17;
@@ -251,7 +251,7 @@ namespace GUI.Client
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label5.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(423, 618);
+            this.label5.Location = new System.Drawing.Point(499, 622);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 32);
             this.label5.TabIndex = 18;
@@ -264,7 +264,7 @@ namespace GUI.Client
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(703, 627);
+            this.label6.Location = new System.Drawing.Point(727, 624);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(86, 23);
             this.label6.TabIndex = 19;

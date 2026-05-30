@@ -30,7 +30,7 @@ namespace GUI.Client
             {
                 _ucSelectBank = new ucSelectBank();
                 _ucSelectBank.Location = new System.Drawing.Point(94, 334);
-                _ucSelectBank.Size = new System.Drawing.Size(250, 280);
+                _ucSelectBank.Size = new System.Drawing.Size(380, 250);
                 _ucSelectBank.BankSelected += (s, e) =>
                 {
                     _selectedBank = _ucSelectBank.SelectedBank;
@@ -78,7 +78,7 @@ namespace GUI.Client
                 {
                     _ucSelectBank.Location = new System.Drawing.Point(
                         lblNganHang.Location.X,
-                        lblNganHang.Location.Y + lblNganHang.Height - 70
+                        lblNganHang.Location.Y + lblNganHang.Height + 5
                     );
                 }
 
