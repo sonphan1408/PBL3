@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -269,6 +269,15 @@ namespace GUI.Client
 
                 MessageBox.Show("Thanh toán hóa đơn internet thành công!", "Giao dịch thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                var notifData = new DTO.Models.NotificationMessageDTO
+                {
+                    OperationType = "payment",
+                    NotificationType = "transaction",
+                    PaymentAmount = _selectedAmount,
+                    InvoiceId = "Internet - " + billCode
+                };
+                GUI.Session.UserSession.RaiseNotification(notifData);
+
                 txtCustomerCode.Clear();
                 SetAdvancedFormVisible(false);
                 LoadPendingInvoices(1);
@@ -295,3 +304,5 @@ namespace GUI.Client
         }
     }
 }
+
+

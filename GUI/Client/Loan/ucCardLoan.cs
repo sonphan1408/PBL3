@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using System;
 using System.Collections.Generic;
@@ -37,6 +37,10 @@ namespace GUI.Client.Loan
             else if (status == "Overdue")
             {
                 status = "Quá hạn";
+            }
+            else if (status == "Closed")
+            {
+                status = "Đã tất toán";
             }
             lblStartDate.Text =  status;
             lblRemainingBalance.Text =  loanContract.RemainingBalance.ToString("N0") + " VNĐ";

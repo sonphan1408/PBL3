@@ -106,6 +106,17 @@ namespace GUI
                 if (success)
                 {
                     MessageBox.Show("Tài khoản tiết kiệm đã được tạo thành công!.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    var notifData = new DTO.Models.NotificationMessageDTO
+                    {
+                        OperationType = "savings",
+                        NotificationType = "success",
+                        PrincipalAmount = Data.PrincipalAmount,
+                        TermMonths = Data.TermMonths,
+                        InterestRate = Data.InterestRate
+                    };
+                    UserSession.RaiseNotification(notifData);
+                    
                     panelCheckPassword.Visible = false;
                     txtCheckPassword.Clear();
 

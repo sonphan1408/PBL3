@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Session;
 using System;
@@ -224,6 +224,15 @@ namespace GUI
                 {
                     UserSession.AddBalance(finalAmount);
                     MessageBox.Show($"Tất toán thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    var notifData = new DTO.Models.NotificationMessageDTO
+                    {
+                        OperationType = "withdrawal",
+                        NotificationType = "transaction",
+                        Amount = finalAmount,
+                        Description = $"Tất toán sổ tiết kiệm ({_savingData.AccountNumber})"
+                    };
+                    GUI.Session.UserSession.RaiseNotification(notifData);
 
                     _savingData.Status = "Closed"; 
                     _savingData.CurrentBalance = 0m; 

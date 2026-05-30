@@ -64,11 +64,11 @@ namespace GUI
                 }
 
                 // Update Balance label
-                lblBalanceAmount.Text = "$" + UserSession.CurrentUser.Balance.ToString("F2");
+                lblBalanceAmount.Text = UserSession.CurrentUser.Balance.ToString("N0") + " VNĐ";
 
                 // For Digital Savings, you may need to calculate from user's savings accounts
                 // For now, we'll display 0 if not implemented
-                lblDigitalSavingsAmount.Text = "$0.00";
+                lblDigitalSavingsAmount.Text = "0 VNĐ";
             }
             catch (Exception ex)
             {
@@ -165,8 +165,10 @@ namespace GUI
                     string invoiceId = "INV" + invoice.InvoiceID.ToString().PadLeft(4, '0');
                     string billingTo = invoice.ProviderName ?? "N/A";
                     string status = invoice.Status ?? "UNKNOWN";
+                    if (status == "Paid") status = "Đã thanh toán";
+                    else if (status == "Pending") status = "Chờ xử lý";
                     string paymentDate = invoice.DueDate.HasValue && invoice.DueDate.Value != DateTime.MinValue ? invoice.DueDate.Value.ToString("yyyy-MM-dd") : "-";
-                    string amount = "$" + invoice.Amount.ToString("F2");
+                    string amount = invoice.Amount.ToString("N0") + " VNĐ";
                     string paymentFor = "CHUYỂN KHOẢN";
 
                     dgvPaymentHistory.Rows.Add(invoiceId, billingTo, status, paymentDate, amount, paymentFor);

@@ -210,13 +210,13 @@ namespace GUI.Client
             // 2. Nút Xem tất cả (Cố định dưới cùng)
             Button btnViewAll = new Button();
             btnViewAll.Text = "Xem tất cả";
-            btnViewAll.Size = new Size(pnlNotificationDropdown.Width, 40);
-            btnViewAll.Location = new Point(0, pnlNotificationDropdown.Height - 40);
+            btnViewAll.Size = new Size(pnlNotificationDropdown.Width, 50);
+            btnViewAll.Location = new Point(0, pnlNotificationDropdown.Height - 50);
             btnViewAll.FlatStyle = FlatStyle.Flat;
             btnViewAll.FlatAppearance.BorderSize = 0;
-            btnViewAll.ForeColor = Color.Red;
-            btnViewAll.BackColor = Color.White;
-            btnViewAll.Font = new Font("Arial", 10F, FontStyle.Bold);
+            btnViewAll.ForeColor = Color.FromArgb(0, 105, 217);
+            btnViewAll.BackColor = Color.FromArgb(240, 248, 255);
+            btnViewAll.Font = new Font("Arial", 11F, FontStyle.Bold);
             btnViewAll.Cursor = Cursors.Hand;
             btnViewAll.Click += (s, e) => {
                 pnlNotificationDropdown.Visible = false;
@@ -226,7 +226,7 @@ namespace GUI.Client
 
             // 3. Vùng chứa danh sách thông báo (Cuộn được)
             Panel pnlScroll = new Panel();
-            pnlScroll.Size = new Size(pnlNotificationDropdown.Width, pnlNotificationDropdown.Height - 80);
+            pnlScroll.Size = new Size(pnlNotificationDropdown.Width, pnlNotificationDropdown.Height - 90);
             pnlScroll.Location = new Point(0, 40);
             pnlScroll.AutoScroll = true;
             pnlScroll.BackColor = Color.White;
@@ -246,52 +246,106 @@ namespace GUI.Client
                 return;
             }
 
-            int yPos = 0; // Bắt đầu từ 0 bên trong pnlScroll
+            int yPos = 5; // Bắt đầu từ 5 bên trong pnlScroll
             foreach (var noti in notifications)
             {
                 Panel pnlItem = new Panel();
-                pnlItem.Size = new Size(pnlNotificationDropdown.Width - 25, 70);
-                pnlItem.Location = new Point(10, yPos);
-                pnlItem.BackColor = noti.IsRead ? Color.White : Color.AliceBlue; // Nổi bật thông báo chưa đọc
+                pnlItem.Size = new Size(pnlNotificationDropdown.Width - 25, 95);
+                pnlItem.Location = new Point(5, yPos);
+                pnlItem.BackColor = Color.FromArgb(242, 253, 252);
+                pnlItem.Margin = new Padding(0, 0, 0, 10);
+                
+                // Vẽ thanh màu xanh dương bên trái
+                pnlItem.Paint += (s, e) => {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, 180, 240)), 0, 20, 4, pnlItem.Height - 40);
+                };
 
                 string displayType = noti.Type;
-                if (displayType.ToLower().Contains("transaction")) displayType = "Giao dịch";
+                if (displayType.ToLower().Contains("transaction") || displayType.ToLower().Contains("transfer")) displayType = "Chuyển khoản";
                 else if (displayType.ToLower().Contains("deposit")) displayType = "Nạp tiền";
                 else if (displayType.ToLower().Contains("withdraw")) displayType = "Rút tiền";
                 else if (displayType.ToLower().Contains("saving")) displayType = "Tiết kiệm";
                 
                 Label lblType = new Label();
                 lblType.Text = displayType;
-                lblType.Font = new Font("Arial", 10F, FontStyle.Bold);
-                lblType.Location = new Point(50, 5);
+                lblType.Font = new Font("Arial", 11F, FontStyle.Bold);
+                lblType.ForeColor = Color.Black;
+                lblType.Location = new Point(70, 15);
                 lblType.AutoSize = true;
                 pnlItem.Controls.Add(lblType);
 
                 Label lblMessage = new Label();
                 lblMessage.Text = noti.Message;
                 lblMessage.Font = new Font("Arial", 9F);
-                lblMessage.Location = new Point(50, 25);
-                lblMessage.Size = new Size(pnlItem.Width - 60, 40); // Tự động co giãn theo độ rộng panel để không bị che
+                lblMessage.ForeColor = Color.FromArgb(120, 130, 130);
+                lblMessage.Location = new Point(70, 40);
+                lblMessage.Size = new Size(pnlItem.Width - 85, 45); // Tự động co giãn theo độ rộng panel để không bị che
                 pnlItem.Controls.Add(lblMessage);
 
                 Label lblTime = new Label();
                 lblTime.Text = GetTimeAgo(noti.CreatedAt);
-                lblTime.Font = new Font("Arial", 8F, FontStyle.Italic);
-                lblTime.ForeColor = Color.Gray;
-                lblTime.Location = new Point(pnlItem.Width - 100, 5);
-                lblTime.Size = new Size(95, 15);
+                lblTime.Font = new Font("Arial", 8.5F, FontStyle.Bold);
+                lblTime.ForeColor = Color.FromArgb(140, 150, 150);
+                lblTime.Location = new Point(pnlItem.Width - 110, 15);
+                lblTime.Size = new Size(100, 20);
                 lblTime.TextAlign = ContentAlignment.TopRight;
                 pnlItem.Controls.Add(lblTime);
 
-                Label lblIcon = new Label();
-                lblIcon.Font = new Font("Segoe UI Emoji", 15F); // Tăng xíu cho dễ nhìn
-                lblIcon.AutoSize = true; // Tự động dãn khung để chuông không bị cắt dưới đáy
-                lblIcon.Location = new Point(10, 12); // Chỉnh lại tọa độ Y cho cân đối
-                lblIcon.Text = GetIconForType(noti.Type);
-                pnlItem.Controls.Add(lblIcon);
+                // Icon tự vẽ giống trong thiết kế
+                PictureBox picIcon = new PictureBox();
+                picIcon.Size = new Size(40, 40);
+                picIcon.Location = new Point(15, 15);
+                picIcon.BackColor = Color.Transparent;
+                
+                bool isSaving = displayType == "Tiết kiệm";
+                picIcon.Paint += (s, e) => {
+                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    
+                    // Nền bo góc vuông (màu xanh nhạt)
+                    System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+                    int radius = 10;
+                    gp.AddArc(0, 0, radius, radius, 180, 90);
+                    gp.AddArc(picIcon.Width - radius, 0, radius, radius, 270, 90);
+                    gp.AddArc(picIcon.Width - radius, picIcon.Height - radius, radius, radius, 0, 90);
+                    gp.AddArc(0, picIcon.Height - radius, radius, radius, 90, 90);
+                    gp.CloseFigure();
+                    
+                    e.Graphics.FillPath(new SolidBrush(Color.FromArgb(220, 248, 235)), gp);
+                    e.Graphics.DrawPath(new Pen(Color.FromArgb(180, 235, 200), 1), gp);
+                    
+                    // Vòng tròn xanh lá ở giữa
+                    int circleSize = 26;
+                    int cx = (picIcon.Width - circleSize) / 2;
+                    int cy = (picIcon.Height - circleSize) / 2;
+                    e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(30, 215, 96)), cx, cy, circleSize, circleSize);
+                    
+                    // Vẽ checkmark màu trắng
+                    Pen whitePen = new Pen(Color.White, 2.5f);
+                    whitePen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+                    whitePen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+                    whitePen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+                    
+                    if (isSaving)
+                    {
+                        // Icon tiết kiệm (kiểu lịch/hộp)
+                        e.Graphics.DrawRectangle(new Pen(Color.White, 1.5f), cx + 6, cy + 8, 14, 11);
+                        e.Graphics.DrawLine(new Pen(Color.White, 1.5f), cx + 6, cy + 12, cx + 20, cy + 12);
+                        e.Graphics.DrawLine(new Pen(Color.White, 1.5f), cx + 10, cy + 6, cx + 10, cy + 9);
+                        e.Graphics.DrawLine(new Pen(Color.White, 1.5f), cx + 16, cy + 6, cx + 16, cy + 9);
+                        e.Graphics.DrawLine(new Pen(Color.White, 1.5f), cx + 10, cy + 15, cx + 12, cy + 17);
+                        e.Graphics.DrawLine(new Pen(Color.White, 1.5f), cx + 12, cy + 17, cx + 16, cy + 14);
+                    }
+                    else
+                    {
+                        // Icon checkmark
+                        e.Graphics.DrawLine(whitePen, cx + 7, cy + 13, cx + 11, cy + 17);
+                        e.Graphics.DrawLine(whitePen, cx + 11, cy + 17, cx + 19, cy + 9);
+                    }
+                };
+                pnlItem.Controls.Add(picIcon);
 
                 pnlScroll.Controls.Add(pnlItem);
-                yPos += 75;
+                yPos += 105; // 95 (chiều cao panel) + 10 (khoảng cách)
             }
         }
 

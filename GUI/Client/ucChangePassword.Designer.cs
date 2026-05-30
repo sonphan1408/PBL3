@@ -1,4 +1,4 @@
-﻿namespace GUI.Client
+namespace GUI.Client
 {
     partial class ucChangePassword
     {
@@ -153,7 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::GUI.Properties.Resources.ChangePassword;
+            // this.BackgroundImage = global::GUI.Properties.Resources.ChangePassword;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.Password);
             this.Controls.Add(this.Editprofile);

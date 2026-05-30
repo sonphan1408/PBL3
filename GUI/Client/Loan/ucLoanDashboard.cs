@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Session;
 using System;
@@ -290,6 +290,15 @@ namespace GUI.Client.Loan
                 }
                 // Thanh toán khoản vay!
                 MessageBox.Show("Tất toán khoản vay thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                var notifData = new DTO.Models.NotificationMessageDTO
+                {
+                    OperationType = "withdrawal",
+                    NotificationType = "transaction",
+                    Amount = actualAmountDeducted,
+                    Description = $"Tất toán khoản vay ({currentContract.ContractID})"
+                };
+                GUI.Session.UserSession.RaiseNotification(notifData);
                 panelPaidAmount.Visible = false;
                 txtCheckPassword.Clear();
 

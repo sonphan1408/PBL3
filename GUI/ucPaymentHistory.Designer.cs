@@ -241,7 +241,7 @@ namespace GUI
             this.lblPaymentFor.Name = "lblPaymentFor";
             this.lblPaymentFor.Size = new System.Drawing.Size(130, 24);
             this.lblPaymentFor.TabIndex = 5;
-            this.lblPaymentFor.Text = "Payment For";
+            this.lblPaymentFor.Text = "Nội dung";
             // 
             // lblAmount
             // 
@@ -251,7 +251,7 @@ namespace GUI
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(83, 24);
             this.lblAmount.TabIndex = 4;
-            this.lblAmount.Text = "Amount";
+            this.lblAmount.Text = "Số tiền";
             // 
             // lblPaymentDate
             // 
@@ -261,7 +261,7 @@ namespace GUI
             this.lblPaymentDate.Name = "lblPaymentDate";
             this.lblPaymentDate.Size = new System.Drawing.Size(141, 24);
             this.lblPaymentDate.TabIndex = 3;
-            this.lblPaymentDate.Text = "Payment Date";
+            this.lblPaymentDate.Text = "Ngày thanh toán";
             // 
             // lblStatus
             // 
@@ -271,7 +271,7 @@ namespace GUI
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(71, 24);
             this.lblStatus.TabIndex = 2;
-            this.lblStatus.Text = "Status";
+            this.lblStatus.Text = "Trạng thái";
             // 
             // lblBillingTo
             // 
@@ -281,7 +281,7 @@ namespace GUI
             this.lblBillingTo.Name = "lblBillingTo";
             this.lblBillingTo.Size = new System.Drawing.Size(98, 24);
             this.lblBillingTo.TabIndex = 1;
-            this.lblBillingTo.Text = "Billing To";
+            this.lblBillingTo.Text = "Đơn vị nhận";
             // 
             // lblInvoice
             // 
@@ -291,7 +291,7 @@ namespace GUI
             this.lblInvoice.Name = "lblInvoice";
             this.lblInvoice.Size = new System.Drawing.Size(77, 24);
             this.lblInvoice.TabIndex = 0;
-            this.lblInvoice.Text = "Invoice";
+            this.lblInvoice.Text = "Mã hóa đơn";
             // 
             // pictureBox1
             // 

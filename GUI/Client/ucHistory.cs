@@ -153,6 +153,7 @@ namespace GUI.Client
             headerStyle.SelectionBackColor = System.Drawing.Color.FromArgb(25, 55, 99);
             dataGridView1.ColumnHeadersDefaultCellStyle = headerStyle;
             dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Alternating rows: original white / light gray
             dataGridView1.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9f);
@@ -247,7 +248,7 @@ namespace GUI.Client
 
                 // Load balance
                 decimal balance = AccountService.GetAccountBalance(accountNumber);
-                lblBalanceAmount.Text = $"${balance:N2}";
+                lblBalanceAmount.Text = $"{balance:N2} VNĐ";
                 System.Diagnostics.Debug.WriteLine($"[ucHistory] Balance loaded: {balance}");
 
                 // Load transactions
@@ -294,11 +295,20 @@ namespace GUI.Client
 
                     string txId = transaction.TransactionID.ToString();
                     row.Cells["TransactionID"].Value = txId.Substring(0, Math.Min(8, txId.Length));
-                    row.Cells["TransactionType"].Value = transaction.TypeID;
+                    string txType = "Khác";
+                    switch(transaction.TypeID)
+                    {
+                        case 1: txType = "Chuyển tiền nội bộ"; break;
+                        case 3: txType = "Chuyển khoản liên ngân hàng"; break;
+                        case 4: txType = "Thanh toán hóa đơn"; break;
+                        case 5: txType = "Sổ tiết kiệm"; break;
+                        case 6: txType = "Khoản vay"; break;
+                    }
+                    row.Cells["TransactionType"].Value = txType;
                     row.Cells["FromAccount"].Value = transaction.FromAccount ?? "-";
                     row.Cells["ToAccount"].Value = transaction.ToAccount ?? "-";
                     row.Cells["Amount"].Value = transaction.Amount.ToString("N0");
-                    row.Cells["Status"].Value = "True";
+                    row.Cells["Status"].Value = "Thành công";
                     row.Cells["TimeRequest"].Value = transaction.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss");
                     row.Cells["TimeApprove"].Value = transaction.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss");
 

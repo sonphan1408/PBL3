@@ -657,6 +657,9 @@
   <ItemGroup>
     <None Include="Resources\f9bb81e576c1a361c61a8c08945b2c48-search-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5e8d3067-e393-482c-bd98-9ba6150ac11e.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

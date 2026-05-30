@@ -113,6 +113,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _5e8d3067_e393_482c_bd98_9ba6150ac11e {
+            get {
+                object obj = ResourceManager.GetObject("5e8d3067-e393-482c-bd98-9ba6150ac11e", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _647600484_930136546239914_1486468665117018077_n {
             get {
                 object obj = ResourceManager.GetObject("647600484_930136546239914_1486468665117018077_n", resourceCulture);
@@ -184,16 +194,6 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ChangePassword {
-            get {
-                object obj = ResourceManager.GetObject("ChangePassword", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap canva_magnifier_outline_icon_MAEgJresBTg {
             get {
                 object obj = ResourceManager.GetObject("canva-magnifier-outline-icon-MAEgJresBTg", resourceCulture);
@@ -214,9 +214,9 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gemini_Generated_Image_ {
+        internal static System.Drawing.Bitmap f9bb81e576c1a361c61a8c08945b2c48_search_icon {
             get {
-                object obj = ResourceManager.GetObject("Gemini_Generated_Image_", resourceCulture);
+                object obj = ResourceManager.GetObject("f9bb81e576c1a361c61a8c08945b2c48-search-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -224,9 +224,9 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap f9bb81e576c1a361c61a8c08945b2c48_search_icon {
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_ {
             get {
-                object obj = ResourceManager.GetObject("f9bb81e576c1a361c61a8c08945b2c48-search-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -434,36 +434,6 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pig {
-            get {
-                object obj = ResourceManager.GetObject("pig", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pig1 {
-            get {
-                object obj = ResourceManager.GetObject("pig1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pig2 {
-            get {
-                object obj = ResourceManager.GetObject("pig2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Payment {
             get {
                 object obj = ResourceManager.GetObject("Payment", resourceCulture);
@@ -504,9 +474,29 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PaymentWaterNew {
+        internal static System.Drawing.Bitmap pig {
             get {
-                object obj = ResourceManager.GetObject("PaymentWaterNew", resourceCulture);
+                object obj = ResourceManager.GetObject("pig", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pig1 {
+            get {
+                object obj = ResourceManager.GetObject("pig1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pig2 {
+            get {
+                object obj = ResourceManager.GetObject("pig2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

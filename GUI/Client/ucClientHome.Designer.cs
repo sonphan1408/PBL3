@@ -605,7 +605,7 @@ namespace GUI.Client
             this.LLSaving.AutoSize = true;
             this.LLSaving.BackColor = System.Drawing.Color.Transparent;
             this.LLSaving.Font = new System.Drawing.Font("Times New Roman", 9.969231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LLSaving.Location = new System.Drawing.Point(203, 18);
+            this.LLSaving.Location = new System.Drawing.Point(310, 20);
             this.LLSaving.Name = "LLSaving";
             this.LLSaving.Size = new System.Drawing.Size(82, 19);
             this.LLSaving.TabIndex = 3;

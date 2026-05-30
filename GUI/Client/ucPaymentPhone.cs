@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -352,6 +352,15 @@ namespace GUI.Client
                     if (dashboardForm != null) dashboardForm.RefreshDashboardBalance();
 
                     MessageBox.Show($"Đã nạp thành công {_selectedAmount.ToString("N0")} VND cho thuê bao {phoneNumber}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    var notifData = new DTO.Models.NotificationMessageDTO
+                    {
+                        OperationType = "payment",
+                        NotificationType = "transaction",
+                        PaymentAmount = _selectedAmount,
+                        InvoiceId = "Nạp thẻ ĐT - " + phoneNumber
+                    };
+                    GUI.Session.UserSession.RaiseNotification(notifData);
 
                     txtPhoneNumber.Clear();
                     if (_selectedGroup != null) _selectedGroup.StateCommon.Back.Color1 = Color.White;

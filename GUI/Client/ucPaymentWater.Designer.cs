@@ -1,4 +1,4 @@
-﻿namespace GUI.Client
+namespace GUI.Client
 {
     partial class ucPaymentWater
     {
@@ -195,7 +195,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::GUI.Properties.Resources.PaymentWaterNew;
+            // this.BackgroundImage = global::GUI.Properties.Resources.PaymentWaterNew;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.txtCustomerCode);
             this.Controls.Add(this.lbCustomerCode);
