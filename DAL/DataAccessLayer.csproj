@@ -157,7 +157,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="App.config" />
     <None Include="packages.config" />
     <EntityDeploy Include="PBL3Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
