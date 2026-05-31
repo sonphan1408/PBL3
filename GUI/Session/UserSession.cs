@@ -139,8 +139,8 @@ namespace GUI.Session
                 var trans = new DTO.Models.InternalTransactionDTO
                 {
                     TransactionID = Guid.NewGuid(),
-                    FromAccount = isExpense ? CurrentUser.AccountNumber : toAccount,
-                    ToAccount = isExpense ? toAccount : CurrentUser.AccountNumber,
+                    FromAccount = CurrentUser.AccountNumber,
+                    ToAccount = CurrentUser.AccountNumber,
                     TypeID = typeId,
                     Amount = amount,
                     BalanceBefore = CurrentUser.Balance + (isExpense ? amount : -amount),

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using BLL.Services;
 using DTO.Models;
@@ -284,9 +285,24 @@ namespace GUI.Client
             {
                 dataGridView1.Rows.Clear();
 
+                // Xóa label cũ nếu có
+                var oldLabel = dataGridView1.Controls["lblEmptyData"];
+                if (oldLabel != null) dataGridView1.Controls.Remove(oldLabel);
+
                 if (transactions == null || transactions.Count == 0)
                 {
                     System.Diagnostics.Debug.WriteLine("[ucHistory] No transactions to display");
+                    Label lblEmpty = new Label();
+                    lblEmpty.Name = "lblEmptyData";
+                    lblEmpty.Text = "Không có dữ liệu giao dịch.";
+                    lblEmpty.Font = new Font("Segoe UI", 12F, FontStyle.Italic);
+                    lblEmpty.ForeColor = Color.Gray;
+                    lblEmpty.AutoSize = false;
+                    lblEmpty.TextAlign = ContentAlignment.MiddleCenter;
+                    lblEmpty.Dock = DockStyle.Fill;
+                    lblEmpty.BackColor = Color.White;
+                    dataGridView1.Controls.Add(lblEmpty);
+                    lblEmpty.BringToFront();
                     return;
                 }
 

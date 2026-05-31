@@ -41,7 +41,6 @@ namespace DAL.Repositories
                     return db.Notifications
                         .Where(n => n.ReceiverAccount == accNum)
                         .OrderByDescending(n => n.CreatedAt)
-                        .Take(5)
                         .ToList()  // Execute query FIRST, then map in memory
                         .Select(n => new NotificationDTO
                         {

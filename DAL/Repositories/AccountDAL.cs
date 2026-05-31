@@ -1,4 +1,4 @@
-﻿using DTO.Models;
+using DTO.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,6 +86,26 @@ namespace DAL.Repositories
             catch (Exception ex)
             {
                 throw new Exception("Lỗi khi lấy danh sách tài khoản: " + ex.Message);
+            }
+        }
+
+        public static string GetUsernameByAccountNumber(string accountNumber)
+        {
+            try
+            {
+                using (var db = new DigitalBankingDBEntities())
+                {
+                    var account = db.Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
+                    if (account != null)
+                    {
+                        return account.Username;
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi lấy username: " + ex.Message);
             }
         }
 

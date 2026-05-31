@@ -28,6 +28,11 @@ namespace BLL.Services
             return AccountDAL.GetFullNameByCustomerId(customerId);
         }
 
+        public static string GetUsernameByAccountNumber(string accountNumber)
+        {
+            return AccountDAL.GetUsernameByAccountNumber(accountNumber);
+        }
+
         public static string GetPasswordByAccountNumber(string accountNumber)
         {
             return AccountDAL.GetPasswordByAccountNumber(accountNumber);

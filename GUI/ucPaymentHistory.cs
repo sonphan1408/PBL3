@@ -151,11 +151,27 @@ namespace GUI
                 string accountNumber = UserSession.CurrentUser.AccountNumber;
 
                 // Get invoices from database
-                var invoices = _paymentService.GetInvoicesByAccount(accountNumber);
+                var invoices = _paymentService.GetInvoicesByAccount(accountNumber)
+                                              .Where(i => i.Status != null && i.Status.ToLower() == "paid")
+                                              .ToList();
+
+                // Xóa label cũ nếu có
+                var oldLabel = dgvPaymentHistory.Controls["lblEmptyData"];
+                if (oldLabel != null) dgvPaymentHistory.Controls.Remove(oldLabel);
 
                 if (invoices == null || invoices.Count == 0)
                 {
-                    MessageBox.Show("Không có dữ liệu thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Label lblEmpty = new Label();
+                    lblEmpty.Name = "lblEmptyData";
+                    lblEmpty.Text = "Không có dữ liệu thanh toán.";
+                    lblEmpty.Font = new Font("Segoe UI", 12F, FontStyle.Italic);
+                    lblEmpty.ForeColor = Color.Gray;
+                    lblEmpty.AutoSize = false;
+                    lblEmpty.TextAlign = ContentAlignment.MiddleCenter;
+                    lblEmpty.Dock = DockStyle.Fill;
+                    lblEmpty.BackColor = Color.White;
+                    dgvPaymentHistory.Controls.Add(lblEmpty);
+                    lblEmpty.BringToFront();
                     return;
                 }
 

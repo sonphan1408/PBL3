@@ -24,14 +24,14 @@ namespace GUI.Client
         private void InitializeComponent()
         {
             this.lblEmpty = new System.Windows.Forms.Label();
-            this.pnlDetailCard = new System.Windows.Forms.Panel();
+            this.pnlDetailCard = new System.Windows.Forms.FlowLayoutPanel();
             this.picDetailIcon = new System.Windows.Forms.PictureBox();
             this.lblDetailTitle = new System.Windows.Forms.Label();
             this.lblDetailTimeLabel = new System.Windows.Forms.Label();
             this.lblDetailTime = new System.Windows.Forms.Label();
             this.lblDetailContentLabel = new System.Windows.Forms.Label();
             this.lblDetailContent = new System.Windows.Forms.Label();
-            this.pnlScrollList = new System.Windows.Forms.Panel();
+            this.pnlScrollList = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDetailCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDetailIcon)).BeginInit();
             this.SuspendLayout();
@@ -129,6 +129,8 @@ namespace GUI.Client
             this.pnlScrollList.Name = "pnlScrollList";
             this.pnlScrollList.Size = new System.Drawing.Size(834, 528);
             this.pnlScrollList.TabIndex = 2;
+            this.pnlScrollList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnlScrollList.WrapContents = false;
             // 
             // ucNotifications
             // 
@@ -157,6 +159,6 @@ namespace GUI.Client
         private System.Windows.Forms.Label lblDetailTime;
         private System.Windows.Forms.Label lblDetailContentLabel;
         private System.Windows.Forms.Label lblDetailContent;
-        private System.Windows.Forms.Panel pnlScrollList;
+        private System.Windows.Forms.FlowLayoutPanel pnlScrollList;
     }
 }

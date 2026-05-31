@@ -180,15 +180,13 @@ namespace GUI.Client
         private void BuildNotificationCards()
         {
             pnlScrollList.Controls.Clear();
-            int yPos = 5;
 
             for (int i = 0; i < notifications.Count; i++)
             {
                 var notif = notifications[i];
                 Panel card = CreateNotificationCard(notif, i);
-                card.Location = new Point(0, yPos);
+                card.Margin = new Padding(0, 5, 0, 5); // Add spacing between cards
                 pnlScrollList.Controls.Add(card);
-                yPos += card.Height + 10;
             }
         }
 
@@ -393,13 +391,18 @@ namespace GUI.Client
         private string GetTypeLabel(string type)
         {
             if (string.IsNullOrEmpty(type)) return "Thông báo";
-            if (type.ToLower().Contains("saving"))   return "Tiết kiệm";
-            if (type.ToLower().Contains("deposit"))  return "Nạp tiền";
-            if (type.ToLower().Contains("withdraw")) return "Rút tiền";
-            if (type.ToLower().Contains("transfer")) return "Chuyển khoản";
-            if (type.ToLower().Contains("loan"))      return "Khoản vay";
-            if (type.ToLower().Contains("payment"))   return "Thanh toán";
-            if (type.ToLower().Contains("transaction")) return "Giao dịch";
+            string lowerType = type.ToLower();
+            if (lowerType.Contains("saving"))   return "Tiết kiệm";
+            if (lowerType.Contains("deposit"))  return "Nạp tiền";
+            if (lowerType.Contains("withdraw")) return "Rút tiền";
+            if (lowerType.Contains("transfer")) return "Chuyển khoản";
+            if (lowerType.Contains("loan"))      return "Khoản vay";
+            if (lowerType.Contains("payment"))   return "Thanh toán";
+            if (lowerType.Contains("transaction")) return "Giao dịch";
+            if (lowerType.Contains("system"))    return "Hệ thống";
+            if (lowerType.Contains("success"))   return "Thành công";
+            if (lowerType.Contains("error"))     return "Lỗi";
+            if (lowerType.Contains("warning"))   return "Cảnh báo";
             return type;
         }
 

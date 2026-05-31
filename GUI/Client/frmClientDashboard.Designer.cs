@@ -29,11 +29,11 @@ namespace GUI.Client
         private void InitializeComponent()
         {
             this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.btnNotifications = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.btnAccountInfo = new System.Windows.Forms.Button();
             this.pnlNav = new System.Windows.Forms.Panel();
+            this.btnNotifications = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.btnLoan = new System.Windows.Forms.Button();
@@ -90,21 +90,21 @@ namespace GUI.Client
             this.pnlSidebar.TabIndex = 0;
             this.pnlSidebar.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSidebar_Paint);
             // 
-            // btnNotifications
+            // button6
             // 
-            this.btnNotifications.FlatAppearance.BorderSize = 0;
-            this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNotifications.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnNotifications.ForeColor = System.Drawing.Color.Black;
-            this.btnNotifications.Location = new System.Drawing.Point(0, 518);
-            this.btnNotifications.Name = "btnNotifications";
-            this.btnNotifications.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.btnNotifications.Size = new System.Drawing.Size(283, 45);
-            this.btnNotifications.TabIndex = 12;
-            this.btnNotifications.Text = "  🔔   Thông báo";
-            this.btnNotifications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNotifications.UseVisualStyleBackColor = true;
-            this.btnNotifications.Click += new System.EventHandler(this.btnNotifications_Click);
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.button6.ForeColor = System.Drawing.Color.Black;
+            this.button6.Location = new System.Drawing.Point(0, 293);
+            this.button6.Name = "button6";
+            this.button6.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.button6.Size = new System.Drawing.Size(283, 45);
+            this.button6.TabIndex = 8;
+            this.button6.Text = "  🕒   Lịch sử";
+            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // btnAccountInfo
             // 
@@ -113,7 +113,7 @@ namespace GUI.Client
             this.btnAccountInfo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnAccountInfo.ForeColor = System.Drawing.Color.Black;
             this.btnAccountInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAccountInfo.Location = new System.Drawing.Point(-3, 293);
+            this.btnAccountInfo.Location = new System.Drawing.Point(-3, 518);
             this.btnAccountInfo.Name = "btnAccountInfo";
             this.btnAccountInfo.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.btnAccountInfo.Size = new System.Drawing.Size(283, 45);
@@ -131,13 +131,29 @@ namespace GUI.Client
             this.pnlNav.Size = new System.Drawing.Size(3, 100);
             this.pnlNav.TabIndex = 1;
             // 
+            // btnNotifications
+            // 
+            this.btnNotifications.FlatAppearance.BorderSize = 0;
+            this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNotifications.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnNotifications.ForeColor = System.Drawing.Color.Black;
+            this.btnNotifications.Location = new System.Drawing.Point(0, 467);
+            this.btnNotifications.Name = "btnNotifications";
+            this.btnNotifications.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.btnNotifications.Size = new System.Drawing.Size(283, 45);
+            this.btnNotifications.TabIndex = 12;
+            this.btnNotifications.Text = "  🔔   Thông báo";
+            this.btnNotifications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNotifications.UseVisualStyleBackColor = true;
+            this.btnNotifications.Click += new System.EventHandler(this.btnNotifications_Click);
+            // 
             // button9
             // 
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.button9.ForeColor = System.Drawing.Color.DimGray;
-            this.button9.Location = new System.Drawing.Point(0, 477);
+            this.button9.Location = new System.Drawing.Point(-3, 426);
             this.button9.Name = "button9";
             this.button9.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.button9.Size = new System.Drawing.Size(283, 35);
@@ -147,22 +163,6 @@ namespace GUI.Client
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // button6
-            // 
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(3, 344);
-            this.button6.Name = "button6";
-            this.button6.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.button6.Size = new System.Drawing.Size(283, 45);
-            this.button6.TabIndex = 8;
-            this.button6.Text = "  🕒   Lịch sử";
-            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.btnHistory_Click);
-            // 
             // button8
             // 
             this.button8.BackColor = System.Drawing.Color.White;
@@ -170,7 +170,7 @@ namespace GUI.Client
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.button8.ForeColor = System.Drawing.Color.DimGray;
-            this.button8.Location = new System.Drawing.Point(0, 436);
+            this.button8.Location = new System.Drawing.Point(-6, 385);
             this.button8.Name = "button8";
             this.button8.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.button8.Size = new System.Drawing.Size(283, 35);
@@ -187,7 +187,7 @@ namespace GUI.Client
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.button7.ForeColor = System.Drawing.Color.DimGray;
-            this.button7.Location = new System.Drawing.Point(3, 395);
+            this.button7.Location = new System.Drawing.Point(-6, 344);
             this.button7.Name = "button7";
             this.button7.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.button7.Size = new System.Drawing.Size(283, 35);
@@ -309,7 +309,7 @@ namespace GUI.Client
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(446, 62);
+            this.panel1.Size = new System.Drawing.Size(516, 62);
             this.panel1.TabIndex = 0;
             this.panel1.WrapContents = false;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -344,7 +344,7 @@ namespace GUI.Client
             this.pnlSubtitles.Location = new System.Drawing.Point(128, 0);
             this.pnlSubtitles.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.pnlSubtitles.Name = "pnlSubtitles";
-            this.pnlSubtitles.Size = new System.Drawing.Size(318, 43);
+            this.pnlSubtitles.Size = new System.Drawing.Size(388, 43);
             this.pnlSubtitles.TabIndex = 2;
             this.pnlSubtitles.WrapContents = false;
             // 
@@ -356,7 +356,7 @@ namespace GUI.Client
             this.lblSubtitle1.Location = new System.Drawing.Point(0, 0);
             this.lblSubtitle1.Margin = new System.Windows.Forms.Padding(0);
             this.lblSubtitle1.Name = "lblSubtitle1";
-            this.lblSubtitle1.Size = new System.Drawing.Size(156, 23);
+            this.lblSubtitle1.Size = new System.Drawing.Size(188, 23);
             this.lblSubtitle1.TabIndex = 0;
             this.lblSubtitle1.Text = "Hơn cả một ngân hàng";
             // 
@@ -368,7 +368,7 @@ namespace GUI.Client
             this.lblSubtitle2.Location = new System.Drawing.Point(0, 23);
             this.lblSubtitle2.Margin = new System.Windows.Forms.Padding(0);
             this.lblSubtitle2.Name = "lblSubtitle2";
-            this.lblSubtitle2.Size = new System.Drawing.Size(318, 20);
+            this.lblSubtitle2.Size = new System.Drawing.Size(388, 20);
             this.lblSubtitle2.TabIndex = 1;
             this.lblSubtitle2.Text = "Giải pháp thông minh quản lý tài chính tương lai của bạn.";
             // 

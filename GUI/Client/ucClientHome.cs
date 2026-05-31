@@ -650,5 +650,10 @@ namespace GUI.Client
         {
 
         }
+
+        private void lblTitleBalHist_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
