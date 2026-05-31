@@ -1,4 +1,4 @@
-﻿namespace GUI.Client
+namespace GUI.Client
 {
     partial class ucInvoicePayment
     {
@@ -34,8 +34,7 @@
             this.Electricity = new System.Windows.Forms.Button();
             this.Water = new System.Windows.Forms.Button();
             this.Internet = new System.Windows.Forms.Button();
-            this.pnlUnpaidList = new Krypton.Toolkit.KryptonPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlUnpaidList)).BeginInit();
+            this.pnlUnpaidList = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // Phone
@@ -128,9 +127,12 @@
             // 
             // pnlUnpaidList
             // 
+            this.pnlUnpaidList.AutoScroll = true;
+            this.pnlUnpaidList.BackColor = System.Drawing.Color.White;
+            this.pnlUnpaidList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnlUnpaidList.WrapContents = false;
             this.pnlUnpaidList.Location = new System.Drawing.Point(762, 221);
             this.pnlUnpaidList.Name = "pnlUnpaidList";
-            this.pnlUnpaidList.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.ContextMenuInner;
             this.pnlUnpaidList.Size = new System.Drawing.Size(575, 526);
             this.pnlUnpaidList.TabIndex = 14;
             // 
@@ -151,7 +153,6 @@
             this.Name = "ucInvoicePayment";
             this.Size = new System.Drawing.Size(1387, 791);
             this.Load += new System.EventHandler(this.ucInvoicePayment_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pnlUnpaidList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -163,6 +164,6 @@
         private System.Windows.Forms.Button Electricity;
         private System.Windows.Forms.Button Water;
         private System.Windows.Forms.Button Internet;
-        private Krypton.Toolkit.KryptonPanel pnlUnpaidList;
+        private System.Windows.Forms.FlowLayoutPanel pnlUnpaidList;
     }
 }

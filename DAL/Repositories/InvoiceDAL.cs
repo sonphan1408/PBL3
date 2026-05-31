@@ -1,4 +1,4 @@
-﻿using DTO.Models;
+using DTO.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace DAL.Repositories
                 // Dung linq de lay danh sach hoa don chua thanh toan theo account va service type, sau do map sang DTO
                 var result = db.Invoices
                     .Where(i => i.AccountNumber == accountNumber
-                             && i.Status == "Unpaid"
+                             && (i.Status == "Unpaid" || i.Status == "Overdue")
                              && i.ServiceProvider.ServiceTypeID == serviceTypeId)
                     .Select(i => new InvoiceDTO
                     {

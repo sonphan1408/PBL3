@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using Krypton.Toolkit;
 using System;
@@ -81,10 +81,12 @@ namespace GUI.Client
                 var electricity = _paymentService.GetPendingInvoices(currentAccountNumber, 1);
                 var water = _paymentService.GetPendingInvoices(currentAccountNumber, 2);
                 var internet = _paymentService.GetPendingInvoices(currentAccountNumber, 3);
+                
 
                 if (electricity != null) allInvoices.AddRange(electricity);
                 if (water != null) allInvoices.AddRange(water);
                 if (internet != null) allInvoices.AddRange(internet);
+               
 
                 // Neu khong co non nao can xu ly thi hien thong bao
                 if (allInvoices.Count == 0)
@@ -102,12 +104,10 @@ namespace GUI.Client
                 }
 
                 // Danh sach the hien hoa don, moi the la 1 hoa don, sap xep theo ngay het han tang dan
-                int yPosition = 10;
                 foreach (InvoiceDTO inv in allInvoices)
                 {
-                    KryptonGroup card = CreateInvoiceCard(inv, yPosition);
+                    KryptonGroup card = CreateInvoiceCard(inv);
                     pnlUnpaidList.Controls.Add(card);
-                    yPosition += card.Height + 15;
                 }
             }
             catch (Exception ex)
@@ -116,11 +116,11 @@ namespace GUI.Client
             }
         }
 
-        private KryptonGroup CreateInvoiceCard(InvoiceDTO invoice, int yPos)
+        private KryptonGroup CreateInvoiceCard(InvoiceDTO invoice)
         {
             KryptonGroup card = new KryptonGroup();
             card.Size = new Size(pnlUnpaidList.Width - 25, 110);
-            card.Location = new Point(10, yPos);
+            card.Margin = new Padding(10, 10, 10, 5);
 
             card.StateCommon.Border.Rounding = 12;
             card.StateCommon.Border.Color1 = Color.LightGray;

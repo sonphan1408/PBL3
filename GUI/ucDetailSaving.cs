@@ -205,6 +205,12 @@ namespace GUI
 
         private void btnFinalSettlement_Click(object sender, EventArgs e)
         {
+            if ((DateTime.Now.Date - _savingData.StartDate.Date).Days < 1)
+            {
+                MessageBox.Show("Tài khoản tiết kiệm phải được tạo ít nhất 1 ngày mới có thể tất toán.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
            DialogResult warning = MessageBox.Show(
         "Nếu tất toán trước hạn, bạn chỉ nhận được lãi suất không kỳ hạn (0.5%). Bạn có chắc chắn muốn rút tiền về tài khoản chính không?",
         "Xác nhận tất toán",

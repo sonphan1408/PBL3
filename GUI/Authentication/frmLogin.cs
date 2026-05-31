@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Admin;
 using GUI.Client;
@@ -100,7 +100,6 @@ namespace GUI.Authentication
                     account.Password = Matkhaukhachnhap;
 
                     UserSession.CurrentUser = account;
-                    MessageBox.Show("Đăng nhập thành công!", "Thông báo");
                     this.Hide();
                     if (account.Role == "Customer")
                     {

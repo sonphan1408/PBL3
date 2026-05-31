@@ -135,7 +135,7 @@ namespace GUI.Client
             // 
             // pnlUnpaidList
             // 
-            this.pnlUnpaidList.Location = new System.Drawing.Point(745, 345);
+            this.pnlUnpaidList.Location = new System.Drawing.Point(770, 344);
             this.pnlUnpaidList.Name = "pnlUnpaidList";
             this.pnlUnpaidList.PanelBackStyle = Krypton.Toolkit.PaletteBackStyle.ContextMenuInner;
             this.pnlUnpaidList.Size = new System.Drawing.Size(549, 392);
