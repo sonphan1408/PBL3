@@ -98,6 +98,17 @@ namespace GUI
 
                     UserSession.UpdateBalance(_depositAmount);
                     UserSession.LoadSavingData();
+
+                    // Raise Notification!
+                    var notifData = new DTO.Models.NotificationMessageDTO
+                    {
+                        OperationType = "savings_deposit",
+                        NotificationType = "transaction",
+                        Amount = _depositAmount,
+                        Description = $"Gửi thêm vào sổ tiết kiệm ({_contractId})"
+                    };
+                    UserSession.RaiseNotification(notifData);
+
                     ucListSaving listSaving = new ucListSaving();
                     listSaving.NavigateTo = this.NavigateTo;
                     listSaving.NavigateTo1 = this.NavigateTo1;

@@ -88,6 +88,13 @@ namespace GUI.Session
                 toAccount = "SAVING";
                 typeId = 5;
             }
+            else if (op == "savings_deposit") // Gửi thêm vào sổ tiết kiệm
+            {
+                amount = data.Amount;
+                isExpense = true;
+                toAccount = "SAVING";
+                typeId = 5;
+            }
             else if (op == "payment") // Thanh toán
             {
                 amount = data.PaymentAmount;
@@ -117,6 +124,13 @@ namespace GUI.Session
                     toAccount = "LOAN";
                     typeId = 6;
                 }
+            }
+            else if (op == "loan_repayment") // Thanh toán kỳ vay
+            {
+                amount = data.Amount;
+                isExpense = true;
+                toAccount = "LOAN";
+                typeId = 6;
             }
             else return;
 

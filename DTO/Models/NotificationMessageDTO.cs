@@ -57,6 +57,9 @@ namespace DTO.Models
                 case "savings":
                     return $"Mở sổ tiết kiệm thành công: {PrincipalAmount:N0} VND, {TermMonths} tháng, Lãi suất: {InterestRate}%";
 
+                case "savings_deposit":
+                    return $"Gửi thêm tiền vào sổ tiết kiệm thành công: {Amount:N0} VND - {Description}";
+
                 case "payment":
                     return $"Thanh toán thành công: {PaymentAmount:N0} VND cho hóa đơn {InvoiceId}";
 
@@ -65,6 +68,9 @@ namespace DTO.Models
 
                 case "withdrawal":
                     return $"Rút tiền thành công: {Amount:N0} VND - {Description}";
+
+                case "loan_repayment":
+                    return $"Thanh toán khoản vay thành công: {Amount:N0} VND - {Description}";
 
                 case "error":
                     return $"Lỗi: {ErrorMessage}";

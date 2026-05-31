@@ -165,8 +165,11 @@ namespace GUI
                     string invoiceId = "INV" + invoice.InvoiceID.ToString().PadLeft(4, '0');
                     string billingTo = invoice.ProviderName ?? "N/A";
                     string status = invoice.Status ?? "UNKNOWN";
-                    if (status == "Paid") status = "Đã thanh toán";
-                    else if (status == "Pending") status = "Chờ xử lý";
+                    string statusLower = status.ToLower();
+                    if (statusLower == "paid") status = "Đã thanh toán";
+                    else if (statusLower == "pending") status = "Chờ xử lý";
+                    else if (statusLower == "unpaid") status = "Chưa thanh toán";
+                    else if (statusLower == "overdue") status = "Quá hạn";
                     string paymentDate = invoice.DueDate.HasValue && invoice.DueDate.Value != DateTime.MinValue ? invoice.DueDate.Value.ToString("yyyy-MM-dd") : "-";
                     string amount = invoice.Amount.ToString("N0") + " VNĐ";
                     string paymentFor = "CHUYỂN KHOẢN";

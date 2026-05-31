@@ -291,6 +291,12 @@ namespace GUI.Client.Loan
                 // Thanh toán khoản vay!
                 MessageBox.Show("Tất toán khoản vay thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                panelPaidAmount.Visible = false;
+                txtCheckPassword.Clear();
+
+                //Thuc hien truừ tiền tài khoản trên ram
+                UserSession.UpdateBalance(actualAmountDeducted);
+
                 var notifData = new DTO.Models.NotificationMessageDTO
                 {
                     OperationType = "withdrawal",
@@ -299,14 +305,6 @@ namespace GUI.Client.Loan
                     Description = $"Tất toán khoản vay ({currentContract.ContractID})"
                 };
                 GUI.Session.UserSession.RaiseNotification(notifData);
-                panelPaidAmount.Visible = false;
-                txtCheckPassword.Clear();
-
-                //Thuc hien truừ tiền tài khoản trên ram
-                UserSession.UpdateBalance(actualAmountDeducted);
-
-
-
 
                 //Gọi sự kiện cập nhật
                 UserSession.LoadLoanData();
@@ -389,8 +387,15 @@ namespace GUI.Client.Loan
                 //Thuc hien truừ tiền tài khoản trên ram
                 UserSession.UpdateBalance(actualAmountDeducted);
 
-
-
+                // Ghi notification + transaction cho thanh toán khoản vay
+                var notifData = new DTO.Models.NotificationMessageDTO
+                {
+                    OperationType = "loan_repayment",
+                    NotificationType = "transaction",
+                    Amount = actualAmountDeducted,
+                    Description = $"Thanh toán kỳ vay ({_nextSchedule.ContractID})"
+                };
+                GUI.Session.UserSession.RaiseNotification(notifData);
 
                 //Gọi sự kiện cập nhật
                 UserSession.LoadLoanData();
