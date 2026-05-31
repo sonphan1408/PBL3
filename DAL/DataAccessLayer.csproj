@@ -125,7 +125,7 @@
     <Compile Include="Repositories\InvoiceDAL.cs" />
     <Compile Include="Repositories\LoanDAL.cs" />
     <Compile Include="Repositories\NotificationDAL.cs" />
-    <Compile Include="Repositories\ReportDAL.cs" />
+    <Compile Include="ReportDAL.cs" />
     <Compile Include="Repositories\TransactionDAL.cs" />
     <Compile Include="Repositories\TransferDAL.cs" />
     <Compile Include="SavingContract.cs">
