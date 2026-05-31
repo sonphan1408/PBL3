@@ -463,6 +463,15 @@ namespace GUI.Client.Loan
                 }
                 // Thanh toán khoản vay!
                 MessageBox.Show("Tất toán khoản vay thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                var notifData = new DTO.Models.NotificationMessageDTO
+                {
+                    OperationType = "withdrawal",
+                    NotificationType = "transaction",
+                    Amount = actualAmountDeducted,
+                    Description = $"Tất toán khoản vay ({data.ContractID})"
+                };
+                GUI.Session.UserSession.RaiseNotification(notifData);
                 panelPaidAmount.Visible = false;
                 txtCheckPassword.Clear();
 

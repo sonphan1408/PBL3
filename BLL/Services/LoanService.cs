@@ -54,6 +54,23 @@ namespace BLL.Services
 
                     if (isContractSaved && isScheduleSaved && isDisbursed)
                     {
+                        var externalTrans = new ExternalTransactionDTO
+                        {
+                            TransactionID = Guid.NewGuid(),
+                            FromAccount = loanContract.ContractID,
+                            ReceiverAccount = loanContract.AccountNumber,
+                            ReceiverName = "Tài khoản Chính",
+                            BankCode = "LOAN",
+                            Amount = loanContract.LoanAmount,
+                            BalanceBefore = AccountService.GetAccountBalance(loanContract.AccountNumber) - loanContract.LoanAmount,
+                            BalanceAfter = AccountService.GetAccountBalance(loanContract.AccountNumber),
+                            Status = "Success",
+                            TraceNumber = loanContract.ContractID.Length > 10 ? loanContract.ContractID.Substring(0, 10) : loanContract.ContractID,
+                            Description = "Giải ngân khoản vay",
+                            CreatedAt = DateTime.Now
+                        };
+                        TransactionService.CreateExternalTransaction(externalTrans);
+
                         scope.Complete(); 
                         return true;
                     }

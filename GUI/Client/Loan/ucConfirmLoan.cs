@@ -98,6 +98,15 @@ namespace GUI.Client.Loan
                 }
                 // Mật khẩu chính xác, tạo hợp đồng vay
                 MessageBox.Show("Hợp đồng vay đã được xác nhận thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                var notifData = new DTO.Models.NotificationMessageDTO
+                {
+                    OperationType = "deposit",
+                    NotificationType = "transaction",
+                    Amount = Data.LoanAmount,
+                    Description = $"Giải ngân khoản vay ({Data.ContractID})"
+                };
+                GUI.Session.UserSession.RaiseNotification(notifData);
                 panelCheckPassword.Visible = false;
                 txtCheckPassword.Clear();
                 //UserSession.LoadLoanData();

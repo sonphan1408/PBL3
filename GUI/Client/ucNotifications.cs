@@ -63,17 +63,12 @@ namespace GUI.Client
         {
             if (selectedNotification == null)
             {
-                pnlRight.Visible = false;
-                pnlLeft.Width = this.Width;
+                pnlDetailCard.Visible = false;
             }
             else
             {
-                pnlRight.Visible = true;
-                pnlLeft.Width = (int)(this.Width * 0.60);
+                pnlDetailCard.Visible = true;
             }
-
-            pnlScrollList.Width  = pnlListArea.Width - 40;
-            pnlScrollList.Height = pnlListArea.Height - 75;
 
             // Cập nhật lại chiều rộng các thẻ thông báo (cards) nếu đã được tạo
             foreach (Control ctrl in pnlScrollList.Controls)
@@ -93,19 +88,6 @@ namespace GUI.Client
                     }
                     ctrl.Invalidate();
                 }
-            }
-
-            // Căn giữa detail card theo chiều dọc của pnlRight
-            if (pnlRight.Visible)
-            {
-                int cardW = Math.Min(340, pnlRight.Width - 40);
-                int cardH = 370;
-                pnlDetailCard.Size = new Size(cardW, cardH);
-                pnlDetailCard.Location = new Point(
-                    (pnlRight.Width - cardW) / 2,
-                    (pnlRight.Height - cardH) / 2
-                );
-                lblDetailContent.Size = new Size(cardW - 40, 150);
             }
         }
 
@@ -136,8 +118,8 @@ namespace GUI.Client
             };
 
             // Cho phép lblDetailContent wrap text
-            lblDetailContent.AutoSize  = false;
-            lblDetailContent.MaximumSize = new Size(lblDetailContent.Width, 0);
+            lblDetailContent.AutoSize  = true;
+            lblDetailContent.MaximumSize = new Size(pnlDetailCard.Width - 40, 0);
         }
 
         // ─── Notification events ──────────────────────────────────────
@@ -385,7 +367,6 @@ namespace GUI.Client
 
             // Hiện panel chi tiết và canh lại layout
             pnlDetailCard.Visible = true;
-            lblNoDetail.Visible   = false;
             LayoutPanels();
 
             // Đánh dấu đã đọc

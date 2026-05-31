@@ -64,6 +64,16 @@ namespace GUI
             txtSearch.ForeColor = Color.Gray;
             txtSearch.Enter += TxtSearch_Enter;
             txtSearch.Leave += TxtSearch_Leave;
+
+            // Handle resize to stretch panels
+            pnlTransactions.Resize += (s, ev) =>
+            {
+                int newWidth = Math.Max(400, pnlTransactions.Width - 60);
+                foreach (Control c in pnlTransactions.Controls)
+                {
+                    if (c is Panel p) p.Width = newWidth;
+                }
+            };
         }
 
         private void UserSession_BalanceChanged()
@@ -120,7 +130,7 @@ namespace GUI
                     }
                     else
                     {
-                        MessageBox.Show("Please login first", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Vui lòng đăng nhập trước", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }
@@ -130,7 +140,7 @@ namespace GUI
 
                 // Load balance
                 decimal balance = AccountService.GetAccountBalance(accountNumber);
-                lblBalance.Text = $"${balance:F2}";
+                lblBalance.Text = $"{balance:N0} VNĐ";
                 System.Diagnostics.Debug.WriteLine($"[ucBalanceChanges] Balance loaded: {balance}");
 
                 // Load transactions
@@ -168,8 +178,8 @@ namespace GUI
 
                 foreach (var transaction in transactions)
                 {
-                    Panel transactionPanel = CreateTransactionPanel(transaction);
-                    transactionPanel.Width = Math.Max(400, pnlTransactions.Width - 60); // Ngăn lỗi ArgumentException khi Width < 60
+                    int panelWidth = Math.Max(400, pnlTransactions.Width - 60); // Tính chiều rộng trước
+                    Panel transactionPanel = CreateTransactionPanel(transaction, panelWidth);
                     pnlTransactions.Controls.Add(transactionPanel);
                 }
                 
@@ -181,14 +191,15 @@ namespace GUI
             }
         }
 
-        private Panel CreateTransactionPanel(TransactionDTO transaction)
+        private Panel CreateTransactionPanel(TransactionDTO transaction, int width)
         {
             try
             {
                 System.Diagnostics.Debug.WriteLine($"[ucBalanceChanges] Creating panel for transaction: {transaction.TransactionID}");
                 
                 Panel panel = new Panel();
-                panel.Height = 90;
+                panel.Width = width;
+                panel.Height = 110;
                 panel.Margin = new Padding(0, 0, 0, 10);
                 panel.BorderStyle = BorderStyle.FixedSingle;
 
@@ -206,7 +217,7 @@ namespace GUI
 
                 // Icon circle
                 PictureBox picIcon = new PictureBox();
-                picIcon.Location = new Point(20, 15);
+                picIcon.Location = new Point(20, 25);
                 picIcon.Size = new Size(60, 60);
                 picIcon.BackColor = backgroundColor;
                 picIcon.BorderStyle = BorderStyle.None;
@@ -242,17 +253,20 @@ namespace GUI
 
                 // Account info
                 Label lblAccountInfo = new Label();
-                lblAccountInfo.Location = new Point(90, 15);
-                lblAccountInfo.Size = new Size(400, 25);
+                lblAccountInfo.Location = new Point(100, 15);
+                lblAccountInfo.Size = new Size(panel.Width - 320, 25);
+                lblAccountInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                 lblAccountInfo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
                 lblAccountInfo.ForeColor = textColor;
                 lblAccountInfo.Text = $"Tài khoản: {transaction.FromAccount}";
+                lblAccountInfo.AutoEllipsis = true;
                 panel.Controls.Add(lblAccountInfo);
 
                 // Description
                 Label lblDescription = new Label();
-                lblDescription.Location = new Point(90, 40);
-                lblDescription.Size = new Size(400, 40);
+                lblDescription.Location = new Point(100, 45);
+                lblDescription.Size = new Size(panel.Width - 320, 55);
+                lblDescription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
                 lblDescription.Font = new Font("Segoe UI", 9F);
                 lblDescription.ForeColor = Color.FromArgb(100, 100, 100);
                 lblDescription.Text = $"Nội dung:\n{transaction.Description}";
@@ -261,28 +275,31 @@ namespace GUI
 
                 // Amount
                 Label lblAmount = new Label();
-                lblAmount.Location = new Point(panel.Width - 150, 15);
-                lblAmount.Size = new Size(130, 25);
+                lblAmount.Location = new Point(panel.Width - 220, 20);
+                lblAmount.Size = new Size(200, 25);
+                lblAmount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 lblAmount.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
                 lblAmount.TextAlign = ContentAlignment.TopRight;
                 lblAmount.ForeColor = borderColor;
-                lblAmount.Text = $"{Math.Abs(transaction.Amount):F2}";
+                lblAmount.Text = $"{Math.Abs(transaction.Amount):N0} VNĐ";
                 panel.Controls.Add(lblAmount);
 
                 // Balance after
                 Label lblBalanceAfter = new Label();
-                lblBalanceAfter.Location = new Point(panel.Width - 150, 40);
-                lblBalanceAfter.Size = new Size(130, 20);
+                lblBalanceAfter.Location = new Point(panel.Width - 220, 48);
+                lblBalanceAfter.Size = new Size(200, 20);
+                lblBalanceAfter.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 lblBalanceAfter.Font = new Font("Segoe UI", 9F);
                 lblBalanceAfter.ForeColor = textColor;
                 lblBalanceAfter.TextAlign = ContentAlignment.TopRight;
-                lblBalanceAfter.Text = $"${transaction.BalanceAfter:F2}";
+                lblBalanceAfter.Text = $"{transaction.BalanceAfter:N0} VNĐ";
                 panel.Controls.Add(lblBalanceAfter);
 
                 // Date
                 Label lblDate = new Label();
-                lblDate.Location = new Point(panel.Width - 150, 60);
-                lblDate.Size = new Size(130, 15);
+                lblDate.Location = new Point(panel.Width - 220, 72);
+                lblDate.Size = new Size(200, 20);
+                lblDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 lblDate.Font = new Font("Segoe UI", 8F);
                 lblDate.TextAlign = ContentAlignment.TopRight;
                 lblDate.ForeColor = Color.Gray;

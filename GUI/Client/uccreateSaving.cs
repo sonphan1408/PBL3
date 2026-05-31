@@ -1,4 +1,4 @@
-﻿using BLL.Services;
+using BLL.Services;
 using DTO.Models;
 using GUI.Session;
 using System;
@@ -116,17 +116,7 @@ namespace GUI.Client
 
             SavingContractsDTO draff = FinancialService.CreateSavingDraft(principalAmount, termMonths, savingType, goal, rate, UserSession.CurrentUser.AccountNumber);
 
-            // Trigger notification with structured data
-            var notificationData = new NotificationMessageDTO
-            {
-                OperationType = "savings",
-                NotificationType = "success",
-                PrincipalAmount = principalAmount,
-                TermMonths = termMonths,
-                InterestRate = rate
-            };
-            UserSession.RaiseNotification(notificationData);
-
+            // Chờ người dùng xác nhận mới gửi thông báo
             ucConfirmSaving confirmSaving = new ucConfirmSaving(draff);
             confirmSaving.NavigateTo = this.NavigateTo;
             confirmSaving.NavigateTo1 = this.NavigateTo1;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DAL.Repositories;
 using DTO.Models;
@@ -20,6 +20,16 @@ namespace BLL.Services
         public static decimal GetTotalExpense(string accountNumber)
         {
             return TransactionDAL.GetTotalExpense(accountNumber);
+        }
+
+        public static bool CreateExternalTransaction(ExternalTransactionDTO transaction)
+        {
+            return TransactionDAL.CreateExternalTransaction(transaction);
+        }
+
+        public static bool CreateInternalTransaction(InternalTransactionDTO transaction)
+        {
+            return TransactionDAL.CreateInternalTransaction(transaction);
         }
     }
 }

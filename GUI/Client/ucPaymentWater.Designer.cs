@@ -1,4 +1,4 @@
-﻿namespace GUI.Client
+namespace GUI.Client
 {
     partial class ucPaymentWater
     {

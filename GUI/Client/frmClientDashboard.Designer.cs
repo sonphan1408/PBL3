@@ -358,7 +358,7 @@ namespace GUI.Client
             this.lblSubtitle1.Name = "lblSubtitle1";
             this.lblSubtitle1.Size = new System.Drawing.Size(156, 23);
             this.lblSubtitle1.TabIndex = 0;
-            this.lblSubtitle1.Text = "More than banking";
+            this.lblSubtitle1.Text = "Hơn cả một ngân hàng";
             // 
             // lblSubtitle2
             // 
@@ -370,7 +370,7 @@ namespace GUI.Client
             this.lblSubtitle2.Name = "lblSubtitle2";
             this.lblSubtitle2.Size = new System.Drawing.Size(318, 20);
             this.lblSubtitle2.TabIndex = 1;
-            this.lblSubtitle2.Text = "A smarter way to manage your financial future.";
+            this.lblSubtitle2.Text = "Giải pháp thông minh quản lý tài chính tương lai của bạn.";
             // 
             // pnlSearch
             // 

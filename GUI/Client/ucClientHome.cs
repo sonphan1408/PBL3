@@ -148,14 +148,14 @@ namespace GUI.Client
                 }
 
                 // Update UI with account info
-                BalanceAmount = "$" + currentAccount.Balance.ToString("N2");
+                BalanceAmount = currentAccount.Balance.ToString("N2") + " VNĐ";
                 CardNumber = currentAccount.AccountNumber;
 
                 // Cập nhật Tiết kiệm và Khoản vay từ Database (Lấy tổng số tiền thay vì số lượng)
                 decimal totalSavingsAmount = FinancialService.GetTotalSavings(currentCustomer.CustomerID);
                 decimal totalLoansAmount = FinancialService.GetTotalLoans(currentCustomer.CustomerID);
-                SavingsAmount = "$" + totalSavingsAmount.ToString("N2");
-                LoansAmount = "$" + totalLoansAmount.ToString("N2");
+                SavingsAmount = totalSavingsAmount.ToString("N2") + " VNĐ";
+                LoansAmount = totalLoansAmount.ToString("N2") + " VNĐ";
 
                 // Load transactions
                 transactions = TransactionService.GetTransactionsByAccount(currentAccount.AccountNumber, 10);
@@ -484,10 +484,10 @@ namespace GUI.Client
                     currentTotalExpense = TransactionService.GetTotalExpense(currentAccount.AccountNumber);
 
                     if (lblTotalIncomeAmount != null)
-                        lblTotalIncomeAmount.Text = "$" + currentTotalIncome.ToString("N2");
+                        lblTotalIncomeAmount.Text = currentTotalIncome.ToString("N2") + " VNĐ";
 
                     if (lblTotalExpenseAmount != null)
-                        lblTotalExpenseAmount.Text = "$" + currentTotalExpense.ToString("N2");
+                        lblTotalExpenseAmount.Text = currentTotalExpense.ToString("N2") + " VNĐ";
 
                     if (picDonutChart != null)
                         picDonutChart.Invalidate();
