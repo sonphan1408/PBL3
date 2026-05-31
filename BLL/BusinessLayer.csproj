@@ -70,6 +70,7 @@
     <Compile Include="Services\LoanService.cs" />
     <Compile Include="Services\FinancialService.cs" />
     <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\SystemCheckService.cs" />
     <Compile Include="Services\PaymentService.cs" />
     <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\TransferService.cs" />

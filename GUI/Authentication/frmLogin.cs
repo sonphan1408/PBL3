@@ -100,6 +100,10 @@ namespace GUI.Authentication
                     account.Password = Matkhaukhachnhap;
 
                     UserSession.CurrentUser = account;
+                    
+                    // Thực hiện kiểm tra hệ thống tự động (Hóa đơn, Vay nợ, Tiết kiệm quá hạn)
+                    SystemCheckService.PerformPostLoginChecks(account.CustomerID, account.Username);
+
                     this.Hide();
                     if (account.Role == "Customer")
                     {

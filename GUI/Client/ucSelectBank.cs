@@ -12,6 +12,7 @@ namespace GUI.Client
         private TransferService _transferService = new TransferService();
         private List<ExternalBankDTO> _banks = new List<ExternalBankDTO>();
         private ExternalBankDTO _selectedBank = null;
+        private Label _lblNoResult;
 
         public event EventHandler BankSelected;
 
@@ -54,6 +55,17 @@ namespace GUI.Client
         private void DisplayBanks()
         {
             pnlBankList.Controls.Clear();
+
+            _lblNoResult = new Label
+            {
+                Text = "Không tìm thấy ngân hàng phù hợp",
+                AutoSize = true,
+                Font = new System.Drawing.Font("Arial", 10, System.Drawing.FontStyle.Italic),
+                ForeColor = System.Drawing.Color.Gray,
+                Visible = false,
+                Margin = new Padding(10, 20, 0, 0)
+            };
+            pnlBankList.Controls.Add(_lblNoResult);
 
             foreach (var bank in _banks)
             {
@@ -191,8 +203,10 @@ namespace GUI.Client
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            string searchText = txtSearch.Text.ToLower();
+            string searchText = txtSearch.Text.Trim().ToLower();
+            bool anyFound = false;
 
+            pnlBankList.SuspendLayout();
             foreach (Control control in pnlBankList.Controls)
             {
                 if (control is Panel panel)
@@ -207,8 +221,15 @@ namespace GUI.Client
                         }
                     }
                     panel.Visible = found;
+                    if (found) anyFound = true;
                 }
             }
+
+            if (_lblNoResult != null)
+            {
+                _lblNoResult.Visible = !anyFound;
+            }
+            pnlBankList.ResumeLayout();
         }
     }
 }

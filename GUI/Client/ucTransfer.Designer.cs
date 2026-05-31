@@ -176,7 +176,7 @@ namespace GUI.Client
             this.btnSelectBank.FlatAppearance.BorderSize = 0;
             this.btnSelectBank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectBank.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnSelectBank.Location = new System.Drawing.Point(528, 307);
+            this.btnSelectBank.Location = new System.Drawing.Point(475, 318);
             this.btnSelectBank.Name = "btnSelectBank";
             this.btnSelectBank.Size = new System.Drawing.Size(28, 28);
             this.btnSelectBank.TabIndex = 12;
@@ -295,6 +295,7 @@ namespace GUI.Client
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ucTransfer";
             this.Size = new System.Drawing.Size(1241, 791);
+            this.Load += new System.EventHandler(this.ucTransfer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

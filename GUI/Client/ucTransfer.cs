@@ -74,16 +74,21 @@ namespace GUI.Client
             InitializeBankSelector();
             if (_ucSelectBank != null)
             {
-                if (lblNganHang != null)
+                if (this.Controls.Contains(_ucSelectBank))
                 {
-                    _ucSelectBank.Location = new System.Drawing.Point(
-                        lblNganHang.Location.X,
-                        lblNganHang.Location.Y + lblNganHang.Height + 5
-                    );
+                    // Đã hiển thị -> Ẩn đi
+                    this.Controls.Remove(_ucSelectBank);
                 }
-
-                if (!this.Controls.Contains(_ucSelectBank))
+                else
                 {
+                    // Chưa hiển thị -> Hiện ra
+                    if (lblNganHang != null)
+                    {
+                        _ucSelectBank.Location = new System.Drawing.Point(
+                            lblNganHang.Location.X - 90 ,
+                            lblNganHang.Location.Y + lblNganHang.Height - 105
+                        );
+                    }
                     this.Controls.Add(_ucSelectBank);
                     _ucSelectBank.BringToFront();
                 }
@@ -281,6 +286,11 @@ namespace GUI.Client
                 txtTenNguoiNhan.Text = "";
             _recipientAccount = null;
             _transferAmount = 0;
+        }
+
+        private void ucTransfer_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
