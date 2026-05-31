@@ -20,6 +20,7 @@ namespace GUI.Client
         private PaymentService _paymentService = new PaymentService();
 
         private decimal _selectedAmount = 0; // Luu tam so tien cua hoa don dien duoc chon
+        private int _selectedInvoiceId = 0; // Luu tam ID hoa don de cap nhat trang thai trong DB
 
         public Action<UserControl> NavigateTo { get; set; }
 
@@ -164,6 +165,7 @@ namespace GUI.Client
             txtAmount.Text = invoice.Amount.ToString("N0") + " VND";
 
             _selectedAmount = invoice.Amount;
+            _selectedInvoiceId = invoice.InvoiceID;
 
             txtCustomerCode.ReadOnly = true;
 
@@ -252,13 +254,15 @@ namespace GUI.Client
             string currentUserPassword = GUI.Session.UserSession.CurrentUser.Password;
 
             // Goi BLL de xu ly logic thanh toan va tra ve thong diep loi neu co, neu thanh cong se tra ve chuoi rong
-            string errorMessage = _paymentService.ProcessPayment(inputPassword, currentUserPassword, billCode, _selectedAmount, ref currentBal);
+            string accountNumber = GUI.Session.UserSession.CurrentUser.AccountNumber;
+            string errorMessage = _paymentService.ProcessPayment(inputPassword, currentUserPassword, billCode, _selectedAmount, ref currentBal, accountNumber, _selectedInvoiceId);
 
 
             if (string.IsNullOrEmpty(errorMessage)) // BLL xu ly thanh cong, tra ve chuoi rong, va cap nhat so du moi vao bien currentBal
             {
                 // Cap nhat lai so du moi vao Session
                 GUI.Session.UserSession.CurrentUser.Balance = currentBal;
+                GUI.Session.UserSession.UpdateBalance(0);
                 LoadBalanceUI();
 
                 var dashboardForm = this.FindForm() as frmClientDashboard;

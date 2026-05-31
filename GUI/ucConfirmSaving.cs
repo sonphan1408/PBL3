@@ -107,16 +107,6 @@ namespace GUI
                 {
                     MessageBox.Show("Tài khoản tiết kiệm đã được tạo thành công!.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
-                    var notifData = new DTO.Models.NotificationMessageDTO
-                    {
-                        OperationType = "savings",
-                        NotificationType = "success",
-                        PrincipalAmount = Data.PrincipalAmount,
-                        TermMonths = Data.TermMonths,
-                        InterestRate = Data.InterestRate
-                    };
-                    UserSession.RaiseNotification(notifData);
-                    
                     panelCheckPassword.Visible = false;
                     txtCheckPassword.Clear();
 
@@ -126,7 +116,17 @@ namespace GUI
                     UserSession.UpdateBalance(Data.PrincipalAmount);
                     UserSession.LoadSavingData();
 
-                   ucListSaving listSaving = new ucListSaving();
+                    var notifData = new DTO.Models.NotificationMessageDTO
+                    {
+                        OperationType = "savings",
+                        NotificationType = "success",
+                        PrincipalAmount = Data.PrincipalAmount,
+                        TermMonths = Data.TermMonths,
+                        InterestRate = Data.InterestRate
+                    };
+                    UserSession.RaiseNotification(notifData);
+
+                    ucListSaving listSaving = new ucListSaving();
                     listSaving.NavigateTo = this.NavigateTo;
                     listSaving.NavigateTo1 = this.NavigateTo1;
 

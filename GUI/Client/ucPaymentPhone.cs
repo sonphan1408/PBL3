@@ -340,12 +340,14 @@ namespace GUI.Client
 
                 // string errorMessage = _paymentService.ProcessPayment(...);
 
-                string errorMessage = _paymentService.ProcessPhonePayment(inputPassword, currentUserPassword, phoneNumber, _selectedAmount, ref currentBal);
+                string accountNumber = GUI.Session.UserSession.CurrentUser.AccountNumber;
+                string errorMessage = _paymentService.ProcessPhonePayment(inputPassword, currentUserPassword, phoneNumber, _selectedAmount, ref currentBal, accountNumber);
 
 
                 if (string.IsNullOrEmpty(errorMessage))
                 {
                     GUI.Session.UserSession.CurrentUser.Balance = currentBal;
+                    GUI.Session.UserSession.UpdateBalance(0);
                     LoadBalanceUI();
 
                     var dashboardForm = this.FindForm() as frmClientDashboard;

@@ -45,8 +45,19 @@ namespace BLL.Services
                 throw new Exception("Loại sản phẩm không được để trống!");
             }
 
+            string mappedCategory = category;
+            if (category.Equals("Loan", StringComparison.OrdinalIgnoreCase))
+            {
+                mappedCategory = "Vay tiêu dùng";
+            }
+            else if (category.Equals("Installment", StringComparison.OrdinalIgnoreCase) || 
+                     category.Equals("Term", StringComparison.OrdinalIgnoreCase) ||
+                     category.Equals("Savings", StringComparison.OrdinalIgnoreCase))
+            {
+                mappedCategory = "Tiết kiệm thường";
+            }
 
-            return FinancialDAL.GetInterestRatesByCategory(category);
+            return FinancialDAL.GetInterestRatesByCategory(mappedCategory);
         }
       
        public static string GenerateContractID(string type)

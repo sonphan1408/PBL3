@@ -57,7 +57,7 @@ namespace BLL.Services
                         var externalTrans = new ExternalTransactionDTO
                         {
                             TransactionID = Guid.NewGuid(),
-                            FromAccount = loanContract.ContractID,
+                            FromAccount = "LOAN",
                             ReceiverAccount = loanContract.AccountNumber,
                             ReceiverName = "Tài khoản Chính",
                             BankCode = "LOAN",
@@ -66,7 +66,7 @@ namespace BLL.Services
                             BalanceAfter = AccountService.GetAccountBalance(loanContract.AccountNumber),
                             Status = "Success",
                             TraceNumber = loanContract.ContractID.Length > 10 ? loanContract.ContractID.Substring(0, 10) : loanContract.ContractID,
-                            Description = "Giải ngân khoản vay",
+                            Description = "Giải ngân khoản vay " + loanContract.ContractID,
                             CreatedAt = DateTime.Now
                         };
                         TransactionService.CreateExternalTransaction(externalTrans);

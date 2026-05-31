@@ -206,6 +206,10 @@ namespace GUI.Client
             { iconBg = LightGreen;  iconFg = GreenIcon; }
             else if (notif.Type?.ToLower().Contains("saving") == true)
             { iconBg = LightOrange; iconFg = Color.FromArgb(200, 120, 20); }
+            else if (notif.Type?.ToLower().Contains("loan") == true)
+            { iconBg = Color.FromArgb(255, 230, 230); iconFg = Color.FromArgb(200, 50, 50); }
+            else if (notif.Type?.ToLower().Contains("payment") == true)
+            { iconBg = Color.FromArgb(230, 230, 255); iconFg = Color.FromArgb(80, 80, 200); }
 
             // ── Card panel ────────────────────────────────────────────
             Panel card = new Panel();
@@ -393,6 +397,8 @@ namespace GUI.Client
             if (type.ToLower().Contains("deposit"))  return "Nạp tiền";
             if (type.ToLower().Contains("withdraw")) return "Rút tiền";
             if (type.ToLower().Contains("transfer")) return "Chuyển khoản";
+            if (type.ToLower().Contains("loan"))      return "Khoản vay";
+            if (type.ToLower().Contains("payment"))   return "Thanh toán";
             if (type.ToLower().Contains("transaction")) return "Giao dịch";
             return type;
         }
@@ -403,6 +409,8 @@ namespace GUI.Client
             if (type.ToLower().Contains("saving"))   return "📅";
             if (type.ToLower().Contains("deposit"))  return "💰";
             if (type.ToLower().Contains("withdraw")) return "✅";
+            if (type.ToLower().Contains("loan"))      return "🏦";
+            if (type.ToLower().Contains("payment"))   return "💳";
             return "🔔";
         }
 
@@ -410,6 +418,8 @@ namespace GUI.Client
         {
             if (type?.ToLower().Contains("deposit")  == true) return LightBlue;
             if (type?.ToLower().Contains("saving")   == true) return LightOrange;
+            if (type?.ToLower().Contains("loan")      == true) return Color.FromArgb(255, 230, 230);
+            if (type?.ToLower().Contains("payment")   == true) return Color.FromArgb(230, 230, 255);
             return LightGreen;
         }
 
@@ -417,6 +427,8 @@ namespace GUI.Client
         {
             if (type?.ToLower().Contains("deposit")  == true) return Color.FromArgb(30, 100, 200);
             if (type?.ToLower().Contains("saving")   == true) return Color.FromArgb(200, 120, 20);
+            if (type?.ToLower().Contains("loan")      == true) return Color.FromArgb(200, 50, 50);
+            if (type?.ToLower().Contains("payment")   == true) return Color.FromArgb(80, 80, 200);
             return GreenIcon;
         }
 

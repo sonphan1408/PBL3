@@ -99,6 +99,12 @@ namespace GUI.Client.Loan
                 // Mật khẩu chính xác, tạo hợp đồng vay
                 MessageBox.Show("Hợp đồng vay đã được xác nhận thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                panelCheckPassword.Visible = false;
+                txtCheckPassword.Clear();
+                
+                UserSession.AddBalance(Data.LoanAmount);
+                UserSession.LoadLoanData();
+
                 var notifData = new DTO.Models.NotificationMessageDTO
                 {
                     OperationType = "deposit",
@@ -107,11 +113,6 @@ namespace GUI.Client.Loan
                     Description = $"Giải ngân khoản vay ({Data.ContractID})"
                 };
                 GUI.Session.UserSession.RaiseNotification(notifData);
-                panelCheckPassword.Visible = false;
-                txtCheckPassword.Clear();
-                //UserSession.LoadLoanData();
-                UserSession.AddBalance(Data.LoanAmount);
-                UserSession.LoadLoanData();
                 ucLoanDashboard loan = new ucLoanDashboard();
                 loan.NavigateTo = this.NavigateTo;
                 loan.NavigateTo1 = this.NavigateTo1;

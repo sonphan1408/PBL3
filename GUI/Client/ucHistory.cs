@@ -199,7 +199,11 @@ namespace GUI.Client
             List<TransactionDTO> displayList = new List<TransactionDTO>(allTransactions);
             
             // Apply filtering
-            if (searchText != "tìm kiếm giao dịch..." && !string.IsNullOrWhiteSpace(searchText))
+            bool isPlaceholder = textBox1.ForeColor == System.Drawing.Color.Gray || 
+                                 searchText == "tìm kiếm giao dịch..." || 
+                                 string.IsNullOrWhiteSpace(searchText);
+                                 
+            if (!isPlaceholder)
             {
                 displayList = displayList.FindAll(t =>
                     t.TransactionID.ToString().ToLower().Contains(searchText) ||
@@ -328,6 +332,7 @@ namespace GUI.Client
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[ucHistory] Error in PopulateDataGridView: {ex.Message}\n{ex.StackTrace}");
+                MessageBox.Show($"Lỗi hiển thị danh sách: {ex.Message}\n{ex.StackTrace}", "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
