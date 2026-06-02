@@ -80,7 +80,7 @@ namespace DAL.Repositories
                 using (var db = new DigitalBankingDBEntities())
                 {
                     decimal internalIncome = db.InternalTransactions
-                        .Where(t => t.ToAccount == accountNumber && t.FromAccount != accountNumber)
+                        .Where(t => t.ToAccount == accountNumber && (t.FromAccount != accountNumber || t.BalanceAfter > t.BalanceBefore))
                         .Sum(t => (decimal?)t.Amount) ?? 0m;
                         
                     decimal externalIncome = db.ExternalTransactions
@@ -104,7 +104,7 @@ namespace DAL.Repositories
                 using (var db = new DigitalBankingDBEntities())
                 {
                     decimal internalExpense = db.InternalTransactions
-                        .Where(t => t.FromAccount == accountNumber && t.ToAccount != accountNumber)
+                        .Where(t => t.FromAccount == accountNumber && (t.ToAccount != accountNumber || t.BalanceAfter < t.BalanceBefore))
                         .Sum(t => (decimal?)t.Amount) ?? 0m;
                         
                     decimal externalExpense = db.ExternalTransactions

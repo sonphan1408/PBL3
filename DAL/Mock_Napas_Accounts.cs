@@ -18,5 +18,6 @@ namespace DAL
         public string AccountNumber { get; set; }
         public string BankCode { get; set; }
         public string FullName { get; set; }
+        public Nullable<decimal> Balance { get; set; }
     }
 }

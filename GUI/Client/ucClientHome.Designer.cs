@@ -205,7 +205,7 @@ namespace GUI.Client
             this.lblBalanceAmount.BackColor = System.Drawing.Color.Transparent;
             this.lblBalanceAmount.Font = new System.Drawing.Font("Times New Roman", 18.27692F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBalanceAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblBalanceAmount.Location = new System.Drawing.Point(17, 71);
+            this.lblBalanceAmount.Location = new System.Drawing.Point(3, 71);
             this.lblBalanceAmount.Name = "lblBalanceAmount";
             this.lblBalanceAmount.Size = new System.Drawing.Size(119, 36);
             this.lblBalanceAmount.TabIndex = 1;
@@ -283,7 +283,7 @@ namespace GUI.Client
             this.lblLoansAmount.BackColor = System.Drawing.Color.Transparent;
             this.lblLoansAmount.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold);
             this.lblLoansAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblLoansAmount.Location = new System.Drawing.Point(17, 72);
+            this.lblLoansAmount.Location = new System.Drawing.Point(3, 72);
             this.lblLoansAmount.Name = "lblLoansAmount";
             this.lblLoansAmount.Size = new System.Drawing.Size(32, 35);
             this.lblLoansAmount.TabIndex = 1;
@@ -359,7 +359,7 @@ namespace GUI.Client
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(27, 46);
+            this.chart1.Location = new System.Drawing.Point(28, 46);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";

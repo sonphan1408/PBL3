@@ -27,7 +27,6 @@
         <AssociationConnector Association="DigitalBankingDBModel.FK_External_Bank" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Invoice_Provider" ManuallyRouted="false" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_Provider_ServiceType" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DigitalBankingDBModel.Mock_Napas_Accounts" Width="1.5" PointX="10.375" PointY="13.75" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.LoanContract" Width="1.5" PointX="10.375" PointY="2.625" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.LoanRepayment" Width="1.5" PointX="12.625" PointY="5" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.LoanSchedule" Width="1.5" PointX="12.625" PointY="1.125" />
@@ -36,6 +35,7 @@
         <EntityTypeShape EntityType="DigitalBankingDBModel.SavingContract" Width="1.5" PointX="10.375" PointY="9" />
         <EntityTypeShape EntityType="DigitalBankingDBModel.SavingTransaction" Width="1.5" PointX="12.625" PointY="9.625" />
         <AssociationConnector Association="DigitalBankingDBModel.FK_SavingTrans_Contract" />
+        <EntityTypeShape EntityType="DigitalBankingDBModel.Mock_Napas_Accounts" Width="1.5" PointX="12.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -249,6 +249,12 @@ namespace DAL.Repositories
                                 a => a.AccountNumber == recipientAccountNumber && a.BankCode == bankCode);
                             string recipientName = mockAccount?.FullName ?? "Unknown";
 
+                            // Cộng tiền vào tài khoản Mock (nếu tồn tại)
+                            if (mockAccount != null)
+                            {
+                                mockAccount.Balance = (mockAccount.Balance ?? 0) + (decimal)amount;
+                            }
+
                             //Ghi bản ghi giao dịch
                             var externalTransaction = new ExternalTransaction
                             {

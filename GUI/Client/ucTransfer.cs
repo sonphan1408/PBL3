@@ -193,7 +193,7 @@ namespace GUI.Client
 
                 if (transferAmount <= 0)
                 {
-                    MessageBox.Show("Vui lòng nhập số tiền chuyển khoản (hoặc click một trong các nút nhanh)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Vui lòng nhập số tiền chuyển khoản", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -204,6 +204,46 @@ namespace GUI.Client
                     return;
                 }
 
+                // Hiện panel nhập mật khẩu
+                panelCheckPassword.Visible = true;
+                txtCheckPassword.Clear();
+                txtCheckPassword.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool isProcessing = false;
+
+        private void btnPassword_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (isProcessing) return;
+                isProcessing = true;
+                string password = txtCheckPassword.Text;
+
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    isProcessing = false;
+                    return;
+                }
+
+                bool passwordValid = FinancialService.CheckPassword(_senderAccount.AccountNumber, password);
+
+                if (!passwordValid)
+                {
+                    MessageBox.Show("Mật khẩu không chính xác!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtCheckPassword.Clear();
+                    isProcessing = false;
+                    return;
+                }
+
+                // Mật khẩu đúng -> Thực hiện chuyển tiền
+                decimal transferAmount = decimal.Parse(txtSoTien.Text.Replace(",", "").Replace(".", "").Trim());
                 string notes = "";
                 if (txtNDCK != null && !string.IsNullOrWhiteSpace(txtNDCK.Text))
                     notes = txtNDCK.Text;
@@ -250,6 +290,10 @@ namespace GUI.Client
                     // Update tiền hiện tại của ng dùng
                     UserSession.UpdateBalance(transferAmount);
 
+                    // Ẩn panel sau khi thành công
+                    panelCheckPassword.Visible = false;
+                    txtCheckPassword.Clear();
+
                     frmBill bill = new frmBill(
                         amount: transferAmount,
                         senderAccount: _senderAccount.AccountNumber,
@@ -267,11 +311,19 @@ namespace GUI.Client
                 {
                     MessageBox.Show("Chuyển khoản thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                isProcessing = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi chuyển khoản: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isProcessing = false;
             }
+        }
+
+        private void btnExitCheckPassword_Click(object sender, EventArgs e)
+        {
+            panelCheckPassword.Visible = false;
+            txtCheckPassword.Clear();
         }
 
         private void ClearForm()
@@ -290,7 +342,14 @@ namespace GUI.Client
 
         private void ucTransfer_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (panelCheckPassword != null)
+                {
+                    panelCheckPassword.Visible = false;
+                }
+            }
+            catch { }
         }
     }
 }

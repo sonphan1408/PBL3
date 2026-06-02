@@ -325,8 +325,18 @@ namespace GUI.Client
                         case 6: txType = "Khoản vay"; break;
                     }
                     row.Cells["TransactionType"].Value = txType;
-                    row.Cells["FromAccount"].Value = transaction.FromAccount ?? "-";
-                    row.Cells["ToAccount"].Value = transaction.ToAccount ?? "-";
+                    string fromAcc = transaction.FromAccount ?? "-";
+                    string toAcc = transaction.ToAccount ?? "-";
+
+                    if (fromAcc == toAcc)
+                    {
+                        if (transaction.TypeID == 5) { if (transaction.Amount > 0 && transaction.Description?.Contains("Mở") == false && transaction.Description?.Contains("Gửi") == false) fromAcc = "Sổ tiết kiệm"; else toAcc = "Sổ tiết kiệm"; }
+                        else if (transaction.TypeID == 6) { if (transaction.Description?.Contains("Giải ngân") == true) fromAcc = "Khoản vay"; else toAcc = "Khoản vay"; }
+                        else if (transaction.TypeID == 4) toAcc = "Thanh toán";
+                    }
+
+                    row.Cells["FromAccount"].Value = fromAcc;
+                    row.Cells["ToAccount"].Value = toAcc;
                     row.Cells["Amount"].Value = transaction.Amount.ToString("N0");
                     row.Cells["Status"].Value = "Thành công";
                     row.Cells["TimeRequest"].Value = transaction.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss");

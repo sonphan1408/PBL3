@@ -38,11 +38,11 @@ namespace DAL
         public virtual DbSet<ServiceType> ServiceTypes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TransactionType> TransactionTypes { get; set; }
-        public virtual DbSet<Mock_Napas_Accounts> Mock_Napas_Accounts { get; set; }
         public virtual DbSet<LoanContract> LoanContracts { get; set; }
         public virtual DbSet<LoanRepayment> LoanRepayments { get; set; }
         public virtual DbSet<LoanSchedule> LoanSchedules { get; set; }
         public virtual DbSet<SavingContract> SavingContracts { get; set; }
         public virtual DbSet<SavingTransaction> SavingTransactions { get; set; }
+        public virtual DbSet<Mock_Napas_Accounts> Mock_Napas_Accounts { get; set; }
     }
 }

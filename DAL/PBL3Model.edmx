@@ -152,6 +152,7 @@
           <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="BankCode" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -760,7 +761,6 @@
             <End Role="ServiceTypes" EntitySet="ServiceTypes" />
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
           </AssociationSet>
-          <EntitySet Name="Mock_Napas_Accounts" EntityType="DigitalBankingDBModel.Mock_Napas_Accounts" />
           <EntitySet Name="LoanContracts" EntityType="DigitalBankingDBModel.LoanContract" />
           <EntitySet Name="LoanRepayments" EntityType="DigitalBankingDBModel.LoanRepayment" />
           <EntitySet Name="LoanSchedules" EntityType="DigitalBankingDBModel.LoanSchedule" />
@@ -778,16 +778,8 @@
             <End Role="SavingContract" EntitySet="SavingContracts" />
             <End Role="SavingTransaction" EntitySet="SavingTransactions" />
           </AssociationSet>
+          <EntitySet Name="Mock_Napas_Accounts" EntityType="DigitalBankingDBModel.Mock_Napas_Accounts" />
         </EntityContainer>
-        <EntityType Name="Mock_Napas_Accounts">
-          <Key>
-            <PropertyRef Name="MockID" />
-          </Key>
-          <Property Name="MockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BankCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="LoanContract">
           <Key>
             <PropertyRef Name="ContractID" />
@@ -899,6 +891,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Mock_Napas_Accounts">
+          <Key>
+            <PropertyRef Name="MockID" />
+          </Key>
+          <Property Name="MockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1060,16 +1062,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Mock_Napas_Accounts">
-            <EntityTypeMapping TypeName="DigitalBankingDBModel.Mock_Napas_Accounts">
-              <MappingFragment StoreEntitySet="Mock_Napas_Accounts">
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="MockID" ColumnName="MockID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LoanContracts">
             <EntityTypeMapping TypeName="DigitalBankingDBModel.LoanContract">
               <MappingFragment StoreEntitySet="LoanContracts">
@@ -1141,6 +1133,17 @@
                 <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
                 <ScalarProperty Name="ContractID" ColumnName="ContractID" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mock_Napas_Accounts">
+            <EntityTypeMapping TypeName="DigitalBankingDBModel.Mock_Napas_Accounts">
+              <MappingFragment StoreEntitySet="Mock_Napas_Accounts">
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="MockID" ColumnName="MockID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
