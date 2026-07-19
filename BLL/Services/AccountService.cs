@@ -4,6 +4,7 @@ using DTO.Models;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using BLL.Utilities;
 
 namespace BLL.Services
 {
@@ -88,8 +89,8 @@ namespace BLL.Services
             }
 
             // Kiem tra mat khau cu co chinh xac khong
-            string actualOldPassword = AccountDAL.GetPasswordByAccountNumber(accountNumber);
-            if (actualOldPassword != oldPasswordInput)
+            string currentPasswordHash = AccountDAL.GetPasswordByAccountNumber(accountNumber);
+            if (!HashPassword.Verify(oldPasswordInput, currentPasswordHash))
             {
                 return "Mật khẩu hiện tại không chính xác.";
             }
@@ -99,7 +100,7 @@ namespace BLL.Services
             {
                 return "Mật khẩu mới phải có ít nhất 5 ký tự.";
             }
-            if (newPassword == oldPasswordInput)
+            if (HashPassword.Verify(newPassword, currentPasswordHash))
             {
                 return "Mật khẩu mới không được trùng với mật khẩu hiện tại.";
             }
@@ -113,7 +114,8 @@ namespace BLL.Services
             // Neu dat duoc tat ca cac dieu kien thi goi DAL de cap nhat mat khau
             try
             {
-                bool isSuccess = AccountDAL.ChangePassword(accountNumber, newPassword);
+                string hashPassword = HashPassword.Hash(newPassword);
+                bool isSuccess = AccountDAL.ChangePassword(accountNumber, hashPassword);
                 if (isSuccess)
                     return ""; // Tra ve chuoi rong nghia la thanh cong 100%
                 else

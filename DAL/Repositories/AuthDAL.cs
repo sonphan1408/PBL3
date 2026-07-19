@@ -19,9 +19,8 @@ namespace DAL.Repositories
             {
                 using (var db = new DigitalBankingDBEntities())
                 {
-                    //Tim tai khoan voi username, password, status = "Active"
+                    //Tim tai khoan voi username va status = "Active"
                     var account = db.Accounts.FirstOrDefault(a => a.Username == username
-                                                               && a.Password == password
                                                                && a.Status == "Active");
 
                     if (account != null)
@@ -30,11 +29,11 @@ namespace DAL.Repositories
                         {
                             AccountNumber = account.AccountNumber,
                             Username = account.Username,
+                            Password = account.Password,
                             Role = "Customer", 
                             Balance = account.Balance ?? 0, 
                             Status = account.Status,
                             CustomerID = account.CustomerID
-
                         };
                     }
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using DTO.Models;
 using DAL.Repositories;
+using BLL.Utilities;
 
 namespace BLL.Services
 {
@@ -58,6 +59,8 @@ namespace BLL.Services
             // Goi DAL de kiem tra trung lap va luu thong tin
             try
             {
+                // Hash the password before passing to DAL
+                account.Password = HashPassword.Hash(account.Password);
                 _authDAL.RegisterCustomerAndAccount(customer, account);
 
                 return "Tạo thành công tài khoản mới";
@@ -72,7 +75,21 @@ namespace BLL.Services
         {
             try
             {
-                return AuthDAL.LoginCustomer(username, password);
+                var account = AuthDAL.LoginCustomer(username, password);
+                if (account != null && HashPassword.Verify(password, account.Password))
+                {
+                    return new AccountCustomerDTO
+                    {
+                        AccountNumber = account.AccountNumber,
+                        Username = account.Username,
+                        Role = account.Role,
+                        Balance = account.Balance,
+                        Status = account.Status,
+                        CustomerID = account.CustomerID
+                    };
+                }
+
+                return null;
             }
             catch (Exception ex)
             {
